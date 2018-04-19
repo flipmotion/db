@@ -1,0 +1,12 @@
+.PortfolioList-Item {
+  cursor: pointer;
+  list-style-type: none;
+  transition: padding 1s ease 0s;
+}
+
+.PortfolioList-Item_current {
+  font-weight: bolder;
+  list-style-type: none;
+  padding-left: 1rem;
+  transition: padding 0.7s ease 0s;
+}
