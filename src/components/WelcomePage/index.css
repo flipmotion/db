@@ -1,0 +1,21 @@
+.DBPageContainer {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.DBPageContainer-Left {
+  flex: 40;
+  padding: 1.5rem;
+}
+
+.DBPageContainer-Right {
+  flex: 60;
+  height: 100%;
+}
+
+.DBPageContainer-Image {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}

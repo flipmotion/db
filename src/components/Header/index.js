@@ -1,7 +1,7 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'react-router-dom'
 import logo from './logo.svg'
-import './index.scss'
+import './index.css'
 
 const Header = () => (
   <div className="Header">

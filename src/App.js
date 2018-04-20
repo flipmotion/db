@@ -1,19 +1,30 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+// import PropTypes from 'prop-types'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+import Header from './components/Header'
+import Footer from './components/Footer'
+import './App.css'
+
+const TemplateWrapper = ({ children }) => (
+
+  <Router>
+    <div className="DBSiteContainer">
+      <div className="DBSiteContainer-Header">
+        <Header />
       </div>
-    );
-  }
-}
+      <div className="DBSiteContainer-Body">
+        <p>123</p>
+      </div>
+      <div className="DBSiteContainer-Footer">
+        <Footer />
+      </div>
+    </div>
+  </Router>
+)
 
-export default App;
+// TemplateWrapper.propTypes = {
+//   children: PropTypes.func,
+// }
+
+export default TemplateWrapper
