@@ -1,11 +1,11 @@
-import React from 'react'
-import './portfolio.scss'
+import React from 'react';
+import './portfolio.scss';
 
-import PortfolioList from '../components/PortfolioList'
-import CameraRoll from '../components/CameraRoll'
-import PortfolioDescription from '../components/PortfolioDescription'
+import PortfolioList from '../components/PortfolioList';
+import CameraRoll from '../components/CameraRoll';
+import PortfolioDescription from '../components/PortfolioDescription';
 
-import dummyData from '../stubs/data'
+import dummyData from '../stubs/data';
 
 class Portfolio extends React.Component {
   constructor(props) {
@@ -17,13 +17,13 @@ class Portfolio extends React.Component {
 
   // not done
   updateCurrent(index, _event) {
-    this.setState({current: index});
+    this.setState({ current: index });
     window.location.hash = index;
   }
 
   render() {
-    const currentDescription =
-      this.state.portfolio[this.state.current].description;
+    const currentDescription = this.state.portfolio[this.state.current]
+      .description;
     const names = this.state.portfolio.map(el => el.name);
 
     // First image serves as a display image in CameraRoll
@@ -42,11 +42,11 @@ class Portfolio extends React.Component {
           <CameraRoll images={images} current={this.state.current} />
         </div>
         <div className="Portfolio-DescriptionArea">
-          <PortfolioDescription text={ currentDescription } />
+          <PortfolioDescription text={currentDescription} />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Portfolio
+export default Portfolio;

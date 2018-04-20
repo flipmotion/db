@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'gatsby-link'
-import './index.scss'
+import React from 'react';
+import Link from 'gatsby-link';
+import './index.scss';
 
 class PortfolioList extends React.Component {
   render() {
@@ -12,16 +12,23 @@ class PortfolioList extends React.Component {
             // https://github.com/facebook/react/issues/5674#issuecomment-165104582
             return (
               <li
-                className={index == this.props.current ? "PortfolioList-Item_current" : "PortfolioList-Item"}
+                className={
+                  index == this.props.current
+                    ? 'PortfolioList-Item_current'
+                    : 'PortfolioList-Item'
+                }
                 k={index}
                 key={index}
                 onClick={this.props.onClick.bind(this, index)}
-              >{name}</li>
-            )})}
+              >
+                {name}
+              </li>
+            );
+          })}
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default PortfolioList
+export default PortfolioList;
