@@ -1,4 +1,10 @@
-.DBSiteContainer {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.DBSite {
   background-color: #222;
   color: white;
   display: flex;
@@ -8,11 +14,11 @@
   padding: 1.5rem 2rem; */
 }
 
-.DBSiteContainer-Header {
+.DBSite-Header {
   flex: 0 0 content;
 }
 
-.DBSiteContainer-Body {
+.DBSite-Body {
   /* flex: 1 1 auto => flex: 1 1 0 and height: 0, see
   https://github.com/philipwalton/flexbugs/issues/197#issuecomment-378908438 */
   flex: 1 1 0;
@@ -23,12 +29,6 @@
   min-width: 0;
 }
 
-.DBSiteContainer-Footer {
+.DBSite-Footer {
   flex: 0 0 content;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
 }

@@ -6,25 +6,20 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import './App.css'
 
-const TemplateWrapper = ({ children }) => (
-
+const App = () => (
   <Router>
-    <div className="DBSiteContainer">
-      <div className="DBSiteContainer-Header">
+    <div className="DBSite">
+      <div className="DBSite-Header">
         <Header />
       </div>
-      <div className="DBSiteContainer-Body">
+      <div className="DBSite-Body">
         <p>123</p>
       </div>
-      <div className="DBSiteContainer-Footer">
+      <div className="DBSite-Footer">
         <Footer />
       </div>
     </div>
   </Router>
 )
 
-// TemplateWrapper.propTypes = {
-//   children: PropTypes.func,
-// }
-
-export default TemplateWrapper
+export default App
