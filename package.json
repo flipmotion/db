@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "flow-bin": "^0.70.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.4",
     "prettier": "^1.12.1",
@@ -22,6 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "flow": "flow",
     "eject": "react-scripts eject"
   }
 }
