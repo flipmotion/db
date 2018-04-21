@@ -1,0 +1,13 @@
+.CameraRoll-Image {
+  padding: 1rem;
+  width: 100%;
+}
+
+.CameraRoll-Container {
+  /* width: 100%; */
+  overflow: hidden;
+  /* position: absolute;
+  top: 0;
+  bottom: 0; */
+  background-color: aqua;
+}
