@@ -1,5 +1,5 @@
 import React from 'react';
-import placeholder from './placeholder.svg';
+import placeholder from '../../modules/content/placeholder.svg';
 import './index.css';
 
 const IndexPage = () => (
