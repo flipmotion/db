@@ -1,10 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import PropTypes from 'prop-types'
+
+import './App.css';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import './App.css';
+
+import WelcomePage from './components/WelcomePage';
 
 const App = () => (
   <Router>
@@ -13,7 +16,10 @@ const App = () => (
         <Header />
       </div>
       <div className="DBSite-Body">
-        <p>123</p>
+        <Route exact path="/" component={WelcomePage} />
+        <Route path="/portfolio" render={() => <p>portfolio</p>} />
+        <Route path="/services" render={() => <p>services</p>} />
+        <Route path="/prices" render={() => <p>prices</p>} />
       </div>
       <div className="DBSite-Footer">
         <Footer />
