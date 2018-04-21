@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { portfolio } from './modules/content';
 
+import 'bootstrap/dist/css/bootstrap-reboot.css';
 import './App.css';
 
 import Header from './components/Header';
