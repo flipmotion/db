@@ -1,7 +1,6 @@
 .DBPageContainer {
   align-items: center;
   display: flex;
-  height: 100%;
 }
 
 .DBPageContainer-Left {
@@ -11,7 +10,6 @@
 
 .DBPageContainer-Right {
   flex: 60;
-  height: 100%;
 }
 
 .DBPageContainer-Image {

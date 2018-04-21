@@ -15,20 +15,23 @@ body {
 }
 
 .DBSite-Header {
-  flex: 0 0 content;
+  flex: none;
 }
 
 .DBSite-Body {
+  display: flex;
+
   /* flex: 1 1 auto => flex: 1 1 0 and height: 0, see
   https://github.com/philipwalton/flexbugs/issues/197#issuecomment-378908438 */
-  flex: 1 1 0;
+  flex: auto;
   /* height: 0; */
 
+  /* otherwise min sizes are content dimensions */
   /* https://github.com/philipwalton/flexbugs#flexbug-1 */
   min-height: 0;
   min-width: 0;
 }
 
 .DBSite-Footer {
-  flex: 0 0 content;
+  flex: none;
 }

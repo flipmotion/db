@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.scss';
+import './index.css';
 
 class CameraRoll extends React.Component {
   render() {
@@ -7,7 +7,7 @@ class CameraRoll extends React.Component {
       <img key={index} src={image} className="CameraRoll-Image" />
     ));
 
-    return <div>{Images}</div>;
+    return <div className="CameraRoll-Container">{Images}</div>;
   }
 }
 
