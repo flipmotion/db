@@ -1,18 +1,10 @@
 import React from 'react';
-import './index.scss';
+import './index.css';
 
 class PortfolioDescription extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { class: 'PortfolioDescription' };
-  }
-
-  componentDidMount() {
-    this.setState({ class: 'PortfolioDescription_inView' });
-  }
-
   render() {
-    return <div className={this.state.class}>{this.props.text}</div>;
+    const description = this.props.descriptions[this.props.current];
+    return <div>{description}</div>;
   }
 }
 

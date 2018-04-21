@@ -1,48 +1,42 @@
 import React from 'react';
-import './portfolio.scss';
+import './index.css';
 
-import PortfolioList from '../components/PortfolioList';
-import CameraRoll from '../components/CameraRoll';
-import PortfolioDescription from '../components/PortfolioDescription';
+import PortfolioList from '../PortfolioList';
+import CameraRoll from '../CameraRoll';
+import PortfolioDescription from '../PortfolioDescription';
 
-import dummyData from '../stubs/data';
+//
 
 class Portfolio extends React.Component {
   constructor(props) {
     super(props);
-    this.state = dummyData;
-
-    this.updateCurrent = this.updateCurrent.bind(this);
+    // this.updateCurrent = this.updateCurrent.bind(this);
+    this.state = { current: 0 };
   }
 
   // not done
-  updateCurrent(index, _event) {
-    this.setState({ current: index });
-    window.location.hash = index;
-  }
+  // updateCurrent(index, _event) {
+  //   this.setState({ current: index });
+  //   window.location.hash = index;
+  // }
 
   render() {
-    const currentDescription = this.state.portfolio[this.state.current]
-      .description;
-    const names = this.state.portfolio.map(el => el.name);
-
-    // First image serves as a display image in CameraRoll
-    const images = this.state.portfolio.map(el => el.images[0]);
+    const { portfolio } = this.props;
+    const { current } = this.state;
+    const titles = portfolio.map(el => el.title);
+    const images = portfolio.map(el => el.images[0]);
+    const descriptions = portfolio.map(el => el.description);
 
     return (
       <div className="Portfolio">
         <div className="Portfolio-ListArea">
-          <PortfolioList
-            names={names}
-            current={this.state.current}
-            onClick={this.updateCurrent}
-          />
+          <PortfolioList titles={titles} current={current} />
         </div>
         <div className="Portfolio-RollArea">
-          <CameraRoll images={images} current={this.state.current} />
+          <CameraRoll images={images} current={current} />
         </div>
         <div className="Portfolio-DescriptionArea">
-          <PortfolioDescription text={currentDescription} />
+          <PortfolioDescription descriptions={descriptions} current={current} />
         </div>
       </div>
     );

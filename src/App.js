@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-// import PropTypes from 'prop-types'
+
+import { portfolio } from './modules/content';
 
 import './App.css';
 
@@ -8,6 +9,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import WelcomePage from './components/WelcomePage';
+import PortfolioPage from './components/PortfolioPage';
 
 const App = () => (
   <Router>
@@ -17,7 +19,10 @@ const App = () => (
       </div>
       <div className="DBSite-Body">
         <Route exact path="/" component={WelcomePage} />
-        <Route path="/portfolio" render={() => <p>portfolio</p>} />
+        <Route
+          path="/portfolio"
+          render={() => <PortfolioPage portfolio={portfolio} />}
+        />
         <Route path="/services" render={() => <p>services</p>} />
         <Route path="/prices" render={() => <p>prices</p>} />
       </div>
