@@ -5,9 +5,9 @@ body {
 }
 
 .DBSite {
+  display: flex;
   background-color: #222;
   color: white;
-  display: flex;
   flex-direction: column;
   height: 100vh;
   /* overflow: hidden;
@@ -16,6 +16,7 @@ body {
 
 .DBSite-Header {
   flex: none;
+  display: flex;
 }
 
 .DBSite-Body {
@@ -34,4 +35,5 @@ body {
 
 .DBSite-Footer {
   flex: none;
+  display: flex;
 }
