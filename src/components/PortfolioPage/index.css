@@ -1,11 +1,6 @@
 .Portfolio {
   align-items: center;
   display: flex;
-  <<<<<<<HEAD
-=======
-  height: 100%;
-  /* width: 100%; */
-  >>>>>>>cb641efae77f6137846d390aaf4953105685595f
   background-color: grey;
 }
 
@@ -18,10 +13,6 @@
 
 .Portfolio-RollArea {
   background-color: red;
-  <<<<<<<HEAD
-=======
-  position: relative;
-  >>>>>>>cb641efae77f6137846d390aaf4953105685595f
   flex: 50;
   display: flex;
   /* min-height: 0; */
@@ -31,8 +22,5 @@
 
 .Portfolio-DescriptionArea {
   flex: 30;
-  <<<<<<<HEAD
-  padding: 1rem;
-  =======>>>>>>> cb641efae77f6137846d390aaf4953105685595f
   background-color: orange;
 }
