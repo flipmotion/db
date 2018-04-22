@@ -10,9 +10,12 @@ class PortfolioList extends React.Component {
         {this.props.titles.map((name, index) => (
           <NavLink
             key={index}
-            to={'/portfolio' + (index + 1).toString()}
+            to={'/portfolio#' + (index + 1).toString()}
             className="PortfolioList-Item"
             activeClassName="PortfolioList-Item_selected"
+            isActive={(_, location) =>
+              location.hash === '#' + (index + 1).toString()
+            }
           >
             {name}
           </NavLink>
