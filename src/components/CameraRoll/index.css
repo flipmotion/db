@@ -1,16 +1,11 @@
 .CameraRoll-Image {
-  <<<<<<<HEAD
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  =======padding: 1rem;
-  >>>>>>>cb641efae77f6137846d390aaf4953105685595f
   width: 100%;
 }
 
 .CameraRoll-Container {
-  <<<<<<<HEAD
   height: 100%;
-  =======>>>>>>> cb641efae77f6137846d390aaf4953105685595f
   /* width: 100%; */
   overflow: hidden;
   /* position: absolute;
