@@ -5,3 +5,7 @@
   padding: 1.5rem;
   width: 100%;
 }
+
+.Header-Item_selected {
+  font-weight: bold;
+}

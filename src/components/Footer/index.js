@@ -1,15 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './index.css';
+
+const FooterItem = props => (
+  <NavLink
+    className="Footer-Item"
+    activeClassName="Footer-Item_selected"
+    exact
+    {...props}
+  />
+);
 
 const Footer = () => (
   <div className="Footer">
     <Link to="/contacts">
       <strong>Контакты</strong>
     </Link>
-    <Link to="/about">О компании</Link>
-    <Link to="/services">Copyright © 2018 DB Company</Link>
-    <Link to="/policy">Политика конфиденциальности</Link>
+    <FooterItem to="/about">О компании</FooterItem>
+    <FooterItem to="/copyright">Copyright © 2018 DB Company</FooterItem>
+    <FooterItem to="/policy">Политика конфиденциальности</FooterItem>
     <div>
       <Link to="/vk">VK</Link>
       <Link to="/vk">FB</Link>
