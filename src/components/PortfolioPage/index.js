@@ -1,6 +1,8 @@
 import React from 'react';
 import './index.css';
 
+import { HashRouter } from 'react-router-dom';
+
 import PortfolioList from '../PortfolioList';
 import CameraRoll from '../CameraRoll';
 import PortfolioDescription from '../PortfolioDescription';
@@ -28,17 +30,22 @@ class Portfolio extends React.Component {
     const descriptions = portfolio.map(el => el.description);
 
     return (
-      <div className="Portfolio">
-        <div className="Portfolio-ListArea">
-          <PortfolioList titles={titles} current={current} />
+      <HashRouter hashType="noslash">
+        <div className="Portfolio">
+          <div className="Portfolio-ListArea">
+            <PortfolioList titles={titles} current={current} />
+          </div>
+          <div className="Portfolio-RollArea">
+            <CameraRoll images={images} current={current} />
+          </div>
+          <div className="Portfolio-DescriptionArea">
+            <PortfolioDescription
+              descriptions={descriptions}
+              current={current}
+            />
+          </div>
         </div>
-        <div className="Portfolio-RollArea">
-          <CameraRoll images={images} current={current} />
-        </div>
-        <div className="Portfolio-DescriptionArea">
-          <PortfolioDescription descriptions={descriptions} current={current} />
-        </div>
-      </div>
+      </HashRouter>
     );
   }
 }
