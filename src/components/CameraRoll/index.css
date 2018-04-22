@@ -1,15 +1,16 @@
-.CameraRoll-Image {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  width: 100%;
+.CameraRoll {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 100%; */
+  height: 100%;
+  /* transform: translateY(see index.js); */
 }
 
-.CameraRoll-Container {
-  height: 100%;
-  /* width: 100%; */
-  overflow: hidden;
-  /* position: absolute;
-  top: 0;
-  bottom: 0; */
-  background-color: aqua;
+.CameraRoll-Image {
+  /* padding-top: 0.5rem;
+  padding-bottom: 0.5rem; */
+  width: 100%;
+  object-fit: cover;
+
+  /* height: see index.js; */
 }
