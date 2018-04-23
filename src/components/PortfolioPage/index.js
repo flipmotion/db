@@ -40,7 +40,6 @@ const PortfolioPage = props => {
   const titles = portfolio.map(el => el.title);
   const images = portfolio.map(el => el.images[0]);
   const descriptions = portfolio.map(el => el.description);
-  const count = portfolio.count;
 
   return (
     <React.Fragment>
