@@ -12,13 +12,23 @@
 }
 
 .Portfolio-RollArea {
-  background-color: red;
   flex: 50;
-  display: flex;
-  /* min-height: 0; */
-  height: 100%;
   flex-direction: column;
   overflow: hidden;
+  align-self: stretch;
+
+  /* otherwise as soon as flex item
+  can't be less the its contents by default, it's size is
+  bigger and child % sizes are screwed up */
+  min-height: 0;
+
+  /* for uniformity all kids can expect their parents are flex
+  unless needed otherwise */
+  display: flex;
+
+  /* debugging */
+  background-color: red;
+  border: 2px solid blue;
 }
 
 .Portfolio-DescriptionArea {

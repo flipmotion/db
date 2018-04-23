@@ -1,8 +1,8 @@
 import React from 'react';
 import './index.css';
 
-export default props => {
-  const itemHeight = 100;
+const CameraRoll = props => {
+  const itemHeight = 40;
   return (
     <div className="CameraRoll">
       {props.images.map((image, index) => (
@@ -17,3 +17,5 @@ export default props => {
     </div>
   );
 };
+
+export default CameraRoll;
