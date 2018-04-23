@@ -2,6 +2,7 @@
   display: block;
   padding-right: 2rem;
   transition: padding 1s ease 0s;
+  margin: 0.5rem 0;
 }
 
 .PortfolioList-Item:hover {
