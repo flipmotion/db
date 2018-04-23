@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './index.css';
 
 const CameraRoll = props => {
@@ -8,13 +9,18 @@ const CameraRoll = props => {
   return (
     <div className="CameraRoll" style={{ transform: `translateY(${offset}%)` }}>
       {props.images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={'portfolio #' + index}
-          className="CameraRoll-Image"
-          style={{ height: `${itemHeight}%` }}
-        />
+        <Link to={`/portfolio#${index + 1}`}>
+          <img
+            key={index}
+            src={image}
+            alt={'portfolio #' + index}
+            className="CameraRoll-Image"
+            style={{ height: `${itemHeight}%` }}
+            onDragStart={e => {
+              e.preventDefault();
+            }}
+          />
+        </Link>
       ))}
     </div>
   );
