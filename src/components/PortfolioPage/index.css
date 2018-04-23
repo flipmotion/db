@@ -1,14 +1,12 @@
 .Portfolio {
   align-items: center;
   display: flex;
-  background-color: grey;
 }
 
 .Portfolio-ListArea {
   flex: 20;
   padding: 1rem;
   /* height: 30%; */
-  background-color: blue;
 }
 
 .Portfolio-RollArea {
@@ -25,13 +23,8 @@
   /* for uniformity all kids can expect their parents are flex
   unless needed otherwise */
   display: flex;
-
-  /* debugging */
-  background-color: red;
-  border: 2px solid blue;
 }
 
 .Portfolio-DescriptionArea {
   flex: 30;
-  background-color: orange;
 }

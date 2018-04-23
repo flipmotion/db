@@ -3,6 +3,10 @@
   transition: padding 1s ease 0s;
 }
 
+.PortfolioList-Item:hover {
+  text-decoration: none;
+}
+
 .PortfolioList-Item_selected {
   font-weight: bold;
   list-style-type: none;

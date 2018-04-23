@@ -2,13 +2,13 @@
   flex-direction: column;
   /* margin-top: 100%; */
   height: 100%;
-  border: 5px solid yellow;
   /* transform: translateY(see index.js); */
+  transition: transform 1s ease 0s;
 }
 
 .CameraRoll-Image {
-  /* padding-top: 0.5rem;
-  padding-bottom: 0.5rem; */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   width: 100%;
   /* height: see index.js; */
   object-fit: cover;
