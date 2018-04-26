@@ -1,58 +1,32 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import styled from 'styled-components';
+import { Menu, MenuItem } from '../Menu';
 
-const HeaderItem = ({ to, children }) => {
-  const activeClassName = 'active';
-
-  const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    width: 100%;
-
-    &.${activeClassName} {
-      font-weight: bold;
-    }
-  `;
-
-  return (
-    <StyledNavLink activeClassName={activeClassName} to={to}>
-      {children}
-    </StyledNavLink>
-  );
-};
-
-// .Header-Item_selected {
-//
-// }
-
-const Menu = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem;
-  width: 100%;
-  z-index: 100;
+const Logo = styled.img.attrs({ alt: 'DB company logo', src: logo })`
+  height: 3rem;
 `;
+
+// TODO
+const LanguageToggle = () => (
+  <div>
+    <strong>Ru</strong> / En
+  </div>
+);
 
 const Header = () => (
   <Menu>
     <Link to="/">
-      <img style={{ height: '3rem' }} src={logo} alt="DB company logo" />
+      <Logo />
     </Link>
 
-    <HeaderItem to="/">Главная</HeaderItem>
-    <HeaderItem to="/portfolio">Портфолио</HeaderItem>
-    <HeaderItem to="/services">Услуги</HeaderItem>
-    <HeaderItem to="/prices">Цены</HeaderItem>
+    <MenuItem to="/">Главная</MenuItem>
+    <MenuItem to="/portfolio">Портфолио</MenuItem>
+    <MenuItem to="/services">Услуги</MenuItem>
+    <MenuItem to="/prices">Цены</MenuItem>
     <a href="tel: +7 495 780 80 55">+7 495 780 80 55</a>
-    {/* This will be a LanguageToggle component, not Link: */}
-    <Link to="/asdf">
-      <strong>Ru</strong> / En
-    </Link>
+    <LanguageToggle />
   </Menu>
 );
 
