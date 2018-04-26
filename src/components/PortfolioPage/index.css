@@ -7,6 +7,19 @@
   flex: 20;
   padding: 1rem;
   /* height: 30%; */
+  animation: all 1s;
+}
+
+.Portfolio-ListArea_entered {
+  opacity: 1;
+  animation: all 1s;
+  background-color: blue;
+}
+
+.Portfolio-ListArea_exiting,
+.Portfolio-ListArea_entering {
+  opacity: 0;
+  animation: all 1s;
 }
 
 .Portfolio-RollArea {

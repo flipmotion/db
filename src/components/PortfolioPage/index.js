@@ -11,13 +11,21 @@ import PortfolioDescription from '../PortfolioDescription';
 
 class Portfolio extends React.Component {
   render() {
-    const { titles, images, descriptions, current } = this.props;
+    const {
+      titles,
+      images,
+      descriptions,
+      current,
+      animationState
+    } = this.props;
 
     return (
       // sub-routing inside /portfolio: /portflio#1, /portflio##2 etc.
 
       <div className="Portfolio">
-        <div className="Portfolio-ListArea">
+        <div
+          className={`Portfolio-ListArea Portfolio-ListArea_${animationState}`}
+        >
           <PortfolioList titles={titles} current={current} />
         </div>
         <div className="Portfolio-RollArea">
@@ -36,16 +44,16 @@ class Portfolio extends React.Component {
 // a number in hash starts from 1, the corresponding current starts from 0,
 // so /portfolio#1 means portfolio[0]
 const PortfolioPage = props => {
-  const { portfolio } = props;
+  const { portfolio, animationState } = props;
   const titles = portfolio.map(el => el.title);
   const images = portfolio.map(el => el.images[0]);
   const descriptions = portfolio.map(el => el.description);
 
   return (
     <React.Fragment>
-      <Route exact path="/portfolio">
+      {/*       <Route exact path="/portfolio">
         <Redirect to="/portfolio#1" />
-      </Route>
+      </Route> */}
 
       <Route
         render={({ _, location }) => {
@@ -59,6 +67,7 @@ const PortfolioPage = props => {
               titles={titles}
               images={images}
               descriptions={descriptions}
+              animationState={animationState}
             />
           );
         }}

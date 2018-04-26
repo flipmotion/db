@@ -9,9 +9,8 @@ const CameraRoll = props => {
   return (
     <div className="CameraRoll" style={{ transform: `translateY(${offset}%)` }}>
       {props.images.map((image, index) => (
-        <Link to={`/portfolio#${index + 1}`}>
+        <Link key={index} to={`/portfolio#${index + 1}`}>
           <img
-            key={index}
             src={image}
             alt={'portfolio #' + index}
             className="CameraRoll-Image"
