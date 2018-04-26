@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Transition, TransitionGroup } from 'react-transition-group';
 
 import { portfolio } from './modules/content';
 
@@ -19,13 +20,34 @@ const App = () => (
         <Header />
       </div>
       <div className="DBSite-Body">
-        <Route exact path="/" component={WelcomePage} />
         <Route
-          path="/portfolio"
-          render={() => <PortfolioPage portfolio={portfolio} />}
+          render={({ location }) => (
+            <TransitionGroup component={null} appear>
+              <Transition
+                key={location.pathname}
+                timeout={{ enter: 0, exit: 800 }}
+              >
+                {animationState => (
+                  <Switch location={location}>
+                    <Route
+                      exact
+                      path="/"
+                      render={() => (
+                        <WelcomePage animationState={animationState} />
+                      )}
+                    />
+                    <Route
+                      path="/portfolio"
+                      render={() => <PortfolioPage portfolio={portfolio} />}
+                    />
+                    <Route path="/services" render={() => <p>services</p>} />
+                    <Route path="/prices" render={() => <p>prices</p>} />
+                  </Switch>
+                )}
+              </Transition>
+            </TransitionGroup>
+          )}
         />
-        <Route path="/services" render={() => <p>services</p>} />
-        <Route path="/prices" render={() => <p>prices</p>} />
       </div>
       <div className="DBSite-Footer">
         <Footer />

@@ -2,10 +2,10 @@ import React from 'react';
 import placeholder from './house.jpg';
 import './index.css';
 
-const IndexPage = () => (
+const IndexPage = props => (
   <div className="DBPageContainer">
     <div className="DBPageContainer-Left">
-      <h1>Услуги в сфере элитной недвижимости</h1>
+      <h1>Услуги в сфере элитной недвижимости {props.animationState}</h1>
       <p>
         Мы разработаем для вас проект любой сложности, получим разрешение на
         строительство или реконструкцию, проведем строительные работы, создадим
