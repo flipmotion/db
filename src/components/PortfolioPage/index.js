@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import styled from 'styled-components';
 
 import { Redirect, Route } from 'react-router-dom';
 
@@ -7,7 +7,32 @@ import PortfolioList from '../PortfolioList';
 import CameraRoll from '../CameraRoll';
 import PortfolioDescription from '../PortfolioDescription';
 
-//
+const ListArea = styled.div`
+  flex: 20;
+  animation: all 1s;
+  align-self: center;
+`;
+
+const RollArea = styled.div`
+  flex: 50;
+  align-self: center;
+  width: 10%;
+  border: 2px solid red;
+
+  /* otherwise as soon as flex item
+  can't be less the its contents by default, it's size is
+  bigger and child % sizes are screwed up */
+  min-height: 0;
+
+  /* for uniformity all kids can expect their parents are flex
+  unless needed otherwise */
+  display: flex;
+`;
+
+const DescriptionArea = styled.div`
+  flex: 30;
+  align-self: center;
+`;
 
 class Portfolio extends React.Component {
   render() {
@@ -21,20 +46,17 @@ class Portfolio extends React.Component {
 
     return (
       // sub-routing inside /portfolio: /portflio#1, /portflio##2 etc.
-
-      <div className="Portfolio">
-        <div
-          className={`Portfolio-ListArea Portfolio-ListArea_${animationState}`}
-        >
+      <React.Fragment>
+        <ListArea>
           <PortfolioList titles={titles} current={current} />
-        </div>
-        <div className="Portfolio-RollArea">
+        </ListArea>
+        <RollArea>
           <CameraRoll images={images} current={current} />
-        </div>
-        <div className="Portfolio-DescriptionArea">
+        </RollArea>
+        <DescriptionArea>
           <PortfolioDescription descriptions={descriptions} current={current} />
-        </div>
-      </div>
+        </DescriptionArea>
+      </React.Fragment>
     );
   }
 }

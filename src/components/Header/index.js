@@ -1,19 +1,45 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from './logo.svg';
-import './index.css';
+import styled from 'styled-components';
 
-const HeaderItem = props => (
-  <NavLink
-    className="Header-Item"
-    activeClassName="Header-Item_selected"
-    exact
-    {...props}
-  />
-);
+const HeaderItem = ({ to, children }) => {
+  const activeClassName = 'active';
+
+  const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    width: 100%;
+
+    &.${activeClassName} {
+      font-weight: bold;
+    }
+  `;
+
+  return (
+    <StyledNavLink activeClassName={activeClassName} to={to}>
+      {children}
+    </StyledNavLink>
+  );
+};
+
+// .Header-Item_selected {
+//
+// }
+
+const Menu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  width: 100%;
+  z-index: 100;
+`;
 
 const Header = () => (
-  <div className="Header">
+  <Menu>
     <Link to="/">
       <img style={{ height: '3rem' }} src={logo} alt="DB company logo" />
     </Link>
@@ -27,7 +53,7 @@ const Header = () => (
     <Link to="/asdf">
       <strong>Ru</strong> / En
     </Link>
-  </div>
+  </Menu>
 );
 
 export default Header;

@@ -9,12 +9,17 @@ const Container = styled.div`
 
 const LeftContainer = styled.div`
   flex: 40;
+  width: 40vw;
   padding: 1.5rem;
 `;
 
 const RightContainer = styled.div`
-  flex: 60;
-  align-self: stretch;
+  position: fixed;
+  width: 60vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  display: flex;
 `;
 
 const DumbImage = styled.img.attrs({ src: placeholder, alt: 'dumb' })`
