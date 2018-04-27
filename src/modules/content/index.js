@@ -2,6 +2,11 @@ import house1 from './house1.jpg';
 import house2 from './house2.jpg';
 import house3 from './house3.jpg';
 
+// http://exploringjs.com/es6/ch_modules.html#_making-a-re-export-the-default-export
+export { default as logo } from './logo.svg';
+
+export { default as house } from './house.jpg';
+
 export const portfolio = [
   {
     title: 'Особняк в Грохольском переулке',

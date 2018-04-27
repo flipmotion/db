@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import { Redirect, Route } from 'react-router-dom';
 
-import PortfolioList from '../PortfolioList';
-import CameraRoll from '../CameraRoll';
-import PortfolioDescription from '../PortfolioDescription';
+import PortfolioList from './PortfolioList';
+import CameraRoll from './CameraRoll';
+import PortfolioDescription from './PortfolioDescription';
 
 const ListArea = styled.div`
   flex: 20;

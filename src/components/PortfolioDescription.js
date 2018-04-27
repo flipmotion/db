@@ -1,10 +1,14 @@
 import React from 'react';
-import './index.css';
+import styled from 'styled-components';
+
+const SpaceAround = styled.div`
+  padding: 1rem;
+`;
 
 class PortfolioDescription extends React.Component {
   render() {
     const description = this.props.descriptions[this.props.current];
-    return <div className="PortfolioDescription">{description}</div>;
+    return <SpaceAround>{description}</SpaceAround>;
   }
 }
 

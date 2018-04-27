@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from './logo.svg';
+import { logo } from '../modules/content';
 import styled from 'styled-components';
-import { Menu, MenuItem } from '../Menu';
+import { Menu, MenuItem } from './Menu';
 
 const Logo = styled.img.attrs({ alt: 'DB company logo', src: logo })`
   height: 3rem;

@@ -1,5 +1,5 @@
 import React from 'react';
-import placeholder from './house.jpg';
+import { house as placeholder } from '../modules/content';
 import styled from 'styled-components';
 
 const Container = styled.div`
