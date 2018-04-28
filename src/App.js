@@ -63,12 +63,6 @@ const FooterArea = styled.div`
   display: flex;
 `;
 
-const ColorDiv = styled.div`
-  background-color: ${props => props.color};
-  width: 100%;
-  height: 100%;
-`;
-
 const App = () => (
   <Router>
     <SiteContainer>
