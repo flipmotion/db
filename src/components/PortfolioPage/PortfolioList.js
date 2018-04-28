@@ -8,7 +8,8 @@ const Item = styled(NavLink).attrs({ activeClassName })`
   display: block;
   padding-left: 0;
   padding-right: 2rem;
-  transition: padding 1s ease 0s;
+  /* transition is overridden completely in inline styles */
+  /* so I had to add padding transition there */
   margin: 0.5rem 0;
   color: rgb(220, 220, 220);
 
@@ -20,29 +21,31 @@ const Item = styled(NavLink).attrs({ activeClassName })`
   &.${activeClassName} {
     padding-left: 2rem;
     padding-right: 0;
-    transition: padding 0.7s ease 0s;
+    /* transition is overridden completely in inline styles */
+    /* so I had to add padding transition there */
     color: rgb(240, 240, 240);
   }
+`;
+
+const H1 = styled.h1`
+  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
+  transition: opacity 1s;
 `;
 
 export default ({ titles, animationStage }) => {
   const titleStyles = titles.map((_, i, { length }) => ({
     transition:
       animationStage === 'entered'
-        ? `transform 1s ease-out ${i / 4}s`
-        : `transform 1s ease-out ${(length - 1 - i) / 4}s, opacity 1s`,
+        ? `padding 1s, transform 1s ease-out ${i / 4}s`
+        : `padding 1s, transform 1s ease-out ${(length - 1 - i) /
+            4}s, opacity 1s`,
     opacity: animationStage === 'entered' ? 1 : 0,
     transform: `translateX(${animationStage === 'entered' ? '0px' : '-300px'})`
   }));
 
-  const headerStyle = {
-    transition: `opacity 1s`,
-    opacity: animationStage === 'entered' ? 1 : 0
-  };
-
   return (
     <div>
-      <h1 style={headerStyle}>Наши работы</h1>
+      <H1 animationStage={animationStage}>Наши работы</H1>
       {titles.map((name, index) => (
         <Item
           style={titleStyles[index]}
