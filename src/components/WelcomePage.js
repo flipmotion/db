@@ -25,7 +25,7 @@ const RightContainer = styled.div`
   top: 0;
   right: 0;
   display: flex;
-  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)}
+  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '500px' : '0px')}
   );
