@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuItem } from '../Menu';
+import { Menu, MenuItem } from './Menu';
 import styled from 'styled-components';
 import facebookIcon from './facebook.svg';
 import instagramIcon from './instagram.svg';
@@ -23,12 +23,18 @@ const FooterMenu = styled(Menu)`
   );
 `;
 
+const Text = styled.div`
+  width: 100%;
+  text-align: center;
+  color: rgb(200, 200, 200);
+`;
+
 export default () => {
   return (
     <FooterMenu>
       <MenuItem to="/contacts">О Контакты</MenuItem>
       <MenuItem to="/about">О компании</MenuItem>
-      <MenuItem to="/copyright">Copyright © 2018 DB Company</MenuItem>
+      <Text>Copyright © 2018 DB Company</Text>
       <MenuItem to="/policy">Политика конфиденциальности</MenuItem>
       <IconContainer>
         <a href="https://instagram.com">

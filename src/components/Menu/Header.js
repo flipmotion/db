@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { logo } from '../modules/content';
+import { logo } from '../../modules/content';
 import styled from 'styled-components';
 import { Menu, MenuItem } from './Menu';
 
@@ -16,12 +16,34 @@ const HeaderMenu = styled(Menu)`
   );
 `;
 
+const Text = styled.div`
+  width: 100%;
+  text-align: center;
+  color: rgb(200, 200, 200);
+`;
+
 // TODO
 const LanguageToggle = () => (
-  <div>
+  <Text>
     <strong>Ru</strong> / En
-  </div>
+  </Text>
 );
+
+const Phone = styled.a.attrs({
+  href: props => `tel: ${props.number}`,
+  children: props => props.number
+})`
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  color: rgb(200, 200, 200);
+  &:hover {
+    text-decoration: none;
+    color: rgb(240, 240, 240);
+    transition: color 0.5s;
+  }
+`;
 
 const Header = () => (
   <HeaderMenu>
@@ -35,7 +57,7 @@ const Header = () => (
     <MenuItem to="/portfolio">Портфолио</MenuItem>
     <MenuItem to="/services">Услуги</MenuItem>
     <MenuItem to="/prices">Цены</MenuItem>
-    <a href="tel: +7 495 780 80 55">+7 495 780 80 55</a>
+    <Phone number="+7 495 780 80 55" />
     <LanguageToggle />
   </HeaderMenu>
 );

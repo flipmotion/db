@@ -18,6 +18,8 @@ export const MenuItem = props => {
     width: 100%;
     color: rgb(200, 200, 200);
     transition: color 0.5s;
+    text-align: center;
+    display: block;
 
     &:hover {
       text-decoration: none;

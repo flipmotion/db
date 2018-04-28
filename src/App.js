@@ -1,14 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-import { portfolio } from './modules/content';
-
 import styled, { injectGlobal } from 'styled-components';
-
 import 'bootstrap/dist/css/bootstrap-reboot.css';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/Menu/Header';
+import Footer from './components/Menu/Footer';
 
 import RoutedContent from './components/RoutedContent';
 
