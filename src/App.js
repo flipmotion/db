@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Transition, TransitionGroup } from 'react-transition-group';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { portfolio } from './modules/content';
 
@@ -11,10 +10,7 @@ import 'bootstrap/dist/css/bootstrap-reboot.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-import WelcomePage from './components/WelcomePage';
-import PortfolioPage from './components/PortfolioPage';
-import Services from './components/Services';
-import Prices from './components/Prices';
+import RoutedContent from './components/RoutedContent';
 
 const SiteContainer = styled.div`
   display: flex;
@@ -53,11 +49,24 @@ const MainArea = styled.div`
   min-height: 0;
   min-width: 0;
   position: relative;
+
+  /* Otherwise width/height specified in % won't work in children */
+  height: 100%;
+  width: 100%;
+
+  /* So all children pages are absolutely positioned and don't interfere */
+  position: relative;
 `;
 
 const FooterArea = styled.div`
   flex: none;
   display: flex;
+`;
+
+const ColorDiv = styled.div`
+  background-color: ${props => props.color};
+  width: 100%;
+  height: 100%;
 `;
 
 const App = () => (
@@ -67,47 +76,7 @@ const App = () => (
         <Header />
       </HeaderArea>
       <MainArea>
-        <Route
-          render={({ location }) => (
-            <TransitionGroup component={null} appear>
-              <Transition
-                key={location.pathname}
-                timeout={{ enter: 0, exit: 800 }}
-              >
-                {animationState => (
-                  <Switch location={location}>
-                    <Route
-                      exact
-                      path="/"
-                      render={() => (
-                        <WelcomePage animationState={animationState} />
-                      )}
-                    />
-                    <Route
-                      path="/portfolio"
-                      render={() => (
-                        <PortfolioPage
-                          portfolio={portfolio}
-                          animationState={animationState}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/services"
-                      render={() => (
-                        <Services animationState={animationState} />
-                      )}
-                    />
-                    <Route
-                      path="/prices"
-                      render={() => <Prices animationState={animationState} />}
-                    />
-                  </Switch>
-                )}
-              </Transition>
-            </TransitionGroup>
-          )}
-        />
+        <RoutedContent />
       </MainArea>
       <FooterArea>
         <Footer />
