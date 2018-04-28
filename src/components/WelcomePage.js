@@ -11,7 +11,7 @@ const LeftContainer = styled.div`
   flex: 40;
   width: 40vw;
   padding: 1.5rem;
-  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)}
+  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '-500px' : '0px')}
   );
@@ -41,7 +41,7 @@ const DumbImage = styled.img.attrs({ src: placeholder, alt: 'dumb' })`
 const IndexPage = ({ animationStage }) => (
   <Container>
     <LeftContainer animationStage={animationStage}>
-      <h1>Услуги в сфере элитной недвижимости {animationStage}</h1>
+      <h1>Услуги в сфере элитной недвижимости</h1>
       <p>
         Мы разработаем для вас проект любой сложности, получим разрешение на
         строительство или реконструкцию, проведем строительные работы, создадим
