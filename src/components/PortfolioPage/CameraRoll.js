@@ -7,7 +7,7 @@ const Roll = styled.div`
   /* margin-top: 100%; */
   height: 100%;
   /* transform: translateY(see index.js); */
-  transition: transform 1s ease 0s;
+  transition: transform 1s, opacity 1s;
 `;
 
 const Image = styled.img`
@@ -21,7 +21,6 @@ const Image = styled.img`
 const CameraRoll = ({ current, animationStage, images }) => {
   const itemHeight = 40;
   const offsetToCenter = (100 - itemHeight) / 2;
-  console.log(animationStage);
   const animationOffset = animationStage === 'entered' ? 0 : 200;
   const offset = offsetToCenter - itemHeight * current + animationOffset;
 

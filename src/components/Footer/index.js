@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Menu, MenuItem } from '../Menu';
 import styled from 'styled-components';
 import facebookIcon from './facebook.svg';
