@@ -1,6 +1,6 @@
 import React from 'react';
 
-function style(animationStage) {
+function styleFor(animationStage) {
   if (animationStage === 'entered')
     return {
       opacity: 1,
@@ -14,5 +14,5 @@ function style(animationStage) {
 
 export default ({ descriptions, current, animationStage }) => {
   const description = descriptions[current];
-  return <div style={style(animationStage)}>{description}</div>;
+  return <div style={styleFor(animationStage)}>{description}</div>;
 };
