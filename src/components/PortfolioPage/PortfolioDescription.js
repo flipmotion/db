@@ -8,7 +8,7 @@ function style(animationStage) {
     };
   return {
     opacity: 0,
-    transition: 'opacity 1s ease-out'
+    transition: 'opacity 0.5s ease-out'
   };
 }
 
