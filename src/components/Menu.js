@@ -7,7 +7,7 @@ import styled from 'styled-components';
 // Styling NavLink with styled-components is a bit tricky
 // Maybe it can be done more elegant, but
 // that's what I came up with so far.
-export const MenuItem = ({ to, children }) => {
+export const MenuItem = props => {
   const activeClassName = 'active';
 
   const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
@@ -16,7 +16,7 @@ export const MenuItem = ({ to, children }) => {
     align-items: center;
     padding: 1.5rem;
     width: 100%;
-    color: rgb(220, 220, 220);
+    color: rgb(200, 200, 200);
     transition: color 0.5s;
 
     &:hover {
@@ -27,14 +27,11 @@ export const MenuItem = ({ to, children }) => {
 
     &.${activeClassName} {
       font-weight: bold;
+      color: rgb(240, 240, 240);
     }
   `;
 
-  return (
-    <StyledNavLink activeClassName={activeClassName} to={to}>
-      {children}
-    </StyledNavLink>
-  );
+  return <StyledNavLink activeClassName={activeClassName} {...props} />;
 };
 
 export const Menu = styled.div`

@@ -29,7 +29,9 @@ const Header = () => (
       <Logo />
     </Link>
 
-    <MenuItem to="/">Главная</MenuItem>
+    <MenuItem exact to="/">
+      Главная
+    </MenuItem>
     <MenuItem to="/portfolio">Портфолио</MenuItem>
     <MenuItem to="/services">Услуги</MenuItem>
     <MenuItem to="/prices">Цены</MenuItem>
