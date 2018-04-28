@@ -32,7 +32,7 @@ const Text = styled.div`
 export default () => {
   return (
     <FooterMenu>
-      <MenuItem to="/contacts">О Контакты</MenuItem>
+      <MenuItem to="/contacts">Контакты</MenuItem>
       <MenuItem to="/about">О компании</MenuItem>
       <Text>Copyright © 2018 DB Company</Text>
       <IconContainer>
