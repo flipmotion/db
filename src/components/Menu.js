@@ -16,9 +16,13 @@ export const MenuItem = ({ to, children }) => {
     align-items: center;
     padding: 1.5rem;
     width: 100%;
+    color: rgb(220, 220, 220);
+    transition: color 0.5s;
 
     &:hover {
       text-decoration: none;
+      color: rgb(240, 240, 240);
+      transition: color 0.5s;
     }
 
     &.${activeClassName} {
@@ -39,4 +43,5 @@ export const Menu = styled.div`
   align-items: center;
   width: 100%;
   z-index: 100;
+  color: white;
 `;

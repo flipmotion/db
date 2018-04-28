@@ -8,19 +8,26 @@ import twitterIcon from './twitter.svg';
 
 const Icon = styled.img`
   height: 1.2rem;
-  padding: 0 0.3rem;
+  padding: 0 0.4rem;
 `;
 
 const IconContainer = styled.div`
   display: flex;
+  padding: 0 1rem;
+`;
+
+const FooterMenu = styled(Menu)`
+  background: linear-gradient(
+    to top,
+    rgba(34, 34, 34, 0.6) 40%,
+    rgba(34, 34, 34, 0) 100%
+  );
 `;
 
 export default () => {
   return (
-    <Menu>
-      <Link to="/contacts">
-        <strong>Контакты</strong>
-      </Link>
+    <FooterMenu>
+      <MenuItem to="/contacts">О Контакты</MenuItem>
       <MenuItem to="/about">О компании</MenuItem>
       <MenuItem to="/copyright">Copyright © 2018 DB Company</MenuItem>
       <MenuItem to="/policy">Политика конфиденциальности</MenuItem>
@@ -35,6 +42,6 @@ export default () => {
           <Icon src={twitterIcon} />
         </a>
       </IconContainer>
-    </Menu>
+    </FooterMenu>
   );
 };
