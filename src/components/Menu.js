@@ -37,7 +37,6 @@ export const Menu = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
   width: 100%;
   z-index: 100;
 `;
