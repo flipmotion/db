@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Redirect, Route } from 'react-router-dom';
-
 import PortfolioList from './PortfolioList';
 import CameraRoll from './CameraRoll';
 import PortfolioDescription from './PortfolioDescription';
@@ -11,6 +9,7 @@ const ListArea = styled.div`
   flex: 20;
   animation: all 1s;
   align-self: center;
+  margin: 1rem;
 `;
 
 const RollArea = styled.div`
@@ -32,6 +31,7 @@ const RollArea = styled.div`
 const DescriptionArea = styled.div`
   flex: 30;
   align-self: center;
+  margin: 1rem;
 `;
 
 // A dumb (presentational) component that combines and orchestrates smaller components
