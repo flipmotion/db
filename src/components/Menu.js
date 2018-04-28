@@ -4,6 +4,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+// Styling NavLink with styled-components is a bit tricky
 // Maybe it can be done more elegant, but
 // that's what I came up with so far.
 export const MenuItem = ({ to, children }) => {
