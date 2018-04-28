@@ -12,7 +12,7 @@ const LeftContainer = styled.div`
   width: 40vw;
   padding: 1.5rem;
   transform: translateX(
-    ${props => (props.animationState !== 'entered' ? '-500px' : '0px')}
+    ${props => (props.animationStage !== 'entered' ? '-500px' : '0px')}
   );
   transition: all 1s;
 `;
@@ -25,7 +25,7 @@ const RightContainer = styled.div`
   right: 0;
   display: flex;
   transform: translateX(
-    ${props => (props.animationState !== 'entered' ? '500px' : '0px')}
+    ${props => (props.animationStage !== 'entered' ? '500px' : '0px')}
   );
   transition: all 1s;
 `;
@@ -36,10 +36,10 @@ const DumbImage = styled.img.attrs({ src: placeholder, alt: 'dumb' })`
   width: 100%;
 `;
 
-const IndexPage = ({ animationState }) => (
+const IndexPage = ({ animationStage }) => (
   <Container>
-    <LeftContainer animationState={animationState}>
-      <h1>Услуги в сфере элитной недвижимости {animationState}</h1>
+    <LeftContainer animationStage={animationStage}>
+      <h1>Услуги в сфере элитной недвижимости {animationStage}</h1>
       <p>
         Мы разработаем для вас проект любой сложности, получим разрешение на
         строительство или реконструкцию, проведем строительные работы, создадим
@@ -47,7 +47,7 @@ const IndexPage = ({ animationState }) => (
       </p>
       <a to="/portfolio">Наши работы</a>
     </LeftContainer>
-    <RightContainer animationState={animationState}>
+    <RightContainer animationStage={animationStage}>
       <DumbImage />
     </RightContainer>
   </Container>

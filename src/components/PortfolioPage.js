@@ -41,7 +41,7 @@ class Portfolio extends React.Component {
       images,
       descriptions,
       current,
-      animationState
+      animationStage
     } = this.props;
 
     return (
@@ -66,7 +66,7 @@ class Portfolio extends React.Component {
 // a number in hash starts from 1, the corresponding current starts from 0,
 // so /portfolio#1 means portfolio[0]
 const PortfolioPage = props => {
-  const { portfolio, animationState } = props;
+  const { portfolio, animationStage } = props;
   const titles = portfolio.map(el => el.title);
   const images = portfolio.map(el => el.images[0]);
   const descriptions = portfolio.map(el => el.description);
@@ -89,7 +89,7 @@ const PortfolioPage = props => {
               titles={titles}
               images={images}
               descriptions={descriptions}
-              animationState={animationState}
+              animationStage={animationStage}
             />
           );
         }}

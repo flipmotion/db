@@ -26,14 +26,14 @@ export default () => (
     render={({ location }) => (
       <TransitionGroup component={null} appear>
         <Transition key={location.pathname} timeout={{ enter: 0, exit: 800 }}>
-          {animationState => (
+          {animationStage => (
             <Switch location={location}>
               <Route
                 exact
                 path="/"
                 render={() => (
                   <AbsoluteDiv>
-                    <WelcomePage animationState={animationState} />
+                    <WelcomePage animationStage={animationStage} />
                   </AbsoluteDiv>
                 )}
               />
@@ -43,7 +43,7 @@ export default () => (
                   <AbsoluteDiv>
                     <PortfolioPage
                       portfolio={portfolio}
-                      animationState={animationState}
+                      animationStage={animationStage}
                     />
                   </AbsoluteDiv>
                 )}
@@ -52,7 +52,7 @@ export default () => (
                 path="/services"
                 render={() => (
                   <AbsoluteDiv>
-                    <Services animationState={animationState} />
+                    <Services animationStage={animationStage} />
                   </AbsoluteDiv>
                 )}
               />
@@ -60,7 +60,7 @@ export default () => (
                 path="/prices"
                 render={() => (
                   <AbsoluteDiv>
-                    <Prices animationState={animationState} />
+                    <Prices animationStage={animationStage} />
                   </AbsoluteDiv>
                 )}
               />
