@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// The Roll component is intentionally supposed to be overflowed
 const Roll = styled.div`
   flex-direction: column;
   /* margin-top: 100%; */
@@ -19,9 +20,9 @@ const Image = styled.img`
 `;
 
 const CameraRoll = ({ current, animationStage, images }) => {
-  const itemHeight = 40;
+  const itemHeight = 66;
   const offsetToCenter = (100 - itemHeight) / 2;
-  const animationOffset = animationStage === 'entered' ? 0 : 200;
+  const animationOffset = animationStage === 'entered' ? 0 : 100;
   const offset = offsetToCenter - itemHeight * current + animationOffset;
 
   return (
