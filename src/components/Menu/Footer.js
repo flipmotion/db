@@ -34,7 +34,7 @@ export default () => {
     <FooterMenu>
       <MenuItem to="/contacts">Контакты</MenuItem>
       <MenuItem to="/about">О компании</MenuItem>
-      <Text>Copyright © 2018 DB Company</Text>
+      <Text>© 2018 DB Company</Text>
       <IconContainer>
         <a href="https://instagram.com">
           <Icon src={instagramIcon} />
