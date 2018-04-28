@@ -19,6 +19,8 @@ const Flag = styled.img`
   margin: 1rem;
   filter: grayscale(30%) brightness(80%);
   transition: all 0.5s;
+  cursor: pointer;
+  display: inline-block;
   &:hover {
     transform: scale(1.1);
     transition: all 0.5s;
