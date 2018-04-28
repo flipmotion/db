@@ -11,6 +11,7 @@ const LeftContainer = styled.div`
   flex: 40;
   width: 40vw;
   padding: 1.5rem;
+  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)}
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '-500px' : '0px')}
   );
@@ -24,6 +25,7 @@ const RightContainer = styled.div`
   top: 0;
   right: 0;
   display: flex;
+  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)}
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '500px' : '0px')}
   );
