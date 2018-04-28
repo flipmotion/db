@@ -1,13 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
 import { portfolio } from '../modules/content';
 
 import styled from 'styled-components';
-
-import Header from './Header';
-import Footer from './Footer';
 
 import WelcomePage from './WelcomePage';
 import PortfolioPage from './PortfolioPage';

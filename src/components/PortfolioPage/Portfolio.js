@@ -17,7 +17,7 @@ const RollArea = styled.div`
   flex: 50;
   align-self: center;
   width: 10%;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 
   /* otherwise as soon as flex item
   can't be less the its contents by default, it's size is
@@ -50,13 +50,25 @@ class Portfolio extends React.Component {
       // sub-routing inside /portfolio: /portflio#1, /portflio##2 etc.
       <React.Fragment>
         <ListArea>
-          <PortfolioList titles={titles} current={current} />
+          <PortfolioList
+            titles={titles}
+            current={current}
+            animationStage={animationStage}
+          />
         </ListArea>
         <RollArea>
-          <CameraRoll images={images} current={current} />
+          <CameraRoll
+            images={images}
+            current={current}
+            animationStage={animationStage}
+          />
         </RollArea>
         <DescriptionArea>
-          <PortfolioDescription descriptions={descriptions} current={current} />
+          <PortfolioDescription
+            descriptions={descriptions}
+            current={current}
+            animationStage={animationStage}
+          />
         </DescriptionArea>
       </React.Fragment>
     );

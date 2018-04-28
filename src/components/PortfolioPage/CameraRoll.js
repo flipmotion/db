@@ -18,13 +18,16 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const CameraRoll = props => {
+const CameraRoll = ({ current, animationStage, images }) => {
   const itemHeight = 40;
   const offsetToCenter = (100 - itemHeight) / 2;
-  const offset = offsetToCenter - itemHeight * props.current;
+  console.log(animationStage);
+  const animationOffset = animationStage === 'entered' ? 0 : 200;
+  const offset = offsetToCenter - itemHeight * current + animationOffset;
+
   return (
     <Roll style={{ transform: `translateY(${offset}%)` }}>
-      {props.images.map((image, index) => (
+      {images.map((image, index) => (
         <Link key={index} to={`/portfolio#${index + 1}`}>
           <Image
             src={image}
