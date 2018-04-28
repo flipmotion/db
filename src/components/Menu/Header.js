@@ -6,6 +6,7 @@ import { Menu, MenuItem } from './Menu';
 
 const Logo = styled.img.attrs({ alt: 'DB company logo', src: logo })`
   height: 3rem;
+  margin: 1rem;
 `;
 
 const HeaderMenu = styled(Menu)`
