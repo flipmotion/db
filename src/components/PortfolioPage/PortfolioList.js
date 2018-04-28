@@ -10,15 +10,18 @@ const Item = styled(NavLink).attrs({ activeClassName })`
   padding-right: 2rem;
   transition: padding 1s ease 0s;
   margin: 0.5rem 0;
+  color: rgb(220, 220, 220);
 
   &:hover {
     text-decoration: none;
+    color: rgb(240, 240, 240);
   }
 
   &.${activeClassName} {
     padding-left: 2rem;
     padding-right: 0;
     transition: padding 0.7s ease 0s;
+    color: rgb(240, 240, 240);
   }
 `;
 
