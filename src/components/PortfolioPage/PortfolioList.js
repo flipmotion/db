@@ -21,13 +21,24 @@ const Item = styled(NavLink).attrs({ activeClassName })`
   }
 `;
 
-class PortfolioList extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Наши работы</h1>
-        {this.props.titles.map((name, index) => (
+export default ({ titles, animationStage }) => {
+  const titleStyles = titles.map((_, i) => ({
+    transition: `transform 1s ease-out ${i / 4}s`,
+    transform: `translateX(${animationStage === 'entered' ? '0px' : '-300px'})`
+  }));
+
+  const headerStyle = {
+    transition: `opacity 1s`,
+    opacity: animationStage === 'entered' ? 1 : 0
+  };
+
+  return (
+    <div>
+      <h1 style={headerStyle}>Наши работы</h1>
+      {titles.map((name, index) => (
+        <div>
           <Item
+            style={titleStyles[index]}
             key={index}
             to={'/portfolio#' + (index + 1).toString()}
             isActive={(_, location) =>
@@ -36,10 +47,8 @@ class PortfolioList extends React.Component {
           >
             {name}
           </Item>
-        ))}
-      </div>
-    );
-  }
-}
-
-export default PortfolioList;
+        </div>
+      ))}
+    </div>
+  );
+};
