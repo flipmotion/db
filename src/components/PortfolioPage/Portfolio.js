@@ -14,8 +14,8 @@ const ListArea = styled.div`
 
 const RollArea = styled.div`
   flex: 50;
-  align-self: center;
-  width: 10%;
+  /* align-self: center; */
+
   /* border: 2px solid red; */
 
   /* otherwise as soon as flex item
