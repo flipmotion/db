@@ -15,7 +15,7 @@ const LeftContainer = styled.div`
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '-500px' : '0px')}
   );
-  transition: all 1s;
+  transition: transform 1s, opacity 1s;
 `;
 
 const RightContainer = styled.div`
@@ -29,7 +29,7 @@ const RightContainer = styled.div`
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '500px' : '0px')}
   );
-  transition: all 1s;
+  transition: transform 1s, opacity 1s;
 `;
 
 const DumbImage = styled.img.attrs({ src: placeholder, alt: 'dumb' })`
