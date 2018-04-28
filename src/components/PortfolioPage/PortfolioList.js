@@ -22,8 +22,11 @@ const Item = styled(NavLink).attrs({ activeClassName })`
 `;
 
 export default ({ titles, animationStage }) => {
-  const titleStyles = titles.map((_, i) => ({
-    transition: `transform 1s ease-out ${i / 4}s`,
+  const titleStyles = titles.map((_, i, { length }) => ({
+    transition:
+      animationStage === 'entered'
+        ? `transform 1s ease-out ${i / 4}s`
+        : `transform 1s ease-out ${(length - 1 - i) / 4}s`,
     transform: `translateX(${animationStage === 'entered' ? '0px' : '-300px'})`
   }));
 
