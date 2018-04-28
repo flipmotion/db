@@ -18,8 +18,6 @@ const HeaderMenu = styled(Menu)`
 `;
 
 const Text = styled.div`
-  width: 100%;
-  text-align: center;
   color: rgb(200, 200, 200);
 `;
 
@@ -32,11 +30,8 @@ const LanguageToggle = () => (
 
 const Phone = styled.a.attrs({
   href: props => `tel: ${props.number}`,
-  children: props => props.number
+  children: props => props.number.replace(/ /g, '\u00a0')
 })`
-  display: block;
-  width: 100%;
-  text-align: center;
   padding: 1rem;
   color: rgb(200, 200, 200);
   &:hover {

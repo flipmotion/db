@@ -11,15 +11,11 @@ export const MenuItem = props => {
   const activeClassName = 'active';
 
   const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    width: 100%;
     color: rgb(200, 200, 200);
     transition: color 0.5s;
-    text-align: center;
-    display: block;
 
     &:hover {
       text-decoration: none;

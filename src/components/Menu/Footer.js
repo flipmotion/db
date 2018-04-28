@@ -24,9 +24,9 @@ const FooterMenu = styled(Menu)`
 `;
 
 const Text = styled.div`
-  width: 100%;
-  text-align: center;
   color: rgb(200, 200, 200);
+  display: inline;
+  padding: 1.5rem;
 `;
 
 export default () => {
