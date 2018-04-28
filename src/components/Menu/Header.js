@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { logo } from '../../modules/content';
 import styled from 'styled-components';
 import { Menu, MenuItem } from './Menu';
+import Toggle from './Toggle';
 
 const Logo = styled.img.attrs({ alt: 'DB company logo', src: logo })`
   height: 3rem;
@@ -16,17 +17,6 @@ const HeaderMenu = styled(Menu)`
     rgba(34, 34, 34, 0) 100%
   );
 `;
-
-const Text = styled.div`
-  color: rgb(200, 200, 200);
-`;
-
-// TODO
-const LanguageToggle = () => (
-  <Text>
-    <strong>Ru</strong> / En
-  </Text>
-);
 
 const Phone = styled.a.attrs({
   href: props => `tel: ${props.number}`,
@@ -54,7 +44,7 @@ const Header = () => (
     <MenuItem to="/services">Услуги</MenuItem>
     <MenuItem to="/prices">Цены</MenuItem>
     <Phone number="+7 495 780 80 55" />
-    <LanguageToggle />
+    <Toggle />
   </HeaderMenu>
 );
 
