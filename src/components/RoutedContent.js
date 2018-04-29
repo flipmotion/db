@@ -7,7 +7,7 @@ import { portfolio } from '../modules/content';
 import styled from 'styled-components';
 
 import WelcomePage from './WelcomePage';
-import PortfolioPage from './PortfolioPage';
+import PortfolioContainer from '../containers/PortfolioContainer';
 import Services from './Services';
 import Prices from './Prices';
 
@@ -38,7 +38,7 @@ export default () => (
                 path="/portfolio"
                 render={() => (
                   <AbsoluteDiv>
-                    <PortfolioPage
+                    <PortfolioContainer
                       portfolio={portfolio}
                       animationStage={animationStage}
                     />
