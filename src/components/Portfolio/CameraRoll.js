@@ -37,7 +37,10 @@ const CameraRoll = ({
   // i the image is already in focus, navigate to item page
   function handleClick(index) {
     if (index === current) {
-      history.push(`${location.pathname}/${index}`);
+      history.push(`${location.pathname}/${index}`, {
+        animationName: 'portfolioItem'
+      });
+      console.log('just pushed into the history!', history);
       return;
     }
     focusOn(index);
