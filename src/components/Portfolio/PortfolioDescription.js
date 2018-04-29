@@ -1,18 +1,42 @@
 import React from 'react';
 
-function styleFor(animationStage) {
-  if (animationStage === 'entered')
-    return {
-      opacity: 1,
-      transition: 'opacity 1.5s 0.8s'
-    };
-  return {
-    opacity: 0,
-    transition: 'opacity 0.5s ease-out'
-  };
+function styleFor(animationStage, location) {
+  const animationName = location.state && location.state.animationName;
+  console.log(location);
+
+  switch (animationName) {
+    // animation to portfolio item and from portfolio item
+    case 'portfolioItem':
+      switch (animationStage) {
+        case 'entered':
+          return {
+            opacity: 1,
+            transition: 'opacity 1.5s 0.8s'
+          };
+        default:
+          return {
+            opacity: 1,
+            transition: 'opacity 0.5s ease-out'
+          };
+      }
+    // default animation
+    default:
+      switch (animationStage) {
+        case 'entered':
+          return {
+            opacity: 1,
+            transition: 'opacity 1.5s 0.8s'
+          };
+        default:
+          return {
+            opacity: 0,
+            transition: 'opacity 0.5s ease-out'
+          };
+      }
+  }
 }
 
-export default ({ descriptions, current, animationStage }) => {
+export default ({ descriptions, current, animationStage, location }) => {
   const description = descriptions[current];
-  return <div style={styleFor(animationStage)}>{description}</div>;
+  return <div style={styleFor(animationStage, location)}>{description}</div>;
 };

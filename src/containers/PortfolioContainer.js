@@ -13,18 +13,17 @@ class PortfolioContainer extends Component {
   }
 
   render() {
-    const { portfolio, animationStage } = this.props;
+    const { portfolio, ...other } = this.props;
     const titles = portfolio.map(el => el.title);
     const images = portfolio.map(el => el.images[0]);
     const descriptions = portfolio.map(el => el.description);
     return (
       <Portfolio
-        {...this.props}
+        {...other}
         current={this.state.current}
         titles={titles}
         images={images}
         descriptions={descriptions}
-        animationStage={animationStage}
         focusOn={this.focusOn}
       />
     );
