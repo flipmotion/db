@@ -16,7 +16,7 @@ const Image = styled.img`
   width: 100%;
   /* height: see index.js; */
   object-fit: cover;
-  cursor: pointer;
+  cursor: ${props => (props.inFocus ? 'zoom-in' : 'pointer')};
 `;
 
 const CameraRoll = ({
@@ -55,6 +55,7 @@ const CameraRoll = ({
             e.preventDefault();
           }}
           onClick={() => handleClick(index)}
+          inFocus={index === current}
         />
       ))}
     </Roll>
