@@ -2,7 +2,6 @@ import React from 'react';
 
 function styleFor(animationStage, location) {
   const animationName = location.state && location.state.animationName;
-  console.log(location);
 
   switch (animationName) {
     // animation to portfolio item and from portfolio item

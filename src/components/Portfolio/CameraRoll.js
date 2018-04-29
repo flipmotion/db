@@ -53,13 +53,6 @@ const CameraRoll = ({
   // history.location.state.animationName
   // This function specifies how each image in the camera roll animates
   function animationStyle(animationName, animationStage, index) {
-    console.log(
-      'location, animationName, animationStage, index',
-      location,
-      animationName,
-      animationStage,
-      index
-    );
     switch (animationName) {
       case 'portfolioItem':
         switch (animationStage) {
