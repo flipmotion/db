@@ -10,7 +10,9 @@ import styled from 'styled-components';
 export const MenuItem = props => {
   const activeClassName = 'active';
 
-  const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
+  const StyledNavLink = styled(NavLink).attrs({
+    activeClassName: activeClassName
+  })`
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
@@ -26,6 +28,7 @@ export const MenuItem = props => {
     &.${activeClassName} {
       font-weight: bold;
       color: rgb(240, 240, 240);
+      cursor: default;
     }
   `;
 
