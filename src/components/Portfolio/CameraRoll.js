@@ -52,20 +52,47 @@ const CameraRoll = ({
 
   // history.location.state.animationName
   // This function specifies how each image in the camera roll animates
-  function animationStyle(animationName, animationStage, index) {
+  function animationStyle(animationName, animationStage, index, current) {
     switch (animationName) {
       case 'portfolioItem':
-        switch (animationStage) {
-          case 'entered':
-            return {
-              opacity: 1,
-              transition: '1s'
-            };
+        switch (index === current) {
+          case true:
+            switch (animationStage) {
+              case 'entered':
+                return {
+                  opacity: 1,
+                  transition: '1s'
+                };
+              case 'exiting':
+                return {
+                  transform: 'scale(2.5)',
+                  opacity: 0,
+                  transition: '1s'
+                };
+              default:
+                return {
+                  opacity: 0,
+                  transition: '1s'
+                };
+            }
           default:
-            return {
-              opacity: 0,
-              transition: '1s'
-            };
+            switch (animationStage) {
+              case 'entered':
+                return {
+                  opacity: 1,
+                  transition: '1s'
+                };
+              case 'exiting':
+                return {
+                  opacity: 0,
+                  transition: '0.3s'
+                };
+              default:
+                return {
+                  opacity: 0,
+                  transition: '1s'
+                };
+            }
         }
       default:
         switch (animationStage) {
@@ -96,7 +123,7 @@ const CameraRoll = ({
           }}
           onClick={() => handleClick(index)}
           inFocus={index === current}
-          style={animationStyle(animationName, animationStage, index)}
+          style={animationStyle(animationName, animationStage, index, current)}
         />
       ))}
     </Roll>
