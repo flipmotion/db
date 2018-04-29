@@ -10,6 +10,9 @@ import WelcomePage from '../components/WelcomePage';
 import PortfolioContainer from './PortfolioContainer';
 import Services from '../components/Services';
 import Prices from '../components/Prices';
+import Page404 from '../components/Page404';
+
+import PortfolioItem from '../components/PortfolioItem';
 
 const AbsoluteDiv = styled.div`
   position: absolute;
@@ -35,10 +38,23 @@ export default () => (
                 )}
               />
               <Route
+                exact
                 path="/portfolio"
                 render={() => (
                   <AbsoluteDiv>
                     <PortfolioContainer
+                      portfolio={portfolio}
+                      animationStage={animationStage}
+                    />
+                  </AbsoluteDiv>
+                )}
+              />
+              <Route
+                exact
+                path="/portfolio/:index"
+                render={() => (
+                  <AbsoluteDiv>
+                    <PortfolioItem
                       portfolio={portfolio}
                       animationStage={animationStage}
                     />
@@ -61,6 +77,7 @@ export default () => (
                   </AbsoluteDiv>
                 )}
               />
+              <Route component={Page404} />
             </Switch>
           )}
         </Transition>
