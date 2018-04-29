@@ -36,43 +36,18 @@ const DescriptionArea = styled.div`
 
 // A dumb (presentational) component that combines and orchestrates smaller components
 // that are also dumb
-class Portfolio extends React.Component {
-  render() {
-    const {
-      titles,
-      images,
-      descriptions,
-      current,
-      animationStage
-    } = this.props;
-
-    return (
-      // sub-routing inside /portfolio: /portflio#1, /portflio##2 etc.
-      <React.Fragment>
-        <ListArea>
-          <PortfolioList
-            titles={titles}
-            current={current}
-            animationStage={animationStage}
-          />
-        </ListArea>
-        <RollArea>
-          <CameraRoll
-            images={images}
-            current={current}
-            animationStage={animationStage}
-          />
-        </RollArea>
-        <DescriptionArea>
-          <PortfolioDescription
-            descriptions={descriptions}
-            current={current}
-            animationStage={animationStage}
-          />
-        </DescriptionArea>
-      </React.Fragment>
-    );
-  }
-}
+const Portfolio = props => (
+  <React.Fragment>
+    <ListArea>
+      <PortfolioList {...props} />
+    </ListArea>
+    <RollArea>
+      <CameraRoll {...props} />
+    </RollArea>
+    <DescriptionArea>
+      <PortfolioDescription {...props} />
+    </DescriptionArea>
+  </React.Fragment>
+);
 
 export default Portfolio;

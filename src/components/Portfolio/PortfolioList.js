@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const H1 = styled.h1`
@@ -7,32 +6,23 @@ const H1 = styled.h1`
   transition: opacity 1s;
 `;
 
-// A styled NavLink
-const activeClassName = 'PortfolioList_active';
-const Item = styled(NavLink).attrs({ activeClassName })`
-  display: block;
-  padding-left: 0;
-  padding-right: 2rem;
+const Item = styled.div`
+  padding-left: ${props => (props.active ? '2rem' : '0rem')};
+  padding-right: ${props => (props.active ? '0rem' : '2rem')};
   /* transition is overridden completely in inline styles */
   /* so I had to add padding transition there */
   margin: 0.5rem 0;
-  color: rgb(220, 220, 220);
+  color: ${props =>
+    props.active ? 'rgb(240, 240, 240)' : 'rgb(200, 200, 200)'};
+  cursor: pointer;
 
   &:hover {
     text-decoration: none;
     color: rgb(240, 240, 240);
   }
-
-  &.${activeClassName} {
-    padding-left: 2rem;
-    padding-right: 0;
-    /* transition is overridden completely in inline styles */
-    /* so I had to add padding transition there */
-    color: rgb(240, 240, 240);
-  }
 `;
 
-const PortfolioList = ({ titles, animationStage }) => {
+const PortfolioList = ({ titles, current, animationStage, NavigateTo }) => {
   // This is the main animation function. In this particular case we don't just
   // animate a single instance, we animate an array where animation on every other element
   // depends on the previous. We also need array length to execute reverse animation.
@@ -58,10 +48,8 @@ const PortfolioList = ({ titles, animationStage }) => {
         <Item
           style={inlineStylePer(animationStage, index, length)}
           key={index}
-          to={'/portfolio#' + (index + 1).toString()}
-          isActive={(_, location) =>
-            location.hash === '#' + (index + 1).toString()
-          }
+          onClick={() => NavigateTo(index)}
+          active={current === index}
         >
           {name}
         </Item>
