@@ -16,14 +16,14 @@ const langs = [
 
 const Perspective = styled.div`
   perspective: 30px;
+  cursor: pointer;
 `;
 
 const Flag = styled.img`
   width: 1.4rem;
   margin: 1rem;
   filter: grayscale(30%) brightness(80%);
-  transition: all 0.5s;
-  cursor: pointer;
+  transition: all 0.7s;
   display: inline-block;
 `;
 
@@ -45,7 +45,7 @@ export default class Toggle extends Component {
 
   lift() {
     this.setState({
-      rotation: -30,
+      rotation: -180,
       scale: 1.5,
       grayscale: 10,
       brightness: 90
@@ -81,12 +81,13 @@ export default class Toggle extends Component {
 
     const { langs, current } = this.state;
     return (
-      <Perspective>
+      <Perspective
+        onClick={this.changeLang}
+        onMouseEnter={this.lift}
+        onMouseLeave={this.default}
+      >
         <Flag
           src={langs[current].img}
-          onClick={this.changeLang}
-          onMouseEnter={this.lift}
-          onMouseLeave={this.default}
           alt={langs[current].alt}
           style={animatedStyle}
         />
