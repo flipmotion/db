@@ -14,7 +14,7 @@ const Image = styled.img`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   width: 100%;
-  /* height: see index.js; */
+  height: ${props => props.height};
   object-fit: cover;
   cursor: ${props => (props.inFocus ? 'zoom-in' : 'pointer')};
 `;
@@ -30,20 +30,64 @@ const CameraRoll = ({
 }) => {
   const itemHeight = 66;
   const offsetToCenter = (100 - itemHeight) / 2;
-  const animationOffset = animationStage === 'entered' ? 0 : 100;
-  const offset = offsetToCenter - itemHeight * current + animationOffset;
+  // const animationOffset = animationStage === 'entered' ? 0 : 100;
+  // const offset = offsetToCenter - itemHeight * current + animationOffset;
+  const offset = offsetToCenter - itemHeight * current;
 
   // if image is clicked while it's not in "focus", what brings the image in focus
-  // i the image is already in focus, navigate to item page
+  // if the image is already in focus, navigate to item page
   function handleClick(index) {
     if (index === current) {
       history.push(`${location.pathname}/${index}`, {
         animationName: 'portfolioItem'
       });
-      console.log('just pushed into the history!', history);
-      return;
+    } else {
+      focusOn(index);
     }
-    focusOn(index);
+  }
+
+  // This is the trickiest part!!!
+  const animationName =
+    history.location.state && history.location.state.animationName;
+
+  // history.location.state.animationName
+  // This function specifies how each image in the camera roll animates
+  function animationStyle(animationName, animationStage, index) {
+    console.log(
+      'location, animationName, animationStage, index',
+      location,
+      animationName,
+      animationStage,
+      index
+    );
+    switch (animationName) {
+      case 'portfolioItem':
+        switch (animationStage) {
+          case 'entered':
+            return {
+              opacity: 1,
+              transition: '1s'
+            };
+          default:
+            return {
+              opacity: 0,
+              transition: '1s'
+            };
+        }
+      default:
+        switch (animationStage) {
+          case 'entered':
+            return {
+              transform: 'translateY(0vh)',
+              transition: '1s'
+            };
+          default:
+            return {
+              transform: 'translateY(100vh)',
+              transition: '1s'
+            };
+        }
+    }
   }
 
   return (
@@ -53,12 +97,13 @@ const CameraRoll = ({
           key={index}
           src={image}
           alt={titles[index]}
-          style={{ height: `${itemHeight}%` }}
+          height={`${itemHeight}%`}
           onDragStart={e => {
             e.preventDefault();
           }}
           onClick={() => handleClick(index)}
           inFocus={index === current}
+          style={animationStyle(animationName, animationStage, index)}
         />
       ))}
     </Roll>

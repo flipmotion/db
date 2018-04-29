@@ -54,11 +54,12 @@ export default () => (
               <Route
                 exact
                 path="/portfolio/:index"
-                render={() => (
+                render={({ history }) => (
                   <AbsoluteDiv>
                     <PortfolioItem
                       portfolio={portfolio}
                       animationStage={animationStage}
+                      history={history}
                     />
                   </AbsoluteDiv>
                 )}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { house as placeholder } from '../modules/content';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -38,6 +39,7 @@ const DumbImage = styled.img.attrs({ src: placeholder, alt: 'dumb' })`
   width: 100%;
 `;
 
+// Just for fun Link here triggers non-standard transition
 const IndexPage = ({ animationStage }) => (
   <Container>
     <LeftContainer animationStage={animationStage}>
@@ -47,7 +49,14 @@ const IndexPage = ({ animationStage }) => (
         строительство или реконструкцию, проведем строительные работы, создадим
         дизайн интерьера и предложим техническое обслуживание.
       </p>
-      <a to="/portfolio">Наши работы</a>
+      <Link
+        to={{
+          pathname: '/portfolio',
+          state: { animationName: 'portfolioItem' }
+        }}
+      >
+        Наши работы
+      </Link>
     </LeftContainer>
     <RightContainer animationStage={animationStage}>
       <DumbImage />
