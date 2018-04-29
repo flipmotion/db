@@ -6,10 +6,10 @@ import { portfolio } from '../modules/content';
 
 import styled from 'styled-components';
 
-import WelcomePage from './WelcomePage';
-import PortfolioContainer from '../containers/PortfolioContainer';
-import Services from './Services';
-import Prices from './Prices';
+import WelcomePage from '../components/WelcomePage';
+import PortfolioContainer from './PortfolioContainer';
+import Services from '../components/Services';
+import Prices from '../components/Prices';
 
 const AbsoluteDiv = styled.div`
   position: absolute;

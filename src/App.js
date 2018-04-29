@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap-reboot.css';
 import Header from './components/Menu/Header';
 import Footer from './components/Menu/Footer';
 
-import RoutedContent from './components/RoutedContent';
+import AppRouter from './containers/AppRouter';
 
 const SiteContainer = styled.div`
   display: flex;
@@ -66,7 +66,7 @@ const App = () => (
         <Header />
       </HeaderArea>
       <MainArea>
-        <RoutedContent />
+        <AppRouter />
       </MainArea>
       <FooterArea>
         <Footer />
