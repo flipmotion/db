@@ -14,6 +14,10 @@ const langs = [
   }
 ];
 
+const Perspective = styled.div`
+  perspective: 30px;
+`;
+
 const Flag = styled.img`
   width: 1.4rem;
   margin: 1rem;
@@ -22,7 +26,7 @@ const Flag = styled.img`
   cursor: pointer;
   display: inline-block;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.5) rotate3d(0, 1, 0, -30deg);
     transition: all 0.5s;
     filter: grayscale(10%) brightness(90%);
   }
@@ -52,11 +56,13 @@ export default class Toggle extends Component {
   render() {
     const { langs, current } = this.state;
     return (
-      <Flag
-        src={langs[current].img}
-        onClick={this.handleClick}
-        alt={langs[current].alt}
-      />
+      <Perspective>
+        <Flag
+          src={langs[current].img}
+          onClick={this.handleClick}
+          alt={langs[current].alt}
+        />
+      </Perspective>
     );
   }
 }
