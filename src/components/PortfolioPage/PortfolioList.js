@@ -2,8 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const activeClassName = 'PortfolioList_active';
+const H1 = styled.h1`
+  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
+  transition: opacity 1s;
+`;
 
+// A styled NavLink
+const activeClassName = 'PortfolioList_active';
 const Item = styled(NavLink).attrs({ activeClassName })`
   display: block;
   padding-left: 0;
@@ -27,28 +32,28 @@ const Item = styled(NavLink).attrs({ activeClassName })`
   }
 `;
 
-const H1 = styled.h1`
-  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
-  transition: opacity 1s;
-`;
-
-export default ({ titles, animationStage }) => {
-  const titleStyles = titles.map((_, i, { length }) => ({
-    transition:
-      animationStage === 'entered'
-        ? `padding 1s, transform 1s ease-out ${i / 4}s`
-        : `padding 1s, transform 1s ease-out ${(length - 1 - i) /
-            4}s, opacity 1s`,
-    opacity: animationStage === 'entered' ? 1 : 0,
-    transform: `translateX(${animationStage === 'entered' ? '0px' : '-300px'})`
-  }));
+const PortfolioList = ({ titles, animationStage }) => {
+  function inlineStylePer(animationStage, index, arrLength) {
+    if (animationStage === 'entered')
+      return {
+        transform: `translateX(0px)`,
+        opacity: 1,
+        transition: `padding 1s, transform 1s ease-out ${index / 4}s`
+      };
+    return {
+      transform: `translateX(-300px)`,
+      opacity: 1,
+      transition: `padding 1s, transform 1s ease-out ${(arrLength - 1 - index) /
+        4}s, opacity 1s`
+    };
+  }
 
   return (
     <div>
       <H1 animationStage={animationStage}>Наши работы</H1>
-      {titles.map((name, index) => (
+      {titles.map((name, index, { length }) => (
         <Item
-          style={titleStyles[index]}
+          style={inlineStylePer(animationStage, index, length)}
           key={index}
           to={'/portfolio#' + (index + 1).toString()}
           isActive={(_, location) =>
@@ -61,3 +66,5 @@ export default ({ titles, animationStage }) => {
     </div>
   );
 };
+
+export default PortfolioList;
