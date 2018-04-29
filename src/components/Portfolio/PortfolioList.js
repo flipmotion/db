@@ -22,7 +22,7 @@ const Item = styled.div`
   }
 `;
 
-const PortfolioList = ({ titles, current, animationStage, NavigateTo }) => {
+const PortfolioList = ({ titles, current, animationStage, focusOn }) => {
   // This is the main animation function. In this particular case we don't just
   // animate a single instance, we animate an array where animation on every other element
   // depends on the previous. We also need array length to execute reverse animation.
@@ -48,7 +48,7 @@ const PortfolioList = ({ titles, current, animationStage, NavigateTo }) => {
         <Item
           style={inlineStylePer(animationStage, index, length)}
           key={index}
-          onClick={() => NavigateTo(index)}
+          onClick={() => focusOn(index)}
           active={current === index}
         >
           {name}
