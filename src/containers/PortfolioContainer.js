@@ -5,11 +5,11 @@ class PortfolioContainer extends Component {
   constructor() {
     super();
     this.state = { current: 0 };
-    this.NavigateTo = this.NavigateTo.bind(this);
+    this.focusOn = this.focusOn.bind(this);
   }
 
-  NavigateTo(portfolioIndex) {
-    this.setState({ current: portfolioIndex });
+  focusOn(itemIndex) {
+    this.setState({ current: itemIndex });
   }
 
   render() {
@@ -19,12 +19,13 @@ class PortfolioContainer extends Component {
     const descriptions = portfolio.map(el => el.description);
     return (
       <Portfolio
+        {...this.props}
         current={this.state.current}
         titles={titles}
         images={images}
         descriptions={descriptions}
         animationStage={animationStage}
-        NavigateTo={this.NavigateTo}
+        focusOn={this.focusOn}
       />
     );
   }

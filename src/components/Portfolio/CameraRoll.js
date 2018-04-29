@@ -24,24 +24,37 @@ const CameraRoll = ({
   animationStage,
   images,
   titles,
-  NavigateTo
+  focusOn,
+  location,
+  history
 }) => {
   const itemHeight = 66;
   const offsetToCenter = (100 - itemHeight) / 2;
   const animationOffset = animationStage === 'entered' ? 0 : 100;
   const offset = offsetToCenter - itemHeight * current + animationOffset;
 
+  // if image is clicked while it's not in "focus", what brings the image in focus
+  // i the image is already in focus, navigate to item page
+  function handleClick(index) {
+    if (index === current) {
+      history.push(`${location.pathname}/${index}`);
+      return;
+    }
+    focusOn(index);
+  }
+
   return (
     <Roll style={{ transform: `translateY(${offset}%)` }}>
       {images.map((image, index) => (
         <Image
+          key={index}
           src={image}
           alt={titles[index]}
           style={{ height: `${itemHeight}%` }}
           onDragStart={e => {
             e.preventDefault();
           }}
-          onClick={() => NavigateTo(index)}
+          onClick={() => handleClick(index)}
         />
       ))}
     </Roll>
