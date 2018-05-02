@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 // The Roll component is intentionally supposed to be overflowed
@@ -19,46 +19,49 @@ const Image = styled.img`
   cursor: ${props => (props.inFocus ? 'zoom-in' : 'pointer')};
 `;
 
-const CameraRoll = ({
-  current,
-  animationStage,
-  images,
-  titles,
-  focusOn,
-  location,
-  history
-}) => {
-  const itemHeight = 66;
-  const offsetToCenter = (100 - itemHeight) / 2;
-  // const animationOffset = animationStage === 'entered' ? 0 : 100;
-  // const offset = offsetToCenter - itemHeight * current + animationOffset;
-  const offset = offsetToCenter - itemHeight * current;
+class CameraRoll extends Component {
+  constructor() {
+    super();
+    // this can come from props as well, just decided to hardcode it for now
+    this.itemHeight = 66;
+    this.animationName = this.animationName.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.morphToPortfolioPage = this.morphToPortfolioPage.bind(this);
+    this.animationStyle = this.animationStyle.bind(this);
+  }
+
+  // This is the trickiest part
+  animationName() {
+    if (this.props.history.location.state)
+      return this.props.history.location.state.animationName;
+  }
 
   // if image is clicked while it's not in "focus", what brings the image in focus
   // if the image is already in focus, navigate to item page
   // focusOn comes from portfolioContainer
-  function handleClick(index) {
-    index === current ? morph(index) : focusOn(index);
+  handleClick(index) {
+    if (index === this.props.current) {
+      this.morphToPortfolioPage(index);
+    } else {
+      this.props.focusOn(index);
+    }
   }
 
-  // location comes from props
-  function morph(index) {
-    history.push(`${location.pathname}/${index}`, {
+  // this is a manual navigation with passing info about desired animation
+  // we can't use Link because action on click is conditional (see handleClick)
+  morphToPortfolioPage(index) {
+    this.props.history.push(`${this.props.location.pathname}/${index}`, {
       animationName: 'portfolioItem'
     });
   }
 
-  // history.location.state.animationName
-  // This function specifies how each image in the camera roll animates
-  // It is needed so the "current" image "morphs" to the new position,
-  // and the rest fade out.
-  function animationStyle(animationName, animationStage, index, current) {
-    switch (animationName) {
+  animationStyle(index) {
+    switch (this.animationName()) {
       case 'portfolioItem':
-        switch (index === current) {
+        switch (index === this.props.current) {
           // animation of the current slide
           case true:
-            switch (animationStage) {
+            switch (this.props.animationStage) {
               // the starting point before entering
               default:
                 return {
@@ -79,7 +82,7 @@ const CameraRoll = ({
             }
           // animation of the rest of the slides
           default:
-            switch (animationStage) {
+            switch (this.props.animationStage) {
               // the starting point before entering
               default:
                 return {
@@ -102,7 +105,7 @@ const CameraRoll = ({
         }
       // animation for the rest of the slides
       default:
-        switch (animationStage) {
+        switch (this.props.animationStage) {
           case 'entered':
             return {
               transform: 'translateY(0vh)',
@@ -117,26 +120,29 @@ const CameraRoll = ({
     }
   }
 
-  // This is the trickiest part
-  const animationName =
-    history.location.state && history.location.state.animationName;
+  render() {
+    const { current, images, titles } = this.props;
 
-  return (
-    <Roll style={{ transform: `translateY(${offset}%)` }}>
-      {images.map((image, index) => (
-        <Image
-          key={index}
-          src={image}
-          alt={titles[index]}
-          height={`${itemHeight}%`}
-          onDragStart={e => e.preventDefault()}
-          onClick={() => handleClick(index)}
-          inFocus={index === current}
-          style={animationStyle(animationName, animationStage, index, current)}
-        />
-      ))}
-    </Roll>
-  );
-};
+    const offsetToCenter = (100 - this.itemHeight) / 2;
+    const offset = offsetToCenter - this.itemHeight * current;
+
+    return (
+      <Roll style={{ transform: `translateY(${offset}%)` }}>
+        {images.map((image, index) => (
+          <Image
+            key={index}
+            src={image}
+            alt={titles[index]}
+            height={`${this.itemHeight}%`}
+            onDragStart={e => e.preventDefault()}
+            onClick={() => this.handleClick(index)}
+            inFocus={index === this.props.current}
+            style={this.animationStyle(index)}
+          />
+        ))}
+      </Roll>
+    );
+  }
+}
 
 export default CameraRoll;
