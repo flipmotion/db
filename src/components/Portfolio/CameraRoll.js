@@ -22,12 +22,14 @@ const Image = styled.img`
 class CameraRoll extends Component {
   constructor() {
     super();
+    this.state = { currentNode: null };
     // this can come from props as well, just decided to hardcode it for now
     this.itemHeight = 66;
     this.animationName = this.animationName.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.morphToPortfolioPage = this.morphToPortfolioPage.bind(this);
     this.animationStyle = this.animationStyle.bind(this);
+    // this.doubleStyle = this.doubleStyle.bind(this);
   }
 
   // This is the trickiest part
@@ -59,7 +61,7 @@ class CameraRoll extends Component {
     switch (this.animationName()) {
       case 'portfolioItem':
         switch (index === this.props.current) {
-          // animation of the current slide
+          // animation of the CURRENT slide
           case true:
             switch (this.props.animationStage) {
               // the starting point before entering
@@ -77,7 +79,9 @@ class CameraRoll extends Component {
               // where it leaves to
               case 'exiting':
                 return {
-                  visibility: 'hidden'
+                  opacity: 0,
+                  transform: 'scale(2)',
+                  transition: '1s'
                 };
             }
           // animation of the rest of the slides
@@ -106,14 +110,16 @@ class CameraRoll extends Component {
       // animation for the rest of the slides
       default:
         switch (this.props.animationStage) {
-          case 'entered':
-            return {
-              transform: 'translateY(0vh)',
-              transition: '1s'
-            };
+          // where coming from and where leaving to
           default:
             return {
               transform: 'translateY(100vh)',
+              transition: '1s'
+            };
+          // normal position
+          case 'entered':
+            return {
+              transform: 'translateY(0vh)',
               transition: '1s'
             };
         }
