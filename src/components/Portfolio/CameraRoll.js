@@ -36,64 +36,71 @@ const CameraRoll = ({
 
   // if image is clicked while it's not in "focus", what brings the image in focus
   // if the image is already in focus, navigate to item page
+  // focusOn comes from portfolioContainer
   function handleClick(index) {
-    if (index === current) {
-      history.push(`${location.pathname}/${index}`, {
-        animationName: 'portfolioItem'
-      });
-    } else {
-      focusOn(index);
-    }
+    index === current ? morph(index) : focusOn(index);
   }
 
-  // This is the trickiest part!!!
-  const animationName =
-    history.location.state && history.location.state.animationName;
+  // location comes from props
+  function morph(index) {
+    history.push(`${location.pathname}/${index}`, {
+      animationName: 'portfolioItem'
+    });
+  }
 
   // history.location.state.animationName
   // This function specifies how each image in the camera roll animates
+  // It is needed so the "current" image "morphs" to the new position,
+  // and the rest fade out.
   function animationStyle(animationName, animationStage, index, current) {
     switch (animationName) {
       case 'portfolioItem':
         switch (index === current) {
+          // animation of the current slide
           case true:
             switch (animationStage) {
-              case 'entered':
-                return {
-                  opacity: 1,
-                  transition: '1s'
-                };
-              case 'exiting':
-                return {
-                  transform: 'scale(2.5)',
-                  opacity: 0,
-                  transition: '1s'
-                };
+              // the starting point before entering
               default:
                 return {
                   opacity: 0,
                   transition: '1s'
                 };
-            }
-          default:
-            switch (animationStage) {
+              // the normal on-screen appearance
               case 'entered':
                 return {
                   opacity: 1,
                   transition: '1s'
                 };
+              // where it leaves to
+              case 'exiting':
+                return {
+                  visibility: 'hidden'
+                };
+            }
+          // animation of the rest of the slides
+          default:
+            switch (animationStage) {
+              // the starting point before entering
+              default:
+                return {
+                  opacity: 0,
+                  transition: '1s'
+                };
+              // the normal on-screen appearance
+              case 'entered':
+                return {
+                  opacity: 1,
+                  transition: '1s'
+                };
+              // where it leaves to
               case 'exiting':
                 return {
                   opacity: 0,
                   transition: '0.3s'
                 };
-              default:
-                return {
-                  opacity: 0,
-                  transition: '1s'
-                };
             }
         }
+      // animation for the rest of the slides
       default:
         switch (animationStage) {
           case 'entered':
@@ -110,6 +117,10 @@ const CameraRoll = ({
     }
   }
 
+  // This is the trickiest part
+  const animationName =
+    history.location.state && history.location.state.animationName;
+
   return (
     <Roll style={{ transform: `translateY(${offset}%)` }}>
       {images.map((image, index) => (
@@ -118,9 +129,7 @@ const CameraRoll = ({
           src={image}
           alt={titles[index]}
           height={`${itemHeight}%`}
-          onDragStart={e => {
-            e.preventDefault();
-          }}
+          onDragStart={e => e.preventDefault()}
           onClick={() => handleClick(index)}
           inFocus={index === current}
           style={animationStyle(animationName, animationStage, index, current)}
