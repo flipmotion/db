@@ -54,10 +54,12 @@ export default () => (
               <Route
                 exact
                 path="/portfolio/:index"
-                render={({ history }) => (
+                render={({ history, match }) => (
                   <AbsoluteDiv>
                     <PortfolioItem
-                      portfolio={portfolio}
+                      portfolioItem={
+                        portfolio[parseInt(match.params.index, 10)]
+                      }
                       animationStage={animationStage}
                       history={history}
                     />
