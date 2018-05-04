@@ -21,11 +21,16 @@ const AbsoluteDiv = styled.div`
   display: flex;
 `;
 
+const animationDuration = 850;
+
 export default () => (
   <Route
     render={({ location }) => (
       <TransitionGroup component={null} appear>
-        <Transition key={location.pathname} timeout={{ enter: 0, exit: 800 }}>
+        <Transition
+          key={location.pathname}
+          timeout={{ enter: 0, exit: animationDuration }}
+        >
           {animationStage => (
             <Switch location={location}>
               <Route
