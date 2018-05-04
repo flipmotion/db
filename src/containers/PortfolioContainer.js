@@ -15,7 +15,7 @@ class PortfolioContainer extends Component {
   render() {
     const { portfolio, ...other } = this.props;
     const titles = portfolio.map(el => el.title);
-    const images = portfolio.map(el => el.images[0]);
+    const images = portfolio.map(el => el.illustration);
     const descriptions = portfolio.map(el => el.description);
     return (
       <Portfolio
