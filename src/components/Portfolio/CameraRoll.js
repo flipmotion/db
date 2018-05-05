@@ -133,7 +133,8 @@ class CameraRoll extends Component {
     const offset = offsetToCenter - this.itemHeight * current;
 
     return (
-      <Roll style={{ transform: `translateY(${offset}%)` }}>
+      // <Roll style={{ transform: `translateY1(${offset}%)` }}>
+      <Roll offset={offset}>
         {images.map((image, index) => (
           <Image
             key={index}
