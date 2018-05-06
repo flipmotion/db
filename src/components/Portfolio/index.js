@@ -35,6 +35,7 @@ Math.easeInOutQuad = function(t, b, c, d) {
 };
 
 class RollArea extends Component {
+  // source: https://gist.github.com/andjosh/6764939
   static scrollTo(element, desiredPosition, duration) {
     const currentPosition = element.scrollTop,
       delta = desiredPosition - currentPosition,
