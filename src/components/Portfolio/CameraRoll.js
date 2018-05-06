@@ -35,12 +35,12 @@ class CameraRoll extends Component {
 
   // if image is clicked while it's not in "focus", what brings the image in focus
   // if the image is already in focus, navigate to item page
-  // focusOn comes from portfolioContainer
+  // setCurrent comes from portfolioContainer
   handleClick(index) {
     if (index === this.props.current) {
       this.morphToPortfolioPage(index);
     } else {
-      this.props.focusOn(index);
+      this.props.setCurrent(index);
     }
   }
 

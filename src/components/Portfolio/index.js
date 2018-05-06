@@ -29,7 +29,7 @@ class RollArea extends Component {
   }
 
   // As user scrolls, we check if a "current" portfolio item changed, and if it did,
-  // we trigger this.props.focusOn(newIndex)
+  // we trigger this.props.setCurrent(newIndex)
   handleScroll(event) {
     const { scrollTop } = event.target;
     const elementHeight = event.target.childNodes[1].clientHeight;
@@ -38,10 +38,7 @@ class RollArea extends Component {
     // How many element heights did we scroll? First item is an exception,
     // because scrolling half the item height must switch the index to the next one.
     const index = Math.floor(adjustedScrollTop / elementHeight);
-    console.log('adjustedScrollTop', adjustedScrollTop);
-    console.log('elementHeight', elementHeight);
-    console.log('current index is', index);
-    this.props.focusOn(index);
+    this.props.setCurrent(index);
   }
 
   render() {
@@ -66,7 +63,7 @@ const Portfolio = props => (
     <ListArea>
       <PortfolioList {...props} />
     </ListArea>
-    <RollArea focusOn={props.focusOn}>
+    <RollArea setCurrent={props.setCurrent}>
       <CameraRoll {...props} />
     </RollArea>
     <DescriptionArea>
