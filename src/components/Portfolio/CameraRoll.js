@@ -1,14 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
-
-// The Roll component is intentionally supposed to be overflowed
-const Roll = styled.div`
-  flex-direction: column;
-  /* margin-top: 100%; */
-  height: 100%;
-  /* transform: translateY(see index.js); */
-  transition: transform 1s, opacity 1s;
-`;
 
 const Image = styled.img`
   padding-top: 0.5rem;
@@ -17,14 +8,18 @@ const Image = styled.img`
   height: ${props => props.height};
   object-fit: cover;
   cursor: ${props => (props.inFocus ? 'zoom-in' : 'pointer')};
+  scroll-snap-align: center;
+`;
+
+// I have no idea why div collapses here, and imgs don't
+const Spacer = styled(Image)`
+  scroll-snap-align: none;
+  visibility: hidden;
 `;
 
 class CameraRoll extends Component {
   constructor() {
     super();
-    this.state = { currentNode: null };
-    // this can come from props as well, just decided to hardcode it for now
-    this.itemHeight = 66;
     this.animationName = this.animationName.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.morphToPortfolioPage = this.morphToPortfolioPage.bind(this);
@@ -127,27 +122,32 @@ class CameraRoll extends Component {
   }
 
   render() {
-    const { current, images, titles } = this.props;
+    const { images, titles, imageHeight } = this.props;
 
-    const offsetToCenter = (100 - this.itemHeight) / 2;
-    const offset = offsetToCenter - this.itemHeight * current;
+    const offsetToCenter = (100 - imageHeight) / 2;
 
     return (
       // <Roll style={{ transform: `translateY1(${offset}%)` }}>
-      <Roll offset={offset}>
+      <Fragment>
+        <Spacer key={-1} src={images[0]} height={offsetToCenter + '%'} />
         {images.map((image, index) => (
           <Image
             key={index}
             src={image}
             alt={titles[index]}
-            height={`${this.itemHeight}%`}
+            height={imageHeight + '%'}
             onDragStart={e => e.preventDefault()}
             onClick={() => this.handleClick(index)}
             inFocus={index === this.props.current}
             style={this.animationStyle(index)}
           />
         ))}
-      </Roll>
+        <Spacer
+          key={images.length}
+          src={images[images.length - 1]}
+          height={offsetToCenter + '%'}
+        />
+      </Fragment>
     );
   }
 }

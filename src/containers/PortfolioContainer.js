@@ -6,6 +6,7 @@ class PortfolioContainer extends Component {
     super();
     this.state = { current: 0 };
     this.focusOn = this.focusOn.bind(this);
+    this.imageHeight = 66; // % height of image
   }
 
   focusOn(itemIndex) {
@@ -25,6 +26,7 @@ class PortfolioContainer extends Component {
         images={images}
         descriptions={descriptions}
         focusOn={this.focusOn}
+        imageHeight={this.imageHeight}
       />
     );
   }
