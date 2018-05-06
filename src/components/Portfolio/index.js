@@ -22,7 +22,43 @@ const RollAreaDiv = styled.div`
   height: 100%;
 `;
 
+// source: https://gist.github.com/andjosh/6764939
+//t = current time
+//b = start value
+//c = change in value
+//d = duration
+Math.easeInOutQuad = function(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1) return c / 2 * t * t + b;
+  t--;
+  return -c / 2 * (t * (t - 2) - 1) + b;
+};
+
 class RollArea extends Component {
+  static scrollTo(element, desiredPosition, duration) {
+    const currentPosition = element.scrollTop,
+      delta = desiredPosition - currentPosition,
+      increment = 20;
+
+    let currentTime = 0;
+
+    // a recursion
+    const animateScroll = function() {
+      var val = Math.easeInOutQuad(
+        currentTime,
+        currentPosition,
+        delta,
+        duration
+      );
+      element.scrollTop = val;
+      currentTime += increment;
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    };
+    animateScroll();
+  }
+
   constructor() {
     super();
     this.handleScroll = this.handleScroll.bind(this);
@@ -69,17 +105,9 @@ class RollArea extends Component {
     const element = this.ref.current;
     const elementHeight = element.childNodes[1].clientHeight;
 
-    const currentPosition = element.scrollTop;
     const desiredPosition = index * elementHeight;
 
-    element.scrollTop = desiredPosition;
-
-    // const delta = desiredPosition - currentPosition
-
-    // for (let i = 1000; i > 0; i--) {
-    //   console.log(i)
-    //   element.scrollTop = index * elementHeight - delta / i
-    // }
+    RollArea.scrollTo(element, desiredPosition, 850);
   }
 
   render() {
