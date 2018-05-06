@@ -17,6 +17,14 @@ const Spacer = styled(Image)`
   visibility: hidden;
 `;
 
+const SpacerTop = styled(Spacer)`
+  padding-top: 0;
+`;
+
+const SpacerBottom = styled(Spacer)`
+  padding-bottom: 0;
+`;
+
 class CameraRoll extends Component {
   constructor() {
     super();
@@ -129,7 +137,7 @@ class CameraRoll extends Component {
     return (
       // <Roll style={{ transform: `translateY1(${offset}%)` }}>
       <Fragment>
-        <Spacer key={-1} src={images[0]} height={offsetToCenter + '%'} />
+        <SpacerTop key={-1} src={images[0]} height={offsetToCenter + '%'} />
         {images.map((image, index) => (
           <Image
             key={index}
@@ -142,7 +150,7 @@ class CameraRoll extends Component {
             style={this.animationStyle(index)}
           />
         ))}
-        <Spacer
+        <SpacerBottom
           key={images.length}
           src={images[images.length - 1]}
           height={offsetToCenter + '%'}
