@@ -63,54 +63,27 @@ class CameraRoll extends Component {
   animationStyle(index) {
     switch (this.animationName()) {
       case 'portfolioItem':
-        switch (index === this.props.current) {
-          // animation of the CURRENT slide
-          case true:
-            switch (this.props.animationStage) {
-              // the starting point before entering
-              default:
-                return {
-                  opacity: 0,
-                  transition: '1s'
-                };
-              // the normal on-screen appearance
-              case 'entered':
-                return {
-                  opacity: 1,
-                  transition: '1s'
-                };
-              // where it leaves to
-              case 'exiting':
-                return {
-                  opacity: 0,
-                  transform: 'scale(2)',
-                  transition: '1s'
-                };
-            }
-          // animation of the rest of the slides
+        switch (this.props.animationStage) {
+          // the starting point before entering
           default:
-            switch (this.props.animationStage) {
-              // the starting point before entering
-              default:
-                return {
-                  opacity: 0,
-                  transition: '1s'
-                };
-              // the normal on-screen appearance
-              case 'entered':
-                return {
-                  opacity: 1,
-                  transition: '1s'
-                };
-              // where it leaves to
-              case 'exiting':
-                return {
-                  opacity: 0,
-                  transition: '0.3s'
-                };
-            }
+            return {
+              opacity: 0,
+              transition: '1s'
+            };
+          // the normal on-screen appearance
+          case 'entered':
+            return {
+              opacity: 1,
+              transition: '1s'
+            };
+          // where it leaves to
+          case 'exiting':
+            return {
+              opacity: 0,
+              transition: '0.85s'
+            };
         }
-      // animation for the rest of the slides
+      // noname animations
       default:
         switch (this.props.animationStage) {
           // where coming from and where leaving to
