@@ -58,8 +58,10 @@ class RollArea extends Component {
     this.props.setCurrent(index);
   }
 
-  componentDidUpdate(prevProps) {
-    this.positionAt(this.props.current);
+  // Prevents jumps on scrolling
+  componentDidUpdate() {
+    if (this.currentAreaIndex() !== this.props.current)
+      this.positionAt(this.props.current);
   }
 
   // position exactly at _index_ image
