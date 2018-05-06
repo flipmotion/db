@@ -26,24 +26,63 @@ class RollArea extends Component {
   constructor() {
     super();
     this.handleScroll = this.handleScroll.bind(this);
+    this.positionAt = this.positionAt.bind(this);
+    this.elementHeight = this.elementHeight.bind(this);
+    this.currentAreaIndex = this.currentAreaIndex.bind(this);
+    this.element = this.element.bind(this);
+    this.ref = React.createRef();
   }
 
-  // As user scrolls, we check if a "current" portfolio item changed, and if it did,
-  // we trigger this.props.setCurrent(newIndex)
-  handleScroll(event) {
-    const { scrollTop } = event.target;
-    const elementHeight = event.target.childNodes[1].clientHeight;
-    const adjustedScrollTop = scrollTop + elementHeight / 2;
+  element() {
+    return this.ref.current;
+  }
 
-    // How many element heights did we scroll? First item is an exception,
-    // because scrolling half the item height must switch the index to the next one.
-    const index = Math.floor(adjustedScrollTop / elementHeight);
+  // What element the current scroll position belongs to
+  currentAreaIndex() {
+    const elementHeight = this.elementHeight();
+    const scrollTop = this.element().scrollTop;
+    const adjustedScrollTop = scrollTop + elementHeight / 2;
+    return Math.floor(adjustedScrollTop / elementHeight);
+  }
+
+  // first element is a spacer, so we skip it
+  elementHeight() {
+    const element = this.element();
+    if (!element.childNodes[1]) return 0;
+    return element.childNodes[1].clientHeight;
+  }
+
+  // scroll position sets current index for the whole Portfolio
+  handleScroll(event) {
+    const index = this.currentAreaIndex();
     this.props.setCurrent(index);
+  }
+
+  componentDidUpdate(prevProps) {
+    this.positionAt(this.props.current);
+  }
+
+  // position exactly at _index_ image
+  positionAt(index) {
+    const element = this.ref.current;
+    const elementHeight = element.childNodes[1].clientHeight;
+
+    const currentPosition = element.scrollTop;
+    const desiredPosition = index * elementHeight;
+
+    element.scrollTop = desiredPosition;
+
+    // const delta = desiredPosition - currentPosition
+
+    // for (let i = 1000; i > 0; i--) {
+    //   console.log(i)
+    //   element.scrollTop = index * elementHeight - delta / i
+    // }
   }
 
   render() {
     return (
-      <RollAreaDiv onScroll={this.handleScroll}>
+      <RollAreaDiv onScroll={this.handleScroll} innerRef={this.ref}>
         {this.props.children}
       </RollAreaDiv>
     );
@@ -63,7 +102,7 @@ const Portfolio = props => (
     <ListArea>
       <PortfolioList {...props} />
     </ListArea>
-    <RollArea setCurrent={props.setCurrent}>
+    <RollArea setCurrent={props.setCurrent} current={props.current}>
       <CameraRoll {...props} />
     </RollArea>
     <DescriptionArea>
