@@ -3,9 +3,18 @@ import { house as placeholder } from '../modules/content';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.div.attrs({
+  // onWheel: function () {
+  //   return function () {
+  //     console.log('I will navigate to portfolio one day :)')
+  //   }
+  // }
+  // this also doesn't work for some reason
+  // onDrag: function () { return function (event) { event.preventDefault() } }
+})`
   align-items: center;
   display: flex;
+  overflow: scroll;
 `;
 
 const LeftContainer = styled.div`
