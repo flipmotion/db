@@ -21,9 +21,8 @@ injectGlobal`
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 `;
 
