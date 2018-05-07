@@ -71,6 +71,7 @@ const Text = styled.div.attrs({
   transition: transform 1s, opacity 1s;
 `;
 
+// I could use Image directly, but maybe I'll add slideshow or video here
 const Media = styled.div.attrs({
   style: props => ({ ...props.style, ...mediaStyle(props.animationStage) }),
   children: props => <Image src={props.imageSrc} alt={props.imageAlt} />
@@ -80,6 +81,13 @@ const Media = styled.div.attrs({
   height: 100%;
   transition: transform 1s, opacity 1s;
 `;
+
+// const Composer = styled.div`
+//   position: relative;
+//   div {
+//     position: absolute;
+//   }
+// `
 
 const HomePage = props => (
   <Fragment>

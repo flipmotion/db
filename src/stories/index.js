@@ -18,7 +18,7 @@ injectGlobal`
 
 const FullpageDiv = styled.div`
   display: flex;
-  height: 100vh;
+  height: 70vh;
 `;
 
 const homePage = storiesOf('Home page', module);
