@@ -10,7 +10,9 @@ const Image = styled.img.attrs({
   height: 100%;
   object-fit: cover;
   width: 100%;
+  min-width: 0;
   transition: all 0.85s ease-out 0.35s;
+  flex: 6;
 `;
 
 const PortfolioButton = styled(Link).attrs({
@@ -77,20 +79,10 @@ const Text = styled.div.attrs({
   z-index: 1;
 `;
 
-// // I could use Image directly, but maybe I'll add slideshow or video here
-// const Media = styled.div.attrs({
-//   style: props => ({ ...props.style, ...mediaStyle(props.animationStage) }),
-// })`
-//   flex: 6;
-//   align-self: stretch;
-//   height: 100%;
-//   transition: transform 1s, opacity 1s;
-// `;
-
 const Composer = styled.div`
-  position: relative;
   display: flex;
   @media (orientation: portrait), (max-width: 50rem) {
+    position: relative;
     div {
       position: absolute;
       background-color: rgba(222, 222, 222, 0.5);
