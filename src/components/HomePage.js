@@ -3,18 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Image = styled.img.attrs({
-  style: props => {
-    console.log('animationStage', props.animationStage);
-    const style = { ...props.style, ...mediaStyle(props.animationStage) };
-    console.log(style);
-    return style;
-  },
+  style: props => ({ ...props.style, ...mediaStyle(props.animationStage) }),
   src: props => props.imageSrc,
   alt: props => props.imageAlt
 })`
   height: 100%;
   object-fit: cover;
   width: 100%;
+  transition: all 0.85s ease-out 0.35s;
 `;
 
 const PortfolioButton = styled(Link).attrs({
