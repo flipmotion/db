@@ -2,7 +2,16 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Image = styled.img`
+const Image = styled.img.attrs({
+  style: props => {
+    console.log('animationStage', props.animationStage);
+    const style = { ...props.style, ...mediaStyle(props.animationStage) };
+    console.log(style);
+    return style;
+  },
+  src: props => props.imageSrc,
+  alt: props => props.imageAlt
+})`
   height: 100%;
   object-fit: cover;
   width: 100%;
@@ -69,31 +78,40 @@ const Text = styled.div.attrs({
   align-self: center;
   padding: 1.5rem;
   transition: transform 1s, opacity 1s;
+  z-index: 1;
 `;
 
-// I could use Image directly, but maybe I'll add slideshow or video here
-const Media = styled.div.attrs({
-  style: props => ({ ...props.style, ...mediaStyle(props.animationStage) }),
-  children: props => <Image src={props.imageSrc} alt={props.imageAlt} />
-})`
-  flex: 6;
-  align-self: stretch;
-  height: 100%;
-  transition: transform 1s, opacity 1s;
-`;
+// // I could use Image directly, but maybe I'll add slideshow or video here
+// const Media = styled.div.attrs({
+//   style: props => ({ ...props.style, ...mediaStyle(props.animationStage) }),
+// })`
+//   flex: 6;
+//   align-self: stretch;
+//   height: 100%;
+//   transition: transform 1s, opacity 1s;
+// `;
 
-// const Composer = styled.div`
-//   position: relative;
-//   div {
-//     position: absolute;
-//   }
-// `
+const Composer = styled.div`
+  position: relative;
+  display: flex;
+  @media (orientation: portrait), (max-width: 50rem) {
+    div {
+      position: absolute;
+      background-color: rgba(222, 222, 222, 0.5);
+
+      @media (min-width: 30rem) {
+        width: 70%;
+        margin: 3rem;
+      }
+    }
+  }
+`;
 
 const HomePage = props => (
-  <Fragment>
+  <Composer>
     <Text {...props} />
-    <Media {...props} />
-  </Fragment>
+    <Image {...props} />
+  </Composer>
 );
 
 export default HomePage;
