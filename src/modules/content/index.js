@@ -39,3 +39,23 @@ export const portfolio = [
     illustration: house3
   }
 ];
+
+export const welcomePage = {
+  header: {
+    ru: 'Услуги в сфере элитной недвижимости',
+    en: 'Real estate services'
+  },
+  paragraphText: {
+    ru:
+      'Мы разработаем для вас проект любой сложности, получим разрешение на строительство или реконструкцию, проведем строительные работы, создадим дизайн интерьера и предложим техническое обслуживание',
+    en:
+      'We will develop for you the project of any complexity, we will receive permission for construction or reconstruction, we will carry out construction works, we will create interior design and we will offer maintenance'
+  },
+  link: {
+    text: {
+      ru: 'Наши работы',
+      en: 'Our works'
+    },
+    path: '/portfolio'
+  }
+};

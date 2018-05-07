@@ -18,8 +18,7 @@ const Container = styled.div.attrs({
 `;
 
 const LeftContainer = styled.div`
-  flex: 40;
-  width: 40vw;
+  flex: 4;
   padding: 1.5rem;
   opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
   transform: translateX(
@@ -29,12 +28,9 @@ const LeftContainer = styled.div`
 `;
 
 const RightContainer = styled.div`
-  position: fixed;
+  flex: 6;
   width: 60vw;
   height: 100vh;
-  top: 0;
-  right: 0;
-  display: flex;
   opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '500px' : '0px')}
@@ -49,22 +45,18 @@ const DumbImage = styled.img.attrs({ src: placeholder, alt: 'dumb' })`
 `;
 
 // Just for fun Link here triggers non-standard transition
-const IndexPage = ({ animationStage }) => (
+const IndexPage = ({ animationStage, header, paragraphText, link }) => (
   <Container>
     <LeftContainer animationStage={animationStage}>
-      <h1>Услуги в сфере элитной недвижимости</h1>
-      <p>
-        Мы разработаем для вас проект любой сложности, получим разрешение на
-        строительство или реконструкцию, проведем строительные работы, создадим
-        дизайн интерьера и предложим техническое обслуживание.
-      </p>
+      <h1>{header}</h1>
+      <p>{paragraphText}</p>
       <Link
         to={{
-          pathname: '/portfolio',
+          pathname: link.path,
           state: { animationName: 'portfolioItem' }
         }}
       >
-        Наши работы
+        {link.text}
       </Link>
     </LeftContainer>
     <RightContainer animationStage={animationStage}>
