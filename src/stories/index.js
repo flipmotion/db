@@ -5,27 +5,36 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
 
 import * as content from '../modules/content';
 
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import WelcomePage from '../components/WelcomePage';
 
-const Div = styled.div`
-  display: flex;
+injectGlobal`
+  body {
+    font-family: sans-serif;
+  }
 `;
 
-const stories = storiesOf('DB company website', module);
-stories.addDecorator(withKnobs);
+const FullpageDiv = styled.div`
+  display: flex;
+  height: 100vh;
+`;
 
-stories.addDecorator(story => (
+const homePage = storiesOf('Home page', module);
+homePage.addDecorator(withKnobs);
+
+homePage.addDecorator(story => (
   <Router>
     <Route>
-      <Div>{story()}</Div>
+      <FullpageDiv>{story()}</FullpageDiv>
     </Route>
   </Router>
 ));
 
-stories.add('Page', () => (
+homePage.add('Text area', () => 1);
+
+homePage.add('Content', () => (
   <WelcomePage
     animationStage={boolean('visible', true) ? 'entered' : 'exited'}
     header={text('Header', content.welcomePage.header.ru)}
@@ -34,5 +43,35 @@ stories.add('Page', () => (
       text: text('Link text', content.welcomePage.link.text.ru),
       path: content.welcomePage.link.path
     }}
+    image={content.homeImage}
   />
 ));
+
+const portfolioPage = storiesOf('Portfolio', module);
+portfolioPage.addDecorator(withKnobs);
+
+portfolioPage.addDecorator(story => (
+  <Router>
+    <Route>
+      <FullpageDiv>{story()}</FullpageDiv>
+    </Route>
+  </Router>
+));
+
+portfolioPage
+  .add('Page', () => (
+    <WelcomePage
+      animationStage={boolean('visible', true) ? 'entered' : 'exited'}
+      header={text('Header', content.welcomePage.header.ru)}
+      paragraphText={text(
+        'Paragraph text',
+        content.welcomePage.paragraphText.ru
+      )}
+      link={{
+        text: text('Link text', content.welcomePage.link.text.ru),
+        path: content.welcomePage.link.path
+      }}
+    />
+  ))
+  .add('Another', () => <p>123</p>)
+  .add('One more', () => <p>one more page</p>);

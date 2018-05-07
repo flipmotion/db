@@ -1,24 +1,10 @@
-import React from 'react';
-import { house as placeholder } from '../modules/content';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled.div.attrs({
-  // onWheel: function () {
-  //   return function () {
-  //     console.log('I will navigate to portfolio one day :)')
-  //   }
-  // }
-  // this also doesn't work for some reason
-  // onDrag: function () { return function (event) { event.preventDefault() } }
-})`
-  align-items: center;
-  display: flex;
-  overflow: scroll;
-`;
-
-const LeftContainer = styled.div`
+const LeftWrapper = styled.div`
   flex: 4;
+  align-self: center;
   padding: 1.5rem;
   opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
   transform: translateX(
@@ -27,10 +13,10 @@ const LeftContainer = styled.div`
   transition: transform 1s, opacity 1s;
 `;
 
-const RightContainer = styled.div`
+const RightWrapper = styled.div`
   flex: 6;
-  width: 60vw;
-  height: 100vh;
+  align-self: stretch;
+  height: 100%;
   opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
   transform: translateX(
     ${props => (props.animationStage !== 'entered' ? '500px' : '0px')}
@@ -38,16 +24,16 @@ const RightContainer = styled.div`
   transition: transform 1s, opacity 1s;
 `;
 
-const DumbImage = styled.img.attrs({ src: placeholder, alt: 'dumb' })`
+const Image = styled.img`
   height: 100%;
   object-fit: cover;
   width: 100%;
 `;
 
 // Just for fun Link here triggers non-standard transition
-const IndexPage = ({ animationStage, header, paragraphText, link }) => (
-  <Container>
-    <LeftContainer animationStage={animationStage}>
+const IndexPage = ({ animationStage, header, paragraphText, link, image }) => (
+  <Fragment>
+    <LeftWrapper animationStage={animationStage}>
       <h1>{header}</h1>
       <p>{paragraphText}</p>
       <Link
@@ -58,11 +44,11 @@ const IndexPage = ({ animationStage, header, paragraphText, link }) => (
       >
         {link.text}
       </Link>
-    </LeftContainer>
-    <RightContainer animationStage={animationStage}>
-      <DumbImage />
-    </RightContainer>
-  </Container>
+    </LeftWrapper>
+    <RightWrapper animationStage={animationStage}>
+      <Image src={image.src} alt={image.alt} />
+    </RightWrapper>
+  </Fragment>
 );
 
 export default IndexPage;
