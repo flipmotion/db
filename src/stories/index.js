@@ -31,7 +31,7 @@ stories.add('Page', () => (
     header={text('Header', content.welcomePage.header.ru)}
     paragraphText={text('Paragraph text', content.welcomePage.paragraphText.ru)}
     link={{
-      text: content.welcomePage.link.text.ru,
+      text: text('Link text', content.welcomePage.link.text.ru),
       path: content.welcomePage.link.path
     }}
   />
