@@ -13,12 +13,13 @@ import HomePage from '../components/HomePage';
 injectGlobal`
   body {
     font-family: sans-serif;
+    margin: 0;
   }
 `;
 
 const FullpageDiv = styled.div`
   display: flex;
-  height: 70vh;
+  height: 100vh;
 `;
 
 const homePage = storiesOf('Home page', module);
