@@ -10,6 +10,8 @@ import styled, { injectGlobal } from 'styled-components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from '../components/HomePage';
 
+import { Menu, MenuItem } from '../components/Menu/Menu';
+
 injectGlobal`
   body {
     font-family: sans-serif;
@@ -33,8 +35,6 @@ homePage.addDecorator(story => (
   </Router>
 ));
 
-// homePage.add('Text area', () => 1);
-
 homePage.add('Content', () => (
   <HomePage
     animationStage={boolean('visible', true) ? 'entered' : 'exited'}
@@ -45,6 +45,26 @@ homePage.add('Content', () => (
     imageSrc={content.homePage.media[0].src}
     imageAlt={content.homePage.media[0].alt}
   />
+));
+
+const menu = storiesOf('Menu', module);
+menu.addDecorator(withKnobs);
+
+menu.addDecorator(story => (
+  <Router>
+    <Route>
+      <div style={{ backgroundColor: 'rgb(22, 22, 22)' }}>{story()}</div>
+    </Route>
+  </Router>
+));
+
+menu.add('Menu', () => (
+  <Menu>
+    <MenuItem to="/page1">Page 1</MenuItem>
+    <MenuItem to="/page2">Page 2</MenuItem>
+    <MenuItem to="/page3">Page 3</MenuItem>
+    <MenuItem to="/page4">Page 4</MenuItem>
+  </Menu>
 ));
 
 // const portfolioPage = storiesOf('Portfolio', module);

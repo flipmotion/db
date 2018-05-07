@@ -15,6 +15,7 @@ const ListArea = styled.div`
 const RollAreaDiv = styled.div`
   overflow-y: auto;
   /* for scroll momentum AND snapping on iOS */
+  -webkit-overflow-scrolling: touch;
   scroll-snap-type: y mandatory;
   flex: 50;
   display: flex;

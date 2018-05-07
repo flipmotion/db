@@ -6,13 +6,15 @@ import { portfolio } from '../modules/content';
 
 import styled from 'styled-components';
 
-import WelcomePage from '../components/WelcomePage';
+import HomePage from '../components/HomePage';
 import PortfolioContainer from './PortfolioContainer';
 import Services from '../components/Services';
 import Prices from '../components/Prices';
 import Page404 from '../components/Page404';
 
 import PortfolioItem from '../components/PortfolioItem';
+
+import { homePage } from '../modules/content';
 
 const AbsoluteDiv = styled.div`
   position: absolute;
@@ -38,7 +40,15 @@ export default () => (
                 path="/"
                 render={() => (
                   <AbsoluteDiv>
-                    <WelcomePage animationStage={animationStage} />
+                    <HomePage
+                      animationStage={animationStage}
+                      header={homePage.header.ru}
+                      paragraphText={homePage.paragraphText.ru}
+                      linkText={homePage.link.text.ru}
+                      linkPath={homePage.link.path}
+                      imageSrc={homePage.media[0].src}
+                      imageAlt={homePage.media[0].alt}
+                    />
                   </AbsoluteDiv>
                 )}
               />

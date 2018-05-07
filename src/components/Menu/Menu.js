@@ -18,6 +18,7 @@ export const MenuItem = props => {
     padding: 1.5rem;
     color: rgb(200, 200, 200);
     transition: color 0.5s;
+    text-decoration: none;
 
     &:hover {
       text-decoration: none;
