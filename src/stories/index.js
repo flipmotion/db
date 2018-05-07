@@ -8,7 +8,7 @@ import * as content from '../modules/content';
 import styled, { injectGlobal } from 'styled-components';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import WelcomePage from '../components/WelcomePage';
+import HomePage from '../components/HomePage';
 
 injectGlobal`
   body {
@@ -32,46 +32,48 @@ homePage.addDecorator(story => (
   </Router>
 ));
 
-homePage.add('Text area', () => 1);
+// homePage.add('Text area', () => 1);
 
-homePage.add('Content', () => (
-  <WelcomePage
-    animationStage={boolean('visible', true) ? 'entered' : 'exited'}
-    header={text('Header', content.welcomePage.header.ru)}
-    paragraphText={text('Paragraph text', content.welcomePage.paragraphText.ru)}
-    link={{
-      text: text('Link text', content.welcomePage.link.text.ru),
-      path: content.welcomePage.link.path
-    }}
-    image={content.homeImage}
-  />
-));
+homePage.add('Content', () => <HomePage />);
 
-const portfolioPage = storiesOf('Portfolio', module);
-portfolioPage.addDecorator(withKnobs);
+// homePage.add('Content', () => (
+//   <HomePage
+//     animationStage={boolean('visible', true) ? 'entered' : 'exited'}
+//     header={text('Header', content.welcomePage.header.ru)}
+//     paragraphText={text('Paragraph text', content.welcomePage.paragraphText.ru)}
+//     link={{
+//       text: text('Link text', content.welcomePage.link.text.ru),
+//       path: content.welcomePage.link.path
+//     }}
+//     image={content.homeImage}
+//   />
+// ));
 
-portfolioPage.addDecorator(story => (
-  <Router>
-    <Route>
-      <FullpageDiv>{story()}</FullpageDiv>
-    </Route>
-  </Router>
-));
+// const portfolioPage = storiesOf('Portfolio', module);
+// portfolioPage.addDecorator(withKnobs);
 
-portfolioPage
-  .add('Page', () => (
-    <WelcomePage
-      animationStage={boolean('visible', true) ? 'entered' : 'exited'}
-      header={text('Header', content.welcomePage.header.ru)}
-      paragraphText={text(
-        'Paragraph text',
-        content.welcomePage.paragraphText.ru
-      )}
-      link={{
-        text: text('Link text', content.welcomePage.link.text.ru),
-        path: content.welcomePage.link.path
-      }}
-    />
-  ))
-  .add('Another', () => <p>123</p>)
-  .add('One more', () => <p>one more page</p>);
+// portfolioPage.addDecorator(story => (
+//   <Router>
+//     <Route>
+//       <FullpageDiv>{story()}</FullpageDiv>
+//     </Route>
+//   </Router>
+// ));
+
+// portfolioPage
+//   .add('Page', () => (
+//     <WelcomePage
+//       animationStage={boolean('visible', true) ? 'entered' : 'exited'}
+//       header={text('Header', content.welcomePage.header.ru)}
+//       paragraphText={text(
+//         'Paragraph text',
+//         content.welcomePage.paragraphText.ru
+//       )}
+//       link={{
+//         text: text('Link text', content.welcomePage.link.text.ru),
+//         path: content.welcomePage.link.path
+//       }}
+//     />
+//   ))
+//   .add('Another', () => <p>123</p>)
+//   .add('One more', () => <p>one more page</p>);
