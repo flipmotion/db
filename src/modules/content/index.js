@@ -6,11 +6,6 @@ import house3 from './house3.jpg';
 // http://exploringjs.com/es6/ch_modules.html#_making-a-re-export-the-default-export
 export { default as logo } from './logo-grey.svg';
 
-export const homeImage = {
-  src: house,
-  alt: 'DB company'
-};
-
 export const portfolio = [
   {
     title: 'Особняк в Грохольском переулке',
@@ -44,7 +39,7 @@ export const portfolio = [
   }
 ];
 
-export const welcomePage = {
+export const homePage = {
   header: {
     ru: 'Услуги в сфере элитной недвижимости',
     en: 'Real estate services'
@@ -61,5 +56,11 @@ export const welcomePage = {
       en: 'Our works'
     },
     path: '/portfolio'
-  }
+  },
+  media: [
+    {
+      src: house,
+      alt: 'DB company'
+    }
+  ]
 };

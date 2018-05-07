@@ -8,16 +8,23 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const PortfolioButton = styled(Link).attrs(props => ({
-  to: {
-    pathname: props.path,
+const PortfolioButton = styled(Link).attrs({
+  to: props => ({
+    pathname: props.to,
     state: { animationType: 'portfolioItem' }
-  },
-  children: text
-}))`
+  })
+})`
   text-decoration: none;
-  color: navy;
-  border: 1px solid black;
+  color: #222;
+  padding: 0.5em;
+  border: 1px solid #222;
+  transition: color 0.5s, background-color 0.5s;
+
+  :hover {
+    color: white;
+    background-color: #222;
+    transition: color 0.5s, background-color 0.5s;
+  }
 `;
 
 function textStyle(animationStage) {
@@ -48,27 +55,27 @@ function mediaStyle(animationStage) {
   }
 }
 
-const Text = styled.div.attrs(props => ({
-  style: textStyle(props.animationStage), // TODO merge style from props!
-  children: (
+const Text = styled.div.attrs({
+  style: props => ({ ...props.style, ...textStyle(props.animationStage) }),
+  children: props => (
     <Fragment>
       <h1>{props.header}</h1>
       <p>{props.paragraphText}</p>
-      <PortfolioButton to={props.linkPath} text={props.linkText} />
+      <PortfolioButton to={props.linkPath}>{props.linkText}</PortfolioButton>
     </Fragment>
   )
-}))`
-  /* flex: 4 */
+})`
+  flex: 4;
   align-self: center;
   padding: 1.5rem;
   transition: transform 1s, opacity 1s;
 `;
 
-const Media = styled.div.attrs(props => ({
-  style: mediaStyle(props.animationStage),
-  children: <Image src={props.imageSrc} alt={props.imageAlt} />
-}))`
-  /* flex: 6; */
+const Media = styled.div.attrs({
+  style: props => ({ ...props.style, ...mediaStyle(props.animationStage) }),
+  children: props => <Image src={props.imageSrc} alt={props.imageAlt} />
+})`
+  flex: 6;
   align-self: stretch;
   height: 100%;
   transition: transform 1s, opacity 1s;
@@ -81,10 +88,4 @@ const HomePage = props => (
   </Fragment>
 );
 
-const MyDiv = styled.div.attrs(props => ({ children: <p>hello</p> }))`
-  background-color: blue;
-  height: 100px;
-  width: 100px;
-`;
-
-export default MyDiv;
+export default HomePage;

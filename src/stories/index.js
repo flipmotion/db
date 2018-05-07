@@ -34,20 +34,17 @@ homePage.addDecorator(story => (
 
 // homePage.add('Text area', () => 1);
 
-homePage.add('Content', () => <HomePage />);
-
-// homePage.add('Content', () => (
-//   <HomePage
-//     animationStage={boolean('visible', true) ? 'entered' : 'exited'}
-//     header={text('Header', content.welcomePage.header.ru)}
-//     paragraphText={text('Paragraph text', content.welcomePage.paragraphText.ru)}
-//     link={{
-//       text: text('Link text', content.welcomePage.link.text.ru),
-//       path: content.welcomePage.link.path
-//     }}
-//     image={content.homeImage}
-//   />
-// ));
+homePage.add('Content', () => (
+  <HomePage
+    animationStage={boolean('visible', true) ? 'entered' : 'exited'}
+    header={text('Header', content.homePage.header.ru)}
+    paragraphText={text('Paragraph text', content.homePage.paragraphText.ru)}
+    linkText={text('Link text', content.homePage.link.text.ru)}
+    linkPath={content.homePage.link.path}
+    imageSrc={content.homePage.media[0].src}
+    imageAlt={content.homePage.media[0].alt}
+  />
+));
 
 // const portfolioPage = storiesOf('Portfolio', module);
 // portfolioPage.addDecorator(withKnobs);
@@ -64,14 +61,14 @@ homePage.add('Content', () => <HomePage />);
 //   .add('Page', () => (
 //     <WelcomePage
 //       animationStage={boolean('visible', true) ? 'entered' : 'exited'}
-//       header={text('Header', content.welcomePage.header.ru)}
+//       header={text('Header', content.homePage.header.ru)}
 //       paragraphText={text(
 //         'Paragraph text',
-//         content.welcomePage.paragraphText.ru
+//         content.homePage.paragraphText.ru
 //       )}
 //       link={{
-//         text: text('Link text', content.welcomePage.link.text.ru),
-//         path: content.welcomePage.link.path
+//         text: text('Link text', content.homePage.link.text.ru),
+//         path: content.homePage.link.path
 //       }}
 //     />
 //   ))
