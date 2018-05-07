@@ -53,7 +53,7 @@ const IndexPage = ({ animationStage, header, paragraphText, link }) => (
       <Link
         to={{
           pathname: link.path,
-          state: { animationName: 'portfolioItem' }
+          state: { animationType: 'portfolioItem' }
         }}
       >
         {link.text}

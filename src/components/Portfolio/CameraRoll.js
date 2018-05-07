@@ -28,7 +28,7 @@ const SpacerBottom = styled(Spacer)`
 class CameraRoll extends Component {
   constructor() {
     super();
-    this.animationName = this.animationName.bind(this);
+    this.animationType = this.animationType.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.morphToPortfolioPage = this.morphToPortfolioPage.bind(this);
     this.animationStyle = this.animationStyle.bind(this);
@@ -36,9 +36,9 @@ class CameraRoll extends Component {
   }
 
   // This is the trickiest part
-  animationName() {
+  animationType() {
     if (this.props.history.location.state)
-      return this.props.history.location.state.animationName;
+      return this.props.history.location.state.animationType;
   }
 
   // if image is clicked while it's not in "focus", what brings the image in focus
@@ -56,12 +56,12 @@ class CameraRoll extends Component {
   // we can't use Link because action on click is conditional (see handleClick)
   morphToPortfolioPage(index) {
     this.props.history.push(`${this.props.location.pathname}/${index}`, {
-      animationName: 'portfolioItem'
+      animationType: 'portfolioItem'
     });
   }
 
   animationStyle(index) {
-    switch (this.animationName()) {
+    switch (this.animationType()) {
       case 'portfolioItem':
         switch (this.props.animationStage) {
           // the starting point before entering

@@ -2,13 +2,13 @@ import React from 'react';
 
 const ScrollableMedia = ({ portfolioItem, history, animationStage }) => {
   // not sure I need it here, but just not to forget how it works
-  function animationName() {
-    return history.location.state && history.location.state.animationName;
+  function animationType() {
+    return history.location.state && history.location.state.animationType;
   }
 
   return (
     <p>
-      AnimationName:{animationName()}
+      animationType:{animationType()}
       {}
       <br />
       AnimationStage: {animationStage}

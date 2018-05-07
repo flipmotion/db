@@ -1,9 +1,9 @@
 import React from 'react';
 
 function styleFor(animationStage, location) {
-  const animationName = location.state && location.state.animationName;
+  const animationType = location.state && location.state.animationType;
 
-  switch (animationName) {
+  switch (animationType) {
     // animation to portfolio item and from portfolio item
     case 'portfolioItem':
       switch (animationStage) {
