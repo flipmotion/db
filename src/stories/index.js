@@ -12,6 +12,8 @@ import HomePage from '../components/HomePage';
 
 import { Menu, MenuItem } from '../components/Menu/Menu';
 
+import Burger from '../components/Menu/Burger';
+
 injectGlobal`
   body {
     font-family: sans-serif;
@@ -23,6 +25,8 @@ const FullpageDiv = styled.div`
   display: flex;
   height: 100vh;
 `;
+
+// Home Page
 
 const homePage = storiesOf('Home page', module);
 homePage.addDecorator(withKnobs);
@@ -53,7 +57,7 @@ menu.addDecorator(withKnobs);
 menu.addDecorator(story => (
   <Router>
     <Route>
-      <div style={{ backgroundColor: 'rgb(22, 22, 22)' }}>{story()}</div>
+      <div style={{ backgroundColor: 'lightgrey' }}>{story()}</div>
     </Route>
   </Router>
 ));
@@ -65,6 +69,10 @@ menu.add('Menu', () => (
     <MenuItem to="/page3">Page 3</MenuItem>
     <MenuItem to="/page4">Page 4</MenuItem>
   </Menu>
+));
+
+menu.add('Burger', () => (
+  <Burger width="50rem" height="40rem" pressed={boolean('Pressed', false)} />
 ));
 
 // const portfolioPage = storiesOf('Portfolio', module);
