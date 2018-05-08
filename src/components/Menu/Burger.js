@@ -3,13 +3,10 @@ import styled from 'styled-components';
 
 const Slice = styled.div`
   height: 18%;
-  background: ${props => props.color || 'red'};
-  border-radius: 0.25rem;
+  background: ${props => props.color || 'black'};
+  border-radius: 2px;
   position: absolute;
   width: 100%;
-  /* opacity: 1; */
-  /* left: 0px; */
-  /* transform: rotate(0deg); */
   transition: 0.25s ease-in-out;
   transform-origin: center center;
 `;
@@ -24,11 +21,7 @@ const Burger = styled.div.attrs({
   width: ${props => props.width || '3.6rem'};
   height: ${props => props.height || '3rem'};
   position: relative;
-  /* margin: 50px auto; */
-  /* transform: rotate(0deg); */
-  /* transition: .5s ease-in-out; */
   cursor: pointer;
-  border: 1px solid black;
 
   ${Slice}:first-child {
     top: ${props => (props.pressed ? '50%' : 0)};

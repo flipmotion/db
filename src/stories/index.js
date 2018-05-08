@@ -71,9 +71,7 @@ menu.add('Menu', () => (
   </Menu>
 ));
 
-menu.add('Burger', () => (
-  <Burger width="50rem" height="40rem" pressed={boolean('Pressed', false)} />
-));
+menu.add('Burger', () => <Burger pressed={boolean('Pressed', false)} />);
 
 // const portfolioPage = storiesOf('Portfolio', module);
 // portfolioPage.addDecorator(withKnobs);
