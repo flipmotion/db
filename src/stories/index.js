@@ -63,7 +63,7 @@ menu.addDecorator(story => (
 ));
 
 menu.add('Menu', () => (
-  <Menu>
+  <Menu mobile={boolean('Mobile version', false)}>
     <MenuItem to="/page1">Page 1</MenuItem>
     <MenuItem to="/page2">Page 2</MenuItem>
     <MenuItem to="/page3">Page 3</MenuItem>

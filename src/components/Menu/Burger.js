@@ -24,23 +24,23 @@ const Burger = styled.div.attrs({
   cursor: pointer;
 
   ${Slice}:first-child {
-    top: ${props => (props.pressed ? '50%' : 0)};
+    top: ${props => (props.isOpen ? '50%' : 0)};
     transform: ${props =>
-      props.pressed ? 'translateY(-50%) rotate(45deg)' : null};
+      props.isOpen ? 'translateY(-50%) rotate(45deg)' : null};
   }
 
   ${Slice}:nth-child(2) {
-    width: ${props => (props.pressed ? '0%' : '90%')};
+    width: ${props => (props.isOpen ? '0%' : '90%')};
     top: 50%;
     transform: translateY(-50%);
-    margin-left: ${props => (props.pressed ? '50%' : '10%')};
+    margin-left: ${props => (props.isOpen ? '50%' : '10%')};
   }
 
   ${Slice}:last-child {
-    bottom: ${props => (props.pressed ? '50%' : 0)};
+    bottom: ${props => (props.isOpen ? '50%' : 0)};
     transform-origin: center center;
     transform: ${props =>
-      props.pressed ? 'translateY(50%) rotate(-45deg)' : null};
+      props.isOpen ? 'translateY(50%) rotate(-45deg)' : null};
   }
 `;
 
