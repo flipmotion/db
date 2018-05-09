@@ -37,19 +37,20 @@ export const MenuItem = props => {
   return <StyledNavLink activeClassName={activeClassName} {...props} />;
 };
 
-const MenuWithoutBurger = styled.div.attrs({
+export const Menu = styled.div.attrs({
   children: props => ({ children: <p>Hi</p> })
 })`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 100%;
   z-index: 100;
   color: white;
   flex-direction: ${props => (props.mobile ? 'column' : 'row')};
 `;
 
-export class Menu extends Component {
+export class BurgerMenu extends Component {
   constructor() {
     super();
     this.state = { isOpen: false };
@@ -62,12 +63,16 @@ export class Menu extends Component {
 
   render() {
     return (
-      <MenuWithoutBurger isOpen={this.state.isOpen} mobile={this.props.mobile}>
+      <Menu isOpen={this.state.isOpen} mobile={this.props.mobile}>
         {this.props.mobile ? (
-          <Burger onClick={this.handleBurgerClick} isOpen={this.state.isOpen} />
+          <Burger
+            onClick={this.handleBurgerClick}
+            isOpen={this.state.isOpen}
+            style={{ alignSelf: 'flex-end', margin: '0.5em' }}
+          />
         ) : null}
-        {this.state.isOpen || !this.props.mobile ? this.props.children : null}
-      </MenuWithoutBurger>
+        {this.props.children}
+      </Menu>
     );
   }
 }

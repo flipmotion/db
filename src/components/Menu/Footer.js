@@ -1,9 +1,9 @@
 import React from 'react';
 import { Menu, MenuItem } from './Menu';
 import styled from 'styled-components';
-import facebookIcon from './facebook.svg';
-import instagramIcon from './instagram.svg';
-import twitterIcon from './twitter.svg';
+import facebookIcon from './icons/facebook.svg';
+import instagramIcon from './icons/instagram.svg';
+import twitterIcon from './icons/twitter.svg';
 
 const Icon = styled.img`
   height: 1.2rem;
