@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-// import Burger from './Burger';
+import Burger from './Burger';
 
 // Styling NavLink with styled-components is a bit tricky
 // Maybe it can be done more elegant, but
 // that's what I came up with so far.
-const MenuItem = props => {
+export const MenuItem = props => {
   const activeClassName = 'MenuItem_active';
 
   const StyledNavLink = styled(NavLink).attrs({
@@ -34,5 +34,3 @@ const MenuItem = props => {
 
   return <StyledNavLink activeClassName={activeClassName} {...props} />;
 };
-
-export default MenuItem;

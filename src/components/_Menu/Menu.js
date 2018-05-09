@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { NavLink } from 'react-router-dom';
-// import styled from 'styled-components';
-import MenuItem from './MenuItem';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import MenuItem from './MenuItem``';
 
-const Menu = props => <div>{props.content}</div>;
+const Menu = props => <p>menu will be here!</p>;
 
 Menu.propTypes = {
   color: PropTypes.string,
@@ -12,7 +12,7 @@ Menu.propTypes = {
   // logo: propTypes.instanceOf(Image),
   topLinks: PropTypes.arrayOf(PropTypes.instanceOf(MenuItem)),
   bottomLinks: PropTypes.arrayOf(PropTypes.instanceOf(MenuItem)),
-  // icons: PropTypes.arrayOf(PropTypes.instanceOf(SocialIcon)),
+  icons: PropTypes.arrayOf(PropTypes.instanceOf(SocialIcon)),
   content: PropTypes.element
 };
 
