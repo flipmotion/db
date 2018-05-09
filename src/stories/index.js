@@ -10,7 +10,7 @@ import styled, { injectGlobal } from 'styled-components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from '../components/HomePage';
 
-import { Menu, MenuItem } from '../components/Menu/Menu';
+import { BurgerMenu, MenuItem } from '../components/Menu/Menu';
 
 import Burger from '../components/Menu/Burger';
 
@@ -63,15 +63,15 @@ menu.addDecorator(story => (
 ));
 
 menu.add('Menu', () => (
-  <Menu mobile={boolean('Mobile version', false)}>
+  <BurgerMenu mobile={boolean('Mobile version', false)}>
     <MenuItem to="/page1">Page 1</MenuItem>
     <MenuItem to="/page2">Page 2</MenuItem>
     <MenuItem to="/page3">Page 3</MenuItem>
     <MenuItem to="/page4">Page 4</MenuItem>
-  </Menu>
+  </BurgerMenu>
 ));
 
-menu.add('Burger', () => <Burger pressed={boolean('Pressed', false)} />);
+menu.add('Burger', () => <Burger isOpen={boolean('Is open', false)} />);
 
 // const portfolioPage = storiesOf('Portfolio', module);
 // portfolioPage.addDecorator(withKnobs);
