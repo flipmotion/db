@@ -1,10 +1,10 @@
-import house from './house.jpg';
-import house1 from './house1.jpg';
-import house2 from './house2.jpg';
-import house3 from './house3.jpg';
+import house from './images/house.jpg';
+import house1 from './images/house1.jpg';
+import house2 from './images/house2.jpg';
+import house3 from './images/house3.jpg';
 
 // http://exploringjs.com/es6/ch_modules.html#_making-a-re-export-the-default-export
-export { default as logo } from './logo-grey.svg';
+export { default as logo } from './images/logo-grey.svg';
 
 export const portfolio = [
   {

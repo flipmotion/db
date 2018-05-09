@@ -14,6 +14,8 @@ import { BurgerMenu, MenuItem } from '../components/Menu/Menu';
 
 import Burger from '../components/Menu/Burger';
 
+import Test from '../components/Menu';
+
 injectGlobal`
   body {
     font-family: sans-serif;
@@ -52,9 +54,7 @@ homePage.add('Content', () => (
 ));
 
 const menu = storiesOf('Menu', module);
-menu.addDecorator(withKnobs);
-
-menu.addDecorator(story => (
+menu.addDecorator(withKnobs).addDecorator(story => (
   <Router>
     <Route>
       <div style={{ backgroundColor: 'lightgrey' }}>{story()}</div>
@@ -72,6 +72,7 @@ menu.add('Menu', () => (
 ));
 
 menu.add('Burger', () => <Burger isOpen={boolean('Is open', false)} />);
+menu.add('Test', () => <Test />);
 
 // const portfolioPage = storiesOf('Portfolio', module);
 // portfolioPage.addDecorator(withKnobs);
