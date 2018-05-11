@@ -9,25 +9,23 @@ import styled from 'styled-components';
 const MenuItem = props => {
   const activeClassName = 'MenuItem_active';
 
-  const StyledNavLink = styled(NavLink).attrs({
-    activeClassName: activeClassName
-  })`
+  const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    color: rgb(230, 230, 230);
+    color: ${props => props.color || 'grey'};
     transition: color 0.5s;
     text-decoration: none;
 
     &:hover {
       text-decoration: none;
-      color: rgb(240, 240, 240);
+      color: ${props => props.hoverColor || 'darkgrey'};
       transition: color 0.5s;
     }
 
     &.${activeClassName} {
       font-weight: bold;
-      color: rgb(240, 240, 240);
+      color: ${props => props.activeColor || 'black'};
       cursor: default;
     }
   `;
