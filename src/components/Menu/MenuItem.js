@@ -9,7 +9,10 @@ import styled from 'styled-components';
 const MenuItem = props => {
   const activeClassName = 'MenuItem_active';
 
-  const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
+  const StyledNavLink = styled(
+    // https://github.com/styled-components/styled-components/issues/305
+    ({ color, activeColor, hoverColor, ...rest }) => <NavLink {...rest} />
+  ).attrs({ activeClassName })`
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
