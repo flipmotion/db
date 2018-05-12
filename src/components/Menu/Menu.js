@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { NavLink } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
@@ -24,21 +24,58 @@ const TopBar = styled.div`
   justify-content: space-evenly;
 `;
 
-const Menu = props => (
-  <Wrapper>
-    <TopBar backgroundColor={props.backgroundColor}>
-      {/* This passing font color to links gets a bit hairy */}
-      {React.Children.map(props.topLinks, el =>
-        React.cloneElement(el, {
-          color: props.color,
-          activeColor: props.activeColor,
-          hoverColor: props.hoverColor
-        })
-      )}
-    </TopBar>
-    <div>{props.content}</div>
-  </Wrapper>
-);
+class Menu extends Component {
+  constructor() {
+    super();
+    this.menuRef = React.createRef();
+    this.state = { overflow: false };
+    this.updateOverflowState = this.updateOverflowState.bind(this);
+  }
+
+  updateOverflowState() {
+    const is_overflowed =
+      this.menuRef.current &&
+      this.menuRef.current.scrollWidth > this.menuRef.current.clientWidth;
+    if (is_overflowed) {
+      this.setState({ overflow: true });
+    } else {
+      this.setState({ overflow: false });
+    }
+  }
+
+  componentDidMount() {
+    this.updateOverflowState();
+    window.addEventListener('resize', this.updateOverflowState);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateOverflowState);
+  }
+
+  render() {
+    return (
+      <Wrapper>
+        <TopBar
+          backgroundColor={this.props.backgroundColor}
+          innerRef={this.menuRef}
+        >
+          {/* This passing font color to links gets a bit hairy */}
+          {React.Children.map(this.props.topLinks, el =>
+            React.cloneElement(el, {
+              color: this.props.color,
+              activeColor: this.props.activeColor,
+              hoverColor: this.props.hoverColor
+            })
+          )}
+        </TopBar>
+        <div>
+          {this.props.content}
+          {`${this.state.overflow}`}
+        </div>
+      </Wrapper>
+    );
+  }
+}
 
 Menu.propTypes = {
   color: PropTypes.string,
