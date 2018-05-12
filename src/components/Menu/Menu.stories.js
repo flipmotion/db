@@ -38,7 +38,19 @@ menu.add('Top menu only', () => (
       .fill()
       .map((_, i) => (
         <MenuItem key={i} to={`/top-link-${i}`}>
-          Top link {i}
+          Top&nbsp;link&nbsp;{i}
+        </MenuItem>
+      ))}
+  />
+));
+
+menu.add('Lots of items', () => (
+  <Menu
+    topLinks={Array(10)
+      .fill()
+      .map((_, i) => (
+        <MenuItem key={i} to={`/top-link-${i}`}>
+          Top&nbsp;link&nbsp;{i}
         </MenuItem>
       ))}
   />
