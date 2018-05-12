@@ -22,13 +22,16 @@ const TopBar = styled.div`
   background-color: ${props => props.backgroundColor || 'palegreen'};
   display: flex;
   justify-content: space-evenly;
+  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
+  height: ${props => (props.mobile ? '100%' : 'auto')};
+  text-align: center;
 `;
 
 class Menu extends Component {
   constructor() {
     super();
     this.menuRef = React.createRef();
-    this.state = { overflow: false };
+    this.state = { is_overflowed: false, is_open: false };
     this.updateOverflowState = this.updateOverflowState.bind(this);
   }
 
@@ -37,9 +40,9 @@ class Menu extends Component {
       this.menuRef.current &&
       this.menuRef.current.scrollWidth > this.menuRef.current.clientWidth;
     if (is_overflowed) {
-      this.setState({ overflow: true });
+      this.setState({ is_overflowed: true });
     } else {
-      this.setState({ overflow: false });
+      this.setState({ is_overflowed: false });
     }
   }
 
@@ -58,8 +61,8 @@ class Menu extends Component {
         <TopBar
           backgroundColor={this.props.backgroundColor}
           innerRef={this.menuRef}
+          mobile={this.state.is_overflowed}
         >
-          {/* This passing font color to links gets a bit hairy */}
           {React.Children.map(this.props.topLinks, el =>
             React.cloneElement(el, {
               color: this.props.color,
@@ -68,10 +71,7 @@ class Menu extends Component {
             })
           )}
         </TopBar>
-        <div>
-          {this.props.content}
-          {`${this.state.overflow}`}
-        </div>
+        <div>{this.props.content}</div>
       </Wrapper>
     );
   }
