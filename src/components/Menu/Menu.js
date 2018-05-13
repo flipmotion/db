@@ -2,10 +2,11 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import MenuItem from './MenuItem';
-import Burger from './Burger';
+import Burger, { InvisibleBurger } from './Burger';
 import Wrapper from './Wrapper';
 import Bar from './Bar';
 import OverflowDetector from './OverflowDetector';
+import Items from './Items';
 
 injectGlobal`
   body {
@@ -13,22 +14,6 @@ injectGlobal`
     margin: 0;
   }
 `;
-
-const Items = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: ${props => (props.isOverflowed ? 'column' : 'row')};
-  min-height: ${props => (props.isOverflowed ? '100vh' : 'auto')};
-  width: 100%;
-  text-align: center;
-  transform: translateY(
-    ${props => (props.mobile && !props.isOpen ? '100vh' : '0vh')}
-  );
-  transition: transform 0.85s;
-`;
-
-// Just to align menu items in the center
-const InvisibleBurger = props => <Burger {...props} visible={false} />;
 
 class Menu extends Component {
   constructor() {
@@ -47,6 +32,7 @@ class Menu extends Component {
   }
 
   onOverflowChange(overflowState) {
+    console.log(overflowState);
     this.setState(overflowState);
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Items from './Items';
 
 class OverflowDetector extends Component {
   constructor() {
@@ -18,6 +19,7 @@ class OverflowDetector extends Component {
   }
 
   updateOverflowState() {
+    console.log('!!!!!!!!');
     const isOverflowed =
       this.overflowDetectorRef.current &&
       this.overflowDetectorRef.current.scrollWidth >
@@ -27,15 +29,17 @@ class OverflowDetector extends Component {
 
   render() {
     return (
-      <div ref={this.overflowDetectorRef} style={{ display: '100vw' }}>
-        <div
+      <div ref={this.overflowDetectorRef} style={{ width: '100vw' }}>
+        <Items
           style={{
-            display: 'flex',
-            visibility: 'hidden'
+            // visibility: 'hidden',
+            // position: 'fixed',
+            bottom: '-2rem'
+            // overflow: 'hidden'
           }}
         >
           {this.props.topLinks}
-        </div>
+        </Items>
       </div>
     );
   }

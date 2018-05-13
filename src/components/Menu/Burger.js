@@ -46,4 +46,7 @@ const Burger = styled.div.attrs({
   }
 `;
 
+// Just to align menu items in the center
+export const InvisibleBurger = props => <Burger {...props} visible={false} />;
+
 export default Burger;
