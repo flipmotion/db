@@ -7,6 +7,7 @@ import Wrapper from './Wrapper';
 import Bar from './Bar';
 import OverflowDetector from './OverflowDetector';
 import Items from './Items';
+import Content from './Content';
 
 injectGlobal`
   body {
@@ -62,7 +63,7 @@ class Menu extends Component {
           </Items>
           <Burger isOpen={this.state.isOpen} onClick={this.toggleOpen} />
         </Bar>
-        <div>{this.props.content}</div>
+        <Content>{this.props.content}</Content>
       </Wrapper>
     );
   }

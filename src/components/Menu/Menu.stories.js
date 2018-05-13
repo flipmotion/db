@@ -30,10 +30,11 @@ menu.add('Content only (no menu items)', () => <Menu content={content} />);
 
 menu.add('Top only: few', () => (
   <Menu
-    color={color('Link color', 'grey')}
-    hoverColor={color('Hover link color', 'lightgrey')}
-    activeColor={color('Active link color', 'black')}
-    backgroundColor={color('Background color', 'rgba(200,200,200,0.5)')}
+    content={content}
+    color={color('Link color', '')}
+    hoverColor={color('Hover link color', '')}
+    activeColor={color('Active link color', '')}
+    backgroundColor={color('Background color', '')}
     topLinks={Array(2)
       .fill()
       .map((_, i) => (
@@ -46,6 +47,7 @@ menu.add('Top only: few', () => (
 
 menu.add('Top only: more', () => (
   <Menu
+    content={content}
     topLinks={Array(6)
       .fill()
       .map((_, i) => (
@@ -58,6 +60,7 @@ menu.add('Top only: more', () => (
 
 menu.add('Top only: many', () => (
   <Menu
+    content={content}
     topLinks={Array(10)
       .fill()
       .map((_, i) => (
@@ -70,6 +73,7 @@ menu.add('Top only: many', () => (
 
 menu.add('Top only: lots', () => (
   <Menu
+    content={content}
     topLinks={Array(100)
       .fill()
       .map((_, i) => (
