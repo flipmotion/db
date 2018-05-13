@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // import { NavLink } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
 import MenuItem from './MenuItem';
+import Burger from './Burger';
 
 injectGlobal`
   body {
@@ -18,14 +19,19 @@ const Wrapper = styled.div`
 `;
 
 const TopBar = styled.div`
+  display: flex;
   background-color: ${props => props.backgroundColor || 'palegreen'};
+`;
+
+const TopItems = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   min-height: ${props => (props.mobile ? '100vh' : 'auto')};
+  width: 100%;
   text-align: center;
   transform: translateY(
-    ${props => (props.mobile && !props.is_open ? '100vh' : '0vh')}
+    ${props => (props.mobile && !props.isOpen ? '100vh' : '0vh')}
   );
   transition: transform 0.85s;
 `;
@@ -34,18 +40,18 @@ class Menu extends Component {
   constructor() {
     super();
     this.menuRef = React.createRef();
-    this.state = { is_overflowed: false, is_open: false };
+    this.state = { isOverflowed: false, isOpen: false };
     this.updateOverflowState = this.updateOverflowState.bind(this);
   }
 
   updateOverflowState() {
-    const is_overflowed =
+    const isOverflowed =
       this.menuRef.current &&
       this.menuRef.current.scrollWidth > this.menuRef.current.clientWidth;
-    if (is_overflowed) {
-      this.setState({ is_overflowed: true });
+    if (isOverflowed) {
+      this.setState({ isOverflowed: true });
     } else {
-      this.setState({ is_overflowed: false });
+      this.setState({ isOverflowed: false });
     }
   }
 
@@ -64,16 +70,18 @@ class Menu extends Component {
         <TopBar
           backgroundColor={this.props.backgroundColor}
           innerRef={this.menuRef}
-          mobile={this.state.is_overflowed}
-          is_open={this.props.is_open}
         >
-          {React.Children.map(this.props.topLinks, el =>
-            React.cloneElement(el, {
-              color: this.props.color,
-              activeColor: this.props.activeColor,
-              hoverColor: this.props.hoverColor
-            })
-          )}
+          <Burger style={{ visibility: 'hidden' }} />
+          <TopItems mobile={this.state.isOverflowed} isOpen={this.props.isOpen}>
+            {React.Children.map(this.props.topLinks, el =>
+              React.cloneElement(el, {
+                color: this.props.color,
+                activeColor: this.props.activeColor,
+                hoverColor: this.props.hoverColor
+              })
+            )}
+          </TopItems>
+          <Burger isOpen={this.props.isOpen} />
         </TopBar>
         <div>{this.props.content}</div>
       </Wrapper>
