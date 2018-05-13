@@ -24,6 +24,10 @@ const TopBar = styled.div`
   flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   min-height: ${props => (props.mobile ? '100vh' : 'auto')};
   text-align: center;
+  transform: translateY(
+    ${props => (props.mobile && !props.is_open ? '100vh' : '0vh')}
+  );
+  transition: transform 0.85s;
 `;
 
 class Menu extends Component {
@@ -61,6 +65,7 @@ class Menu extends Component {
           backgroundColor={this.props.backgroundColor}
           innerRef={this.menuRef}
           mobile={this.state.is_overflowed}
+          is_open={this.props.is_open}
         >
           {React.Children.map(this.props.topLinks, el =>
             React.cloneElement(el, {

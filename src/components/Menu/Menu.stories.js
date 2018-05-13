@@ -70,6 +70,7 @@ menu.add('Top only: many', () => (
 
 menu.add('Top only: lots', () => (
   <Menu
+    is_open={boolean('is open', false)}
     topLinks={Array(100)
       .fill()
       .map((_, i) => (
