@@ -32,7 +32,6 @@ class Menu extends Component {
   }
 
   onOverflowChange(overflowState) {
-    console.log(overflowState);
     this.setState(overflowState);
   }
 

@@ -19,7 +19,6 @@ class OverflowDetector extends Component {
   }
 
   updateOverflowState() {
-    console.log('!!!!!!!!');
     const isOverflowed =
       this.overflowDetectorRef.current &&
       this.overflowDetectorRef.current.scrollWidth >
@@ -29,13 +28,13 @@ class OverflowDetector extends Component {
 
   render() {
     return (
-      <div ref={this.overflowDetectorRef} style={{ width: '100vw' }}>
+      <div style={{ width: '100vw' }}>
         <Items
+          innerRef={this.overflowDetectorRef}
           style={{
-            // visibility: 'hidden',
-            // position: 'fixed',
-            bottom: '-2rem'
-            // overflow: 'hidden'
+            position: 'fixed',
+            top: '0px',
+            marginTop: '100vh'
           }}
         >
           {this.props.topLinks}
