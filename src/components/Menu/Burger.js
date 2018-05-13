@@ -21,7 +21,9 @@ const Burger = styled.div.attrs({
   width: ${props => props.width || '3.6rem'};
   height: ${props => props.height || '3rem'};
   position: relative;
+  background-color: orange;
   cursor: pointer;
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
 
   ${Slice}:first-child {
     top: ${props => (props.isOpen ? '50%' : 0)};

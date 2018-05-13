@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import { NavLink } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
 import MenuItem from './MenuItem';
 import Burger from './Burger';
+import Wrapper from './Wrapper';
+import Bar from './Bar';
+import OverflowDetector from './OverflowDetector';
 
 injectGlobal`
   body {
@@ -12,22 +14,11 @@ injectGlobal`
   }
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-`;
-
-const TopBar = styled.div`
-  display: flex;
-  background-color: ${props => props.backgroundColor || 'palegreen'};
-`;
-
-const TopItems = styled.div`
+const Items = styled.div`
   display: flex;
   justify-content: space-evenly;
-  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
-  min-height: ${props => (props.mobile ? '100vh' : 'auto')};
+  flex-direction: ${props => (props.isOverflowed ? 'column' : 'row')};
+  min-height: ${props => (props.isOverflowed ? '100vh' : 'auto')};
   width: 100%;
   text-align: center;
   transform: translateY(
@@ -36,53 +27,56 @@ const TopItems = styled.div`
   transition: transform 0.85s;
 `;
 
+// Just to align menu items in the center
+const InvisibleBurger = props => <Burger {...props} visible={false} />;
+
 class Menu extends Component {
   constructor() {
     super();
-    this.menuRef = React.createRef();
-    this.state = { isOverflowed: false, isOpen: false };
-    this.updateOverflowState = this.updateOverflowState.bind(this);
+    this.overflowDetectorRef = React.createRef();
+    this.state = {
+      isOverflowed: false,
+      isOpen: false
+    };
+    this.onOverflowChange = this.onOverflowChange.bind(this);
+    this.toggleOpen = this.toggleOpen.bind(this);
   }
 
-  updateOverflowState() {
-    const isOverflowed =
-      this.menuRef.current &&
-      this.menuRef.current.scrollWidth > this.menuRef.current.clientWidth;
-    if (isOverflowed) {
-      this.setState({ isOverflowed: true });
-    } else {
-      this.setState({ isOverflowed: false });
-    }
+  toggleOpen() {
+    this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
-  componentDidMount() {
-    this.updateOverflowState();
-    window.addEventListener('resize', this.updateOverflowState);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateOverflowState);
+  onOverflowChange(overflowState) {
+    this.setState(overflowState);
   }
 
   render() {
+    const styledTopLinks = React.Children.map(this.props.topLinks, el =>
+      React.cloneElement(el, {
+        color: this.props.color,
+        activeColor: this.props.activeColor,
+        hoverColor: this.props.hoverColor
+      })
+    );
     return (
       <Wrapper>
-        <TopBar
+        <OverflowDetector
+          onOverflowChange={this.onOverflowChange}
+          topLinks={styledTopLinks}
+        />
+        <Bar
           backgroundColor={this.props.backgroundColor}
-          innerRef={this.menuRef}
+          innerRef={this.overflowDetectorRef}
         >
-          <Burger style={{ visibility: 'hidden' }} />
-          <TopItems mobile={this.state.isOverflowed} isOpen={this.props.isOpen}>
-            {React.Children.map(this.props.topLinks, el =>
-              React.cloneElement(el, {
-                color: this.props.color,
-                activeColor: this.props.activeColor,
-                hoverColor: this.props.hoverColor
-              })
-            )}
-          </TopItems>
-          <Burger isOpen={this.props.isOpen} />
-        </TopBar>
+          <InvisibleBurger />
+          <Items
+            isOverflowed={this.state.isOverflowed}
+            isOpen={this.state.isOpen}
+          >
+            {styledTopLinks}
+          </Items>
+          <Burger isOpen={this.state.isOpen} onClick={this.toggleOpen} />
+        </Bar>
         <div>{this.props.content}</div>
       </Wrapper>
     );

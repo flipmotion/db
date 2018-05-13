@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-// import Burger from './Burger';
 
 // Styling NavLink with styled-components is a bit tricky
 // Maybe it can be done more elegant, but
