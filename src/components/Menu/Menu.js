@@ -13,7 +13,7 @@ injectGlobal`
 
 const Wrapper = styled.div`
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   flex-direction: column;
 `;
@@ -23,7 +23,7 @@ const TopBar = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-direction: ${props => (props.mobile ? 'column' : 'row')};
-  height: ${props => (props.mobile ? '100%' : 'auto')};
+  min-height: ${props => (props.mobile ? '100%' : 'auto')};
   text-align: center;
 `;
 
