@@ -16,6 +16,12 @@ injectGlobal`
   }
 `;
 
+const Logo = styled.img`
+  height: 3rem;
+  width: 50%;
+  flex: none;
+`;
+
 class Menu extends Component {
   constructor() {
     super();
@@ -54,14 +60,18 @@ class Menu extends Component {
           backgroundColor={this.props.backgroundColor}
           innerRef={this.overflowDetectorRef}
         >
-          <InvisibleBurger />
+          <Burger
+            isOpen={this.state.isOpen}
+            onClick={this.toggleOpen}
+            absent={!this.state.isOverflowed}
+          />
+          {this.props.logo && <Logo src={this.props.logo} />}
           <Items
             isOverflowed={this.state.isOverflowed}
             isOpen={this.state.isOpen}
           >
             {styledTopLinks}
           </Items>
-          <Burger isOpen={this.state.isOpen} onClick={this.toggleOpen} />
         </Bar>
         <Content>{this.props.content}</Content>
       </Wrapper>

@@ -7,6 +7,7 @@ const Bar = styled.div`
   background-color: ${props => props.backgroundColor || 'palegreen'};
   position: sticky;
   top: 0px;
+  align-items: center;
 `;
 
 Bar.propTypes = {

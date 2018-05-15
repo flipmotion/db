@@ -10,7 +10,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuItem from './MenuItem';
 // import Menu from './Menu';
 
-// import content from '../../content'
+// import content from '../../../content'
+
+import logo from '../../content/images/logo.svg';
+
+import Burger from './Burger';
 
 const insideRouter = story => (
   <Router>
@@ -30,6 +34,7 @@ menu.add('Content only (no menu items)', () => <Menu content={content} />);
 
 menu.add('Top only: few', () => (
   <Menu
+    logo={logo}
     content={content}
     color={color('Link color', '')}
     hoverColor={color('Hover link color', '')}
@@ -47,6 +52,7 @@ menu.add('Top only: few', () => (
 
 menu.add('Top only: more', () => (
   <Menu
+    logo={logo}
     content={content}
     topLinks={Array(6)
       .fill()
@@ -83,5 +89,7 @@ menu.add('Top only: lots', () => (
       ))}
   />
 ));
+
+menu.add('Burger', () => <Burger visible={true} />);
 
 // menu.add('Test', () => <Test  />);
