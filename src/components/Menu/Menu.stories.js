@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, boolean, color } from '@storybook/addon-knobs/react';
 
 import Menu from './Menu';
 
@@ -16,12 +15,17 @@ const insideRouter = story => (
 );
 
 const Logo = () => <p>Logo</p>;
-const Content = () => <p>{'lorem ipsum '.repeat(2000)}</p>;
+const Content = () => (
+  <p>
+    {Array(2000)
+      .fill()
+      .map((_, i) => `lorem ipsum ${i} `)
+      .join(', ')}
+  </p>
+);
 const Icon = () => <p>Icon</p>;
 
-const menu = storiesOf('Menu', module)
-  .addDecorator(withKnobs)
-  .addDecorator(insideRouter);
+const menu = storiesOf('Menu', module).addDecorator(insideRouter);
 
 menu.add('Content only (no menu items)', () => (
   <Menu>

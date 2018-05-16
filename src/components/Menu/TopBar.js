@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import Burger from './Burger';
 
 const TopBarDiv = styled.div`
+  flex: auto;
   display: flex;
   align-items: center;
   flex-wrap: ${props => (props.inBurgerMode ? 'wrap' : 'nowrap')};
+  height: ${props => (props.isOpen ? '100vh' : '3rem')};
   /* position: sticky; */
   /* top: 0px; */
   /* align-items: center; */
@@ -16,6 +18,8 @@ const BurgerWrapper = styled.div`
   flex: none;
   display: flex;
   width: ${props => (props.inBurgerMode ? '33%' : 'auto')};
+  padding: 0.5rem;
+  box-sizing: border-box;
 `;
 
 const LogoWrapper = styled.div`
@@ -23,6 +27,9 @@ const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: ${props => (props.inBurgerMode ? '34%' : 'auto')};
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-size: 1.25rem;
 `;
 
 const IconWrapper = styled.div`
@@ -30,12 +37,15 @@ const IconWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: ${props => (props.inBurgerMode ? '33%' : 'auto')};
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-size: 1.25rem;
 `;
 
 const Items = styled.div`
   flex: auto;
-  background-color: blue;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  align-items: center;
   display: ${props =>
     !props.inBurgerMode || (props.inBurgerMode && props.isOpen)
       ? 'flex'
@@ -43,6 +53,8 @@ const Items = styled.div`
   order: ${props => (props.inBurgerMode ? 10 : 0)};
   flex-direction: ${props => (props.inBurgerMode ? 'column' : 'row')};
   width: ${props => (props.inBurgerMode ? '100%' : 'auto')};
+  height: ${props => (props.isOpen ? 'calc(100vh - 3rem)' : 'auto')};
+  overflow-y: auto;
 `;
 
 const TopBar = props => {

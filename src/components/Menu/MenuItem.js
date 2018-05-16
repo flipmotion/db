@@ -14,7 +14,7 @@ const MenuItem = props => {
   ).attrs({ activeClassName })`
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem;
+    padding: 0.5rem 1rem;
     color: ${props => props.color || 'grey'};
     transition: color 0.5s;
     text-decoration: none;

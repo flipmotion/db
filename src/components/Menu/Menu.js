@@ -13,7 +13,7 @@ injectGlobal`
 
 const ContentAndMenu = styled.div`
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   flex-direction: column;
 `;
 
@@ -23,6 +23,7 @@ ContentAndMenu.propTypes = {
 
 const Content = styled.div`
   overflow: ${props => (props.frozenScroll ? 'hidden' : 'scroll')};
+  height: calc(100vh - 3rem);
 `;
 
 class Menu extends Component {
@@ -66,7 +67,7 @@ class Menu extends Component {
           links={this.props.links}
         />
 
-        <Content frozenScroll={this.state.inBurgerMode && this.state.isOpen}>
+        <Content hidden={this.state.inBurgerMode && this.state.isOpen}>
           {this.props.children}
         </Content>
       </ContentAndMenu>
