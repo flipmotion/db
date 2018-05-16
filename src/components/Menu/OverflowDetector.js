@@ -1,45 +1,54 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Items from './Items';
 
+const FullWidth = styled.div`
+  width: 100vw;
+`;
+
+// Reliably hidden from viewport
+const ContentWrapper = styled.div`
+  position: fixed;
+  top: 0px;
+  margin-top: 100vh;
+`;
+
+// Checks if children overflow on 100vw and calls back
+// props.onOverflowChange with the current result of the check.
+// Triggered on mount and every screen resize.
 class OverflowDetector extends Component {
   constructor() {
     super();
-    this.overflowDetectorRef = React.createRef();
-    this.updateOverflowState = this.updateOverflowState.bind(this);
+    this.contentWrapperRef = React.createRef();
+    this.fullWidthRef = React.createRef();
+    this.checkOverflow = this.checkOverflow.bind(this);
   }
 
   componentDidMount() {
-    this.updateOverflowState();
-    window.addEventListener('resize', this.updateOverflowState);
+    this.checkOverflow();
+    window.addEventListener('resize', this.checkOverflow);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateOverflowState);
+    window.removeEventListener('resize', this.checkOverflow);
   }
 
-  updateOverflowState() {
-    const isOverflowed =
-      this.overflowDetectorRef.current &&
-      this.overflowDetectorRef.current.scrollWidth >
-        this.overflowDetectorRef.current.clientWidth;
-    this.props.onOverflowChange({ isOverflowed: !!isOverflowed });
+  checkOverflow() {
+    const contentRef = this.contentWrapperRef.current;
+    const fullWidthRef = this.fullWidthRef.current;
+    if (!contentRef || !fullWidthRef) return;
+
+    const isOverflowed = contentRef.clientWidth > fullWidthRef.clientWidth;
+    this.props.onOverflowChange(isOverflowed);
   }
 
   render() {
     return (
-      <div style={{ width: '100vw' }}>
-        <Items
-          innerRef={this.overflowDetectorRef}
-          style={{
-            position: 'fixed',
-            top: '0px',
-            marginTop: '100vh'
-          }}
-        >
-          {this.props.topLinks}
-        </Items>
-      </div>
+      <FullWidth innerRef={this.fullWidthRef}>
+        <ContentWrapper innerRef={this.contentWrapperRef}>
+          {this.props.children}
+        </ContentWrapper>
+      </FullWidth>
     );
   }
 }
