@@ -43,9 +43,9 @@ function menuWithNLinks(n) {
   return (
     <Menu
       logo={<Logo />}
-      content={<Content />}
       links={generateLinks(n)}
       icon={<Icon />}
+      children={<Content />}
     />
   );
 }
