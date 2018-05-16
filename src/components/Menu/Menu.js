@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
-import MenuItem from './MenuItem';
-import Burger from './Burger';
-import Wrapper from './Wrapper';
-import Bar from './Bar';
+import TopBar from './TopBar';
 import OverflowDetector from './OverflowDetector';
-import Items from './Items';
-import Content from './Content';
 
 injectGlobal`
   body {
@@ -16,21 +11,27 @@ injectGlobal`
   }
 `;
 
-const Logo = styled.img`
-  height: 3rem;
-  width: 50%;
-  flex: none;
+const ContentAndMenu = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+`;
+
+ContentAndMenu.propTypes = {
+  children: PropTypes.node
+};
+
+const Content = styled.div`
+  overflow: ${props => (props.frozenScroll ? 'hidden' : 'scroll')};
 `;
 
 class Menu extends Component {
   constructor() {
     super();
-    this.overflowDetectorRef = React.createRef();
     this.state = {
-      isOverflowed: false,
+      inBurgerMode: false,
       isOpen: false
     };
-    this.onOverflowChange = this.onOverflowChange.bind(this);
     this.toggleOpen = this.toggleOpen.bind(this);
   }
 
@@ -38,56 +39,40 @@ class Menu extends Component {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
-  onOverflowChange(overflowState) {
-    this.setState(overflowState);
-  }
-
   render() {
-    const styledTopLinks = React.Children.map(this.props.topLinks, el =>
-      React.cloneElement(el, {
-        color: this.props.color,
-        activeColor: this.props.activeColor,
-        hoverColor: this.props.hoverColor
-      })
-    );
     return (
-      <Wrapper>
+      <ContentAndMenu>
+        {/* Triggers inBurgerMode state change depending on TopBar overflow state in _desktop_ mode */}
         <OverflowDetector
-          onOverflowChange={this.onOverflowChange}
-          topLinks={styledTopLinks}
+          onOverflowChange={overflowStatus =>
+            this.setState({ inBurgerMode: overflowStatus })
+          }
+          children={<TopBar inBurgerMode={false} links={this.props.links} />}
         />
-        <Bar
-          backgroundColor={this.props.backgroundColor}
-          innerRef={this.overflowDetectorRef}
-        >
-          <Burger
-            isOpen={this.state.isOpen}
-            onClick={this.toggleOpen}
-            absent={!this.state.isOverflowed}
-          />
-          {this.props.logo && <Logo src={this.props.logo} />}
-          <Items
-            isOverflowed={this.state.isOverflowed}
-            isOpen={this.state.isOpen}
-          >
-            {styledTopLinks}
-          </Items>
-        </Bar>
-        <Content>{this.props.content}</Content>
-      </Wrapper>
+
+        <TopBar
+          inBurgerMode={this.state.inBurgerMode}
+          isOpen={this.state.isOpen}
+          toggleOpen={this.toggleOpen}
+          logo={this.props.logo}
+          icon={this.props.icon}
+          links={this.props.links}
+        />
+
+        <Content frozenScroll={this.state.inBurgerMode && this.state.isOpen}>
+          {this.props.children}
+        </Content>
+      </ContentAndMenu>
     );
   }
 }
 
 // The Menu API
 Menu.propTypes = {
-  color: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  // logo: propTypes.instanceOf(Image),
-  topLinks: PropTypes.arrayOf(PropTypes.instanceOf(MenuItem)),
-  bottomLinks: PropTypes.arrayOf(PropTypes.instanceOf(MenuItem)),
-  // icons: PropTypes.arrayOf(PropTypes.instanceOf(SocialIcon)),
-  content: PropTypes.element
+  logo: PropTypes.node,
+  icon: PropTypes.node,
+  links: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.node // content
 };
 
 export default Menu;

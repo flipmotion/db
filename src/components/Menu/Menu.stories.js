@@ -8,13 +8,6 @@ import Menu from './Menu';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import MenuItem from './MenuItem';
-// import Menu from './Menu';
-
-// import content from '../../../content'
-
-import logo from '../../content/images/logo.svg';
-
-import Burger from './Burger';
 
 const insideRouter = story => (
   <Router>
@@ -22,74 +15,42 @@ const insideRouter = story => (
   </Router>
 );
 
+const Logo = () => <p>Logo</p>;
+const Content = () => <p>{'lorem ipsum '.repeat(2000)}</p>;
+const Icon = () => <p>Icon</p>;
+
 const menu = storiesOf('Menu', module)
   .addDecorator(withKnobs)
   .addDecorator(insideRouter);
 
-const content = <p>{'lorem ipsum '.repeat(2000)}</p>;
-
-const phones = ['+1 555 150 92 23', '+7 495 871 12 34'];
-
-menu.add('Content only (no menu items)', () => <Menu content={content} />);
-
-menu.add('Top only: few', () => (
-  <Menu
-    logo={logo}
-    content={content}
-    color={color('Link color', '')}
-    hoverColor={color('Hover link color', '')}
-    activeColor={color('Active link color', '')}
-    backgroundColor={color('Background color', '')}
-    topLinks={Array(2)
-      .fill()
-      .map((_, i) => (
-        <MenuItem key={i} to={`/top-link-${i}`}>
-          Top&nbsp;link&nbsp;{i}
-        </MenuItem>
-      ))}
-  />
+menu.add('Content only (no menu items)', () => (
+  <Menu>
+    <Content />
+  </Menu>
 ));
 
-menu.add('Top only: more', () => (
-  <Menu
-    logo={logo}
-    content={content}
-    topLinks={Array(6)
-      .fill()
-      .map((_, i) => (
-        <MenuItem key={i} to={`/top-link-${i}`}>
-          Top&nbsp;link&nbsp;{i}
-        </MenuItem>
-      ))}
-  />
-));
+function generateLinks(n) {
+  return Array(n)
+    .fill()
+    .map((_, i) => (
+      <MenuItem key={i + 1} to={`/top-link-${i + 1}`}>
+        Top&nbsp;link&nbsp;{i + 1}
+      </MenuItem>
+    ));
+}
 
-menu.add('Top only: many', () => (
-  <Menu
-    content={content}
-    topLinks={Array(10)
-      .fill()
-      .map((_, i) => (
-        <MenuItem key={i} to={`/top-link-${i}`}>
-          Top&nbsp;link&nbsp;{i}
-        </MenuItem>
-      ))}
-  />
-));
+function menuWithNLinks(n) {
+  return (
+    <Menu
+      logo={<Logo />}
+      content={<Content />}
+      links={generateLinks(n)}
+      icon={<Icon />}
+    />
+  );
+}
 
-menu.add('Top only: lots', () => (
-  <Menu
-    content={content}
-    topLinks={Array(100)
-      .fill()
-      .map((_, i) => (
-        <MenuItem key={i} to={`/top-link-${i}`}>
-          Top&nbsp;link&nbsp;{i}
-        </MenuItem>
-      ))}
-  />
-));
-
-menu.add('Burger', () => <Burger visible={true} />);
-
-// menu.add('Test', () => <Test  />);
+menu.add('Top only: few', () => menuWithNLinks(2));
+menu.add('Top only: more', () => menuWithNLinks(6));
+menu.add('Top only: many', () => menuWithNLinks(10));
+menu.add('Top only: lots', () => menuWithNLinks(50));

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Slice = styled.div`
   height: 18%;
@@ -22,7 +23,7 @@ const Burger = styled.div.attrs({
   position: relative;
   background-color: orange;
   cursor: pointer;
-  display: ${props => (props.absent ? 'none' : 'block')};
+  display: ${props => (props.present ? 'block' : 'none')};
 
   ${Slice}:first-child {
     top: ${props => (props.isOpen ? '50%' : '20%')};
@@ -37,5 +38,13 @@ const Burger = styled.div.attrs({
       props.isOpen ? 'translateY(50%) rotate(-45deg)' : null};
   }
 `;
+
+Burger.propTypes = {
+  present: PropTypes.bool,
+  isOpen: PropTypes.bool,
+  height: PropTypes.string,
+  width: PropTypes.string,
+  color: PropTypes.string
+};
 
 export default Burger;
