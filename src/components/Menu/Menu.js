@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import MenuItem from './MenuItem';
-import Burger, { InvisibleBurger } from './Burger';
+import Burger from './Burger';
 import Wrapper from './Wrapper';
 import Bar from './Bar';
 import OverflowDetector from './OverflowDetector';
@@ -79,6 +79,7 @@ class Menu extends Component {
   }
 }
 
+// The Menu API
 Menu.propTypes = {
   color: PropTypes.string,
   backgroundColor: PropTypes.string,
