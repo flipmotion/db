@@ -47,7 +47,14 @@ class Menu extends Component {
           onOverflowChange={overflowStatus =>
             this.setState({ inBurgerMode: overflowStatus })
           }
-          children={<TopBar inBurgerMode={false} links={this.props.links} />}
+          children={
+            <TopBar
+              inBurgerMode={false}
+              links={this.props.links}
+              logo={this.props.logo}
+              icon={this.props.icon}
+            />
+          }
         />
 
         <TopBar
