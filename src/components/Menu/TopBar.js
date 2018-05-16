@@ -44,7 +44,8 @@ const IconWrapper = styled.div`
 
 const Items = styled.div`
   flex: auto;
-  justify-content: flex-start;
+  justify-content: ${props =>
+    props.inBurgerMode ? 'flex-start' : 'space-evenly'};
   align-items: center;
   display: ${props =>
     !props.inBurgerMode || (props.inBurgerMode && props.isOpen)
