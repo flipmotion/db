@@ -3,8 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
 import 'bootstrap/dist/css/bootstrap-reboot.css';
 
-import Header from './components/Menu/Header';
-import Footer from './components/Menu/Footer';
+import Header from './components/_Menu/Header';
+import Footer from './components/_Menu/Footer';
 
 import AppRouter from './containers/AppRouter';
 

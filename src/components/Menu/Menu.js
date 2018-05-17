@@ -1,78 +1,86 @@
-// To be used in Header and Footer components
-
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import Burger from './Burger';
+import PropTypes from 'prop-types';
+import styled, { injectGlobal } from 'styled-components';
+import TopBar from './TopBar';
+import OverflowDetector from './OverflowDetector';
 
-// Styling NavLink with styled-components is a bit tricky
-// Maybe it can be done more elegant, but
-// that's what I came up with so far.
-export const MenuItem = props => {
-  const activeClassName = 'active';
-
-  const StyledNavLink = styled(NavLink).attrs({
-    activeClassName: activeClassName
-  })`
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    color: rgb(230, 230, 230);
-    transition: color 0.5s;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: none;
-      color: rgb(240, 240, 240);
-      transition: color 0.5s;
-    }
-
-    &.${activeClassName} {
-      font-weight: bold;
-      color: rgb(240, 240, 240);
-      cursor: default;
-    }
-  `;
-
-  return <StyledNavLink activeClassName={activeClassName} {...props} />;
-};
-
-export const Menu = styled.div.attrs({
-  children: props => ({ children: <p>Hi</p> })
-})`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  color: white;
-  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
+injectGlobal`
+  body {
+    font-family: sans-serif;
+    margin: 0;
+  }
 `;
 
-export class BurgerMenu extends Component {
+const ContentAndMenu = styled.div`
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+`;
+
+ContentAndMenu.propTypes = {
+  children: PropTypes.node
+};
+
+const Content = styled.div`
+  overflow: ${props => (props.frozenScroll ? 'hidden' : 'scroll')};
+  height: calc(100vh - 3rem);
+`;
+
+class Menu extends Component {
   constructor() {
     super();
-    this.state = { isOpen: false };
-    this.handleBurgerClick = this.handleBurgerClick.bind(this);
+    this.state = {
+      inBurgerMode: false,
+      isOpen: false
+    };
+    this.toggleOpen = this.toggleOpen.bind(this);
   }
 
-  handleBurgerClick() {
+  toggleOpen() {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
   render() {
     return (
-      <Menu isOpen={this.state.isOpen} mobile={this.props.mobile}>
-        {this.props.mobile ? (
-          <Burger
-            onClick={this.handleBurgerClick}
-            isOpen={this.state.isOpen}
-            style={{ alignSelf: 'flex-end', margin: '0.5em' }}
-          />
-        ) : null}
-        {this.props.children}
-      </Menu>
+      <ContentAndMenu>
+        {/* Triggers inBurgerMode state change depending on TopBar overflow state in _desktop_ mode */}
+        <OverflowDetector
+          onOverflowChange={overflowStatus =>
+            this.setState({ inBurgerMode: overflowStatus })
+          }
+          children={
+            <TopBar
+              inBurgerMode={false}
+              links={this.props.links}
+              logo={this.props.logo}
+              icon={this.props.icon}
+            />
+          }
+        />
+
+        <TopBar
+          inBurgerMode={this.state.inBurgerMode}
+          isOpen={this.state.isOpen}
+          toggleOpen={this.toggleOpen}
+          logo={this.props.logo}
+          icon={this.props.icon}
+          links={this.props.links}
+        />
+
+        <Content hidden={this.state.inBurgerMode && this.state.isOpen}>
+          {this.props.children}
+        </Content>
+      </ContentAndMenu>
     );
   }
 }
+
+// The Menu API
+Menu.propTypes = {
+  logo: PropTypes.node,
+  icon: PropTypes.node,
+  links: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.node // content
+};
+
+export default Menu;
