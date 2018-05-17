@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import Menu from './Menu';
+import Menu from './index';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
