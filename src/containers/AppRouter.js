@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
-import { portfolio } from '../modules/content';
+import { portfolio } from '../content';
 
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ import Page404 from '../components/Page404';
 
 import PortfolioItem from '../components/PortfolioItem';
 
-import { homePage } from '../modules/content';
+import { homePage } from '../content';
 
 const AbsoluteDiv = styled.div`
   position: absolute;

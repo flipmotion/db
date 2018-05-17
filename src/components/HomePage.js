@@ -81,6 +81,7 @@ const Text = styled.div.attrs({
 
 const Composer = styled.div`
   display: flex;
+  height: 100%;
   @media (orientation: portrait), (max-width: 50rem) {
     position: relative;
     div {
