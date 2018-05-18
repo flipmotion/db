@@ -3,9 +3,8 @@ import { storiesOf } from '@storybook/react';
 import Menu from './index';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuItem from './MenuItem';
-import Context, { globalStateIn, defaultLang } from '../../Context';
 import LangIcon from './LangIcon';
-import { langsSupported } from '../../content';
+import contentIn from '../../content';
 
 const insideRouter = story => (
   <Router>
@@ -14,6 +13,7 @@ const insideRouter = story => (
 );
 
 const Logo = () => <p>Logo</p>;
+
 const Content = () => (
   <p>
     {Array(2000)
@@ -61,40 +61,28 @@ menu.add('Top only: lots', () => menuWithNLinks(50));
 class IntApp extends Component {
   constructor() {
     super();
-    this.state = globalStateIn(defaultLang);
-    this.nextLang = this.nextLang.bind(this);
+    this.state = { lang: 'ru' };
+    this.toggleLang = this.toggleLang.bind(this);
   }
 
-  nextLang() {
-    const currentIndex = langsSupported.indexOf(this.state.lang);
-    const nextIndex =
-      currentIndex + 1 >= langsSupported.length ? 0 : currentIndex + 1;
-    const newLang = langsSupported[nextIndex];
-    console.log('new lang', newLang);
-    this.setState(globalStateIn(newLang));
+  toggleLang() {
+    this.setState(
+      state => (state.lang === 'ru' ? { lang: 'en' } : { lang: 'ru' })
+    );
   }
 
   render() {
     return (
-      <Context.Provider value={this.state}>
-        <Context.Consumer>
-          {globalState => {
-            console.dir(globalState);
-            return (
-              <Menu
-                logo={<Logo />}
-                links={globalState.content.menu.top.map((item, index) => (
-                  <MenuItem key={index} to={item.to}>
-                    {item.text}
-                  </MenuItem>
-                ))}
-                icon={<LangIcon onClick={this.nextLang} />}
-                children={<Content />}
-              />
-            );
-          }}
-        </Context.Consumer>
-      </Context.Provider>
+      <Menu
+        logo={<Logo />}
+        links={contentIn(this.state.lang).menu.top.map((item, index) => (
+          <MenuItem key={index} to={item.to}>
+            {item.text}
+          </MenuItem>
+        ))}
+        icon={<LangIcon onClick={this.toggleLang} />}
+        children={<Content />}
+      />
     );
   }
 }
