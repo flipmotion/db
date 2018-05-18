@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import HomePage from './HomePage';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
 import * as content from '../content';
 import Menu from './Menu/Menu';
@@ -21,9 +21,7 @@ function generateLinks(n) {
 
 homePage.addDecorator(story => (
   <Router>
-    <Route>
-      <Menu links={generateLinks(5)}>{story()}</Menu>
-    </Route>
+    <Menu links={generateLinks(6)}>{story()}</Menu>
   </Router>
 ));
 
