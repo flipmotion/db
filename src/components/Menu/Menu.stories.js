@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import LangIcon from './LangIcon';
 import contentIn from '../../content';
+import IntApp from '../../helpers/IntApp';
 
 const insideRouter = story => (
   <Router>
@@ -14,14 +15,17 @@ const insideRouter = story => (
 
 const Logo = () => <p>Logo</p>;
 
-const Content = () => (
-  <p>
-    {Array(2000)
-      .fill()
-      .map((_, i) => `lorem ipsum ${i} `)
-      .join(', ')}
-  </p>
-);
+const Content = props => {
+  const str = props.lang === 'ru' ? 'Привет Медвед ' : 'lorem ipsum ';
+  return (
+    <p>
+      {Array(2000)
+        .fill()
+        .map((_, i) => `${str}${i} `)
+        .join(', ')}
+    </p>
+  );
+};
 const Icon = () => <p>Icon</p>;
 
 const menu = storiesOf('Menu', module).addDecorator(insideRouter);
@@ -58,33 +62,19 @@ menu.add('Top only: more', () => menuWithNLinks(6));
 menu.add('Top only: many', () => menuWithNLinks(10));
 menu.add('Top only: lots', () => menuWithNLinks(50));
 
-class IntApp extends Component {
-  constructor() {
-    super();
-    this.state = { lang: 'ru' };
-    this.toggleLang = this.toggleLang.bind(this);
-  }
-
-  toggleLang() {
-    this.setState(
-      state => (state.lang === 'ru' ? { lang: 'en' } : { lang: 'ru' })
-    );
-  }
-
-  render() {
-    return (
+menu.add('Translation', () => (
+  <IntApp
+    render={(lang, toggleLang) => (
       <Menu
         logo={<Logo />}
-        links={contentIn(this.state.lang).menu.top.map((item, index) => (
+        links={contentIn(lang).menu.top.map((item, index) => (
           <MenuItem key={index} to={item.to}>
             {item.text}
           </MenuItem>
         ))}
-        icon={<LangIcon onClick={this.toggleLang} />}
-        children={<Content />}
+        icon={<LangIcon onClick={toggleLang} />}
+        children={<Content lang={lang} />}
       />
-    );
-  }
-}
-
-menu.add('Translation', () => <IntApp />);
+    )}
+  />
+));

@@ -7,28 +7,11 @@ import Menu from './Menu/Menu';
 import MenuItem from './Menu/MenuItem';
 import LangIcon from './Menu/LangIcon';
 import contentIn from '../content';
+import IntApp from '../helpers/IntApp';
 
 const homePage = storiesOf('Home page', module);
 
-// A minimal app that provides a lang and a function to change that lang
-// to render prop
-class IntApp extends Component {
-  constructor() {
-    super();
-    this.state = { lang: 'ru' };
-    this.toggleLang = this.toggleLang.bind(this);
-  }
-
-  toggleLang() {
-    this.setState(
-      state => (state.lang === 'ru' ? { lang: 'en' } : { lang: 'ru' })
-    );
-  }
-
-  render() {
-    return this.props.render(this.state.lang, this.toggleLang);
-  }
-}
+homePage.addDecorator(withKnobs);
 
 homePage.add('Menu', () => (
   <IntApp
