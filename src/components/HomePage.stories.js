@@ -20,11 +20,7 @@ homePage.add('Menu', () => (
         <Router>
           <Menu
             toggleLang={toggleLang}
-            links={content.menu.top.map((item, index) => (
-              <MenuItem to={item.to} key={index}>
-                {item.text}
-              </MenuItem>
-            ))}
+            links={content.menu.top}
             children={
               <HomePage
                 animationStage={boolean('visible', true) ? 'entered' : 'exited'}

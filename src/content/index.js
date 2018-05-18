@@ -3,6 +3,8 @@ import house from './images/house.jpg';
 import house1 from './images/house1.jpg';
 import house2 from './images/house2.jpg';
 import house3 from './images/house3.jpg';
+import React from 'react';
+import MenuItem from '../components/Menu/MenuItem';
 
 export const langsSupported = ['ru', 'en'];
 
@@ -212,6 +214,14 @@ function translateMediaIn(media, lang) {
   };
 }
 
+function navLinkify(item, index) {
+  return (
+    <MenuItem to={item.to} key={index}>
+      {item.text}
+    </MenuItem>
+  );
+}
+
 // Helps keep strings in different languages together
 function contentIn(lang) {
   // Let's use closure here not to repeat lang all the time;
@@ -226,8 +236,12 @@ function contentIn(lang) {
 
   return {
     menu: {
-      top: menu.top.map(item => translateMenuItem(item)),
-      bottom: menu.bottom.map(item => translateMenuItem(item))
+      top: menu.top.map((item, index) =>
+        navLinkify(translateMenuItem(item), index)
+      ),
+      bottom: menu.bottom.map((item, index) =>
+        navLinkify(translateMenuItem(item), index)
+      )
     },
     portfolio: portfolio.map(item => ({
       title: item.title[lang],

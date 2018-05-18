@@ -59,11 +59,7 @@ menu.add('Translation', () => (
     render={(lang, toggleLang) => (
       <Menu
         toggleLang={toggleLang}
-        links={contentIn(lang).menu.top.map((item, index) => (
-          <MenuItem key={index} to={item.to}>
-            {item.text}
-          </MenuItem>
-        ))}
+        links={contentIn(lang).menu.top}
         children={<Content lang={lang} />}
       />
     )}
