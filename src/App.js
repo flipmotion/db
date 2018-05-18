@@ -8,11 +8,11 @@ import contentIn from './content';
 const App = props => (
   <IntApp
     render={(lang, toggleLang) => {
-      content = contentIn(lang);
+      const content = contentIn(lang);
       return (
         <Router>
-          <Menu setLang={toggleLang}>
-            <AppRouter />
+          <Menu toggleLang={toggleLang} links={content.menu.top}>
+            <AppRouter lang={lang} />
           </Menu>
         </Router>
       );
