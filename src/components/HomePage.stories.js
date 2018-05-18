@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import HomePage from './HomePage';
 import { BrowserRouter as Router } from 'react-router-dom';
