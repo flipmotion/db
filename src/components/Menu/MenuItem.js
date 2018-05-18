@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-// Styling NavLink with styled-components is a bit tricky
-// Maybe it can be done more elegant, but
-// that's what I came up with so far.
+// This a NavLink with some styling without using classes thanks to
+// styled-components
 const MenuItem = props => {
   const activeClassName = 'MenuItem_active';
 

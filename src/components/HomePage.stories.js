@@ -3,38 +3,47 @@ import { storiesOf } from '@storybook/react';
 import HomePage from './HomePage';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
-import * as content from '../content';
+import Context from '../Context';
 import Menu from './Menu/Menu';
 import MenuItem from './Menu/MenuItem';
 
 const homePage = storiesOf('Home page', module);
 
-function generateLinks(n) {
-  return Array(n)
-    .fill()
-    .map((_, i) => (
-      <MenuItem key={i + 1} to={`/top-link-${i + 1}`}>
-        Top&nbsp;link&nbsp;{i + 1}
-      </MenuItem>
-    ));
-}
-
 homePage.addDecorator(story => (
-  <Router>
-    <Menu links={generateLinks(6)}>{story()}</Menu>
-  </Router>
+  <Context.Consumer>
+    {globalState => (
+      <Router>
+        <Menu
+          links={globalState.content.menu.top.map((item, index) => (
+            <MenuItem to={item.to} key={index}>
+              {item.text}
+            </MenuItem>
+          ))}
+        >
+          {story()}
+        </Menu>
+      </Router>
+    )}
+  </Context.Consumer>
 ));
 
 homePage.addDecorator(withKnobs);
 
 homePage.add('Home page', () => (
-  <HomePage
-    animationStage={boolean('visible', true) ? 'entered' : 'exited'}
-    header={text('Header', content.homePage.header.ru)}
-    paragraphText={text('Paragraph text', content.homePage.paragraphText.ru)}
-    linkText={text('Link text', content.homePage.link.text.ru)}
-    linkPath={content.homePage.link.path}
-    imageSrc={content.homePage.media[0].src}
-    imageAlt={content.homePage.media[0].alt}
-  />
+  <Context.Consumer>
+    {globalState => (
+      <HomePage
+        animationStage={boolean('visible', true) ? 'entered' : 'exited'}
+        header={text('Header', globalState.content.homePage.header)}
+        paragraphText={text(
+          'Paragraph text',
+          globalState.content.homePage.paragraphText
+        )}
+        linkText={text('Link text', globalState.content.homePage.link.text)}
+        linkPath={globalState.content.homePage.link.path}
+        imageSrc={globalState.content.homePage.media[0].src}
+        imageAlt={globalState.content.homePage.media[0].alt}
+      />
+    )}
+  </Context.Consumer>
 ));
