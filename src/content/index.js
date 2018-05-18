@@ -4,6 +4,8 @@ import house1 from './images/house1.jpg';
 import house2 from './images/house2.jpg';
 import house3 from './images/house3.jpg';
 
+export const langsSupported = ['ru', 'en'];
+
 const logo = {
   src: logoSrc,
   alt: {

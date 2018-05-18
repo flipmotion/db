@@ -4,7 +4,8 @@ import Menu from './index';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import Context, { globalStateIn, defaultLang } from '../../Context';
-import Toggle from './Toggle';
+import LangIcon from './LangIcon';
+import { langsSupported } from '../../content';
 
 const insideRouter = story => (
   <Router>
@@ -61,34 +62,37 @@ class IntApp extends Component {
   constructor() {
     super();
     this.state = globalStateIn(defaultLang);
-    this.onChangeLang = this.onChangeLang.bind(this);
+    this.nextLang = this.nextLang.bind(this);
   }
 
-  onChangeLang(lang) {
-    this.setState({ lang });
+  nextLang() {
+    const currentIndex = langsSupported.indexOf(this.state.lang);
+    const nextIndex =
+      currentIndex + 1 >= langsSupported.length ? 0 : currentIndex + 1;
+    const newLang = langsSupported[nextIndex];
+    console.log('new lang', newLang);
+    this.setState(globalStateIn(newLang));
   }
 
   render() {
     return (
       <Context.Provider value={this.state}>
         <Context.Consumer>
-          {globalState => (
-            <Menu
-              logo={<Logo />}
-              links={globalState.content.menu.top.map((item, index) => (
-                <MenuItem key={index} to={item.to}>
-                  {item.text}
-                </MenuItem>
-              ))}
-              icon={
-                <Toggle
-                  lang={globalState.lang}
-                  onChangeLang={this.onChangeLang}
-                />
-              }
-              children={<Content />}
-            />
-          )}
+          {globalState => {
+            console.dir(globalState);
+            return (
+              <Menu
+                logo={<Logo />}
+                links={globalState.content.menu.top.map((item, index) => (
+                  <MenuItem key={index} to={item.to}>
+                    {item.text}
+                  </MenuItem>
+                ))}
+                icon={<LangIcon onClick={this.nextLang} />}
+                children={<Content />}
+              />
+            );
+          }}
         </Context.Consumer>
       </Context.Provider>
     );

@@ -6,6 +6,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
 import Context from '../Context';
 import Menu from './Menu/Menu';
 import MenuItem from './Menu/MenuItem';
+import LangIcon from './Menu/LangIcon';
 
 const homePage = storiesOf('Home page', module);
 
@@ -14,6 +15,7 @@ homePage.addDecorator(story => (
     {globalState => (
       <Router>
         <Menu
+          icon={<LangIcon onClick={globalState.shuffleLang} />}
           links={globalState.content.menu.top.map((item, index) => (
             <MenuItem to={item.to} key={index}>
               {item.text}
