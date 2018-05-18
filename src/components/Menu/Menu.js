@@ -55,8 +55,8 @@ class Menu extends Component {
             <TopBar
               inBurgerMode={false}
               links={this.props.links}
-              logo={this.props.logo}
-              icon={this.props.icon}
+              logo={<Logo />}
+              icon={<LangIcon onClick={this.props.toggleLang} />}
             />
           }
         />

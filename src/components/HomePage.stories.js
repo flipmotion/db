@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
 import Menu from './Menu/Menu';
 import MenuItem from './Menu/MenuItem';
-import LangIcon from './Menu/LangIcon';
 import contentIn from '../content';
 import IntApp from './IntApp';
 
