@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Menu from './index';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuItem from './MenuItem';
-import LangIcon from './LangIcon';
 import contentIn from '../../content';
-import IntApp from '../../helpers/IntApp';
+import IntApp from '../IntApp';
 
 const insideRouter = story => (
   <Router>
     <Route>{story()}</Route>
   </Router>
 );
-
-const Logo = () => <p>Logo</p>;
 
 const Content = props => {
   const str = props.lang === 'ru' ? 'Привет Медвед ' : 'lorem ipsum ';
@@ -48,12 +45,7 @@ function generateLinks(n) {
 
 function menuWithNLinks(n) {
   return (
-    <Menu
-      logo={<Logo />}
-      links={generateLinks(n)}
-      icon={<Icon />}
-      children={<Content />}
-    />
+    <Menu links={generateLinks(n)} icon={<Icon />} children={<Content />} />
   );
 }
 
@@ -66,13 +58,12 @@ menu.add('Translation', () => (
   <IntApp
     render={(lang, toggleLang) => (
       <Menu
-        logo={<Logo />}
+        toggleLang={toggleLang}
         links={contentIn(lang).menu.top.map((item, index) => (
           <MenuItem key={index} to={item.to}>
             {item.text}
           </MenuItem>
         ))}
-        icon={<LangIcon onClick={toggleLang} />}
         children={<Content lang={lang} />}
       />
     )}

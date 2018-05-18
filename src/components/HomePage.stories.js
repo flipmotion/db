@@ -7,7 +7,7 @@ import Menu from './Menu/Menu';
 import MenuItem from './Menu/MenuItem';
 import LangIcon from './Menu/LangIcon';
 import contentIn from '../content';
-import IntApp from '../helpers/IntApp';
+import IntApp from './IntApp';
 
 const homePage = storiesOf('Home page', module);
 
@@ -20,7 +20,7 @@ homePage.add('Menu', () => (
       return (
         <Router>
           <Menu
-            icon={<LangIcon onClick={toggleLang} />}
+            toggleLang={toggleLang}
             links={content.menu.top.map((item, index) => (
               <MenuItem to={item.to} key={index}>
                 {item.text}

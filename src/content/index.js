@@ -19,7 +19,7 @@ const menu = {
     {
       to: '/portfolio',
       text: {
-        ru: 'Наши работы',
+        ru: 'НашиФантастическиеРаботы',
         en: 'Our works'
       }
     },

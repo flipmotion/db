@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import TopBar from './TopBar';
 import OverflowDetector from './OverflowDetector';
+import LangIcon from './LangIcon';
 
 injectGlobal`
   body {
@@ -10,6 +11,8 @@ injectGlobal`
     margin: 0;
   }
 `;
+
+const Logo = () => <p>Logo</p>;
 
 const ContentAndMenu = styled.div`
   display: flex;
@@ -62,8 +65,8 @@ class Menu extends Component {
           inBurgerMode={this.state.inBurgerMode}
           isOpen={this.state.isOpen}
           toggleOpen={this.toggleOpen}
-          logo={this.props.logo}
-          icon={this.props.icon}
+          logo={<Logo />}
+          icon={<LangIcon onClick={this.props.toggleLang} />}
           links={this.props.links}
         />
 
@@ -78,8 +81,8 @@ class Menu extends Component {
 // The Menu API
 Menu.propTypes = {
   logo: PropTypes.node,
-  icon: PropTypes.node,
   links: PropTypes.arrayOf(PropTypes.node),
+  toggleLang: PropTypes.func,
   children: PropTypes.node // content
 };
 
