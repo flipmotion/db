@@ -1,18 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import ru from './ru.svg';
-import en from './uk.svg';
-
-const langs = [
-  {
-    alt: 'Читать на русском',
-    img: ru
-  },
-  {
-    alt: 'Read in English',
-    img: en
-  }
-];
 
 const Perspective = styled.div`
   perspective: 30px;
@@ -31,8 +18,6 @@ export default class Toggle extends Component {
   constructor() {
     super();
     this.state = {
-      langs: langs,
-      current: 0,
       rotation: 0,
       scale: 1,
       grayscale: 30,
@@ -61,17 +46,6 @@ export default class Toggle extends Component {
     });
   }
 
-  changeLang() {
-    const nextIndex = () => {
-      const maxIndex = this.state.langs.length - 1;
-      const current = this.state.current;
-      if (current + 1 > maxIndex) return 0;
-      return current + 1;
-    };
-
-    this.setState(state => ({ current: nextIndex() }));
-  }
-
   render() {
     const { rotation, scale, grayscale, brightness } = this.state;
     const animatedStyle = {
@@ -79,10 +53,10 @@ export default class Toggle extends Component {
       filter: `grayscale(${grayscale}%) brightness(${brightness}%)`
     };
 
-    const { langs, current } = this.state;
+    const { lang, changeLang } = this.props;
     return (
       <Perspective
-        onClick={this.changeLang}
+        onClick={changeLang}
         onMouseEnter={this.lift}
         onMouseLeave={this.default}
       >
