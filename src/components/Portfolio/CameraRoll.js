@@ -2,20 +2,24 @@ import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Image = styled.img`
+const Image = styled(({ isCurrent, ...otherProps }) => (
+  <img onDragStart={e => e.preventDefault()} {...otherProps} />
+))`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  width: 100%;
+  width: ${props => (props.isCurrent ? '100%' : '90%')};
   height: ${props => props.height};
   object-fit: cover;
-  cursor: ${props => (props.inFocus ? 'zoom-in' : 'pointer')};
+  cursor: ${props => (props.isCurrent ? 'zoom-in' : 'pointer')};
   scroll-snap-align: center;
+  transition: height 0.85s, width 0.85s;
 `;
 
 // I have no idea why div collapses here, and imgs don't
-const Spacer = styled(Image)`
+const Spacer = styled.div`
+  height: ${props => props.height};
   scroll-snap-align: none;
-  visibility: hidden;
+  /* visibility: hidden; */
 `;
 
 const SpacerTop = styled(Spacer)`
@@ -27,122 +31,80 @@ const SpacerBottom = styled(Spacer)`
 `;
 
 // The component renders an array of images. An image is an object with
-// src and alt properties.
-// It also takes a function to inform upwards a new current image index
-// if that has changed
+// "src", "alt", "to" properties.
+// If a clicked image is not "in focus" (= in the center), it will scroll
+// to the center. If the image clicked is in focus, it will navigate to its "to".
+//
+// The component also takes a function to inform upwards a new current image index
+// if that has changed.
 class CameraRoll extends Component {
   static propTypes = {
-    onCurrentChange: PropTypes.func,
+    current: PropTypes.number, // index of the current (= in focus, = in the center) image
+    setCurrent: PropTypes.func.isRequired, // "current" state it held (and managed) up the component chain
+    imageHeight: PropTypes.number, // "specify %, but without % sign, a number (for math later on)"
+    currentImageHeight: PropTypes.number,
+    navigateTo: PropTypes.func, // programmatic click it the upper component's concern
     images: PropTypes.arrayOf(
       PropTypes.shape({
-        src: PropTypes.string, // is ot OK for both small (inline) and big images?
-        alt: PropTypes.string
+        src: PropTypes.string.isRequired, // is ot OK for both small (inline) and big images?
+        alt: PropTypes.string,
+        to: PropTypes.string,
+        // inline styles are passed to DOM node, for animations
+        // (controlled by upper component, that's why there's no animationStage prop here)
+        style: PropTypes.object
       })
     )
   };
 
+  static defaultProps = {
+    imageHeight: 40,
+    currentImageHeight: 60
+  };
+
   constructor() {
     super();
-    this.animationType = this.animationType.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.morphToPortfolioPage = this.morphToPortfolioPage.bind(this);
-    this.animationStyle = this.animationStyle.bind(this);
-    // this.doubleStyle = this.doubleStyle.bind(this);
-  }
-
-  // This is the trickiest part
-  animationType() {
-    if (this.props.history.location.state)
-      return this.props.history.location.state.animationType;
   }
 
   // if image is clicked while it's not in "focus", what brings the image in focus
-  // if the image is already in focus, navigate to item page
+  // if the image is already in focus, navigate to the item page
   // setCurrent comes from portfolioContainer
   handleClick(index) {
     if (index === this.props.current) {
-      this.morphToPortfolioPage(index);
+      const url = this.props.images[index].to;
+      if (!url) return console.warn("'to' property is not specified");
+      this.props.navigateTo(url);
     } else {
       this.props.setCurrent(index);
     }
   }
 
-  // this is a manual navigation with passing info about desired animation
-  // we can't use Link because action on click is conditional (see handleClick)
-  morphToPortfolioPage(index) {
-    this.props.history.push(`${this.props.location.pathname}/${index}`, {
-      animationType: 'portfolioItem'
-    });
-  }
-
-  animationStyle(index) {
-    switch (this.animationType()) {
-      case 'portfolioItem':
-        switch (this.props.animationStage) {
-          // the starting point before entering
-          default:
-            return {
-              opacity: 0,
-              transition: '1s'
-            };
-          // the normal on-screen appearance
-          case 'entered':
-            return {
-              opacity: 1,
-              transition: '1s'
-            };
-          // where it leaves to
-          case 'exiting':
-            return {
-              opacity: 0,
-              transition: '0.85s'
-            };
-        }
-      // noname animations
-      default:
-        switch (this.props.animationStage) {
-          // where coming from and where leaving to
-          default:
-            return {
-              transform: 'translateY(100vh)',
-              transition: '1s'
-            };
-          // normal position
-          case 'entered':
-            return {
-              transform: 'translateY(0vh)',
-              transition: '1s'
-            };
-        }
-    }
-  }
-
   render() {
-    const { images, titles, imageHeight } = this.props;
+    const { images, imageHeight, currentImageHeight } = this.props;
+
+    if (!images || images.length === 0) return null;
 
     const offsetToCenter = (100 - imageHeight) / 2;
+    console.log('offsetToCenter is', offsetToCenter);
 
     return (
-      // <Roll style={{ transform: `translateY1(${offset}%)` }}>
       <Fragment>
-        <SpacerTop key={-1} src={images[0]} height={offsetToCenter + '%'} />
-        {images.map((image, index) => (
-          <Image
-            key={index}
-            src={image.src}
-            alt={image.alt}
-            height={imageHeight + '%'}
-            onDragStart={e => e.preventDefault()}
-            onClick={() => this.handleClick(index)}
-            inFocus={index === this.props.current}
-            style={this.animationStyle(index)}
-          />
-        ))}
-        <SpacerBottom
-          key={images.length}
-          src={images[images.length - 1]}
-          height={offsetToCenter + '%'}
-        />
+        <SpacerTop key={-1} height={offsetToCenter + '%'} />
+        {images.map((image, index) => {
+          const isCurrent = index === this.props.current;
+          return (
+            <Image
+              key={index}
+              src={image.src}
+              alt={image.alt}
+              height={(isCurrent ? currentImageHeight : imageHeight) + '%'}
+              onClick={() => this.handleClick(index)}
+              isCurrent={isCurrent}
+              style={image.style}
+            />
+          );
+        })}
+        <SpacerBottom key={images.length} height={offsetToCenter + '%'} />
       </Fragment>
     );
   }
