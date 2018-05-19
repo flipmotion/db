@@ -114,8 +114,8 @@ class CameraRoll extends Component {
         {images.map((image, index) => (
           <Image
             key={index}
-            src={image}
-            alt={titles[index]}
+            src={image.src}
+            alt={image.alt}
             height={imageHeight + '%'}
             onDragStart={e => e.preventDefault()}
             onClick={() => this.handleClick(index)}
