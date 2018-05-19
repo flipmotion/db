@@ -21,15 +21,22 @@ const menu = {
     {
       to: '/portfolio',
       text: {
-        ru: 'НашиФантастическиеРаботы',
-        en: 'Our works'
+        ru: 'Портфолио',
+        en: 'Portfolio'
       }
     },
     {
-      to: '/contacts',
+      to: '/services',
       text: {
-        ru: 'Контакты',
-        en: 'Contacts'
+        ru: 'Услуги',
+        en: 'Services'
+      }
+    },
+    {
+      to: '/prices',
+      text: {
+        ru: 'Цены',
+        en: 'Prices'
       }
     }
   ],
