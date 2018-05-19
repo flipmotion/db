@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Image = styled.img`
   padding-top: 0.5rem;
@@ -25,7 +26,21 @@ const SpacerBottom = styled(Spacer)`
   padding-bottom: 0;
 `;
 
+// The component renders an array of images. An image is an object with
+// src and alt properties.
+// It also takes a function to inform upwards a new current image index
+// if that has changed
 class CameraRoll extends Component {
+  static propTypes = {
+    onCurrentChange: PropTypes.func,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        src: PropTypes.string, // is ot OK for both small (inline) and big images?
+        alt: PropTypes.string
+      })
+    )
+  };
+
   constructor() {
     super();
     this.animationType = this.animationType.bind(this);
