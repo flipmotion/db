@@ -4,7 +4,7 @@ import Menu from './index';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import contentIn from '../../content';
-import IntApp from '../IntApp';
+import IntApp from '../../containers/IntApp';
 
 const insideRouter = story => (
   <Router>

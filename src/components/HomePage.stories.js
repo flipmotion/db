@@ -6,7 +6,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
 import Menu from './Menu/Menu';
 import MenuItem from './Menu/MenuItem';
 import contentIn from '../content';
-import IntApp from './IntApp';
+import IntApp from '../containers/IntApp';
 
 const homePage = storiesOf('Home page', module);
 

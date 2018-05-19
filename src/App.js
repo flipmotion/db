@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Menu from './components/Menu';
 import AppRouter from './containers/AppRouter';
-import IntApp from './components/IntApp';
+import IntApp from './containers/IntApp';
 import contentIn from './content';
 
 const App = props => (

@@ -2,6 +2,9 @@ import { Component } from 'react';
 
 // A minimal app that provides a lang and a function to change that lang
 // to render prop
+// use it like this:
+// <App  render={(lang, toggleLang) => {...}} />
+// toggleLang flips between 'ru' and 'en'.
 class IntApp extends Component {
   constructor() {
     super();
