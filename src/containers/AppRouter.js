@@ -14,8 +14,6 @@ import PortfolioItem from '../components/PortfolioItem';
 
 import contentIn from '../content';
 
-import { homePage } from '../content';
-
 const AbsoluteDiv = styled.div`
   position: absolute;
   width: 100%;
