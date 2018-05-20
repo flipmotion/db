@@ -215,13 +215,15 @@ class CameraRoll extends Component {
           const first = index === 0;
 
           return (
-            <ImageWithDescription height={imageHeight + '%'}>
+            <ImageWithDescription
+              height={imageHeight + '%'}
+              key={index}
+              onClick={() => this.handleClick(index)}
+            >
               <Image
                 myRef={first ? this.firstImageRef : undefined}
-                key={index}
                 src={image.src}
                 alt={image.alt}
-                onClick={() => this.handleClick(index)}
                 isCurrent={isCurrent}
                 style={image.style}
               />
