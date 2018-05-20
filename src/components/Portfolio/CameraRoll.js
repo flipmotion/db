@@ -48,33 +48,6 @@ const SpacerBottom = styled(Spacer)`
 // The component also takes a function to inform upwards a new current image index
 // if that has changed.
 class CameraRoll extends Component {
-  static animateTo({ positionStart, positionEnd, duration, targetElement }) {
-    const startTime = performance.now();
-    const endTime = startTime + duration;
-
-    const positionDelta = positionEnd - positionStart;
-
-    function positionAt(currentTime) {
-      const relativeTime = currentTime - startTime;
-      const durationFraction = relativeTime / duration;
-      const value = positionStart + positionDelta * durationFraction; // 1:1
-      console.log(value);
-      return value;
-    }
-
-    // console.log(performance.now(), endTime)
-
-    const animation = () =>
-      requestAnimationFrame(time => {
-        if (performance.now() < endTime) {
-          targetElement.scrollTop = positionAt(time);
-          animation();
-        }
-      });
-
-    animation();
-  }
-
   static propTypes = {
     current: PropTypes.number, // index of the current (= in focus, = in the center) image
     setCurrent: PropTypes.func.isRequired, // "current" state it held (and managed) up the component chain
@@ -98,6 +71,7 @@ class CameraRoll extends Component {
 
   constructor() {
     super();
+    this.state = { isScrolling: false };
     this.scrollContainerRef = React.createRef();
     this.firstImageRef = React.createRef();
     this.handleClick = this.handleClick.bind(this);
@@ -106,6 +80,33 @@ class CameraRoll extends Component {
     this.currentIndexAccordingToScroll = this.currentIndexAccordingToScroll.bind(
       this
     );
+    this.smoothlyScrollTo = this.smoothlyScrollTo.bind(this);
+  }
+
+  smoothlyScrollTo({ positionStart, positionEnd, duration, targetElement }) {
+    const startTime = performance.now();
+    const endTime = startTime + duration;
+
+    const positionDelta = positionEnd - positionStart;
+
+    function positionAt(currentTime) {
+      const relativeTime = currentTime - startTime;
+      const durationFraction = relativeTime / duration;
+      const value = positionStart + positionDelta * durationFraction; // 1:1
+      console.log(value);
+      return value;
+    }
+
+    const animation = () =>
+      requestAnimationFrame(time => {
+        if (performance.now() < endTime) {
+          // && this.state.isScrolling !== true
+          targetElement.scrollTop = positionAt(time);
+          animation();
+        }
+      });
+
+    animation();
   }
 
   currentIndexAccordingToScroll() {
@@ -115,13 +116,17 @@ class CameraRoll extends Component {
   }
 
   onScroll() {
+    this.setState({ isScrolling: true });
     const index = this.currentIndexAccordingToScroll();
 
     // this will trigger immidiate positioning on the new 'current'
     // as soon as it's changed
     // if (this.props.current !== index) this.props.setCurrent(index)
 
-    const onScrollEnd = () => this.scrollTo(index);
+    const onScrollEnd = () => {
+      this.setState({ isScrolling: false });
+      this.scrollTo(index);
+    };
 
     const scrollAimingTimeout = 150;
     const timeOutHandler = window.setTimeout(onScrollEnd, scrollAimingTimeout);
@@ -160,7 +165,7 @@ class CameraRoll extends Component {
     const duration = 350;
     // scrollContainer.scrollTop = desiredScrollTop;
 
-    CameraRoll.animateTo({
+    this.smoothlyScrollTo({
       positionStart: scrollTopBeforeAnimationStart,
       positionEnd: desiredScrollTop,
       duration: duration,
