@@ -7,8 +7,13 @@ const ScrollContainer = styled.div`
   overflow: auto;
 `;
 
-const Image = styled(({ isCurrent, myRef, ...otherProps }) => (
-  <img ref={myRef} onDragStart={e => e.preventDefault()} {...otherProps} />
+const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
+  <img
+    ref={myRef}
+    alt={alt}
+    onDragStart={e => e.preventDefault()}
+    {...otherProps}
+  />
 ))`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -86,14 +91,15 @@ class CameraRoll extends Component {
   }
 
   scrollTo(index) {
-    if (index < 0) index = 0;
+    if (!this.props.images) return;
     const maxIndex = this.props.images.length - 1;
     if (index > maxIndex) index = maxIndex;
+    if (index < 0) index = 0;
 
     const scrollContainer = this.scrollContainerRef.current;
     const elementHeight = this.firstImageRef.current.clientHeight;
     const desiredScrollTop = index * elementHeight;
-    this.scrollContainerRef.current.scrollTop = desiredScrollTop;
+    scrollContainer.scrollTop = desiredScrollTop;
   }
 
   componentDidMount() {
