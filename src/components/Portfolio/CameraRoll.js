@@ -75,6 +75,34 @@ class CameraRoll extends Component {
     this.firstImageRef = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.scrollTo = this.scrollTo.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.currentIndexAccordingToScroll = this.currentIndexAccordingToScroll.bind(
+      this
+    );
+  }
+
+  currentIndexAccordingToScroll() {
+    const curentScrollTop = this.scrollContainerRef.current.scrollTop;
+    const elementHeight = this.firstImageRef.current.clientHeight;
+    return Math.floor(0.5 + curentScrollTop / elementHeight);
+  }
+
+  onScroll() {
+    const index = this.currentIndexAccordingToScroll();
+
+    // this will trigger immidiate positioning on the new 'current'
+    // as soon as it's changed
+    // if (this.props.current !== index) this.props.setCurrent(index)
+
+    const onScrollEnd = () => this.scrollTo(index);
+
+    const scrollActionTimeout = 850;
+    const timeOutHandler = window.setTimeout(onScrollEnd, scrollActionTimeout);
+
+    this.setState(state => {
+      window.clearInterval(state && state.timeOutHandler);
+      return { timeOutHandler };
+    });
   }
 
   // if image is clicked while it's not in "focus", what brings the image in focus
@@ -119,7 +147,10 @@ class CameraRoll extends Component {
     const offsetToCenter = (100 - imageHeight) / 2;
 
     return (
-      <ScrollContainer innerRef={this.scrollContainerRef}>
+      <ScrollContainer
+        innerRef={this.scrollContainerRef}
+        onScroll={this.onScroll}
+      >
         <SpacerTop key={-1} height={offsetToCenter + '%'} />
         {images.map((image, index) => {
           const isCurrent = index === this.props.current;

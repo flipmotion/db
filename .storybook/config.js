@@ -1,5 +1,5 @@
 import { configure } from '@storybook/react';
-import '@storybook/addon-console';
+import '@storybook/addon-actions/register';
 
 const req = require.context('../src/components', true, /\.stories\.js$/)
 
