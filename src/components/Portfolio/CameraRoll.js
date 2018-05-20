@@ -9,18 +9,22 @@ const ScrollContainer = styled.div`
 
 const ImageWithDescription = styled.div`
   display: flex;
-  flex-direction: row;
   width: 100%;
   height: ${props => props.height};
+  overflow: hidden;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 `;
 
 const Description = styled.div`
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  width: 40%;
+  padding: 1rem;
+  flex: 3;
   align-self: center;
   opacity: ${props => (props.isCurrent ? '1' : '0.5')};
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
@@ -31,9 +35,7 @@ const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
     {...otherProps}
   />
 ))`
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  width: 66%;
+  flex: 7;
   height: 100%;
   object-fit: cover;
   cursor: ${props => (props.isCurrent ? 'zoom-in' : 'pointer')};
@@ -41,6 +43,7 @@ const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
   box-sizing: border-box;
   opacity: ${props => (props.isCurrent ? '1' : '0.5')};
   transition: opacity 0.85s;
+  min-width: 0;
 `;
 
 // I have no idea why div collapses here, and imgs don't

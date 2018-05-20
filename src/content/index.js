@@ -206,11 +206,9 @@ const homePage = {
 function translateMediaIn(media, lang) {
   if (!media) throw new Error(`media is ${media}`);
   if (!media.src) {
-    console.dir(media);
     throw new Error(`media src is ${media.src}. Check out ${media} above`);
   }
   if (!media.alt[lang]) {
-    console.dir(media);
     throw new Error(
       `media.alt in ${lang} is ${media.alt[lang]}. Check out ${media} above`
     );
