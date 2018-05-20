@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import Portfolio from '../components/Portfolio';
 
+// This container basically tracks which image is current
+// (holds the state)
 class PortfolioContainer extends Component {
   constructor() {
     super();
     this.state = { current: 0 };
     this.setCurrent = this.setCurrent.bind(this);
-    this.imageHeight = 66; // % height of image
   }
 
-  setCurrent(itemIndex) {
-    this.setState({ current: itemIndex });
+  setCurrent(current) {
+    this.setState({ current });
   }
 
   render() {
@@ -26,7 +27,6 @@ class PortfolioContainer extends Component {
         images={images}
         descriptions={descriptions}
         setCurrent={this.setCurrent}
-        imageHeight={this.imageHeight}
       />
     );
   }
