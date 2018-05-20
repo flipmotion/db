@@ -17,10 +17,15 @@ const Item = styled.div`
   }
 `;
 
+const Div = styled.div`
+  padding: 1rem;
+  align-self: center;
+`;
+
 const PortfolioList = ({ titles, current, setCurrent }) => {
   if (!titles || titles.length === 0) return null;
   return (
-    <div>
+    <Div>
       <h1>Наши работы</h1>
       {titles.map((title, index) => (
         <Item
@@ -31,7 +36,7 @@ const PortfolioList = ({ titles, current, setCurrent }) => {
           {title}
         </Item>
       ))}
-    </div>
+    </Div>
   );
 };
 

@@ -6,6 +6,21 @@ import PortfolioList from '../components/Portfolio/PortfolioList';
 const ListAndCameraRoll = styled.div`
   height: 100vh;
   display: flex;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
+
+const ListArea = styled.div`
+  align-self: center;
+  flex: 33;
+`;
+
+const RollArea = styled.div`
+  flex: 66;
+  min-width: 0;
+  height: 100%;
 `;
 
 // This container basically tracks which image is current
@@ -28,16 +43,20 @@ class PortfolioContainer extends Component {
     );
     return (
       <ListAndCameraRoll>
-        <PortfolioList
-          current={this.state.current}
-          titles={titles}
-          setCurrent={this.setCurrent}
-        />
-        <CameraRoll
-          current={this.state.current}
-          images={images}
-          setCurrent={this.setCurrent}
-        />
+        <ListArea>
+          <PortfolioList
+            current={this.state.current}
+            titles={titles}
+            setCurrent={this.setCurrent}
+          />
+        </ListArea>
+        <RollArea>
+          <CameraRoll
+            current={this.state.current}
+            images={images}
+            setCurrent={this.setCurrent}
+          />
+        </RollArea>
       </ListAndCameraRoll>
     );
   }

@@ -55,6 +55,9 @@ const Spacer = styled.div`
 
 const SpacerTop = styled(Spacer)`
   padding-top: 0;
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const SpacerBottom = styled(Spacer)`
