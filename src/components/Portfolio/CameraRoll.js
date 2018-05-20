@@ -7,6 +7,22 @@ const ScrollContainer = styled.div`
   overflow: auto;
 `;
 
+const ImageWithDescription = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: ${props => props.height};
+`;
+
+const Description = styled.div`
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  width: 40%;
+  align-self: center;
+  opacity: ${props => (props.isCurrent ? '1' : '0.5')};
+`;
+
 const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
   <img
     ref={myRef}
@@ -17,12 +33,14 @@ const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
 ))`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  width: 100%;
-  height: ${props => props.height};
+  width: 66%;
+  height: 100%;
   object-fit: cover;
   cursor: ${props => (props.isCurrent ? 'zoom-in' : 'pointer')};
   scroll-snap-align: center;
   box-sizing: border-box;
+  opacity: ${props => (props.isCurrent ? '1' : '0.5')};
+  transition: opacity 0.85s;
 `;
 
 // I have no idea why div collapses here, and imgs don't
@@ -47,7 +65,14 @@ const SpacerBottom = styled(Spacer)`
 //
 // The component also takes a function to inform upwards a new current image index
 // if that has changed.
+//
+// UI bottom line: if user scrolls, never interfere with the scroll, it's uncomfortable,
+// feels like you're losing control. The only circumstance is when you _navigate_ to it
+// via a clickable menu.
 class CameraRoll extends Component {
+  static scrollAimingDelay = 100;
+  static smoothScrollDuration = 660;
+
   static propTypes = {
     current: PropTypes.number, // index of the current (= in focus, = in the center) image
     setCurrent: PropTypes.func.isRequired, // "current" state it held (and managed) up the component chain
@@ -57,6 +82,7 @@ class CameraRoll extends Component {
       PropTypes.shape({
         src: PropTypes.string.isRequired, // is ot OK for both small (inline) and big images?
         alt: PropTypes.string,
+        description: PropTypes.string,
         to: PropTypes.string,
         // inline styles are passed to DOM node, for animations
         // (controlled by upper component, that's why there's no animationStage prop here)
@@ -71,7 +97,6 @@ class CameraRoll extends Component {
 
   constructor() {
     super();
-    this.state = { isScrolling: false };
     this.scrollContainerRef = React.createRef();
     this.firstImageRef = React.createRef();
     this.handleClick = this.handleClick.bind(this);
@@ -83,7 +108,8 @@ class CameraRoll extends Component {
     this.smoothlyScrollTo = this.smoothlyScrollTo.bind(this);
   }
 
-  smoothlyScrollTo({ positionStart, positionEnd, duration, targetElement }) {
+  smoothlyScrollTo({ positionStart, positionEnd, targetElement }) {
+    const duration = CameraRoll.smoothScrollDuration;
     const startTime = performance.now();
     const endTime = startTime + duration;
 
@@ -93,14 +119,12 @@ class CameraRoll extends Component {
       const relativeTime = currentTime - startTime;
       const durationFraction = relativeTime / duration;
       const value = positionStart + positionDelta * durationFraction; // 1:1
-      console.log(value);
       return value;
     }
 
     const animation = () =>
       requestAnimationFrame(time => {
         if (performance.now() < endTime) {
-          // && this.state.isScrolling !== true
           targetElement.scrollTop = positionAt(time);
           animation();
         }
@@ -116,20 +140,13 @@ class CameraRoll extends Component {
   }
 
   onScroll() {
-    this.setState({ isScrolling: true });
     const index = this.currentIndexAccordingToScroll();
+    const onScrollEnd = () => this.props.setCurrent(index);
 
-    // this will trigger immidiate positioning on the new 'current'
-    // as soon as it's changed
-    // if (this.props.current !== index) this.props.setCurrent(index)
-
-    const onScrollEnd = () => {
-      this.setState({ isScrolling: false });
-      this.scrollTo(index);
-    };
-
-    const scrollAimingTimeout = 150;
-    const timeOutHandler = window.setTimeout(onScrollEnd, scrollAimingTimeout);
+    const timeOutHandler = window.setTimeout(
+      onScrollEnd,
+      CameraRoll.scrollAimingDelay
+    );
 
     this.setState(state => {
       window.clearInterval(state && state.timeOutHandler);
@@ -137,7 +154,7 @@ class CameraRoll extends Component {
     });
   }
 
-  // if image is clicked while it's not in "focus", what brings the image in focus
+  // if image is clicked while it's not in "focus", that brings the image in focus
   // if the image is already in focus, navigate to the item page
   // setCurrent comes from portfolioContainer
   handleClick(index) {
@@ -162,13 +179,11 @@ class CameraRoll extends Component {
 
     const scrollTopBeforeAnimationStart = Number(scrollContainer.scrollTop);
     const desiredScrollTop = index * elementHeight;
-    const duration = 350;
     // scrollContainer.scrollTop = desiredScrollTop;
 
     this.smoothlyScrollTo({
       positionStart: scrollTopBeforeAnimationStart,
       positionEnd: desiredScrollTop,
-      duration: duration,
       targetElement: scrollContainer
     });
   }
@@ -200,16 +215,20 @@ class CameraRoll extends Component {
           const first = index === 0;
 
           return (
-            <Image
-              myRef={first ? this.firstImageRef : undefined}
-              key={index}
-              src={image.src}
-              alt={image.alt}
-              height={imageHeight + '%'}
-              onClick={() => this.handleClick(index)}
-              isCurrent={isCurrent}
-              style={image.style}
-            />
+            <ImageWithDescription height={imageHeight + '%'}>
+              <Image
+                myRef={first ? this.firstImageRef : undefined}
+                key={index}
+                src={image.src}
+                alt={image.alt}
+                onClick={() => this.handleClick(index)}
+                isCurrent={isCurrent}
+                style={image.style}
+              />
+              <Description isCurrent={isCurrent}>
+                {image.description}
+              </Description>
+            </ImageWithDescription>
           );
         })}
         <SpacerBottom key={images.length} height={offsetToCenter + '%'} />

@@ -4,8 +4,10 @@ import CameraRoll from './CameraRoll';
 import contentIn from '../../content';
 import { withKnobs, number } from '@storybook/addon-knobs/react';
 
-const images = contentIn('ru').portfolio.map(p => p.illustration);
-
+const images = contentIn('ru').portfolio.map(p =>
+  Object.assign({}, p.illustration, { description: p.description })
+);
+console.dir(images);
 const roll = storiesOf('CameraRoll', module).addDecorator(withKnobs);
 
 roll.add("empty roll won't throw errors", () => <CameraRoll />);
