@@ -86,15 +86,13 @@ class CameraRoll extends Component {
   }
 
   scrollTo(index) {
+    if (index < 0) index = 0;
+    const maxIndex = this.props.images.length - 1;
+    if (index > maxIndex) index = maxIndex;
+
     const scrollContainer = this.scrollContainerRef.current;
     const elementHeight = this.firstImageRef.current.clientHeight;
-    console.log('elementHeight is', elementHeight);
     const desiredScrollTop = index * elementHeight;
-    console.log(
-      'previous scrolltop was ',
-      this.scrollContainerRef.current.scrollTop
-    );
-    console.log('now setting to ', desiredScrollTop);
     this.scrollContainerRef.current.scrollTop = desiredScrollTop;
   }
 
@@ -113,7 +111,6 @@ class CameraRoll extends Component {
     if (!images || images.length === 0) return null;
 
     const offsetToCenter = (100 - imageHeight) / 2;
-    console.log('offsetToCenter is', offsetToCenter);
 
     return (
       <ScrollContainer innerRef={this.scrollContainerRef}>

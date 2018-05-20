@@ -11,8 +11,12 @@ const roll = storiesOf('CameraRoll', module).addDecorator(withKnobs);
 roll.add("empty roll won't throw errors", () => <CameraRoll />);
 
 class CameraRollContainer extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return { current: nextProps.current };
+  }
+
   constructor(props) {
-    super();
+    super(props);
     this.state = { current: props.current };
     this.setCurrent = this.setCurrent.bind(this);
   }
@@ -35,5 +39,5 @@ class CameraRollContainer extends Component {
 }
 
 roll.add('Actual images', () => (
-  <CameraRollContainer images={images} current={number('Current slide', 2)} />
+  <CameraRollContainer images={images} current={number('Current slide', 1)} />
 ));
