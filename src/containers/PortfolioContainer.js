@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import Portfolio from '../components/Portfolio';
+import styled from 'styled-components';
+import CameraRoll from '../components/Portfolio/CameraRoll';
+import PortfolioList from '../components/Portfolio/PortfolioList';
+
+const ListAndCameraRoll = styled.div`
+  height: 100vh;
+  display: flex;
+`;
 
 // This container basically tracks which image is current
-// (holds the state)
+// (holds the state) and combines CameraRoll and PortfolioList
 class PortfolioContainer extends Component {
   constructor() {
     super();
@@ -15,19 +22,23 @@ class PortfolioContainer extends Component {
   }
 
   render() {
-    const { portfolio, ...other } = this.props;
-    const titles = portfolio.map(el => el.title);
-    const images = portfolio.map(el => el.illustration);
-    const descriptions = portfolio.map(el => el.description);
+    const titles = this.props.portfolio.map(el => el.title);
+    const images = this.props.portfolio.map(p =>
+      Object.assign({}, p.illustration, { description: p.description })
+    );
     return (
-      <Portfolio
-        {...other}
-        current={this.state.current}
-        titles={titles}
-        images={images}
-        descriptions={descriptions}
-        setCurrent={this.setCurrent}
-      />
+      <ListAndCameraRoll>
+        <PortfolioList
+          current={this.state.current}
+          titles={titles}
+          setCurrent={this.setCurrent}
+        />
+        <CameraRoll
+          current={this.state.current}
+          images={images}
+          setCurrent={this.setCurrent}
+        />
+      </ListAndCameraRoll>
     );
   }
 }
