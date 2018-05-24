@@ -3,6 +3,17 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Burger from './Burger';
 
+const BottomBarDiv = styled.div`
+  flex: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: ${props => (props.inBurgerMode ? 'wrap' : 'nowrap')};
+  height: ${props => (props.isOpen ? '100vh' : '3rem')};
+  /* position: sticky; */
+  /* top: 0px; */
+  /* align-items: center; */
+`;
+
 const TopBarDiv = styled.div`
   flex: auto;
   display: flex;
@@ -58,7 +69,7 @@ const Items = styled.div`
   overflow-y: auto;
 `;
 
-const TopBar = props => {
+export const TopBar = props => {
   // Do not render TopBar at all if there are no children
   if (React.Children.count(props.links) === 0) return null;
   return (
@@ -88,4 +99,14 @@ TopBar.propTypes = {
   links: PropTypes.node
 };
 
-export default TopBar;
+export const BottomBar = props => {
+  // Do not render BottomBar at all if there are no children
+  if (React.Children.count(props.links) === 0) return null;
+  return (
+    <BottomBarDiv inBurgerMode={props.inBurgerMode}>
+      <Items inBurgerMode={props.inBurgerMode} isOpen={props.isOpen}>
+        {props.links}
+      </Items>
+    </BottomBarDiv>
+  );
+};
