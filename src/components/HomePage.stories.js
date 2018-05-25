@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import HomePage from './HomePage';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
-import Menu from './Menu/Menu';
+// import Menu from './Menu/Menu';
 import contentIn from '../content';
 import IntApp from '../containers/IntApp';
 
