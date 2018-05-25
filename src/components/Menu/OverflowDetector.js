@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const FullWidth = styled.div`
-  width: 100vw;
-`;
-
 // Reliably hidden from viewport
 const ContentWrapper = styled.div`
   position: fixed;
@@ -13,14 +9,14 @@ const ContentWrapper = styled.div`
   margin-top: 100vh;
 `;
 
-// Checks if children overflow on 100vw and calls back
+// Checks if OverflowDetector children overflow OverflowDetector parent
+// containing element. It calls back
 // props.onOverflowChange with the current result of the check.
-// Triggered on mount and every screen resize.
+// The check it triggered on mount and on every screen resize.
 class OverflowDetector extends Component {
   constructor() {
     super();
     this.contentWrapperRef = React.createRef();
-    this.fullWidthRef = React.createRef();
     this.checkOverflow = this.checkOverflow.bind(this);
   }
 
@@ -34,21 +30,19 @@ class OverflowDetector extends Component {
   }
 
   checkOverflow() {
-    const contentRef = this.contentWrapperRef.current;
-    const fullWidthRef = this.fullWidthRef.current;
-    if (!contentRef || !fullWidthRef) return;
+    const contentNode = this.contentWrapperRef.current;
+    const parentNode = contentNode.parentNode;
+    // if (!contentNode || !parentNode) return;
 
-    const isOverflowed = contentRef.clientWidth > fullWidthRef.clientWidth;
+    const isOverflowed = contentNode.clientWidth > parentNode.clientWidth;
     this.props.onOverflowChange(isOverflowed);
   }
 
   render() {
     return (
-      <FullWidth innerRef={this.fullWidthRef}>
-        <ContentWrapper innerRef={this.contentWrapperRef}>
-          {this.props.children}
-        </ContentWrapper>
-      </FullWidth>
+      <ContentWrapper innerRef={this.contentWrapperRef}>
+        {this.props.children}
+      </ContentWrapper>
     );
   }
 }
