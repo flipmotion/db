@@ -79,7 +79,7 @@ class MenuContainer extends Component {
           toggleOpen={this.toggleOpen}
         />
 
-        <MobileBar displayed={this.state.isOpen} />
+        <MobileBar displayed={this.state.inBurgerMode && this.state.isOpen} />
 
         <Content removed={this.state.isOpen}>{this.props.children}</Content>
 

@@ -3,12 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Burger from './Burger';
 
-const BottomBarDiv = styled.div`
-  flex: none;
-  display: ${props => (props.displayed ? 'flex' : 'none')};
-  align-items: center;
-`;
-
 const TopBarDiv = styled.div`
   flex: none;
   display: flex;
@@ -31,9 +25,7 @@ export const TopBar = props => {
         present={props.inBurgerMode}
       />
       {/* <LogoWrapper inBurgerMode={props.inBurgerMode}>{props.logo}</LogoWrapper> */}
-      <Items inBurgerMode={props.inBurgerMode} isOpen={props.isOpen}>
-        {props.links}
-      </Items>
+      <Items inBurgerMode={props.inBurgerMode}>{props.links}</Items>
       {/* <IconWrapper inBurgerMode={props.inBurgerMode}>{props.icon}</IconWrapper> */}
     </TopBarDiv>
   );
@@ -48,23 +40,28 @@ TopBar.propTypes = {
   links: PropTypes.node
 };
 
+const BottomBarDiv = styled.div`
+  flex: none;
+  display: ${props => (props.displayed ? 'flex' : 'none')};
+  align-items: center;
+`;
+
 export const BottomBar = props => {
   // Do not render BottomBar at all if there are no children
   // if (!!React.Children.count(props.links)) return null;
   return (
-    <BottomBarDiv inBurgerMode={props.inBurgerMode}>
-      <Items inBurgerMode={props.inBurgerMode} isOpen={props.isOpen}>
-        {props.links}
-      </Items>
+    <BottomBarDiv displayed={props.displayed}>
+      <Items inBurgerMode={props.inBurgerMode}>{props.links}</Items>
     </BottomBarDiv>
   );
 };
 
 const MobileBarDiv = styled.div`
-  flex: none;
+  flex: auto;
   display: ${props => (props.displayed ? 'flex' : 'none')};
   align-items: center;
   flex-direction: column;
+  overflow: auto;
 `;
 
 export const MobileBar = props => (
