@@ -9,7 +9,7 @@ const TopBarDiv = styled.div`
   align-items: center;
 `;
 
-const Items = styled.div`
+const ItemsWrapper = styled.div`
   justify-content: space-evenly;
   /* align-items: center; */
   display: ${props => (props.inBurgerMode ? 'none' : 'flex')};
@@ -25,7 +25,9 @@ export const TopBar = props => {
         present={props.inBurgerMode}
       />
       {/* <LogoWrapper inBurgerMode={props.inBurgerMode}>{props.logo}</LogoWrapper> */}
-      <Items inBurgerMode={props.inBurgerMode}>{props.links}</Items>
+      <ItemsWrapper inBurgerMode={props.inBurgerMode}>
+        {props.children}
+      </ItemsWrapper>
       {/* <IconWrapper inBurgerMode={props.inBurgerMode}>{props.icon}</IconWrapper> */}
     </TopBarDiv>
   );
@@ -37,7 +39,7 @@ TopBar.propTypes = {
   toggleOpen: PropTypes.func,
   logo: PropTypes.node,
   icon: PropTypes.node,
-  links: PropTypes.node
+  children: PropTypes.node
 };
 
 const BottomBarDiv = styled.div`
@@ -51,7 +53,9 @@ export const BottomBar = props => {
   // if (!!React.Children.count(props.links)) return null;
   return (
     <BottomBarDiv displayed={props.displayed}>
-      <Items inBurgerMode={props.inBurgerMode}>{props.links}</Items>
+      <ItemsWrapper inBurgerMode={props.inBurgerMode}>
+        {props.children}
+      </ItemsWrapper>
     </BottomBarDiv>
   );
 };

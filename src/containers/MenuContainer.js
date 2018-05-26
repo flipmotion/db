@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import OverflowDetector from '../components/Menu/OverflowDetector';
-import { TopBar, BottomBar, MobileBar } from '../components/Menu/MenuBars';
 
 // Sets flex-direction to column
 const Wrapper = styled.div`
@@ -16,7 +15,7 @@ Wrapper.propTypes = {
 };
 
 const Content = styled.div`
-  display: ${props => (props.removed ? 'none' : 'initial')}
+  display: ${props => (props.displayed ? 'initial' : 'none')}
   overflow-y: auto;
   flex: auto;
 `;
@@ -25,11 +24,19 @@ Content.propTypes = {
   displayed: PropTypes.bool
 };
 
+Content.defaultProps = {
+  displayed: true
+};
+
+// The MenuContainer component holds menu state (open/closed, mobile/desktop)
+// and receives render props with top/bottom/mobile bar render props.
+// topbar is given inBurgerMode and isOpen state, so it knows how to appear,
+// and toggleOpen so topbar can toggle open/closed mobile menu state.
 class MenuContainer extends Component {
   static propTypes = {
-    topBar: PropTypes.instanceOf(TopBar),
-    bottomBar: PropTypes.instanceOf(BottomBar),
-    mobileMenu: PropTypes.instanceOf(MobileBar),
+    topBar: PropTypes.node,
+    bottomBar: PropTypes.node,
+    mobileMenu: PropTypes.node,
     children: PropTypes.node // content
   };
 
@@ -53,6 +60,7 @@ class MenuContainer extends Component {
   }
 
   render() {
+    // ...so props specified in return() below work.
     const TopBar = props =>
       this.props.topBar
         ? React.cloneElement(this.props.topBar, { ...props })
@@ -72,17 +80,13 @@ class MenuContainer extends Component {
           <TopBar />
           <BottomBar />
         </OverflowDetector>
-
         <TopBar
           inBurgerMode={this.state.inBurgerMode}
           isOpen={this.state.isOpen}
           toggleOpen={this.toggleOpen}
         />
-
         <MobileBar displayed={this.state.inBurgerMode && this.state.isOpen} />
-
-        <Content removed={this.state.isOpen}>{this.props.children}</Content>
-
+        <Content displayed={!this.state.isOpen}>{this.props.children}</Content>
         <BottomBar displayed={!this.state.inBurgerMode} />
       </Wrapper>
     );
