@@ -1,4 +1,4 @@
-import logoSrc from './images/logo-grey.svg';
+import logoSrc from './images/logo.svg';
 import house from './images/house.jpg';
 import house1 from './images/house1.jpg';
 import house2 from './images/house2.jpg';
