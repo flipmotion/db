@@ -30,7 +30,8 @@ Content.defaultProps = {
 };
 
 // The MenuContainer component holds menu state (open/closed, mobile/desktop)
-// and receives render props with top/bottom/mobile bar render props.
+// and receives render props with topBar/bottomBar/mobileBar render props.
+//
 // topbar is given inBurgerMode and isOpen state, so it knows how to appear,
 // and toggleOpen so topbar can toggle open/closed mobile menu state.
 // It does not know about burger appearance etc, that is a concern of component instance
