@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   cursor: pointer;
-
   margin: 0.5rem 0;
+  white-space: nowrap;
 
   /* https://www.webpagefx.com/blog/web-design/disable-text-selection/ */
   -moz-user-select: none; /* Firefox */
