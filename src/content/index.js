@@ -6,7 +6,29 @@ import house3 from './images/house3.jpg';
 import React from 'react';
 import MenuItem from '../components/Menu/MenuItem';
 
+import instagram from './images/social/instagram.svg';
+import facebook from './images/social/facebook.svg';
+import twitter from './images/social/twitter.svg';
+
 export const langsSupported = ['ru', 'en'];
+
+const social = {
+  instagram: {
+    icon: instagram,
+    alt: 'Инстаграм',
+    link: 'https://instagram.com/db-company'
+  },
+  facebook: {
+    icon: facebook,
+    alt: 'Facebook',
+    link: 'https://facebook.com/db-company'
+  },
+  twitter: {
+    icon: twitter,
+    alt: 'Twitter',
+    link: 'https://twitter.com/db-company'
+  }
+};
 
 const logo = {
   src: logoSrc,
@@ -42,17 +64,17 @@ const menu = {
   ],
   bottom: [
     {
-      to: '/other',
+      to: '/contacts',
       text: {
-        ru: 'Другая страница',
-        en: 'Other page'
+        ru: 'Контакты',
+        en: 'Contacts'
       }
     },
     {
-      to: '/another',
+      to: '/about',
       text: {
-        ru: 'И еще одна',
-        en: 'And one more'
+        ru: 'О компании',
+        en: 'About'
       }
     }
   ]
@@ -240,6 +262,7 @@ function contentIn(lang) {
   });
 
   return {
+    social: social,
     menu: {
       top: menu.top.map((item, index) =>
         navLinkify(translateMenuItem(item), index)
