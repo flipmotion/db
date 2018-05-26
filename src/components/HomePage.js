@@ -84,7 +84,7 @@ const Composer = styled.div`
   height: 100%;
   @media (orientation: portrait), (max-width: 50rem) {
     position: relative;
-    div {
+    ${Text} {
       position: absolute;
       background-color: rgba(222, 222, 222, 0.5);
 
