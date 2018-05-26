@@ -3,6 +3,9 @@
 ## Current design
 The current design is in the wireframe stage: https://drive.google.com/drive/folders/1TOau5h5wjotXMCtNXPnbZU3bxW8T55py?usp=sharing
 
+## What's under the hood
+The project uses `styled-components` and `storybook` heavily. It also relies on `react-transition-group` for animations.
+
 ## How to start the app
 `npm i` first, then
 - to start storybook, execute `npm run storybook` and navigate to `localhost:9009`
