@@ -15,3 +15,9 @@ The current design is in the wireframe stage: https://drive.google.com/drive/fol
 
 ## Animation aproach
 The current component contract is: every component recieves an `animationStage` prop, which is an invariant of ['entering', 'entered', 'exiting', 'exited', 'unmounted']
+
+## Linting
+The project uses prettier (default settings) and ESLint (thanks to Create React App, also no manual  settings).
+
+## Branches
+The main development happens in `dev` branch, with which `master` is syncronized time to time. Please check out `dev` to see the latest work, `master` branch can be outdated!
