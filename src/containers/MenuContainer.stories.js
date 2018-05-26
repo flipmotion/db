@@ -42,11 +42,15 @@ menuContainer.add('Content and top and bottom bars', () => (
 ));
 
 menuContainer.add('Menu turns to hamburger', () => {
-  const topLinks = Array(20)
+  const topLinks = Array(12)
     .fill()
     .map(_ => <p style={{ whiteSpace: 'nowrap' }}> some link</p>);
-  const bottomLinks = [<p>link5</p>, <p>link6</p>, <p>link7</p>];
-  const mobileLinks = [...topLinks, ...bottomLinks];
+  const bottomLinks = [
+    <p>BottomLink1</p>,
+    <p>BottomLink2</p>,
+    <p>BottomLink3</p>
+  ];
+  const mobileLinks = [...topLinks, <p>----</p>, ...bottomLinks];
 
   return (
     <MenuContainer
