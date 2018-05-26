@@ -6,9 +6,10 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
 import MenuContainer from '../containers/MenuContainer';
 import contentIn from '../content';
 import IntApp from '../containers/IntApp';
-import { TopBar } from '../components/Menu/MenuBars';
+import { TopBar, BottomBar, MobileBar } from '../components/Menu/MenuBars';
 import LangIcon from '../components/Menu/LangIcon';
 import styled from 'styled-components';
+import LogoWrapper from '../components/Menu/LogoWrapper';
 
 const homePage = storiesOf('Home page', module);
 
@@ -17,6 +18,9 @@ homePage.addDecorator(withKnobs);
 const FullHeight = styled.div`
   height: 100vh;
 `;
+
+// Something very basic for now
+const Splitter = () => <div>---</div>;
 
 homePage.add('Menu', () => (
   <FullHeight>
@@ -29,9 +33,24 @@ homePage.add('Menu', () => (
               toggleLang={toggleLang}
               topBar={
                 <TopBar>
+                  <LogoWrapper>
+                    <img
+                      src={content.logo.src}
+                      alt={content.logo.alt}
+                      style={{ height: '3rem' }}
+                    />
+                  </LogoWrapper>
                   {content.menu.top}
                   <LangIcon onClick={toggleLang} />
                 </TopBar>
+              }
+              bottomBar={<BottomBar>{content.menu.bottom}</BottomBar>}
+              mobileBar={
+                <MobileBar>
+                  {content.menu.top}
+                  <Splitter />
+                  {content.menu.bottom}
+                </MobileBar>
               }
             >
               <HomePage
