@@ -32,6 +32,8 @@ Content.defaultProps = {
 // and receives render props with top/bottom/mobile bar render props.
 // topbar is given inBurgerMode and isOpen state, so it knows how to appear,
 // and toggleOpen so topbar can toggle open/closed mobile menu state.
+// It does not know about burger appearance etc, that is a concern of component instance
+// passed through topBar prop.
 class MenuContainer extends Component {
   static propTypes = {
     topBar: PropTypes.node,
