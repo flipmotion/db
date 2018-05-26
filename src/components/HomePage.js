@@ -2,19 +2,6 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Image = styled.img.attrs({
-  style: props => ({ ...props.style, ...mediaStyle(props.animationStage) }),
-  src: props => props.imageSrc,
-  alt: props => props.imageAlt
-})`
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-  min-width: 0;
-  transition: all 0.85s ease-out 0.35s;
-  flex: 6;
-`;
-
 const PortfolioButton = styled(Link).attrs({
   to: props => ({
     pathname: props.to,
@@ -79,8 +66,18 @@ const Text = styled.div.attrs({
   z-index: 1;
 `;
 
+const Image = styled.img`
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+  min-width: 0;
+  transition: all 0.85s ease-out 0.35s;
+  flex: 6;
+`;
+
 const Composer = styled.div`
   display: flex;
+  align-items: stretch;
   height: 100%;
   @media (orientation: portrait), (max-width: 50rem) {
     position: relative;
@@ -99,7 +96,11 @@ const Composer = styled.div`
 const HomePage = props => (
   <Composer>
     <Text {...props} />
-    <Image {...props} />
+    <Image
+      alt={props.imageAlt}
+      src={props.imageSrc}
+      style={{ ...props.style, ...mediaStyle(props.animationStage) }}
+    />
   </Composer>
 );
 

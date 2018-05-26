@@ -15,9 +15,10 @@ Wrapper.propTypes = {
 };
 
 const Content = styled.div`
-  display: ${props => (props.displayed ? 'initial' : 'none')}
+  display: ${props => (props.displayed ? 'initial' : 'none')};
   overflow-y: auto;
   flex: auto;
+  height: 100%;
 `;
 
 Content.propTypes = {

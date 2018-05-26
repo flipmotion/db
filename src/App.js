@@ -7,7 +7,7 @@ import contentIn from './content';
 import { TopBar, BottomBar } from './components/Menu/MenuBars';
 import LangIcon from './components/Menu/LangIcon';
 import LogoWrapper from './components/Menu/LogoWrapper';
-import { injectGlobal } from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 
 injectGlobal`
   body {
@@ -19,12 +19,16 @@ injectGlobal`
   }
 `;
 
+const FullHeightDiv = styled.div`
+  height: 100vh;
+`;
+
 const App = props => (
   <IntApp
     render={(lang, toggleLang) => {
       const content = contentIn(lang);
       return (
-        <div style={{ height: '100vh' }}>
+        <FullHeightDiv>
           <Router>
             <MenuContainer
               topBar={
@@ -50,7 +54,7 @@ const App = props => (
               <AppRouter lang={lang} />
             </MenuContainer>
           </Router>
-        </div>
+        </FullHeightDiv>
       );
     }}
   />
