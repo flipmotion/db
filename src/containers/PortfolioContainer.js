@@ -4,7 +4,7 @@ import CameraRoll from '../components/Portfolio/CameraRoll';
 import PortfolioList from '../components/Portfolio/PortfolioList';
 
 const ListAndCameraRoll = styled.div`
-  height: 100vh;
+  height: 100%;
   display: flex;
 
   @media (max-width: 600px) {
