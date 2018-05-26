@@ -11,6 +11,12 @@ const images = contentIn('ru').portfolio.map(p =>
 );
 const portfolio = storiesOf('Portfolio', module).addDecorator(withKnobs);
 
+function inFullHeightDiv(story) {
+  return <div style={{ height: '100vh' }}>{story()}</div>;
+}
+
+portfolio.addDecorator(inFullHeightDiv);
+
 portfolio.add("CameraRoll: empty roll won't throw errors", () => (
   <CameraRoll />
 ));
@@ -32,13 +38,11 @@ class CameraRollContainer extends Component {
 
   render() {
     return (
-      <div style={{ height: '100vh' }}>
-        <CameraRoll
-          current={this.state.current}
-          setCurrent={this.setCurrent}
-          images={images}
-        />
-      </div>
+      <CameraRoll
+        current={this.state.current}
+        setCurrent={this.setCurrent}
+        images={images}
+      />
     );
   }
 }
@@ -66,13 +70,11 @@ class PortfolioListContainer extends Component {
 
   render() {
     return (
-      <div style={{ height: '100vh' }}>
-        <PortfolioList
-          current={this.state.current}
-          setCurrent={this.setCurrent}
-          titles={titles}
-        />
-      </div>
+      <PortfolioList
+        current={this.state.current}
+        setCurrent={this.setCurrent}
+        titles={titles}
+      />
     );
   }
 }
