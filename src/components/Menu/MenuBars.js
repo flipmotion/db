@@ -6,17 +6,10 @@ import Burger from './Burger';
 const TopBarDiv = styled.div`
   flex: none;
   display: flex;
-`;
-
-const ItemsWrapper = styled.div`
-  justify-content: space-evenly;
-  /* align-items: center; */
-  display: ${props => (props.displayed ? 'none' : 'flex')};
-  width: 100%;
+  justify-content: space-between;
 `;
 
 export const TopBar = props => {
-  //
   const Logo =
     props.logo &&
     (() =>
@@ -30,9 +23,7 @@ export const TopBar = props => {
         present={props.inBurgerMode}
       />
       {props.logo && <Logo />}
-      <ItemsWrapper displayed={props.inBurgerMode}>
-        {props.children}
-      </ItemsWrapper>
+      {!props.inBurgerMode && props.children}
     </TopBarDiv>
   );
 };
@@ -48,16 +39,15 @@ TopBar.propTypes = {
 
 const BottomBarDiv = styled.div`
   flex: none;
-  display: ${props => (props.displayed ? 'flex' : 'none')};
   align-items: center;
+  justify-content: space-between;
+  display: flex;
 `;
 
 export const BottomBar = props => {
   return (
     <BottomBarDiv displayed={props.displayed}>
-      <ItemsWrapper displayed={props.inBurgerMode}>
-        {props.children}
-      </ItemsWrapper>
+      {props.displayed && !props.inBurgerMode && props.children}
     </BottomBarDiv>
   );
 };
