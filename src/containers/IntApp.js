@@ -4,7 +4,7 @@ import { Component } from 'react';
 // to render prop
 // use it like this:
 // <App  render={(lang, toggleLang) => {...}} />
-// toggleLang takes no arsg and flips the language between 'ru' and 'en'.
+// toggleLang takes no args and flips the language between 'ru' and 'en'.
 class IntApp extends Component {
   constructor() {
     super();
