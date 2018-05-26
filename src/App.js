@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import MenuContainer from './containers/MenuContainer';
 import AppRouter from './containers/AppRouter';
 import IntApp from './containers/IntApp';
@@ -19,12 +19,18 @@ const App = props => (
               <TopBar
                 logo={
                   <LogoWrapper>
-                    <p>DB</p>
+                    <Link to="/">
+                      <img
+                        src={content.logo.src}
+                        alt={content.logo.alt}
+                        style={{ height: '3rem' }}
+                      />
+                    </Link>
                   </LogoWrapper>
                 }
               >
                 {content.menu.top}
-                <LangIcon onClick={toggleLang} />
+                <LangIcon onClick={toggleLang} lang={lang} />
               </TopBar>
             }
           >
