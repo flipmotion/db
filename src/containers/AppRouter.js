@@ -36,13 +36,13 @@ export default ({ lang }) => {
   return (
     <Route
       render={({ location }) => (
-        <TransitionGroup component={null} appear>
-          <Transition
-            key={location.pathname}
-            timeout={{ enter: 0, exit: animationDuration }}
-          >
-            {animationStage => (
-              <RelativeDiv>
+        <RelativeDiv>
+          <TransitionGroup component={null} appear>
+            <Transition
+              key={location.pathname}
+              timeout={{ enter: 0, exit: animationDuration }}
+            >
+              {animationStage => (
                 <Switch location={location}>
                   <Route
                     exact
@@ -108,10 +108,10 @@ export default ({ lang }) => {
                   />
                   <Route component={Page404} />
                 </Switch>
-              </RelativeDiv>
-            )}
-          </Transition>
-        </TransitionGroup>
+              )}
+            </Transition>
+          </TransitionGroup>
+        </RelativeDiv>
       )}
     />
   );
