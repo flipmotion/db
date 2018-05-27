@@ -15,7 +15,6 @@ injectGlobal`
     padding: 0;
     font-family: sans-serif;
     /* overflow: hidden; */
-    /* -webkit-overflow-scrolling: touch; */
   }
 `;
 

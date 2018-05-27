@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const ScrollContainer = styled.div`
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const ImageWithDescription = styled.div`
@@ -39,7 +40,7 @@ const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
   height: 100%;
   object-fit: cover;
   cursor: ${props => (props.isCurrent ? 'zoom-in' : 'pointer')};
-  scroll-snap-align: center;
+  /* scroll-snap-align: center; */
   box-sizing: border-box;
   opacity: ${props => (props.isCurrent ? '1' : '0.5')};
   transition: opacity 0.85s;
@@ -49,7 +50,7 @@ const Image = styled(({ isCurrent, myRef, alt, ...otherProps }) => (
 // I have no idea why div collapses here, and imgs don't
 const Spacer = styled.div`
   height: ${props => props.height};
-  scroll-snap-align: none;
+  /* scroll-snap-align: none; */
   /* visibility: hidden; */
 `;
 
