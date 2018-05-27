@@ -4,10 +4,11 @@ import MenuContainer from './containers/MenuContainer';
 import AppRouter from './containers/AppRouter';
 import IntApp from './containers/IntApp';
 import contentIn from './content';
-import { TopBar, BottomBar } from './components/Menu/MenuBars';
+import { TopBar, BottomBar, MobileBar } from './components/Menu/MenuBars';
 import LangIcon from './components/Menu/LangIcon';
 import LogoWrapper from './components/Menu/LogoWrapper';
-import styled, { injectGlobal } from 'styled-components';
+import { injectGlobal } from 'styled-components';
+import Div100vh from './components/Div100vh';
 
 injectGlobal`
   body {
@@ -18,16 +19,12 @@ injectGlobal`
   }
 `;
 
-const FullHeightDiv = styled.div`
-  height: 100vh;
-`;
-
 const App = props => (
   <IntApp
     render={(lang, toggleLang) => {
       const content = contentIn(lang);
       return (
-        <FullHeightDiv>
+        <Div100vh>
           <Router>
             <MenuContainer
               topBar={
@@ -49,11 +46,18 @@ const App = props => (
                 </TopBar>
               }
               bottomBar={<BottomBar>{content.menu.bottom}</BottomBar>}
+              mobileBar={
+                <MobileBar>
+                  {content.menu.top}
+                  <p>---</p>
+                  {content.menu.bottom}
+                </MobileBar>
+              }
             >
               <AppRouter lang={lang} />
             </MenuContainer>
           </Router>
-        </FullHeightDiv>
+        </Div100vh>
       );
     }}
   />
