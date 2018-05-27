@@ -9,7 +9,6 @@ import IntApp from '../containers/IntApp';
 import { TopBar, BottomBar, MobileBar } from '../components/Menu/MenuBars';
 import LangIcon from '../components/Menu/LangIcon';
 import styled from 'styled-components';
-import LogoWrapper from '../components/Menu/LogoWrapper';
 
 const homePage = storiesOf('Home page', module);
 
@@ -33,13 +32,11 @@ homePage.add('Menu', () => (
               toggleLang={toggleLang}
               topBar={
                 <TopBar>
-                  <LogoWrapper>
-                    <img
-                      src={content.logo.src}
-                      alt={content.logo.alt}
-                      style={{ height: '3rem' }}
-                    />
-                  </LogoWrapper>
+                  <img
+                    src={content.logo.src}
+                    alt={content.logo.alt}
+                    style={{ height: '3rem' }}
+                  />
                   {content.menu.top}
                   <LangIcon onClick={toggleLang} />
                 </TopBar>

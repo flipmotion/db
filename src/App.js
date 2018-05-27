@@ -6,7 +6,6 @@ import IntApp from './containers/IntApp';
 import contentIn from './content';
 import { TopBar, BottomBar, MobileBar } from './components/Menu/MenuBars';
 import LangIcon from './components/Menu/LangIcon';
-import LogoWrapper from './components/Menu/LogoWrapper';
 import { injectGlobal } from 'styled-components';
 import Div100vh from './components/Div100vh';
 
@@ -30,15 +29,13 @@ const App = props => (
               topBar={
                 <TopBar
                   logo={
-                    <LogoWrapper>
-                      <Link to="/">
-                        <img
-                          src={content.logo.src}
-                          alt={content.logo.alt}
-                          style={{ height: '3rem' }}
-                        />
-                      </Link>
-                    </LogoWrapper>
+                    <Link to="/">
+                      <img
+                        src={content.logo.src}
+                        alt={content.logo.alt}
+                        style={{ height: '3rem' }}
+                      />
+                    </Link>
                   }
                 >
                   {content.menu.top}

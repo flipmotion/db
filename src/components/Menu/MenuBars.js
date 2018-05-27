@@ -7,6 +7,7 @@ const TopBarDiv = styled.div`
   flex: none;
   display: flex;
   justify-content: space-between;
+  margin: 1rem;
 `;
 
 export const TopBar = props => {
@@ -17,13 +18,13 @@ export const TopBar = props => {
   return (
     // in case I'll want to style it with inline style
     <TopBarDiv {...props}>
+      {props.logo && <Logo />}
+      {!props.inBurgerMode && props.children}
       <Burger
         isOpen={props.isOpen}
         onClick={props.toggleOpen}
         present={props.inBurgerMode}
       />
-      {props.logo && <Logo />}
-      {!props.inBurgerMode && props.children}
     </TopBarDiv>
   );
 };
@@ -42,6 +43,7 @@ const BottomBarDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   display: flex;
+  margin: 1rem;
 `;
 
 export const BottomBar = props => {
