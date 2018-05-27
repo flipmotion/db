@@ -41,6 +41,7 @@ function animation_fadeFromBottom(animationStage) {
 
 const ListAndCameraRoll = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
 
   @media (max-width: 600px) {
