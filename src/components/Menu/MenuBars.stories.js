@@ -8,7 +8,7 @@ const bars = storiesOf('Menu bars', module);
 
 bars.addDecorator(withKnobs);
 
-bars.add('Empty bar', () => <TopBar />);
+bars.add('Empty Top Bar', () => <TopBar />);
 
 bars.add('Some menu items with some inline styling', () => (
   <TopBar style={{ background: 'red' }}>
