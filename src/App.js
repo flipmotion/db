@@ -7,7 +7,7 @@ import contentIn from './content';
 import { TopBar, BottomBar, MobileBar } from './components/Menu/MenuBars';
 import LangIcon from './components/Menu/LangIcon';
 import { injectGlobal } from 'styled-components';
-import Div100vh from './components/Div100vh';
+import Div100vh from 'react-div-100vh';
 
 injectGlobal`
   body {
