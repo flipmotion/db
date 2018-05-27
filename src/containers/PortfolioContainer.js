@@ -6,7 +6,6 @@ import PortfolioList from '../components/Portfolio/PortfolioList';
 const animationDuration = '0.85s';
 
 function animation_fadeFromLeft(animationStage) {
-  console.log(animationStage);
   if (animationStage === 'entered') {
     return {
       opacity: 1,
@@ -23,7 +22,6 @@ function animation_fadeFromLeft(animationStage) {
 }
 
 function animation_fadeFromBottom(animationStage) {
-  console.log(animationStage);
   if (animationStage === 'entered') {
     return {
       opacity: 1,
