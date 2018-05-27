@@ -16,7 +16,7 @@ export const TopBar = props => {
       React.cloneElement(props.logo, { inBurgerMode: props.inBurgerMode }));
   return (
     // in case I'll want to style it with inline style
-    <TopBarDiv style={props.style}>
+    <TopBarDiv {...props}>
       <Burger
         isOpen={props.isOpen}
         onClick={props.toggleOpen}
