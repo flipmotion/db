@@ -23,4 +23,4 @@ The current component contract is: every component recieves an `animationStage` 
 The project uses prettier (default settings) and ESLint (thanks to Create React App, also no manual  settings).
 
 ## Branches
-The main development happens in `dev` branch, with which `master` is syncronized time to time. Please check out `dev` to see the latest work, `master` branch can be outdated!
+The development happens in the `dev` branch. `master` is syncronized with `dev` from time to time. Please check out `dev` to see the latest work, as `master` can be outdated!
