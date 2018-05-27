@@ -21,8 +21,12 @@ class OverflowDetector extends Component {
   }
 
   componentDidMount() {
-    this.checkOverflow();
     window.addEventListener('resize', this.checkOverflow);
+
+    this.checkOverflow();
+    // this is a nasty kludge, for some reason overflow is not detected
+    // on page load with overflowed mennu (the above call is not enough)
+    window.setTimeout(this.checkOverflow, 100);
   }
 
   componentWillUnmount() {
