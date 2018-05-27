@@ -3,6 +3,42 @@ import styled from 'styled-components';
 import CameraRoll from '../components/Portfolio/CameraRoll';
 import PortfolioList from '../components/Portfolio/PortfolioList';
 
+const animationDuration = '0.85s';
+
+function animation_fadeFromLeft(animationStage) {
+  console.log(animationStage);
+  if (animationStage === 'entered') {
+    return {
+      opacity: 1,
+      transform: 'translateX(0px)',
+      transition: `all ${animationDuration}`
+    };
+  } else {
+    return {
+      opacity: 0,
+      transform: 'translateX(-500px)',
+      transition: `all ${animationDuration}`
+    };
+  }
+}
+
+function animation_fadeFromBottom(animationStage) {
+  console.log(animationStage);
+  if (animationStage === 'entered') {
+    return {
+      opacity: 1,
+      transform: 'translateY(0px)',
+      transition: `all ${animationDuration} ease-out 0.35s`
+    };
+  } else {
+    return {
+      opacity: 0,
+      transform: 'translateY(500px)',
+      transition: `all ${animationDuration} ease-out 0.35s`
+    };
+  }
+}
+
 const ListAndCameraRoll = styled.div`
   height: 100%;
   display: flex;
@@ -43,14 +79,20 @@ class PortfolioContainer extends Component {
     );
     return (
       <ListAndCameraRoll>
-        <ListArea>
+        <ListArea
+          animationStage={this.props.animationStage}
+          style={animation_fadeFromLeft(this.props.animationStage)}
+        >
           <PortfolioList
             current={this.state.current}
             titles={titles}
             setCurrent={this.setCurrent}
           />
         </ListArea>
-        <RollArea>
+        <RollArea
+          animationStage={this.props.animationStage}
+          style={animation_fadeFromBottom(this.props.animationStage)}
+        >
           <CameraRoll
             current={this.state.current}
             images={images}
