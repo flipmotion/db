@@ -54,7 +54,11 @@ homePage.add('Menu', () => (
               }
             >
               <HomePage
-                animationStage={boolean('visible', true) ? 'entered' : 'exited'}
+                animationStage={
+                  boolean('animation stage "entered"', true)
+                    ? 'entered'
+                    : 'exited'
+                }
                 header={text('Header', content.homePage.header)}
                 paragraphText={text(
                   'Paragraph text',
