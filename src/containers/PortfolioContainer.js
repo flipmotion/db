@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import CameraRoll from '../components/Portfolio/CameraRoll';
 import PortfolioList from '../components/Portfolio/PortfolioList';
+import PropTypes from 'prop-types';
 
 const animationDuration = '0.85s';
 
@@ -61,10 +62,26 @@ const RollArea = styled.div`
 // This container basically tracks which image is current
 // (holds the state) and combines CameraRoll and PortfolioList
 class PortfolioContainer extends Component {
+  static propTypes = {
+    animationStage: PropTypes.oneOf([
+      'entering',
+      'entered',
+      'exiting',
+      'exited'
+    ]),
+    history: PropTypes.object.isRequired
+    // more
+  };
+
   constructor() {
     super();
     this.state = { current: 0 };
     this.setCurrent = this.setCurrent.bind(this);
+    this.navigateTo = this.navigateTo.bind(this);
+  }
+
+  navigateTo(url) {
+    this.props.history.push(url);
   }
 
   setCurrent(current) {
@@ -73,8 +90,11 @@ class PortfolioContainer extends Component {
 
   render() {
     const titles = this.props.portfolio.map(el => el.title);
-    const images = this.props.portfolio.map(p =>
-      Object.assign({}, p.illustration, { description: p.description })
+    const images = this.props.portfolio.map((p, i) =>
+      Object.assign({}, p.illustration, {
+        description: p.description,
+        to: `/portfolio/${i}`
+      })
     );
     return (
       <ListAndCameraRoll>
@@ -93,6 +113,7 @@ class PortfolioContainer extends Component {
           style={animation_fadeFromBottom(this.props.animationStage)}
         >
           <CameraRoll
+            navigateTo={this.navigateTo}
             current={this.state.current}
             images={images}
             setCurrent={this.setCurrent}

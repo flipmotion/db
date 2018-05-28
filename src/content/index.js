@@ -271,7 +271,7 @@ function contentIn(lang) {
         navLinkify(translateMenuItem(item), index)
       )
     },
-    portfolio: portfolio.map(item => ({
+    portfolio: portfolio.map((item, index) => ({
       title: item.title[lang],
       description: item.description[lang],
       illustration: translateMedia(item.illustration),
