@@ -11,10 +11,7 @@ const TopBarDiv = styled.div`
 `;
 
 export const TopBar = props => {
-  const Logo =
-    props.logo &&
-    (() =>
-      React.cloneElement(props.logo, { inBurgerMode: props.inBurgerMode }));
+  const Logo = props.logo && (() => props.logo);
   return (
     // in case I'll want to style it with inline style
     <TopBarDiv {...props}>
