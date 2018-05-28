@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import CameraRoll from './CameraRoll';
 import PortfolioList from './PortfolioList';
 import contentIn from '../../content';
-import { withKnobs, number } from '@storybook/addon-knobs/react';
+import { withKnobs, number, select } from '@storybook/addon-knobs/react';
 import PortfolioContainer from '../../containers/PortfolioContainer';
 
 const images = contentIn('ru').portfolio.map(p =>
@@ -86,6 +86,21 @@ portfolio.add('PortfolioList: list of titles', () => (
   />
 ));
 
+const label = 'Animation stages';
+
+const animationStages = {
+  entering: 'entering',
+  entered: 'entered',
+  exiting: 'exiting',
+  exited: 'exited'
+};
+
+const defaultStage = 'entered';
+const groupId = 'GROUP-ID1';
+
 portfolio.add('Portfolio: all together', () => (
-  <PortfolioContainer portfolio={contentIn('ru').portfolio} />
+  <PortfolioContainer
+    portfolio={contentIn('ru').portfolio}
+    animationStage={select(label, animationStages, defaultStage, groupId)}
+  />
 ));
