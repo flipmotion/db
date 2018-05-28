@@ -29,6 +29,23 @@ const AbsoluteDiv = styled.div`
 
 const animationDuration = 850;
 
+// selects what data to pass to a specific route's component
+function selector(content, url) {
+  switch (url) {
+    case '/':
+      return {
+        header: content.homePage.header,
+        paragraphText: content.homePage.paragraphText,
+        linkText: content.homePage.link.text,
+        linkPath: content.homePage.link.path,
+        imageSrc: content.homePage.media[0].src,
+        imageAlt: content.homePage.media[0].alt
+      };
+    default:
+      return content;
+  }
+}
+
 // To figure out how this monster works, check out
 // https://medium.com/@pshrmn/4b73f634992a
 export default ({ lang }) => {
@@ -51,12 +68,7 @@ export default ({ lang }) => {
                       <AbsoluteDiv data-name="AbsoluteDiv">
                         <HomePage
                           animationStage={animationStage}
-                          header={content.homePage.header}
-                          paragraphText={content.homePage.paragraphText}
-                          linkText={content.homePage.link.text}
-                          linkPath={content.homePage.link.path}
-                          imageSrc={content.homePage.media[0].src}
-                          imageAlt={content.homePage.media[0].alt}
+                          {...selector(content, '/')}
                         />
                       </AbsoluteDiv>
                     )}
