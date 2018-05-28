@@ -59,7 +59,6 @@ class MenuContainer extends Component {
   }
 
   handleOverflowChange(overflowStatus) {
-    console.log(overflowStatus);
     this.setState({ inBurgerMode: overflowStatus });
   }
 
