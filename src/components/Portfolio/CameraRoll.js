@@ -78,7 +78,7 @@ const SpacerBottom = styled(Spacer)`
 // via a clickable menu.
 class CameraRoll extends Component {
   static scrollAimingDelay = 100;
-  static smoothScrollDuration = 660;
+  static smoothScrollDuration = 500;
 
   static propTypes = {
     current: PropTypes.number, // index of the current (= in focus, = in the center) image
