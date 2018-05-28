@@ -30,6 +30,8 @@ const AbsoluteDiv = styled.div`
 const animationDuration = 850;
 
 // selects what data to pass to a specific route's component
+// just exploring this pattern for now, that's why I didn't
+// extend it to all routes yet.
 function selector(content, url) {
   switch (url) {
     case '/':
