@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import contentIn from '../content';
 
 const PortfolioButton = styled(Link).attrs({
   to: props => ({
@@ -93,15 +94,31 @@ const Composer = styled.div`
   }
 `;
 
-const HomePage = props => (
-  <Composer>
-    <Text {...props} />
-    <Image
-      alt={props.imageAlt}
-      src={props.imageSrc}
-      style={{ ...props.style, ...mediaStyle(props.animationStage) }}
-    />
-  </Composer>
-);
+const HomePage = ({ lang, animationStage, style }) => {
+  const content = contentIn(lang);
+  const header = content.homePage.header;
+  const paragraphText = content.homePage.paragraphText;
+  const linkText = content.homePage.link.text;
+  const linkPath = content.homePage.link.path;
+  const imageSrc = content.homePage.media[0].src;
+  const imageAlt = content.homePage.media[0].alt;
+
+  return (
+    <Composer>
+      <Text
+        linkPath={linkPath}
+        linkText={linkText}
+        paragraphText={paragraphText}
+        header={header}
+        animationStage={animationStage}
+      />
+      <Image
+        alt={imageAlt}
+        src={imageSrc}
+        style={{ ...style, ...mediaStyle(animationStage) }}
+      />
+    </Composer>
+  );
+};
 
 export default HomePage;
