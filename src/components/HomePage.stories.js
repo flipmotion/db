@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import HomePage from './HomePage';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/react';
+import { withKnobs, select } from '@storybook/addon-knobs/react';
 import MenuContainer from '../containers/MenuContainer';
 import contentIn from '../content';
 import IntApp from '../containers/IntApp';
@@ -20,6 +20,18 @@ const FullHeight = styled.div`
 
 // Something very basic for now
 const Splitter = () => <div>---</div>;
+
+const label = 'Animation stages';
+
+const animationStages = {
+  entering: 'entering',
+  entered: 'entered',
+  exiting: 'exiting',
+  exited: 'exited'
+};
+
+const defaultStage = 'entered';
+const groupId = 'HomePageGroup';
 
 homePage.add('Menu', () => (
   <FullHeight>
@@ -51,11 +63,12 @@ homePage.add('Menu', () => (
               }
             >
               <HomePage
-                animationStage={
-                  boolean('animation stage "entered"', true)
-                    ? 'entered'
-                    : 'exited'
-                }
+                animationStage={select(
+                  label,
+                  animationStages,
+                  defaultStage,
+                  groupId
+                )}
                 lang={lang}
               />
             </MenuContainer>
