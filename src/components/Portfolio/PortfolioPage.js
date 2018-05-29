@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Element, Link as ScrollLink } from 'react-scroll';
+import { Element as ScrollElement, Link as ScrollLink } from 'react-scroll';
 import styled from 'styled-components';
 // import Spacer from '../../components/Spacer'
 import PropTypes from 'prop-types';
-import contentIn from '../../content';
+import { pageNameIn, portfolioIndexPageIn } from './content';
 
 // later will adjust flex direction on smaller screens
 const Wrapper = styled.div`
@@ -30,8 +30,27 @@ const ContentArea = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 70vh;
+  height: 100%;
   object-fit: cover;
+  flex: 6;
+  min-width: 0;
+`;
+
+const Description = styled.div`
+  flex: 3;
+  display: flex;
+  align-items: center;
+`;
+const Padding = styled.div`
+  padding: 2em;
+`;
+
+const Element = styled(ScrollElement)`
+  height: calc(100vh - 6em);
+  display: flex;
+  width: 100%;
+  padding-top: 3em;
+  padding-bottom: 3em;
 `;
 
 const activeClass = 'PortfolioPageLink_active';
@@ -42,9 +61,20 @@ const Link = styled(props => (
   display: block;
   clear: both;
   width: 100%;
+  padding-bottom: 0.66rem;
+
+  /* animation */
+  padding-left: 0;
+  padding-right: 2rem;
+  transition: padding 0.78s;
 
   &.${activeClass} {
-    color: red;
+    font-weight: bold;
+
+    /* animation */
+    padding-left: 2rem;
+    padding-right: 0;
+    transition: padding 0.78s;
   }
 `;
 
@@ -65,27 +95,14 @@ class PortfolioPage extends Component {
   };
 
   render() {
-    const item1 = {
-      name: 'A fabulous house',
-      url: 'https://google.com',
-      imageSrc:
-        'https://i.pinimg.com/originals/e5/14/63/e51463679cef014934f14e8e03fbd21c.jpg'
-    };
-
-    const item2 = {
-      name: 'A nice apartment',
-      url: 'https://yandex.ru',
-      imageSrc:
-        'http://cdn.home-designing.com/wp-content/uploads/2016/04/luxury-art-deco-apartment-interior.jpg'
-    };
-
-    const items = [item1, item2];
+    const items = portfolioIndexPageIn(this.props.lang);
+    console.dir(items);
 
     return (
       <Wrapper>
         <NavArea>
           <div style={{ padding: '2rem' }}>
-            <h2>Наши работы</h2>
+            <h1>{pageNameIn(this.props.lang)}</h1>
             {items.map((item, index) => (
               <Link to={index.toString()} key={item.name}>
                 {item.name}
@@ -96,9 +113,12 @@ class PortfolioPage extends Component {
         <ContentArea>
           {items.map((item, index) => (
             <Element name={index.toString()} key={item.name}>
-              <a href={item.url}>
-                <Image src={item.imageSrc} alt={item.name} />
-              </a>
+              {/* <a href={item.url}> */}
+              <Image src={item.imageSrc} alt={item.name} />
+              {/* </a> */}
+              <Description>
+                <Padding>{item.description}</Padding>
+              </Description>
             </Element>
           ))}
         </ContentArea>
