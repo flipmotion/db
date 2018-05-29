@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import CameraRoll from '../components/Portfolio/CameraRoll';
-import PortfolioList from '../components/Portfolio/PortfolioList';
+import CameraRoll from './CameraRoll';
+import PortfolioList from './PortfolioList';
 import PropTypes from 'prop-types';
 
 const animationDuration = '0.85s';

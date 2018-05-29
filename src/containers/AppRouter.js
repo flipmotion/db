@@ -5,7 +5,7 @@ import { Transition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 
 import HomePage from '../components/HomePage';
-import PortfolioContainer from './PortfolioContainer';
+import PortfolioPage from '../components/Portfolio/PortfolioPage';
 import Services from '../components/Services';
 import Prices from '../components/Prices';
 import Page404 from '../components/Page404';
@@ -80,7 +80,7 @@ export default ({ lang }) => {
                     path="/portfolio"
                     render={({ location, history }) => (
                       <AbsoluteDiv>
-                        <PortfolioContainer
+                        <PortfolioPage
                           portfolio={content.portfolio}
                           animationStage={animationStage}
                           location={location}

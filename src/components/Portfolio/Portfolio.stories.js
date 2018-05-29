@@ -4,7 +4,7 @@ import CameraRoll from './CameraRoll';
 import PortfolioList from './PortfolioList';
 import contentIn from '../../content';
 import { withKnobs, number, select } from '@storybook/addon-knobs/react';
-import PortfolioContainer from '../../containers/PortfolioContainer';
+import PortfolioPage from './PortfolioPage';
 
 const images = contentIn('ru').portfolio.map(p =>
   Object.assign({}, p.illustration, { description: p.description })
@@ -99,7 +99,7 @@ const defaultStage = 'entered';
 const groupId = 'GROUP-ID1';
 
 portfolio.add('Portfolio: all together', () => (
-  <PortfolioContainer
+  <PortfolioPage
     portfolio={contentIn('ru').portfolio}
     animationStage={select(label, animationStages, defaultStage, groupId)}
   />
