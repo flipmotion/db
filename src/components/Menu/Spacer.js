@@ -32,7 +32,7 @@ const SpaceCreator = styled.div`
 class Spacer extends React.Component {
   static propTypes = {
     children: PropTypes.node,
-    horizontal: PropTypes.bool
+    horizontal: PropTypes.bool // broken!
   };
 
   constructor() {

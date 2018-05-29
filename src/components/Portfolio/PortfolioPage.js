@@ -5,6 +5,8 @@ import PortfolioList from './PortfolioList';
 import PropTypes from 'prop-types';
 import contentIn from '../../content';
 
+// TODO: move to container folder
+
 const animationDuration = '0.85s';
 
 function animation_fadeFromLeft(animationStage) {
