@@ -56,15 +56,7 @@ homePage.add('Menu', () => (
                     ? 'entered'
                     : 'exited'
                 }
-                header={text('Header', content.homePage.header)}
-                paragraphText={text(
-                  'Paragraph text',
-                  content.homePage.paragraphText
-                )}
-                linkText={text('Link text', content.homePage.link.text)}
-                linkPath={content.homePage.link.path}
-                imageSrc={content.homePage.media[0].src}
-                imageAlt={content.homePage.media[0].alt}
+                lang={lang}
               />
             </MenuContainer>
           </Router>
