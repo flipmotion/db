@@ -31,7 +31,8 @@
     "flow": "flow",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "lint:css": "stylelint './src/**/*.js'"
   },
   "devDependencies": {
     "@storybook/addon-knobs": "^3.4.6",
@@ -42,6 +43,10 @@
     "@storybook/react": "^3.4.6",
     "ajv": "^6.5.0",
     "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "stylelint": "^9.2.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.3.1"
   }
 }
