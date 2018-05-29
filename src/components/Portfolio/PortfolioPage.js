@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CameraRoll from './CameraRoll';
 import PortfolioList from './PortfolioList';
 import PropTypes from 'prop-types';
+import contentIn from '../../content';
 
 const animationDuration = '0.85s';
 
@@ -61,7 +62,7 @@ const RollArea = styled.div`
 
 // This container basically tracks which image is current
 // (holds the state) and combines CameraRoll and PortfolioList
-class PortfolioContainer extends Component {
+class PortfolioPage extends Component {
   static propTypes = {
     animationStage: PropTypes.oneOf([
       'entering',
@@ -69,7 +70,9 @@ class PortfolioContainer extends Component {
       'exiting',
       'exited'
     ]),
-    history: PropTypes.object.isRequired
+    // so we can programmatically navigate to portfolio item page
+    history: PropTypes.object.isRequired,
+    lang: PropTypes.oneOf(['ru', 'en']).isRequired
     // more
   };
 
@@ -89,8 +92,9 @@ class PortfolioContainer extends Component {
   }
 
   render() {
-    const titles = this.props.portfolio.map(el => el.title);
-    const images = this.props.portfolio.map((p, i) =>
+    const content = contentIn(this.props.lang);
+    const titles = content.portfolio.map(el => el.title);
+    const images = content.portfolio.map((p, i) =>
       Object.assign({}, p.illustration, {
         description: p.description,
         to: `/portfolio/${i}`
@@ -124,4 +128,4 @@ class PortfolioContainer extends Component {
   }
 }
 
-export default PortfolioContainer;
+export default PortfolioPage;

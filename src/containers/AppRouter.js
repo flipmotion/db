@@ -81,10 +81,10 @@ export default ({ lang }) => {
                     render={({ location, history }) => (
                       <AbsoluteDiv>
                         <PortfolioPage
-                          portfolio={content.portfolio}
                           animationStage={animationStage}
                           location={location}
                           history={history}
+                          lang={lang}
                         />
                       </AbsoluteDiv>
                     )}
