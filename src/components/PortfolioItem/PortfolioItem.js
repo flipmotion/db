@@ -4,6 +4,7 @@ import ScrollableMedia from './ScrollableMedia';
 
 const MediaArea = styled.div`
   flex: 40;
+
   /* align-self: center; */
 
   /* border: 2px solid red; */
