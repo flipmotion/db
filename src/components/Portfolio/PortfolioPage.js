@@ -10,22 +10,24 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
+// TODO: try to forward scroll with this:
+// http://jsfiddle.net/s4hwt886/2/
 const NavArea = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
+  /* position: fixed; */
+  height: 100%;
   left: 0;
-  width: 40vw;
+  width: 40%;
   background: lightblue;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  z-index: 1;
 `;
 
 const ContentArea = styled.div`
   flex: 6;
-  padding-left: 40vw;
-  width: 60vw;
+  width: 60%;
+  overflow: auto;
 `;
 
 const Image = styled.img`
