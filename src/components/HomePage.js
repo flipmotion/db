@@ -80,6 +80,7 @@ const Composer = styled.div`
   display: flex;
   align-items: stretch;
   height: 100%;
+
   @media (orientation: portrait), (max-width: 50rem) {
     position: relative;
     ${Text} {

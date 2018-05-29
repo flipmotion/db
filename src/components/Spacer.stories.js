@@ -2,11 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Spacer from './Spacer';
 import Div100vh from 'react-div-100vh';
-import { injectGlobal } from 'styled-components';
-
-injectGlobal`
-  body {margin: 0}
-`;
 
 function randomColor() {
   return '#' + (((1 << 24) * Math.random()) | 0).toString(16);

@@ -1,69 +1,53 @@
 import React, { Component } from 'react';
+import { Element, Link as ScrollLink } from 'react-scroll';
 import styled from 'styled-components';
-import CameraRoll from './CameraRoll';
-import PortfolioList from './PortfolioList';
+// import Spacer from '../../components/Spacer'
 import PropTypes from 'prop-types';
 import contentIn from '../../content';
 
-// TODO: move to container folder
-
-const animationDuration = '0.85s';
-
-function animation_fadeFromLeft(animationStage) {
-  if (animationStage === 'entered') {
-    return {
-      opacity: 1,
-      transform: 'translateX(0px)',
-      transition: `all ${animationDuration}`
-    };
-  } else {
-    return {
-      opacity: 0,
-      transform: 'translateX(-500px)',
-      transition: `all ${animationDuration}`
-    };
-  }
-}
-
-function animation_fadeFromBottom(animationStage) {
-  if (animationStage === 'entered') {
-    return {
-      opacity: 1,
-      transform: 'translateY(0px)',
-      transition: `all ${animationDuration} ease-out 0.35s`
-    };
-  } else {
-    return {
-      opacity: 0,
-      transform: 'translateY(500px)',
-      transition: `all ${animationDuration} ease-out 0.35s`
-    };
-  }
-}
-
-const ListAndCameraRoll = styled.div`
-  height: 100%;
-  width: 100%;
+// later will adjust flex direction on smaller screens
+const Wrapper = styled.div`
   display: flex;
+`;
 
-  @media (max-width: 600px) {
-    flex-direction: column;
+const NavArea = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40vw;
+  background: lightblue;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const ContentArea = styled.div`
+  flex: 6;
+  padding-left: 40vw;
+  width: 60vw;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+`;
+
+const activeClass = 'PortfolioPageLink_active';
+const Link = styled(props => (
+  <ScrollLink smooth spy activeClass={activeClass} {...props} />
+))`
+  cursor: pointer;
+  display: block;
+  clear: both;
+  width: 100%;
+
+  &.${activeClass} {
+    color: red;
   }
 `;
 
-const ListArea = styled.div`
-  align-self: center;
-  flex: 33;
-`;
-
-const RollArea = styled.div`
-  flex: 66;
-  min-width: 0;
-  height: 100%;
-`;
-
-// This container basically tracks which image is current
-// (holds the state) and combines CameraRoll and PortfolioList
 class PortfolioPage extends Component {
   static propTypes = {
     animationStage: PropTypes.oneOf([
@@ -72,60 +56,53 @@ class PortfolioPage extends Component {
       'exiting',
       'exited'
     ]),
-    // so we can programmatically navigate to portfolio item page
-    history: PropTypes.object.isRequired,
-    lang: PropTypes.oneOf(['ru', 'en']).isRequired
-    // more
+    lang: PropTypes.oneOf(['ru', 'en'])
   };
 
-  constructor() {
-    super();
-    this.state = { current: 0 };
-    this.setCurrent = this.setCurrent.bind(this);
-    this.navigateTo = this.navigateTo.bind(this);
-  }
-
-  navigateTo(url) {
-    this.props.history.push(url);
-  }
-
-  setCurrent(current) {
-    this.setState({ current });
-  }
+  static defaultProps = {
+    lang: 'ru',
+    animationStage: 'entered'
+  };
 
   render() {
-    const content = contentIn(this.props.lang);
-    const titles = content.portfolio.map(el => el.title);
-    const images = content.portfolio.map((p, i) =>
-      Object.assign({}, p.illustration, {
-        description: p.description,
-        to: `/portfolio/${i}`
-      })
-    );
+    const item1 = {
+      name: 'A fabulous house',
+      url: 'https://google.com',
+      imageSrc:
+        'https://i.pinimg.com/originals/e5/14/63/e51463679cef014934f14e8e03fbd21c.jpg'
+    };
+
+    const item2 = {
+      name: 'A nice apartment',
+      url: 'https://yandex.ru',
+      imageSrc:
+        'http://cdn.home-designing.com/wp-content/uploads/2016/04/luxury-art-deco-apartment-interior.jpg'
+    };
+
+    const items = [item1, item2];
+
     return (
-      <ListAndCameraRoll>
-        <ListArea
-          animationStage={this.props.animationStage}
-          style={animation_fadeFromLeft(this.props.animationStage)}
-        >
-          <PortfolioList
-            current={this.state.current}
-            titles={titles}
-            setCurrent={this.setCurrent}
-          />
-        </ListArea>
-        <RollArea
-          animationStage={this.props.animationStage}
-          style={animation_fadeFromBottom(this.props.animationStage)}
-        >
-          <CameraRoll
-            navigateTo={this.navigateTo}
-            current={this.state.current}
-            images={images}
-            setCurrent={this.setCurrent}
-          />
-        </RollArea>
-      </ListAndCameraRoll>
+      <Wrapper>
+        <NavArea>
+          <div style={{ padding: '2rem' }}>
+            <h2>Наши работы</h2>
+            {items.map((item, index) => (
+              <Link to={index.toString()} key={item.name}>
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </NavArea>
+        <ContentArea>
+          {items.map((item, index) => (
+            <Element name={index.toString()} key={item.name}>
+              <a href={item.url}>
+                <Image src={item.imageSrc} alt={item.name} />
+              </a>
+            </Element>
+          ))}
+        </ContentArea>
+      </Wrapper>
     );
   }
 }
