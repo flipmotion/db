@@ -9,10 +9,7 @@ import PortfolioPage from '../components/Portfolio/PortfolioPage';
 import Services from '../components/Services';
 import Prices from '../components/Prices';
 import Page404 from '../components/Page404';
-
 import PortfolioItem from '../components/PortfolioItem';
-
-import contentIn from '../content';
 
 const RelativeDiv = styled.div`
   position: relative;
@@ -32,7 +29,6 @@ const animationDuration = 850;
 // To figure out how this monster works, check out
 // https://medium.com/@pshrmn/4b73f634992a
 export default ({ lang }) => {
-  const content = contentIn(lang);
   return (
     <Route
       render={({ location }) => (
