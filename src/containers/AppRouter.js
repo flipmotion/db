@@ -73,9 +73,7 @@ export default ({ lang }) => {
                     render={({ history, match }) => (
                       <AbsoluteDiv>
                         <PortfolioItem
-                          portfolioItem={
-                            content.portfolio[parseInt(match.params.index, 10)]
-                          }
+                          lang={lang}
                           animationStage={animationStage}
                           history={history}
                         />
