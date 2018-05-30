@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Element as ScrollElement, Link as ScrollLink } from 'react-scroll';
+import {
+  Events,
+  Element as ScrollElement,
+  Link as ScrollLink
+} from 'react-scroll';
 import styled from 'styled-components';
 // import Spacer from '../../components/Spacer'
 import PropTypes from 'prop-types';
@@ -91,16 +95,8 @@ const ContentArea = styled.div.attrs({ id: 'ContentArea' })`
   /* scroll-snap-type: y mandatory; */
 `;
 
-const activeClass = 'PortfolioPageLink_active';
 const Link = styled(props => (
-  <ScrollLink
-    smooth
-    spy
-    activeClass={activeClass}
-    containerId={'ContentArea'}
-    onSetActive={to => console.log(to)}
-    {...props}
-  />
+  <ScrollLink smooth spy containerId={'ContentArea'} {...props} />
 ))`
   cursor: pointer;
   display: block;
@@ -109,26 +105,16 @@ const Link = styled(props => (
   padding-bottom: 0.66rem;
 
   /* animation */
-  padding-left: 0;
-  padding-right: 2rem;
-  transition: padding 0.78s;
+  margin-left: ${props => (props.active ? '2em' : '0')};
+  margin-right: ${props => (props.active ? '0' : '2em')};
+  // transition: padding 2s;
 
   &::before {
-    content: '✌️ ';
-  }
-
-  &.${activeClass} {
-    /* just for fun, for now */
-    &::before {
-      content: '👉 ';
-    }
-
-    /* animation */
-    padding-left: 2rem;
-    padding-right: 0;
-    transition: padding 0.78s;
+    content: ${props => (props.active ? '👉 ' : '✌️ ')};
   }
 `;
+
+Link.propTypes = { active: PropTypes.bool };
 
 class PortfolioPage extends Component {
   static propTypes = {
@@ -148,12 +134,40 @@ class PortfolioPage extends Component {
 
   constructor() {
     super();
-    this.state = { current: 0 };
+    this.state = { active: 0, delayedActive: 0, lastScrollTime: 0 };
     this.setActive = this.setActive.bind(this);
+    this.saveLastScrollTime = this.saveLastScrollTime.bind(this);
   }
 
+  // I had to introduce delayedActive instead of regular delayed
+  // because there are glitches on iPad
   setActive(to) {
-    this.setState({ current: Number(to) });
+    this.setState({ active: Number(to) });
+    // const currentTimestamp = + new Date();
+    // const lastScrollTime = this.state.lastScrollTime;
+    // const scrollTimeout = 300;
+    // const scrollStopped = currentTimestamp > lastScrollTime + scrollTimeout;
+
+    // if (scrollStopped) {
+    //   this.setState({ delayedActive: Number(to)});
+    //   return;
+    // }
+
+    // // restart itself if scroll didn't come to an end
+    // const reCheckTime = 50;
+    // window.setTimeout(() => this.setActive(to), reCheckTime)
+  }
+
+  componentDidMount() {
+    Events.scrollEvent.register('end', function(to, element) {});
+  }
+
+  componentWillUnmount() {
+    Events.scrollEvent.remove('end');
+  }
+
+  saveLastScrollTime() {
+    this.setState({ lastScrollTime: +new Date() });
   }
 
   render() {
@@ -170,6 +184,7 @@ class PortfolioPage extends Component {
                   to={index.toString()}
                   key={item.name}
                   onSetActive={this.setActive}
+                  active={this.state.active === index}
                 >
                   {item.name}
                 </Link>
@@ -177,10 +192,10 @@ class PortfolioPage extends Component {
             </div>
           </Nav>
           <DescriptionUnderNav>
-            {items[this.state.current].description}
+            {items[this.state.active].description}
           </DescriptionUnderNav>
         </NavArea>
-        <ContentArea>
+        <ContentArea onScroll={this.saveLastScrollTime}>
           {items.map((item, index) => (
             <Element name={index.toString()} key={item.name}>
               <ImageLink href={item.url}>
