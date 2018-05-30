@@ -6,11 +6,11 @@ import Div100vh from 'react-div-100vh';
 
 const portfolio = storiesOf('Portfolio', module).addDecorator(withKnobs);
 
-// function inFullHeightDiv(story) {
-//   return <Div100vh style={{border: '5px solid orange', boxSizing: 'border-box'}}>{story()}</Div100vh>;
-// }
+function inFullHeightDiv(story) {
+  return <Div100vh>{story()}</Div100vh>;
+}
 
-// portfolio.addDecorator(inFullHeightDiv);
+portfolio.addDecorator(inFullHeightDiv);
 
 const label = 'Animation stages';
 

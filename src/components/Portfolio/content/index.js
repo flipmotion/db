@@ -132,6 +132,7 @@ export function portfolioIndexPageIn(lang) {
   return portfolio.map((item, index) => ({
     name: item.name[lang],
     description: item.description[lang],
-    imageSrc: item.illustration.src
+    imageSrc: item.illustration.src,
+    url: `/portfolio/${index}`
   }));
 }
