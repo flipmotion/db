@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import contentIn from '../content';
+import { fadeFromLeft } from '../animations';
 
 const PortfolioButton = styled(Link).attrs({
   to: props => ({
@@ -22,20 +23,6 @@ const PortfolioButton = styled(Link).attrs({
   }
 `;
 
-function textStyle(animationStage) {
-  if (animationStage === 'entered') {
-    return {
-      opacity: 1,
-      transform: 'translateX(0px)'
-    };
-  } else {
-    return {
-      opacity: 0,
-      transform: 'translateX(-500px)'
-    };
-  }
-}
-
 function mediaStyle(animationStage) {
   if (animationStage === 'entered') {
     return {
@@ -51,7 +38,13 @@ function mediaStyle(animationStage) {
 }
 
 const Text = styled.div.attrs({
-  style: props => ({ ...props.style, ...textStyle(props.animationStage) }),
+  style: props => ({
+    ...props.style,
+    ...fadeFromLeft({
+      animationStage: props.animationStage,
+      animationDuration: props.animationDuration
+    })
+  }),
   children: props => (
     <Fragment>
       <h1>{props.header}</h1>
@@ -95,7 +88,7 @@ const Composer = styled.div`
   }
 `;
 
-const HomePage = ({ lang, animationStage, style }) => {
+const HomePage = ({ lang, animationStage, aninationDuration, style }) => {
   const content = contentIn(lang);
   const header = content.homePage.header;
   const paragraphText = content.homePage.paragraphText;
@@ -112,6 +105,7 @@ const HomePage = ({ lang, animationStage, style }) => {
         paragraphText={paragraphText}
         header={header}
         animationStage={animationStage}
+        aninationDuration={aninationDuration}
       />
       <Image
         alt={imageAlt}
