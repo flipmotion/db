@@ -5,20 +5,12 @@ import {
   Link as ScrollLink
 } from 'react-scroll';
 import styled from 'styled-components';
-// import Spacer from '../../components/Spacer'
 import PropTypes from 'prop-types';
 import { pageNameIn, portfolioIndexPageIn } from './content';
-import { fadeInOut } from '../../animations';
+import animated, { fadeInOut } from '../../animations';
 
 // later will adjust flex direction on smaller screens
-const Wrapper = styled(
-  ({ transitionDuration, animationStage, ...otherProps }) => (
-    <div
-      style={fadeInOut({ transitionDuration, animationStage })}
-      {...otherProps}
-    />
-  )
-)`
+const Wrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
@@ -30,13 +22,15 @@ Wrapper.propTypes = {
   transitionDuration: PropTypes.number.isRequired
 };
 
+const AnimatedWrapper = animated(Wrapper, fadeInOut);
+
 // TODO: scroll forwarding works only in Safari and to be dropped,
 // to programmatically clicking could be a better idea
 const NavArea = styled.div`
   display: flex;
   flex-direction: column;
   flex: none;
-  width: 20em;
+  width: 22em;
 
   @media (max-width: 40rem) {
     display: none;
@@ -48,6 +42,7 @@ const Nav = styled.div`
   flex-direction: column;
   flex: 1;
   justify-content: center;
+  padding: 2em;
 `;
 
 const DescriptionUnderNav = styled.div`
@@ -78,7 +73,7 @@ const ImageLink = styled.a`
 const Description = styled.div`
   flex: none;
   align-self: center;
-  width: 20em;
+  width: 22em;
 
   @media (max-width: 70rem) {
     display: none;
@@ -121,7 +116,7 @@ const Link = styled(props => (
   /* animation */
   margin-left: ${props => (props.active ? '2em' : '0')};
   margin-right: ${props => (props.active ? '0' : '2em')};
-  /* transition: padding 2s; */
+  transition: margin 0.5s ease-in 1s;
 
   &::before {
     content: ${props => (props.active ? '👉 ' : '✌️ ')};
@@ -192,7 +187,7 @@ class PortfolioPage extends Component {
     };
 
     return (
-      <Wrapper {...animation}>
+      <AnimatedWrapper {...animation}>
         <NavArea>
           <Nav>
             <div style={{ padding: '2rem' }}>
@@ -225,7 +220,7 @@ class PortfolioPage extends Component {
             </Element>
           ))}
         </ContentArea>
-      </Wrapper>
+      </AnimatedWrapper>
     );
   }
 }
