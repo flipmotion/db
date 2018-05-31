@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import contentIn from '../content';
-import { fadeFromLeft, fadeFromRight } from '../animations';
+import animated, { fadeFromLeft, fadeFromRight } from '../animations';
 
 const PortfolioButton = styled(Link).attrs({
   to: props => ({
@@ -54,25 +54,13 @@ const Image = styled.img`
   flex: 6;
 `;
 
-// Kinda HOC
-const Animated = Component => ({
-  animationStage,
-  transitionDuration,
-  delayIn,
-  ...otherProps
-}) => (
-  <Component
-    style={fadeFromRight({ animationStage, transitionDuration, delayIn })}
-    {...otherProps}
-  />
-);
-
-const AnimatedImage = Animated(Image);
+const AnimatedImage = animated(Image, fadeFromRight);
 
 const Composer = styled.div`
   display: flex;
   align-items: stretch;
   height: 100%;
+  width: 100%;
 
   @media (orientation: portrait), (max-width: 50rem) {
     position: relative;

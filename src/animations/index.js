@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function fadeInOut({ animationStage, transitionDuration }) {
   return {
     transitionProperty: 'opacity',
@@ -63,3 +65,23 @@ export function fadeFromBottom({ animationStage, transitionDuration }) {
     };
   }
 }
+
+// Kinda HOC. Or just a fn?
+function animated(Component, animationFn) {
+  return function({
+    animationStage,
+    transitionDuration,
+    delayIn,
+    delayOut,
+    style,
+    ...otherProps
+  }) {
+    const mergedStyle = {
+      ...style,
+      ...animationFn({ animationStage, transitionDuration, delayIn })
+    };
+    return <Component style={mergedStyle} {...otherProps} />;
+  };
+}
+
+export default animated;
