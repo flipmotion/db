@@ -8,15 +8,29 @@ import styled from 'styled-components';
 // import Spacer from '../../components/Spacer'
 import PropTypes from 'prop-types';
 import { pageNameIn, portfolioIndexPageIn } from './content';
+import { fadeInOut } from '../../animations';
 
 // later will adjust flex direction on smaller screens
-const Wrapper = styled.div`
+const Wrapper = styled(
+  ({ animationDuration, animationStage, ...otherProps }) => (
+    <div
+      style={fadeInOut({ animationDuration, animationStage })}
+      {...otherProps}
+    />
+  )
+)`
   display: flex;
   width: 100%;
   height: 100%;
 `;
 
-// TODO: scroll forwarding forks only in Safari and to be dropped,
+Wrapper.propTypes = {
+  animationStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+    .isRequired,
+  animationDuration: PropTypes.number.isRequired
+};
+
+// TODO: scroll forwarding works only in Safari and to be dropped,
 // to programmatically clicking could be a better idea
 const NavArea = styled.div`
   display: flex;
@@ -172,9 +186,13 @@ class PortfolioPage extends Component {
 
   render() {
     const items = portfolioIndexPageIn(this.props.lang);
+    const animation = {
+      animationStage: this.props.animationStage,
+      animationDuration: this.props.animationDuration
+    };
 
     return (
-      <Wrapper>
+      <Wrapper {...animation}>
         <NavArea>
           <Nav>
             <div style={{ padding: '2rem' }}>

@@ -45,7 +45,11 @@ export default ({ lang }) => {
                     path="/"
                     render={() => (
                       <AbsoluteDiv data-name="AbsoluteDiv">
-                        <HomePage animationStage={animationStage} lang={lang} />
+                        <HomePage
+                          animationStage={animationStage}
+                          lang={lang}
+                          animationDuration={animationDuration}
+                        />
                       </AbsoluteDiv>
                     )}
                   />
@@ -59,6 +63,7 @@ export default ({ lang }) => {
                           location={location}
                           history={history}
                           lang={lang}
+                          animationDuration={animationDuration}
                         />
                       </AbsoluteDiv>
                     )}
@@ -72,6 +77,7 @@ export default ({ lang }) => {
                           lang={lang}
                           animationStage={animationStage}
                           history={history}
+                          animationDuration={animationDuration}
                         />
                       </AbsoluteDiv>
                     )}
@@ -80,7 +86,10 @@ export default ({ lang }) => {
                     path="/services"
                     render={() => (
                       <AbsoluteDiv>
-                        <Services animationStage={animationStage} />
+                        <Services
+                          animationStage={animationStage}
+                          animationDuration={animationDuration}
+                        />
                       </AbsoluteDiv>
                     )}
                   />
@@ -88,7 +97,10 @@ export default ({ lang }) => {
                     path="/prices"
                     render={() => (
                       <AbsoluteDiv>
-                        <Prices animationStage={animationStage} />
+                        <Prices
+                          animationStage={animationStage}
+                          animationDuration={animationDuration}
+                        />
                       </AbsoluteDiv>
                     )}
                   />
