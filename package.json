@@ -32,7 +32,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "lint:css": "stylelint './src/**/*.js'"
+    "lint:css": "stylelint './src/**/*.js' --syntax scss"
   },
   "devDependencies": {
     "@storybook/addon-knobs": "^3.4.6",
