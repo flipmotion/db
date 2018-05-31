@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import contentIn from '../content';
-import { fadeFromLeft } from '../animations';
+import { fadeFromLeft, fadeFromRight } from '../animations';
 
 const PortfolioButton = styled(Link).attrs({
   to: props => ({
@@ -23,26 +23,12 @@ const PortfolioButton = styled(Link).attrs({
   }
 `;
 
-function mediaStyle(animationStage) {
-  if (animationStage === 'entered') {
-    return {
-      opacity: 1,
-      transform: 'translateX(0px)'
-    };
-  } else {
-    return {
-      opacity: 0,
-      transform: 'translateX(500px)'
-    };
-  }
-}
-
 const Text = styled.div.attrs({
   style: props => ({
     ...props.style,
     ...fadeFromLeft({
       animationStage: props.animationStage,
-      animationDuration: props.animationDuration
+      transitionDuration: props.transitionDuration
     })
   }),
   children: props => (
@@ -65,9 +51,23 @@ const Image = styled.img`
   object-fit: cover;
   width: 100%;
   min-width: 0;
-  transition: all 0.85s ease-out 0.35s;
   flex: 6;
 `;
+
+// Kinda HOC
+const Animated = Component => ({
+  animationStage,
+  transitionDuration,
+  delayIn,
+  ...otherProps
+}) => (
+  <Component
+    style={fadeFromRight({ animationStage, transitionDuration, delayIn })}
+    {...otherProps}
+  />
+);
+
+const AnimatedImage = Animated(Image);
 
 const Composer = styled.div`
   display: flex;
@@ -88,7 +88,7 @@ const Composer = styled.div`
   }
 `;
 
-const HomePage = ({ lang, animationStage, aninationDuration, style }) => {
+const HomePage = ({ lang, animationStage, transitionDuration, style }) => {
   const content = contentIn(lang);
   const header = content.homePage.header;
   const paragraphText = content.homePage.paragraphText;
@@ -105,12 +105,14 @@ const HomePage = ({ lang, animationStage, aninationDuration, style }) => {
         paragraphText={paragraphText}
         header={header}
         animationStage={animationStage}
-        aninationDuration={aninationDuration}
+        transitionDuration={transitionDuration}
       />
-      <Image
+      <AnimatedImage
         alt={imageAlt}
         src={imageSrc}
-        style={{ ...style, ...mediaStyle(animationStage) }}
+        animationStage={animationStage}
+        transitionDuration={transitionDuration}
+        delayIn={400}
       />
     </Composer>
   );

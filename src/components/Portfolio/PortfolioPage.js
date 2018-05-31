@@ -12,9 +12,9 @@ import { fadeInOut } from '../../animations';
 
 // later will adjust flex direction on smaller screens
 const Wrapper = styled(
-  ({ animationDuration, animationStage, ...otherProps }) => (
+  ({ transitionDuration, animationStage, ...otherProps }) => (
     <div
-      style={fadeInOut({ animationDuration, animationStage })}
+      style={fadeInOut({ transitionDuration, animationStage })}
       {...otherProps}
     />
   )
@@ -27,7 +27,7 @@ const Wrapper = styled(
 Wrapper.propTypes = {
   animationStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
     .isRequired,
-  animationDuration: PropTypes.number.isRequired
+  transitionDuration: PropTypes.number.isRequired
 };
 
 // TODO: scroll forwarding works only in Safari and to be dropped,
@@ -188,7 +188,7 @@ class PortfolioPage extends Component {
     const items = portfolioIndexPageIn(this.props.lang);
     const animation = {
       animationStage: this.props.animationStage,
-      animationDuration: this.props.animationDuration
+      transitionDuration: this.props.transitionDuration
     };
 
     return (

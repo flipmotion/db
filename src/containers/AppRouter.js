@@ -24,7 +24,7 @@ const AbsoluteDiv = styled.div`
   display: flex;
 `;
 
-const animationDuration = 850;
+const transitionDuration = 850;
 
 // To figure out how this monster works, check out
 // https://medium.com/@pshrmn/4b73f634992a
@@ -36,7 +36,7 @@ export default ({ lang }) => {
           <TransitionGroup component={null} appear>
             <Transition
               key={location.pathname}
-              timeout={{ enter: 0, exit: animationDuration }}
+              timeout={{ enter: 0, exit: transitionDuration }}
             >
               {animationStage => (
                 <Switch location={location}>
@@ -48,7 +48,7 @@ export default ({ lang }) => {
                         <HomePage
                           animationStage={animationStage}
                           lang={lang}
-                          animationDuration={animationDuration}
+                          transitionDuration={transitionDuration}
                         />
                       </AbsoluteDiv>
                     )}
@@ -63,7 +63,7 @@ export default ({ lang }) => {
                           location={location}
                           history={history}
                           lang={lang}
-                          animationDuration={animationDuration}
+                          transitionDuration={transitionDuration}
                         />
                       </AbsoluteDiv>
                     )}
@@ -77,7 +77,7 @@ export default ({ lang }) => {
                           lang={lang}
                           animationStage={animationStage}
                           history={history}
-                          animationDuration={animationDuration}
+                          transitionDuration={transitionDuration}
                         />
                       </AbsoluteDiv>
                     )}
@@ -88,7 +88,7 @@ export default ({ lang }) => {
                       <AbsoluteDiv>
                         <Services
                           animationStage={animationStage}
-                          animationDuration={animationDuration}
+                          transitionDuration={transitionDuration}
                         />
                       </AbsoluteDiv>
                     )}
@@ -99,7 +99,7 @@ export default ({ lang }) => {
                       <AbsoluteDiv>
                         <Prices
                           animationStage={animationStage}
-                          animationDuration={animationDuration}
+                          transitionDuration={transitionDuration}
                         />
                       </AbsoluteDiv>
                     )}
