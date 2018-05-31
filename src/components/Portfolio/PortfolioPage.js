@@ -107,7 +107,7 @@ const Link = styled(props => (
   /* animation */
   margin-left: ${props => (props.active ? '2em' : '0')};
   margin-right: ${props => (props.active ? '0' : '2em')};
-  // transition: padding 2s;
+  /* transition: padding 2s; */
 
   &::before {
     content: ${props => (props.active ? '👉 ' : '✌️ ')};
