@@ -27,13 +27,12 @@ const NavArea = styled.div`
   background: orange;
   display: flex;
   flex-direction: column;
+  padding: 2em;
+  box-sizing: border-box;
 `;
 
 // we bind to the top of this element for navigation
-const StageMedia = styled(Element)`
-  display: flex;
-  flex-direction: column;
-`;
+const StageMedia = styled(Element)``;
 
 const Image = styled.img`
   height: 100%;

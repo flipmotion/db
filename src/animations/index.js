@@ -66,7 +66,7 @@ export function fadeFromBottom({ animationStage, transitionDuration }) {
   }
 }
 
-// Kinda HOC. Or just a fn?
+// Kinda HOC. Or just a fn that returns a component?
 function animated(Component, animationEffectFn) {
   return function({
     animationStage,
