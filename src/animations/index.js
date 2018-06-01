@@ -67,7 +67,7 @@ export function fadeFromBottom({ animationStage, transitionDuration }) {
 }
 
 // Kinda HOC. Or just a fn?
-function animated(Component, animationFn) {
+function animated(Component, animationEffectFn) {
   return function({
     animationStage,
     transitionDuration,
@@ -78,7 +78,7 @@ function animated(Component, animationFn) {
   }) {
     const mergedStyle = {
       ...style,
-      ...animationFn({ animationStage, transitionDuration, delayIn })
+      ...animationEffectFn({ animationStage, transitionDuration, delayIn })
     };
     return <Component style={mergedStyle} {...otherProps} />;
   };

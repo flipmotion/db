@@ -9,7 +9,7 @@ import PortfolioPage from '../components/Portfolio/PortfolioPage';
 import Services from '../components/Services';
 import Prices from '../components/Prices';
 import Page404 from '../components/Page404';
-import PortfolioItem from '../components/PortfolioItem';
+import PortfolioItemContainer from '../containers/PortfolioItemContainer';
 
 const RelativeDiv = styled.div`
   position: relative;
@@ -71,16 +71,19 @@ export default ({ lang }) => {
                   <Route
                     exact
                     path="/portfolio/:index"
-                    render={({ history, match }) => (
-                      <AbsoluteDiv>
-                        <PortfolioItem
-                          lang={lang}
-                          animationStage={animationStage}
-                          history={history}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
+                    render={({ history, match }) => {
+                      return (
+                        <AbsoluteDiv>
+                          <PortfolioItemContainer
+                            index={Number(match.params.index)}
+                            lang={lang}
+                            animationStage={animationStage}
+                            history={history}
+                            transitionDuration={transitionDuration}
+                          />
+                        </AbsoluteDiv>
+                      );
+                    }}
                   />
                   <Route
                     path="/services"

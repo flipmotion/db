@@ -96,7 +96,8 @@ const portfolio = [
         en: 'Plankton office center'
       },
       src: house2
-    }
+    },
+    stages: []
   },
   {
     name: {
@@ -115,7 +116,8 @@ const portfolio = [
         en: 'Chalet Mindorf'
       },
       src: house3
-    }
+    },
+    stages: []
   }
 ];
 
@@ -134,5 +136,41 @@ export function portfolioIndexPageIn(lang) {
     description: item.description[lang],
     imageSrc: item.illustration.src,
     url: `/portfolio/${index}`
+  }));
+}
+
+export function portfolioItemIn({ index, lang }) {
+  const item = portfolio[index];
+  if (!item) return null;
+  return {
+    name: item.name[lang],
+    description: item.description[lang],
+    stages: item.stages.map(stage => ({
+      name: stage.name[lang],
+      description: stage.description[lang],
+      media: stage.media.map(medium => ({
+        alt: medium.alt[lang],
+        src: medium.src
+      }))
+    }))
+  };
+}
+
+export function nameOfIn({ index, lang }) {
+  const item = portfolio[index];
+  if (!item) return null;
+  return item.name[lang];
+}
+
+export function stagesOfIn({ index, lang }) {
+  const item = portfolio[index];
+  if (!item) return null;
+  return item.stages.map(stage => ({
+    name: stage.name[lang],
+    description: stage.description[lang],
+    media: stage.media.map(medium => ({
+      alt: medium.alt[lang],
+      src: medium.src
+    }))
   }));
 }
