@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import HomePage from '../components/HomePage';
 import PortfolioPage from '../components/Portfolio/PortfolioPage';
-import Services from '../components/Services';
+import ServicesContainer from '../containers/ServicesContainer';
 import Prices from '../components/Prices';
 import Page404 from '../components/Page404';
 import PortfolioItemContainer from '../containers/PortfolioItemContainer';
@@ -86,15 +86,21 @@ export default ({ lang }) => {
                     }}
                   />
                   <Route
-                    path="/services"
-                    render={() => (
-                      <AbsoluteDiv>
-                        <Services
-                          animationStage={animationStage}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
+                    // NOT exact route, we show index page and
+                    // each service page with the same component
+                    path="/services/:index"
+                    render={({ match }) => {
+                      return (
+                        <AbsoluteDiv>
+                          <ServicesContainer
+                            current={Number(match.params.index)}
+                            lang={lang}
+                            animationStage={animationStage}
+                            transitionDuration={transitionDuration}
+                          />
+                        </AbsoluteDiv>
+                      );
+                    }}
                   />
                   <Route
                     path="/prices"
