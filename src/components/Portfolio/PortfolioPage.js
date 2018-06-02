@@ -186,6 +186,7 @@ class PortfolioPage extends Component {
       animationStage: this.props.animationStage,
       transitionDuration: this.props.transitionDuration
     };
+    console.dir(animation);
 
     return (
       <AnimatedWrapper {...animation}>
