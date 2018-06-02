@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { pageNameIn, portfolioIndexPageIn } from './content';
 import animated, { fadeInOut } from '../../animations';
+import { Link as RouterLink } from 'react-router-dom';
 
 // later will adjust flex direction on smaller screens
 const Wrapper = styled.div`
@@ -66,7 +67,7 @@ const Image = styled.img`
   min-width: 0;
 `;
 
-const ImageLink = styled.a`
+const ImageLink = styled(RouterLink)`
   flex: auto;
 `;
 
@@ -211,7 +212,7 @@ class PortfolioPage extends Component {
         <ContentArea onScroll={this.saveLastScrollTime}>
           {items.map((item, index) => (
             <Element name={index.toString()} key={item.name}>
-              <ImageLink href={item.url}>
+              <ImageLink to={item.url}>
                 <Image src={item.imageSrc} alt={item.name} />
               </ImageLink>
               <Description>
