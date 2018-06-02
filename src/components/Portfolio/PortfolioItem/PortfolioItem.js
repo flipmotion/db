@@ -6,23 +6,37 @@ import animated, { fadeInOut } from '../../../animations';
 
 // to change layout for mobile later on
 const Wrapper = styled.div`
-  background: lightgrey;
   width: 100%;
   height: 100%;
   display: flex;
 `;
 
+// emphasizes that Link and MediaArea use the same string
 const containerId = 'MediaArea';
+const activeClass = 'MediaAreaLink_active';
+
 const Link = styled(props => (
-  <ScrollLink containerId={containerId} smooth {...props} />
+  <ScrollLink
+    containerId={containerId}
+    smooth
+    spy
+    {...props}
+    activeClass={activeClass}
+  />
 ))`
   cursor: pointer;
+  padding-bottom: 0.5rem;
+
+  color: grey;
+
+  &.${activeClass} {
+    color: black;
+  }
 `;
 
 const MediaArea = styled.div.attrs({ id: containerId })`
   width: 50%;
   height: 100%;
-  background: orange;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -31,11 +45,12 @@ const MediaArea = styled.div.attrs({ id: containerId })`
 const DetailsArea = styled.div`
   width: 50%;
   height: 100%;
-  background: orange;
   display: flex;
   flex-direction: column;
-  padding: 2em;
+  padding: 4em;
   box-sizing: border-box;
+  justify-content: center;
+  /* align-items: center; */
 `;
 
 // we bind to the top of this element for navigation
@@ -70,6 +85,11 @@ class PortfolioItem extends React.Component {
   constructor() {
     super();
     this.state = { currentStageIndex: 0 };
+    this.handleSetActive = this.handleSetActive.bind(this);
+  }
+
+  handleSetActive(stageIndex) {
+    this.setState({ currentStageIndex: stageIndex });
   }
 
   render() {
@@ -87,7 +107,9 @@ class PortfolioItem extends React.Component {
         <DetailsArea>
           <h1>{this.props.name}</h1>
           {this.props.stages.map((stage, stageIndex) => (
-            <Link to={stageIndex}>{stage.name}</Link>
+            <Link to={stageIndex} onSetActive={this.handleSetActive}>
+              {stage.name}
+            </Link>
           ))}
           <p>
             {this.props.stages[this.state.currentStageIndex] &&
