@@ -39,14 +39,16 @@ const portfolio = [
               ru: 'Портфолио фото 1',
               en: 'Portfolio foto 1'
             },
-            src: house1
+            src:
+              'http://4.bp.blogspot.com/-voGdFbjNQG0/UUN1UzFCHkI/AAAAAAAAAds/bWDRRWcbEaY/s1600/3D+Architectural+Designs+(37)+HD+Latest+Pictures+Photos+Wallpapers.jpg'
           },
           {
             alt: {
               ru: 'Портфолио фото 2',
               en: 'Portfolio foto 2'
             },
-            src: house2
+            src:
+              'https://www.samoshousing.com/wp-content/uploads/2018/02/Floor-Details-Proper4-copy-1024x683.jpg'
           }
         ]
       },
@@ -66,14 +68,43 @@ const portfolio = [
               ru: 'Портфолио фото 1',
               en: 'Portfolio foto 1'
             },
-            src: house1
+            src:
+              'https://thumbs.dreamstime.com/b/early-stages-house-construction-28914069.jpg'
           },
           {
             alt: {
               ru: 'Портфолио фото 2',
               en: 'Portfolio foto 2'
             },
-            src: house2
+            src:
+              'http://www.prefabmarket.com/wp-content/uploads/2016/08/Exterior-construction-of-Modular-Prefab-Luxury-House-manufactured-in-China.jpg'
+          }
+        ]
+      },
+      {
+        name: {
+          ru: 'Эксплуатация',
+          en: 'Maintanance'
+        },
+        description: {
+          ru: 'Обслуживание здания без проблем',
+          en: 'Property maintanance without troubles'
+        },
+        media: [
+          {
+            alt: {
+              ru: 'Портфолио фото 1',
+              en: 'Portfolio foto 1'
+            },
+            src:
+              'http://www.14forty.co.uk/images/Content/14forty_maintain_mechanical_and_electrical_equipment.jpg'
+          },
+          {
+            alt: {
+              ru: 'Портфолио фото 2',
+              en: 'Portfolio foto 2'
+            },
+            src: house1
           }
         ]
       }

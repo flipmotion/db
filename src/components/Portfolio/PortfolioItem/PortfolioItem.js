@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Element, Link } from 'react-scroll';
+import { Element, Link as ScrollLink } from 'react-scroll';
 import animated, { fadeInOut } from '../../../animations';
 
 // to change layout for mobile later on
@@ -12,7 +12,14 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const MediaArea = styled.div`
+const containerId = 'MediaArea';
+const Link = styled(props => (
+  <ScrollLink containerId={containerId} smooth {...props} />
+))`
+  cursor: pointer;
+`;
+
+const MediaArea = styled.div.attrs({ id: containerId })`
   width: 50%;
   height: 100%;
   background: orange;
@@ -21,7 +28,7 @@ const MediaArea = styled.div`
   overflow-y: auto;
 `;
 
-const NavArea = styled.div`
+const DetailsArea = styled.div`
   width: 50%;
   height: 100%;
   background: orange;
@@ -32,7 +39,9 @@ const NavArea = styled.div`
 `;
 
 // we bind to the top of this element for navigation
-const StageMedia = styled(Element)``;
+const StageMedia = styled(Element)`
+  padding-bottom: 2em;
+`;
 
 const Image = styled.img`
   height: 100%;
@@ -67,21 +76,24 @@ class PortfolioItem extends React.Component {
     return (
       <Wrapper>
         <MediaArea>
-          {this.props.stages.map((stage, index) => (
-            <StageMedia key={index}>
+          {this.props.stages.map((stage, stageIndex) => (
+            <StageMedia name={stageIndex} key={stageIndex}>
               {stage.media.map((medium, index) => (
                 <Image key={index} src={medium.src} alt={medium.alt} />
               ))}
             </StageMedia>
           ))}
         </MediaArea>
-        <NavArea>
+        <DetailsArea>
           <h1>{this.props.name}</h1>
+          {this.props.stages.map((stage, stageIndex) => (
+            <Link to={stageIndex}>{stage.name}</Link>
+          ))}
           <p>
             {this.props.stages[this.state.currentStageIndex] &&
               this.props.stages[this.state.currentStageIndex].description}
           </p>
-        </NavArea>
+        </DetailsArea>
       </Wrapper>
     );
   }
