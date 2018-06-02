@@ -94,7 +94,7 @@ class PortfolioItem extends React.Component {
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper style={this.props.style}>
         <MediaArea>
           {this.props.stages.map((stage, stageIndex) => (
             <StageMedia name={stageIndex} key={stageIndex}>
@@ -121,7 +121,6 @@ class PortfolioItem extends React.Component {
   }
 }
 
-// I'll mix in animation later, it's just too much in one take
-const AnimatedPortfolioItem = PortfolioItem; // animated(PortfolioItem, fadeInOut)
+const AnimatedPortfolioItem = animated(PortfolioItem, fadeInOut);
 
 export default AnimatedPortfolioItem;

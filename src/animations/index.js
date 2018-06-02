@@ -66,7 +66,10 @@ export function fadeFromBottom({ animationStage, transitionDuration }) {
   }
 }
 
-// Kinda HOC. Or just a fn that returns a component?
+// Here comes the HOC
+//
+// Component then must use style prop (apply it to root component
+// or some inner component) to make it work
 function animated(Component, animationEffectFn) {
   return function({
     animationStage,
