@@ -32,9 +32,10 @@ const App = props => (
                       <img
                         src={content.logo.src}
                         alt={content.logo.alt}
-                        style={{ width: '3rem' }}
+                        style={{ height: '3em', width: '3em' }}
                         // otherwise menu jumps because logo loads later
-                        width="3rem"
+                        width="3em"
+                        height="3em"
                       />
                     </Link>
                   }
