@@ -17,12 +17,6 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-Wrapper.propTypes = {
-  animationStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
-    .isRequired,
-  transitionDuration: PropTypes.number.isRequired
-};
-
 const AnimatedWrapper = animated(Wrapper, fadeInOut);
 
 // TODO: scroll forwarding works only in Safari and to be dropped,
@@ -128,12 +122,6 @@ Link.propTypes = { active: PropTypes.bool };
 
 class PortfolioPage extends Component {
   static propTypes = {
-    animationStage: PropTypes.oneOf([
-      'entering',
-      'entered',
-      'exiting',
-      'exited'
-    ]),
     lang: PropTypes.oneOf(['ru', 'en'])
   };
 

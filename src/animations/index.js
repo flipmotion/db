@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export function fadeInOut({ animationStage, transitionDuration }) {
   return {
@@ -71,7 +72,7 @@ export function fadeFromBottom({ animationStage, transitionDuration }) {
 // Component then must use style prop (apply it to root component
 // or some inner component) to make it work
 function animated(Component, animationEffectFn) {
-  return function({
+  function AnimatedComponent({
     animationStage,
     transitionDuration,
     delayIn,
@@ -84,7 +85,21 @@ function animated(Component, animationEffectFn) {
       ...animationEffectFn({ animationStage, transitionDuration, delayIn })
     };
     return <Component style={mergedStyle} {...otherProps} />;
+  }
+
+  AnimatedComponent.propTypes = {
+    animationStage: PropTypes.oneOf([
+      'entering',
+      'entered',
+      'exiting',
+      'exited'
+    ]).isRequired,
+    transitionDuration: PropTypes.number.isRequired,
+    delayIn: PropTypes.number,
+    delayOut: PropTypes.number
   };
+
+  return AnimatedComponent;
 }
 
 export default animated;
