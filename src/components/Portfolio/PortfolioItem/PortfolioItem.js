@@ -97,7 +97,7 @@ class PortfolioItem extends React.Component {
       <Wrapper style={this.props.style}>
         <MediaArea>
           {this.props.stages.map((stage, stageIndex) => (
-            <StageMedia name={stageIndex} key={stageIndex}>
+            <StageMedia name={stageIndex.toString()} key={stageIndex}>
               {stage.media.map((medium, index) => (
                 <Image key={index} src={medium.src} alt={medium.alt} />
               ))}
@@ -107,7 +107,11 @@ class PortfolioItem extends React.Component {
         <DetailsArea>
           <h1>{this.props.name}</h1>
           {this.props.stages.map((stage, stageIndex) => (
-            <Link to={stageIndex} onSetActive={this.handleSetActive}>
+            <Link
+              key={stageIndex}
+              to={stageIndex.toString()}
+              onSetActive={this.handleSetActive}
+            >
               {stage.name}
             </Link>
           ))}
