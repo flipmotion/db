@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Page404 from '../components/Page404';
+import { NavLink } from 'react-router-dom';
+import animated, { noTween } from '../animations';
+
 const Wrapper = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 const Nav = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  flex: none;
+  background: white;
 `;
 const activeClassName = 'ServicesRouterLink_active';
 const Link = styled(props => (
@@ -24,7 +29,10 @@ const Link = styled(props => (
   }
 `;
 
-const Page = styled.div``;
+const Page = styled.div`
+  flex: auto;
+  overflow-y: auto;
+`;
 
 class Services extends React.Component {
   static propTypes = {
@@ -35,7 +43,7 @@ class Services extends React.Component {
     const { services, current } = this.props;
     if (!services[current]) return <Page404 />;
     return (
-      <Wrapper>
+      <Wrapper style={this.props.style}>
         <Nav>
           {services.map((service, index) => (
             <Link key={index} to={`/services/${index}`}>
@@ -49,4 +57,6 @@ class Services extends React.Component {
   }
 }
 
-export default Services;
+const NotAnimatedServices = animated(Services, noTween);
+
+export default NotAnimatedServices;
