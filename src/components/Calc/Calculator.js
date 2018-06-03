@@ -1,5 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { areaRange } from '../../content/calc';
+
+const Wrapper = styled.div`
+  background: grey;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+`;
+
+const Input = props => (
+  <input {...props} min={areaRange.min} max={areaRange.max} />
+);
 
 class Calculator extends React.Component {
   static propTypes = {
@@ -38,25 +51,21 @@ class Calculator extends React.Component {
 
   render() {
     return (
-      <div>
-        <input
-          type="number"
-          min={30}
-          max={5000}
+      <Wrapper>
+        <Input
+          type="text"
           onChange={this.handleAreaChange}
           value={this.state.area}
         />
-        <input
+        <Input
           type="range"
-          min={30}
-          max={5000}
           onChange={this.handleAreaChange}
           value={this.state.area}
         />
         <p>
           min: {this.priceRange().min}, max: {this.priceRange().max}
         </p>
-      </div>
+      </Wrapper>
     );
   }
 }

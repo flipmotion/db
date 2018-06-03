@@ -12,17 +12,19 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   display: flex;
-  width: 150%;
+  width: 100%;
+  flex: auto;
+  align-items: center;
 `;
 
-const Description = styled.div``;
-
-const SelectorArea = styled.div``;
+const SelectorArea = styled.div`
+  padding: 2em;
+`;
 
 const Service = styled(({ selected, ...otherProps }) => (
   <div {...otherProps} />
 ))`
-padding-bottom: 1em;
+padding-bottom: 1.5em;
 cursor: pointer;
 
   &::before {
@@ -58,7 +60,6 @@ class Calc extends React.Component {
       <Wrapper>
         <h1>{pageTextIn(lang).pageName}</h1>
         <Main>
-          <Description>{pageTextIn(lang).chooseServices}</Description>
           <SelectorArea>
             {services.map((service, index) => (
               <Service

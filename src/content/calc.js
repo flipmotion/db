@@ -45,3 +45,8 @@ export function servicesIn(lang) {
     price: service.price
   }));
 }
+
+export const areaRange = {
+  min: 30,
+  max: 5000
+};
