@@ -45,7 +45,7 @@ const menu = {
       }
     },
     {
-      to: '/services',
+      to: '/services/0',
       text: {
         ru: 'Услуги',
         en: 'Services'
