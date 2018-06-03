@@ -99,8 +99,8 @@ const ContentArea = styled.div.attrs({ id: 'ContentArea' })`
   /* scroll-snap-type: y mandatory; */
 `;
 
-const Link = styled(props => (
-  <ScrollLink smooth spy containerId={'ContentArea'} {...props} />
+const Link = styled(({ active, ...otherProps }) => (
+  <ScrollLink smooth spy containerId={'ContentArea'} {...otherProps} />
 ))`
   cursor: pointer;
   display: block;
