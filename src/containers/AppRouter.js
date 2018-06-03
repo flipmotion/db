@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import HomePage from '../components/HomePage';
 import PortfolioPage from '../components/Portfolio/PortfolioPage';
 import ServicesContainer from '../containers/ServicesContainer';
-import Prices from '../components/Prices';
+import Calc from '../components/Calc';
 import Page404 from '../components/Page404';
 import PortfolioItemContainer from '../containers/PortfolioItemContainer';
 
@@ -107,10 +107,11 @@ export default ({ lang }) => {
                     }}
                   />
                   <Route
-                    path="/prices"
+                    path="/calc"
                     render={() => (
                       <AbsoluteDiv>
-                        <Prices
+                        <Calc
+                          lang={lang}
                           animationStage={animationStage}
                           transitionDuration={transitionDuration}
                         />

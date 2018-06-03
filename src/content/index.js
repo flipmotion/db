@@ -52,7 +52,7 @@ const menu = {
       }
     },
     {
-      to: '/prices',
+      to: '/calc',
       text: {
         ru: 'Цены',
         en: 'Prices'
