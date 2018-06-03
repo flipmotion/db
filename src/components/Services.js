@@ -51,7 +51,11 @@ class Services extends React.Component {
             </Link>
           ))}
         </Nav>
-        <Page>{services[current].text}</Page>
+        <Page>
+          {services[current].text.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </Page>
       </Wrapper>
     );
   }
