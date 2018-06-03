@@ -111,6 +111,7 @@ class PortfolioItem extends React.Component {
               key={stageIndex}
               to={stageIndex.toString()}
               onSetActive={this.handleSetActive}
+              spy
             >
               {stage.name}
             </Link>
