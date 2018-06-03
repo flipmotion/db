@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
 import styled from 'styled-components';
@@ -86,8 +86,12 @@ export default ({ lang }) => {
                     }}
                   />
                   <Route
-                    // NOT exact route, we show index page and
-                    // each service page with the same component
+                    exact
+                    path="/services"
+                    render={() => <Redirect to="/services/0" />}
+                  />
+                  <Route
+                    exact
                     path="/services/:index"
                     render={({ match }) => {
                       return (
