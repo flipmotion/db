@@ -16,6 +16,7 @@ const Input = props => (
 
 class Calculator extends React.Component {
   static propTypes = {
+    lang: PropTypes.oneOf(['ru', 'en']),
     priceRanges: PropTypes.arrayOf(
       PropTypes.shape({
         min: PropTypes.number,
@@ -62,12 +63,40 @@ class Calculator extends React.Component {
           onChange={this.handleAreaChange}
           value={this.state.area}
         />
-        <p>
-          min: {this.priceRange().min}, max: {this.priceRange().max}
-        </p>
+        <Result range={this.priceRange()} lang={this.props.lang} />
       </Wrapper>
     );
   }
 }
+
+function formatCurrency(number) {
+  return new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUB'
+  }).format(number);
+}
+
+const text = {
+  selectServices: {
+    en: '⬅︎ Please choose one or more services',
+    ru: '⬅︎ Пожалуйста выберите одну или несколько услуг'
+  }
+};
+
+function textIn(lang) {
+  return {
+    selectServices: text.selectServices[lang]
+  };
+}
+
+const Result = ({ range, lang }) => {
+  if (range.min === 0 || range.max === 0)
+    return <p>{textIn(lang).selectServices}</p>;
+  return (
+    <p>
+      min: {formatCurrency(range.min)}, max: {formatCurrency(range.max)}
+    </p>
+  );
+};
 
 export default Calculator;

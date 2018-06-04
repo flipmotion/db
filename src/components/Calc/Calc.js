@@ -75,6 +75,7 @@ class Calc extends React.Component {
             ))}
           </SelectorArea>
           <Calculator
+            lang={lang}
             priceRanges={this.state.selectedServices.map(
               serviceIndex => services[serviceIndex].price
             )}
