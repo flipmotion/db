@@ -12,6 +12,16 @@ const prices = {
 const services = [
   {
     name: {
+      ru: 'Дизайн-проект',
+      en: 'Project design'
+    },
+    price: {
+      min: 4000,
+      max: 9000
+    }
+  },
+  {
+    name: {
       ru: 'Строительство',
       en: 'Construction'
     },
