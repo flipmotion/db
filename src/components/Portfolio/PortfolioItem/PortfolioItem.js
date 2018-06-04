@@ -35,11 +35,23 @@ const Link = styled(props => (
 `;
 
 const MediaArea = styled.div.attrs({ id: containerId })`
-  width: 50%;
+  flex: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+`;
+
+// This clearly shows that some components have the same
+// layout threshold.
+const slimLayoutThreshold = '800px';
+
+const TitleInMediaArea = styled.h1`
+  padding-left: 1em;
+
+  @media (min-width: ${slimLayoutThreshold}) {
+    display: none;
+  }
 `;
 
 const DetailsArea = styled.div`
@@ -50,18 +62,25 @@ const DetailsArea = styled.div`
   padding: 4em;
   box-sizing: border-box;
   justify-content: center;
-  /* align-items: center; */
+
+  @media (max-width: ${slimLayoutThreshold}) {
+    display: none;
+  }
 `;
 
 // we bind to the top of this element for navigation
 const StageMedia = styled(Element)`
-  padding-bottom: 3em;
+  padding-bottom: 1em;
 `;
 
 const Image = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
+`;
+
+const H2 = styled.h2`
+  padding-left: 1em;
 `;
 
 // Let's express what this component wants to recieve in terms
@@ -96,9 +115,10 @@ class PortfolioItem extends React.Component {
     return (
       <Wrapper style={this.props.style}>
         <MediaArea>
+          <TitleInMediaArea>{this.props.name}</TitleInMediaArea>
           {this.props.stages.map((stage, stageIndex) => (
             <StageMedia name={stageIndex.toString()} key={stageIndex}>
-              <h2>{stage.name}</h2>
+              <H2>{stage.name}</H2>
               {stage.media.map((medium, index) => (
                 <Image key={index} src={medium.src} alt={medium.alt} />
               ))}
@@ -113,6 +133,7 @@ class PortfolioItem extends React.Component {
               to={stageIndex.toString()}
               onSetActive={this.handleSetActive}
               spy
+              containerId={containerId}
             >
               {stage.name}
             </Link>
