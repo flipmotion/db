@@ -55,7 +55,7 @@ const DetailsArea = styled.div`
 
 // we bind to the top of this element for navigation
 const StageMedia = styled(Element)`
-  padding-bottom: 2em;
+  padding-bottom: 3em;
 `;
 
 const Image = styled.img`
@@ -98,6 +98,7 @@ class PortfolioItem extends React.Component {
         <MediaArea>
           {this.props.stages.map((stage, stageIndex) => (
             <StageMedia name={stageIndex.toString()} key={stageIndex}>
+              <h2>{stage.name}</h2>
               {stage.media.map((medium, index) => (
                 <Image key={index} src={medium.src} alt={medium.alt} />
               ))}
