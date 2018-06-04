@@ -17,20 +17,23 @@ const Main = styled.div`
   align-items: center;
 `;
 
-const SelectorArea = styled.div`
-  padding: 2em;
-`;
-
 const Service = styled(({ selected, ...otherProps }) => (
   <div {...otherProps} />
 ))`
-padding-bottom: 1.5em;
 cursor: pointer;
+
+  &:not(:last-child) {
+    padding-bottom: 1.5em;
+  }
 
   &::before {
     content: '${props => (props.selected ? '◼︎' : '◻')}';
     padding: 0.5em;
   }
+`;
+
+const SelectorArea = styled.div`
+  padding: 2em;
 `;
 
 class Calc extends React.Component {
