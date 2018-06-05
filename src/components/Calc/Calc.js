@@ -7,14 +7,9 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
-`;
-
-const Main = styled.div`
-  display: flex;
-  width: 100%;
-  flex: auto;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const Service = styled(({ selected, ...otherProps }) => (
@@ -62,25 +57,23 @@ class Calc extends React.Component {
     return (
       <Wrapper>
         <h1>{pageTextIn(lang).pageName}</h1>
-        <Main>
-          <SelectorArea>
-            {services.map((service, index) => (
-              <Service
-                key={index}
-                onClick={() => this.toggleSelectedServices(index)}
-                selected={this.state.selectedServices.includes(index)}
-              >
-                {service.name}
-              </Service>
-            ))}
-          </SelectorArea>
-          <Calculator
-            lang={lang}
-            priceRanges={this.state.selectedServices.map(
-              serviceIndex => services[serviceIndex].price
-            )}
-          />
-        </Main>
+        <SelectorArea>
+          {services.map((service, index) => (
+            <Service
+              key={index}
+              onClick={() => this.toggleSelectedServices(index)}
+              selected={this.state.selectedServices.includes(index)}
+            >
+              {service.name}
+            </Service>
+          ))}
+        </SelectorArea>
+        <Calculator
+          lang={lang}
+          priceRanges={this.state.selectedServices.map(
+            serviceIndex => services[serviceIndex].price
+          )}
+        />
       </Wrapper>
     );
   }
