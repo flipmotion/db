@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { areaRange } from '../../content/calc';
+import RangeInput from './RangeInput';
 
 const Wrapper = styled.div`
   background: grey;
@@ -10,9 +11,34 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Input = props => (
-  <input {...props} min={areaRange.min} max={areaRange.max} />
-);
+const ControlsWraper = styled.div`
+  display: flex;
+  background: orange;
+`;
+
+const TextInput = styled(props => (
+  <input {...props} type="text" maxLength={areaRange.max.toString().length} />
+))`
+  width: 4em;
+  flex: none;
+  font-size: 1.5rem;
+  text-align: center;
+`;
+
+const Label = styled.label`
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+`;
+
+function validArea(string) {
+  return (
+    // contains up to 4 numbers
+    /^([0-9]{0,4})$/.test(string) &&
+    // and doesn't start with 0
+    !string.startsWith('0')
+  );
+}
 
 class Calculator extends React.Component {
   static propTypes = {
@@ -45,24 +71,28 @@ class Calculator extends React.Component {
   }
 
   handleAreaChange(event) {
-    const enteredArea = Number(event.target.value);
-    if (enteredArea.isNaN) return;
+    const enteredArea = event.target.value;
+    if (!validArea(enteredArea)) return;
     this.setState({ area: event.target.value });
   }
 
   render() {
     return (
       <Wrapper>
-        <Input
-          type="text"
-          onChange={this.handleAreaChange}
-          value={this.state.area}
-        />
-        <Input
-          type="range"
-          onChange={this.handleAreaChange}
-          value={this.state.area}
-        />
+        <ControlsWraper>
+          <TextInput
+            id="CalculatorTextInput"
+            onChange={this.handleAreaChange}
+            value={this.state.area}
+          />
+          <Label htmlFor="CalculatorTextInput">m2</Label>
+          <RangeInput
+            min={areaRange.min}
+            max={areaRange.max}
+            onChange={this.handleAreaChange}
+            value={this.state.area}
+          />
+        </ControlsWraper>
         <Result range={this.priceRange()} lang={this.props.lang} />
       </Wrapper>
     );
@@ -76,6 +106,7 @@ function formatCurrency(number) {
   }).format(number);
 }
 
+// This not content, this is a part of the app, internationalized though.
 const text = {
   selectServices: {
     en: '⬅︎ Please choose one or more services',
