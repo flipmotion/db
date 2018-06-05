@@ -2,18 +2,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { areaRange } from '../../content/calc';
-import RangeInput from './RangeInput';
+import RangeInput from './RangeInput/index';
+
+// This not content, this is a part of the app, internationalized though.
+const text = {
+  selectServices: {
+    en: '⬅︎ Please choose one or more services',
+    ru: '⬅︎ Пожалуйста выберите одну или несколько услуг'
+  },
+  calculationResult: {
+    en: 'The preliminary cost of the works',
+    ru: 'Предварительная стоимость работ'
+  }
+};
+
+function textIn(lang) {
+  return {
+    selectServices: text.selectServices[lang]
+  };
+}
 
 const Wrapper = styled.div`
-  background: grey;
   display: flex;
-  flex: auto;
   flex-direction: column;
+  width: 100%;
 `;
+
+const StyledRangeInput = styled(RangeInput)`
+  width: 100%;
+`;
+
+// I gave up and wrapped the slider in another div
+const StyledRangeInputWithPadding = props => (
+  <div
+    style={{
+      paddingLeft: '1em',
+      paddingRight: '1em',
+      width: '100%'
+    }}
+  >
+    <StyledRangeInput {...props} />
+  </div>
+);
 
 const ControlsWraper = styled.div`
   display: flex;
-  background: orange;
 `;
 
 const TextInput = styled(props => (
@@ -25,20 +58,12 @@ const TextInput = styled(props => (
   text-align: center;
 `;
 
+// m2 text
 const Label = styled.label`
   padding: 0.5em;
   display: flex;
   align-items: center;
 `;
-
-function validArea(string) {
-  return (
-    // contains up to 4 numbers
-    /^([0-9]{0,4})$/.test(string) &&
-    // and doesn't start with 0
-    !string.startsWith('0')
-  );
-}
 
 class Calculator extends React.Component {
   static propTypes = {
@@ -55,7 +80,12 @@ class Calculator extends React.Component {
     super();
     this.state = { area: 450 };
     this.priceRange = this.priceRange.bind(this);
-    this.handleAreaChange = this.handleAreaChange.bind(this);
+    this.handleAreaChangeViaRangeInput = this.handleAreaChangeViaRangeInput.bind(
+      this
+    );
+    this.handleAreaChangeViaTextInput = this.handleAreaChangeViaTextInput.bind(
+      this
+    );
   }
 
   priceRange() {
@@ -70,10 +100,14 @@ class Calculator extends React.Component {
     return { min, max };
   }
 
-  handleAreaChange(event) {
-    const enteredArea = event.target.value;
-    if (!validArea(enteredArea)) return;
-    this.setState({ area: event.target.value });
+  handleAreaChangeViaRangeInput(value) {
+    this.setState({ area: value });
+  }
+
+  handleAreaChangeViaTextInput(event) {
+    const { value } = event.target;
+    const valid = /^([0-9]{0,4})$/.test(value) && !value.startsWith('0');
+    if (valid) this.setState({ area: value });
   }
 
   render() {
@@ -82,15 +116,16 @@ class Calculator extends React.Component {
         <ControlsWraper>
           <TextInput
             id="CalculatorTextInput"
-            onChange={this.handleAreaChange}
+            onChange={this.handleAreaChangeViaTextInput}
             value={this.state.area}
           />
           <Label htmlFor="CalculatorTextInput">m2</Label>
-          <RangeInput
+          <StyledRangeInputWithPadding
             min={areaRange.min}
             max={areaRange.max}
-            onChange={this.handleAreaChange}
-            value={this.state.area}
+            onChange={this.handleAreaChangeViaRangeInput}
+            value={Number(this.state.area)}
+            tooltip={false}
           />
         </ControlsWraper>
         <Result range={this.priceRange()} lang={this.props.lang} />
@@ -106,27 +141,16 @@ function formatCurrency(number) {
   }).format(number);
 }
 
-// This not content, this is a part of the app, internationalized though.
-const text = {
-  selectServices: {
-    en: '⬅︎ Please choose one or more services',
-    ru: '⬅︎ Пожалуйста выберите одну или несколько услуг'
-  }
-};
-
-function textIn(lang) {
-  return {
-    selectServices: text.selectServices[lang]
-  };
-}
-
 const Result = ({ range, lang }) => {
-  if (range.min === 0 || range.max === 0)
-    return <p>{textIn(lang).selectServices}</p>;
+  const noServicesSelected = range.min === 0 || range.max === 0;
+  if (noServicesSelected) return <p>{textIn(lang).selectServices}</p>;
   return (
-    <p>
-      min: {formatCurrency(range.min)}, max: {formatCurrency(range.max)}
-    </p>
+    <React.Fragment>
+      <h3>{textIn(lang).calculationResult}</h3>
+      <p>
+        min: {formatCurrency(range.min)}, max: {formatCurrency(range.max)}
+      </p>
+    </React.Fragment>
   );
 };
 
