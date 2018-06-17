@@ -11,8 +11,8 @@ const services = [
       en: 'Project design'
     },
     price: {
-      min: 4000,
-      max: 9000
+      min: 1000,
+      max: 12000
     }
   },
   {
@@ -22,7 +22,7 @@ const services = [
     },
     price: {
       min: 50000,
-      max: 500000
+      max: 240000
     }
   },
   {
@@ -32,7 +32,7 @@ const services = [
     },
     price: {
       min: 5000,
-      max: 50000
+      max: 25000
     }
   }
 ];
