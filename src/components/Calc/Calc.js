@@ -60,15 +60,17 @@ class Calc extends React.Component {
             selectedServiceIndeces={this.state.selectedServiceIndeces}
             toggleService={this.onServiceToggle}
           />
-          <AreaInput
-            value={this.state.area}
-            onChange={area => this.setState({ area })}
-          />
-          <Result
-            lang={lang}
-            selectedServiceIndeces={this.state.selectedServiceIndeces}
-            area={this.state.area}
-          />
+          <Vertical>
+            <AreaInput
+              value={this.state.area}
+              onChange={area => this.setState({ area })}
+            />
+            <Result
+              lang={lang}
+              selectedServiceIndeces={this.state.selectedServiceIndeces}
+              area={this.state.area}
+            />
+          </Vertical>
         </VerticalOnMobile>
       </Vertical>
     );

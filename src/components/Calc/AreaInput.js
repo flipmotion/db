@@ -39,8 +39,17 @@ function isValidTextInput(value) {
   );
 }
 
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const GreedyChild = styled.div`
+  flex: auto;
+`;
+
 const AreaInput = props => (
-  <div>
+  <Wrapper>
     <TextInput
       id="CalculatorTextInput"
       value={props.value}
@@ -50,14 +59,16 @@ const AreaInput = props => (
       }
     />
     <Label htmlFor="CalculatorTextInput">m2</Label>
-    <RangeInput
-      min={area.min}
-      max={area.max}
-      onChange={props.onChange}
-      value={Number(props.value)}
-      tooltip={false}
-    />
-  </div>
+    <GreedyChild>
+      <RangeInput
+        min={area.min}
+        max={area.max}
+        onChange={props.onChange}
+        value={Number(props.value)}
+        tooltip={false}
+      />
+    </GreedyChild>
+  </Wrapper>
 );
 
 AreaInput.propTypes = {
