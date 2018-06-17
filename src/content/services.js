@@ -1,58 +1,58 @@
 const services = [
   {
     name: {
-      ru: 'Согласование',
-      en: 'Approval'
+      en: 'Approval',
+      ru: 'Согласование'
     },
     text: [
       {
-        ru: 'Описание услуги по согласованию, первый абзац',
-        en: 'Description of the approval service, first paragraph'
+        en: 'Description of the approval service, first paragraph',
+        ru: 'Описание услуги по согласованию, первый абзац'
       },
       {
-        ru: 'Второй абзац',
-        en: 'Second paragraph'
+        en: 'Second paragraph',
+        ru: 'Второй абзац'
       }
     ]
   },
   {
     name: {
-      ru: 'Строительство',
-      en: 'Construction'
+      en: 'Construction',
+      ru: 'Строительство'
     },
     text: [
       {
-        ru: 'Описание услуг по строительству',
-        en: 'Description of the construction service'
+        en: 'Description of the construction service',
+        ru: 'Описание услуг по строительству'
       },
       {
-        ru: 'Второй абзац',
-        en: 'Second paragraph'
+        en: 'Second paragraph',
+        ru: 'Второй абзац'
       }
     ]
   },
   {
     name: {
-      ru: 'Обслуживание',
-      en: 'Maintanance'
+      en: 'Maintanance',
+      ru: 'Обслуживание'
     },
     text: [
       {
-        ru: 'Описание услуг по обслуживанию',
-        en: 'Description of the maintanance service'
+        en: 'Description of the maintanance service',
+        ru: 'Описание услуг по обслуживанию'
       },
       {
-        ru: 'Второй абзац',
-        en: 'Second paragraph'
+        en: 'Second paragraph',
+        ru: 'Второй абзац'
       }
     ]
   }
 ];
 
-export function servicesIn(lang) {
-  if (!lang) throw new Error('lang is not defined');
+export default function servicesIn(lang) {
   return services.map(service => ({
     name: service.name[lang],
-    text: service.text.map(paragraph => paragraph[lang])
+    // use first language as a fallback
+    text: service.text.map(paragraph => paragraph[lang] || paragraph[0])
   }));
 }

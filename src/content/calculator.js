@@ -1,12 +1,7 @@
-const prices = {
-  pageName: {
-    ru: 'Рассчитайте стоимость работ',
-    en: 'Calculate the cost of works'
-  },
-  chooseServices: {
-    ru: 'Выберите нужные вам услуги',
-    en: 'Select the services you need'
-  }
+export const area = {
+  min: 30,
+  max: 5000,
+  default: 450
 };
 
 const services = [
@@ -42,21 +37,9 @@ const services = [
   }
 ];
 
-export function pageTextIn(lang) {
-  return {
-    pageName: prices.pageName[lang],
-    chooseServices: prices.chooseServices[lang]
-  };
-}
-
-export function servicesIn(lang) {
+export default function contentIn(lang) {
   return services.map(service => ({
     name: service.name[lang],
     price: service.price
   }));
 }
-
-export const areaRange = {
-  min: 30,
-  max: 5000
-};

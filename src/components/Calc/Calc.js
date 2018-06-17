@@ -1,80 +1,76 @@
 import React from 'react';
 import styled from 'styled-components';
-import { pageTextIn, servicesIn } from '../../content/calc';
-import Calculator from './Calculator';
+import interfaceIn from '../../interfaceIn';
+import PropTypes from 'prop-types';
+import { Vertical } from '../common';
+import ServiceSelector from './ServiceSelector';
+import AreaInput from './AreaInput';
+import Result from './Result';
+import { area } from '../../content/calculator';
 
-const Wrapper = styled.div`
+const VerticalOnMobile = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-`;
 
-const Service = styled(({ selected, ...otherProps }) => (
-  <div {...otherProps} />
-))`
-cursor: pointer;
-
-  &:not(:last-child) {
-    padding-bottom: 1.5em;
+  @media (max-width: 35rem) {
+    flex-direction: column;
   }
-
-  &::before {
-    content: '${props => (props.selected ? '◼︎' : '◻')}';
-    padding: 0.5em;
-  }
-`;
-
-const SelectorArea = styled.div`
-  padding: 2em;
 `;
 
 class Calc extends React.Component {
+  static propTypes = {
+    lang: PropTypes.oneOf(['ru', 'en'])
+  };
+
   constructor() {
     super();
-    this.state = { selectedServices: [] };
-    this.toggleSelectedServices = this.toggleSelectedServices.bind(this);
+    this.state = { selectedServiceIndeces: [], area: area.default };
+    this.onServiceToggle = this.onServiceToggle.bind(this);
   }
 
-  toggleSelectedServices(serviceIndex) {
-    this.setState(({ selectedServices }) => {
-      const selectedServicesCopy = [...selectedServices];
-      const indexOfServiceInQuestionInState = selectedServices.indexOf(
+  onServiceToggle(serviceIndex) {
+    this.setState(prevState => {
+      // to make sure I don't mess up state directly. Maybe I can go without it
+      // (if muting prevState won't actually mute the state)
+      const selectedServiceIndecesCopy = [...prevState.selectedServiceIndeces];
+
+      const indexOfServiceInQuestionInState = prevState.selectedServiceIndeces.indexOf(
         serviceIndex
       );
+
+      // toggle
       indexOfServiceInQuestionInState !== -1
-        ? selectedServicesCopy.splice(indexOfServiceInQuestionInState, 1)
-        : selectedServicesCopy.push(serviceIndex);
-      return { selectedServices: selectedServicesCopy };
+        ? selectedServiceIndecesCopy.splice(indexOfServiceInQuestionInState, 1)
+        : selectedServiceIndecesCopy.push(serviceIndex);
+      return { selectedServiceIndeces: selectedServiceIndecesCopy };
     });
   }
 
   render() {
     const { lang } = this.props;
-    const services = servicesIn(lang);
     return (
-      <Wrapper>
-        <h1>{pageTextIn(lang).pageName}</h1>
-        <SelectorArea>
-          {services.map((service, index) => (
-            <Service
-              key={index}
-              onClick={() => this.toggleSelectedServices(index)}
-              selected={this.state.selectedServices.includes(index)}
-            >
-              {service.name}
-            </Service>
-          ))}
-        </SelectorArea>
-        <Calculator
-          lang={lang}
-          priceRanges={this.state.selectedServices.map(
-            serviceIndex => services[serviceIndex].price
-          )}
-        />
-      </Wrapper>
+      <Vertical>
+        <h1>{interfaceIn(lang, 'calculate')}</h1>
+        <VerticalOnMobile>
+          <ServiceSelector
+            lang={lang}
+            selectedServiceIndeces={this.state.selectedServiceIndeces}
+            toggleService={this.onServiceToggle}
+          />
+          <AreaInput
+            value={this.state.area}
+            onChange={area => this.setState({ area })}
+          />
+          <Result
+            lang={lang}
+            selectedServiceIndeces={this.state.selectedServiceIndeces}
+            area={this.state.area}
+          />
+        </VerticalOnMobile>
+      </Vertical>
     );
   }
 }

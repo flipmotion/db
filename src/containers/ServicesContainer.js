@@ -1,6 +1,6 @@
 import React from 'react';
 import Services from '../components/Services';
-import { servicesIn } from '../content/services';
+import servicesIn from '../content/services';
 import PropTypes from 'prop-types';
 
 const ServicesContainer = ({ lang, ...otherProps }) => {
