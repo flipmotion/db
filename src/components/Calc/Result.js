@@ -30,6 +30,10 @@ const Result = ({ selectedServiceIndeces, area, lang }) => {
         min: {formatCurrency(resultMinPrice)}, max:{' '}
         {formatCurrency(resultMaxPrice)}
       </p>
+      <p>
+        <a href="https://rbc.ru">{phrase('leave an enquiry')}</a>
+        {phrase('and we will calulcate')}
+      </p>
     </Vertical>
   );
 };

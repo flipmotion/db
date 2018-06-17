@@ -17,6 +17,14 @@ const text = {
   'calculation result': {
     en: 'The preliminary cost of the works',
     ru: 'Предварительная стоимость работ'
+  },
+  'leave an enquiry': {
+    en: 'Leave an enquiry',
+    ru: 'Оставьте заявку'
+  },
+  'and we will calulcate': {
+    en: ', and will make a more precise calculation',
+    ru: ', и мы сделаем для вас более точный расчет'
   }
 };
 
