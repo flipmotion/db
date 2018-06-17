@@ -17,7 +17,6 @@ const Result = ({ selectedServiceIndeces, area, lang }) => {
   const phrase = phrase => interfaceIn(lang, phrase);
   const allServices = servicesIn(lang);
   const selectedServices = selectedServiceIndeces.map(i => allServices[i]);
-  console.dir(selectedServices);
   const resultMinPrice = selectedServices
     .map(service => service.price.min)
     .reduce((prev, curr) => prev + curr * Number(area), 0);
