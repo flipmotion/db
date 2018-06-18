@@ -24,7 +24,11 @@ function BalanceArea() {
   );
 }
 
-const Main = styled(props => <div {...props}>Form</div>)`
+const Main = styled(({ lang, ...otherProps }) => (
+  <div {...otherProps}>
+    {interfaceIn(lang)("fill the from and we'll call back")}
+  </div>
+))`
   align-self: center;
 `;
 
