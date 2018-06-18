@@ -24,15 +24,25 @@ function BalanceArea() {
   );
 }
 
-const Main = styled(({ lang, ...otherProps }) => (
-  <div {...otherProps}>
-    {interfaceIn(lang)("fill the from and we'll call back")}
-  </div>
-))`
+class Form extends React.Component {
+  render() {
+    return <p>This is a form</p>;
+  }
+}
+
+const Main = styled(({ lang, ...otherProps }) => {
+  const phrase = interfaceIn(lang);
+  return (
+    <div {...otherProps}>
+      <h1>{phrase("fill the from and we'll call back")}</h1>
+      <Form />
+    </div>
+  );
+})`
   align-self: center;
 `;
 
-const Form = () => (
+const Enquiry = () => (
   <Wrapper>
     <BalanceArea />
     <Main />
@@ -40,4 +50,4 @@ const Form = () => (
   </Wrapper>
 );
 
-export default Form;
+export default Enquiry;

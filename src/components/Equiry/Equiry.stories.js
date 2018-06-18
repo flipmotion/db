@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Form from './Form';
+import Form from './Equiry';
 import Div100vh from 'react-div-100vh';
 
 const form = storiesOf('Form', module);
