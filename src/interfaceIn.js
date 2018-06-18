@@ -35,5 +35,5 @@ export default function interfaceIn(lang, phraseId) {
   const phrase = text[phraseId];
   if (!phrase) throw new Error(`Phrase id '${phraseId}' was not found`);
   // Falls back to the first translation if `lang` translation is not found.
-  return phrase[lang] || phrase[0];
+  return phrase[lang] || phrase['ru'] || phrase[0];
 }
