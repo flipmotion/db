@@ -68,6 +68,8 @@ function App() {
                 >
                   <AppRouter lang={lang} />
                 </MenuContainer>
+
+                {/* here comes the pop-up (one for now, maybe more later) */}
                 <Route
                   render={({ location }) =>
                     location.hash === '#inquiry' && (
