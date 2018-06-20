@@ -1,7 +1,7 @@
 const text = {
   "fill the from and we'll call back": {
     en: 'Fill the form below and we will call you back',
-    ru: 'Заполните форму ниже и вы вам перезвоним'
+    ru: 'Заполните форму ниже и мы вам перезвоним'
   }
 };
 
