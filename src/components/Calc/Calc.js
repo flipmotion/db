@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import interfaceIn from '../../interfaceIn';
+import interfaceIn from './interfaceIn';
 import PropTypes from 'prop-types';
 import { Vertical } from '../common';
 import ServiceSelector from './ServiceSelector';

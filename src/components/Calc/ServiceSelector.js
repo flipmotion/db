@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import interfaceIn from '../../interfaceIn';
+import interfaceIn from './interfaceIn';
 import contentIn from '../../content/calculator';
 import { Vertical } from '../common';
 

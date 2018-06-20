@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import interfaceIn from '../../interfaceIn';
+import interfaceIn from './interfaceIn';
 import { Vertical } from '../common';
 import servicesIn from '../../content/calculator';
 
@@ -31,7 +31,7 @@ const Result = ({ selectedServiceIndeces, area, lang }) => {
         {formatCurrency(resultMaxPrice)}
       </p>
       <p>
-        <a href="https://rbc.ru">{phrase('leave an enquiry')}</a>
+        <a href="#inquiry">{phrase('leave an enquiry')}</a>
         {phrase('and we will calulcate')}
       </p>
     </Vertical>
