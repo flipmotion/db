@@ -28,7 +28,7 @@ const transitionDuration = 850;
 
 // To figure out how this monster works, check out
 // https://medium.com/@pshrmn/4b73f634992a
-export default ({ lang }) => {
+function AppRouter({ lang }) {
   return (
     <Route
       render={({ location }) => (
@@ -37,6 +37,8 @@ export default ({ lang }) => {
             <Transition
               key={location.pathname}
               timeout={{ enter: 0, exit: transitionDuration }}
+              mountOnEnter={true}
+              unmountOnExit={true}
             >
               {animationStage => (
                 <Switch location={location}>
@@ -44,7 +46,7 @@ export default ({ lang }) => {
                     exact
                     path="/"
                     render={() => (
-                      <AbsoluteDiv data-name="AbsoluteDiv">
+                      <AbsoluteDiv>
                         <HomePage
                           animationStage={animationStage}
                           lang={lang}
@@ -127,4 +129,6 @@ export default ({ lang }) => {
       )}
     />
   );
-};
+}
+
+export default AppRouter;
