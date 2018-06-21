@@ -34,7 +34,9 @@ const AnimatedFixedWrapper = styled(
       ${props => (props.animationStage === 'entered' ? '0' : '100vh')}
     );
     /* when closing the form, fade does not work with transition: background-color
-     so I had to resort to transition: all */
+     so I had to resort to transition: all
+     also, transition delay doesn't work for unclear reason */
+
     transition: all ${props => props.transitionDuration / 1000}s;
   }
 `;
