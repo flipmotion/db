@@ -14,7 +14,6 @@ const FixedWrapper = styled.div`
   padding: 1em;
   justify-content: space-between;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.95);
 `;
 
 const AnimatedFixedWrapper = styled(
@@ -22,8 +21,22 @@ const AnimatedFixedWrapper = styled(
     <FixedWrapper {...other} />
   )
 )`
-  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
-  transition: opacity ${props => props.transitionDuration / 1000}s;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    ${props => (props.animationStage === 'entered' ? 0.95 : 0)}
+  );
+  transition: all ${props => props.transitionDuration / 1000}s;
+  &${FixedWrapper} {
+    opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
+    transform: translateY(
+      ${props => (props.animationStage === 'entered' ? '0' : '100vh')}
+    );
+    /* when closing the form, fade does not work with transition: background-color
+     so I had to resort to transition: all */
+    transition: all ${props => props.transitionDuration / 1000}s;
+  }
 `;
 
 AnimatedFixedWrapper.propTypes = {
@@ -38,6 +51,7 @@ const CloseButton = styled(props => (
   </Link>
 ))`
   align-self: flex-start;
+  text-decoration: none;
 `;
 
 const SubmitButton = styled.button.attrs({ type: 'submit' })`
