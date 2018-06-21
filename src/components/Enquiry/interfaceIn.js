@@ -15,8 +15,6 @@ const text = {
 export default function interfaceIn(lang) {
   return function(phraseId) {
     const phrase = text[phraseId];
-    if (!phrase) throw new Error(`Phrase id '${phraseId}' was not found`);
-    // Falls back
-    return phrase[lang] || phrase['ru'] || phrase[0];
+    return phrase ? phrase[lang] : phraseId;
   };
 }

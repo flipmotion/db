@@ -6,7 +6,7 @@ import IntApp from './containers/IntApp';
 import contentIn from './content';
 import { TopBar, BottomBar, MobileBar } from './components/Menu/MenuBars';
 import LangIcon from './components/Menu/LangIcon';
-import Enquiry from './components/Equiry';
+import Enquiry from './components/Enquiry';
 import { injectGlobal } from 'styled-components';
 import Div100vh from 'react-div-100vh';
 import { Transition } from 'react-transition-group';
@@ -77,6 +77,7 @@ function App() {
                         <Enquiry
                           animationStage={animationStage}
                           transitionDuration={transitionDuration}
+                          lang={lang}
                         />
                       )}
                     </Transition>

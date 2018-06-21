@@ -43,7 +43,7 @@ const AnimatedFixedWrapper = styled(
 AnimatedFixedWrapper.propTypes = {
   animationStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
     .isRequired,
-  animationDuration: PropTypes.number.isRequired
+  transitionDuration: PropTypes.number.isRequired
 };
 
 const CloseButton = styled(props => (
@@ -106,6 +106,7 @@ class Form extends React.Component {
     this.nameValidationErrors = this.nameValidationErrors.bind(this);
     this.phoneValidationErrors = this.phoneValidationErrors.bind(this);
     this.handlePhoneChange = this.handlePhoneChange.bind(this);
+    this.phrase = this.phrase.bind(this);
     this.state = {
       name: '',
       phone: '',
@@ -114,9 +115,13 @@ class Form extends React.Component {
     };
   }
 
+  phrase(phraseId) {
+    return interfaceIn(this.props.lang)(phraseId);
+  }
+
   nameValidationErrors() {
     return this.state.name.length < 3
-      ? 'The name must be at least 3 chars long'
+      ? this.phrase('The name must be at least 3 chars long')
       : '';
   }
 
@@ -187,7 +192,7 @@ const Main = styled(({ lang, ...otherProps }) => {
   return (
     <div {...otherProps}>
       <h1>{phrase("fill the from and we'll call back")}</h1>
-      <Form />
+      <Form lang={lang} />
     </div>
   );
 })`
@@ -201,7 +206,7 @@ const Enquiry = ({ lang, animationStage, transitionDuration }) => (
     transitionDuration={transitionDuration}
   >
     <BalanceArea />
-    <Main />
+    <Main lang={lang} />
     <CloseButton />
   </AnimatedFixedWrapper>
 );
