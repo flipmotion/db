@@ -12,8 +12,18 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const CloseButton = styled(props => <div {...props}>X</div>)`
+function removeHash() {
+  // window.history.pushState({}, "", window.location.pathname)
+  window.history.back();
+}
+
+const CloseButton = styled(props => (
+  <div {...props} onClick={removeHash}>
+    X
+  </div>
+))`
   align-self: flex-start;
+  cursor: pointer;
 `;
 
 const SubmitButton = styled.button.attrs({ type: 'submit' })`
@@ -57,7 +67,7 @@ Field.propTypes = {
 };
 
 class Form extends React.Component {
-  propTypes = {
+  static propTypes = {
     lang: PropTypes.string.isRequired
   };
 
