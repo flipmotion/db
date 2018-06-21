@@ -16,17 +16,16 @@ const FixedWrapper = styled.div`
   box-sizing: border-box;
 `;
 
+function bgFill(props) {
+  return props.animationStage === 'entered' ? 0.95 : 0;
+}
+
 const AnimatedFixedWrapper = styled(
   ({ animationStage, transitionDuration, ...other }) => (
     <FixedWrapper {...other} />
   )
 )`
-  background-color: rgba(
-    255,
-    255,
-    255,
-    ${props => (props.animationStage === 'entered' ? 0.95 : 0)}
-  );
+  background-color: rgba(255, 255, 255, ${bgFill});
   transition: all ${props => props.transitionDuration / 1000}s;
   &${FixedWrapper} {
     opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
