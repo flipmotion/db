@@ -16,11 +16,12 @@ injectGlobal`
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    overflow: hidden;
   }
 `;
 
 const Fixed = styled.div`
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.95);
   position: fixed;
   left: 0;
   top: 0;
