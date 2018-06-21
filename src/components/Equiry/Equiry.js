@@ -2,28 +2,42 @@ import React from 'react';
 import styled from 'styled-components';
 import interfaceIn from './interfaceIn';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+const FixedWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   padding: 1em;
   justify-content: space-between;
   box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.95);
 `;
 
-function removeHash() {
-  // window.history.pushState({}, "", window.location.pathname)
-  window.history.back();
-}
+const AnimatedFixedWrapper = styled(
+  ({ animationStage, transitionDuration, ...other }) => (
+    <FixedWrapper {...other} />
+  )
+)`
+  opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
+  transition: opacity ${props => props.transitionDuration / 1000}s;
+`;
+
+AnimatedFixedWrapper.propTypes = {
+  animationStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+    .isRequired,
+  animationDuration: PropTypes.number.isRequired
+};
 
 const CloseButton = styled(props => (
-  <div {...props} onClick={removeHash}>
+  <Link {...props} to="#">
     X
-  </div>
+  </Link>
 ))`
   align-self: flex-start;
-  cursor: pointer;
 `;
 
 const SubmitButton = styled.button.attrs({ type: 'submit' })`
@@ -165,12 +179,16 @@ const Main = styled(({ lang, ...otherProps }) => {
   align-self: center;
 `;
 
-const Enquiry = () => (
-  <Wrapper>
+// next: actually use lang and animationStage
+const Enquiry = ({ lang, animationStage, transitionDuration }) => (
+  <AnimatedFixedWrapper
+    animationStage={animationStage}
+    transitionDuration={transitionDuration}
+  >
     <BalanceArea />
     <Main />
     <CloseButton />
-  </Wrapper>
+  </AnimatedFixedWrapper>
 );
 
 export default Enquiry;

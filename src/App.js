@@ -9,7 +9,7 @@ import LangIcon from './components/Menu/LangIcon';
 import Enquiry from './components/Equiry';
 import { injectGlobal } from 'styled-components';
 import Div100vh from 'react-div-100vh';
-import styled from 'styled-components';
+import { Transition } from 'react-transition-group';
 
 injectGlobal`
   body {
@@ -20,14 +20,7 @@ injectGlobal`
   }
 `;
 
-const Fixed = styled.div`
-  background: rgba(255, 255, 255, 0.95);
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-`;
+const transitionDuration = 850;
 
 function App() {
   return (
@@ -72,13 +65,22 @@ function App() {
 
                 {/* here comes the pop-up (one for now, maybe more later) */}
                 <Route
-                  render={({ location }) =>
-                    location.hash === '#inquiry' && (
-                      <Fixed>
-                        <Enquiry />
-                      </Fixed>
-                    )
-                  }
+                  render={({ location }) => (
+                    <Transition
+                      in={location.hash === '#inquiry'}
+                      key={location.pathname}
+                      timeout={{ enter: 0, exit: transitionDuration }}
+                      mountOnEnter={true}
+                      unmountOnExit={true}
+                    >
+                      {animationStage => (
+                        <Enquiry
+                          animationStage={animationStage}
+                          transitionDuration={transitionDuration}
+                        />
+                      )}
+                    </Transition>
+                  )}
                 />
               </React.Fragment>
             </Router>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import interfaceIn from './interfaceIn';
 import { Vertical } from '../common';
 import servicesIn from '../../content/calculator';
+import { Link } from 'react-router-dom';
 
 function formatCurrency(number) {
   return new Intl.NumberFormat('ru-RU', {
@@ -31,7 +32,7 @@ const Result = ({ selectedServiceIndeces, area, lang }) => {
         {formatCurrency(resultMaxPrice)}
       </p>
       <p>
-        <a href="#inquiry">{phrase('leave an enquiry')}</a>
+        <Link to="#inquiry">{phrase('leave an enquiry')}</Link>
         {phrase('and we will calulcate')}
       </p>
     </Vertical>
