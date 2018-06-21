@@ -63,7 +63,7 @@ class Calc extends React.Component {
           <Vertical>
             <AreaInput
               value={this.state.area}
-              onChange={area => this.setState({ area })}
+              onChange={area => this.setState({ area: String(area) })}
             />
             <Result
               lang={lang}

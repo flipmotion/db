@@ -1,7 +1,7 @@
 export const area = {
-  min: 30,
-  max: 5000,
-  default: 450
+  min: '30',
+  max: '5000',
+  default: '450'
 };
 
 const services = [

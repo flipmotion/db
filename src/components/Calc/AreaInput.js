@@ -19,9 +19,9 @@ TextInput.propTypes = {
 
 RangeInput.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  min: PropTypes.number,
-  max: PropTypes.number
+  value: PropTypes.number.isRequired,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired
 };
 
 // m2 text
@@ -61,8 +61,8 @@ const AreaInput = props => (
     <Label htmlFor="CalculatorTextInput">m2</Label>
     <GreedyChild>
       <RangeInput
-        min={area.min}
-        max={area.max}
+        min={Number(area.min)}
+        max={Number(area.max)}
         onChange={props.onChange}
         value={Number(props.value)}
         tooltip={false}
