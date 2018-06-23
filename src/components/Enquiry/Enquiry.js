@@ -112,10 +112,11 @@ class Form extends React.Component {
       this.nameValidationErrors().length === 0 &&
       this.phoneValidationErrors().length === 0;
     if (fieldsAreOK) {
+      this.setState({ displayValidationErrors: false, submitted: true });
       // TODO: should actually submit
       console.log('The form (kind of) submitted');
     } else {
-      this.setState({ displayValidationErrors: true });
+      this.setState({ displayValidationErrors: true, submitted: false });
     }
   }
 
@@ -132,7 +133,10 @@ class Form extends React.Component {
   }
 
   render() {
-    return (
+    const phrase = interfaceIn(this.props.lang);
+    return this.state.submitted ? (
+      <p>{phrase("thanks for the eqnuiry, we'll call you back")}</p>
+    ) : (
       <form onSubmit={this.handleSubmit}>
         <Field
           icon={
@@ -166,18 +170,20 @@ const Main = styled(({ lang, ...otherProps }) => {
   const phrase = interfaceIn(lang);
   return (
     <div {...otherProps}>
-      <h1>{phrase("fill the from and we'll call back")}</h1>
+      <h1>{phrase('fill the from')}</h1>
       <Form lang={lang} />
     </div>
   );
 })`
   align-self: center;
+  background: white;
+  padding: 3em;
 `;
 
 const AnimatedMain = animated(Main, fadeFromBottom);
 
 const Cover = styled(FixedWrapper)`
-  background: white;
+  background: rgb(230, 230, 230);
 `;
 
 const AnimatedCover = animated(Cover, almostIn);

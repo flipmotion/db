@@ -1,7 +1,11 @@
 const text = {
-  "fill the from and we'll call back": {
-    en: 'Fill the form below and we will call you back',
-    ru: 'Заполните форму ниже и мы вам перезвоним'
+  'fill the from': {
+    en: 'Fill the form',
+    ru: 'Заполните форму'
+  },
+  "thanks for the eqnuiry, we'll call you back": {
+    en: "Thanks for the eqnuiry, we'll call you back",
+    ru: 'Спасибо на обращение, мы обязательно вам перезвоним'
   }
 };
 

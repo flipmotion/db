@@ -7,8 +7,8 @@
 // For iternationalized content, see content directory.
 const text = {
   'choose services': {
-    en: 'Please choose one or more services',
-    ru: 'Пожалуйста выберите одну или несколько услуг'
+    en: 'Choose one or more services',
+    ru: 'Выберите одну или несколько услуг'
   },
   calculate: {
     ru: 'Рассчитайте стоимость работ',
