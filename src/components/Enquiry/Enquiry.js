@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import interfaceIn from './interfaceIn';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import animated, { fadeFromBottom, almostIn } from '../../animations';
 
 const FixedWrapper = styled.div`
   position: fixed;
@@ -15,36 +16,6 @@ const FixedWrapper = styled.div`
   justify-content: space-between;
   box-sizing: border-box;
 `;
-
-function bgFill({ transitionStage }) {
-  return transitionStage === 'entered' ? 0.95 : 0;
-}
-
-const AnimatedFixedWrapper = styled(
-  ({ transitionStage, transitionDuration, ...other }) => (
-    <FixedWrapper {...other} />
-  )
-)`
-  background-color: rgba(255, 255, 255, ${bgFill});
-  transition: all ${props => props.transitionDuration / 200}s;
-  &${FixedWrapper} {
-    opacity: ${props => (props.transitionStage === 'entered' ? 1 : 0)};
-    transform: translateY(
-      ${props => (props.transitionStage === 'entered' ? '0' : '100vh')}
-    );
-    /* when closing the form, fade does not work with transition: background-color
-     so I had to resort to transition: all
-     also, transition delay doesn't work for unclear reason */
-
-    transition: all ${props => props.transitionDuration / 1000}s;
-  }
-`;
-
-AnimatedFixedWrapper.propTypes = {
-  transitionStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
-    .isRequired,
-  transitionDuration: PropTypes.number.isRequired
-};
 
 const CloseButton = styled(props => (
   <Link {...props} to="#">
@@ -199,16 +170,32 @@ const Main = styled(({ lang, ...otherProps }) => {
   align-self: center;
 `;
 
-// next: actually use lang and transitionStage
+const AnimatedFixedWrapper = animated(FixedWrapper, fadeFromBottom);
+
+const Cover = styled(FixedWrapper)`
+  background: white;
+`;
+
+const AnimatedCover = animated(Cover, almostIn);
+
 const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
-  <AnimatedFixedWrapper
-    transitionStage={transitionStage}
-    transitionDuration={transitionDuration}
-  >
-    <BalanceArea />
-    <Main lang={lang} />
-    <CloseButton />
-  </AnimatedFixedWrapper>
+  <React.Fragment>
+    <AnimatedCover
+      transitionStage={transitionStage}
+      transitionDuration={transitionDuration}
+      delayOut={transitionDuration}
+    />
+
+    <AnimatedFixedWrapper
+      transitionStage={transitionStage}
+      transitionDuration={transitionDuration}
+      delayIn={transitionDuration * 0.67}
+    >
+      <BalanceArea />
+      <Main lang={lang} />
+      <CloseButton />
+    </AnimatedFixedWrapper>
+  </React.Fragment>
 );
 
 export default Enquiry;

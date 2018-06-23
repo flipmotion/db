@@ -15,6 +15,25 @@ export function fadeInOut({ transitionStage, transitionDuration }) {
   };
 }
 
+export function almostIn({
+  transitionStage,
+  transitionDuration,
+  delayIn = 0,
+  delayOut = 0
+}) {
+  const entered = transitionStage === 'entered';
+  const exiting = transitionStage === 'exiting';
+
+  return {
+    opacity: entered ? 0.95 : 0,
+    transitionProperty: 'opacity',
+    transitionDuration: `${transitionDuration / 1000}s`,
+    transitionDelay: `${
+      entered ? delayIn / 1000 : exiting ? delayOut / 1000 : 0
+    }s`
+  };
+}
+
 export function fadeFromLeft({ transitionStage, transitionDuration }) {
   if (transitionStage === 'entered') {
     return {
@@ -51,20 +70,25 @@ export function fadeFromRight({
   };
 }
 
-export function fadeFromBottom({ transitionStage, transitionDuration }) {
-  if (transitionStage === 'entered') {
-    return {
-      opacity: 1,
-      transform: 'translateY(0px)',
-      transition: `all ${transitionDuration / 1000} ease-out 0.35s`
-    };
-  } else {
-    return {
-      opacity: 0,
-      transform: 'translateY(500px)',
-      transition: `all ${transitionDuration / 1000} ease-out 0.35s`
-    };
-  }
+export function fadeFromBottom({
+  transitionStage,
+  transitionDuration,
+  delayIn = 0,
+  delayOut = 0
+}) {
+  const entered = transitionStage === 'entered';
+  const exiting = transitionStage === 'exiting';
+
+  return {
+    // opacity: entered ? 1 : 0,
+    animationTimingFunction: 'ease-out',
+    transform: `translateY(${entered ? '0px' : '100vh'})`,
+    transitionProperty: 'all',
+    transitionDuration: `${transitionDuration / 1000}s`,
+    transitionDelay: `${
+      entered ? delayIn / 1000 : exiting ? delayOut / 1000 : 0
+    }s`
+  };
 }
 
 export function noTween({ transitionStage, transitionDuration }) {
