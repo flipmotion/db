@@ -14,7 +14,7 @@ portfolio.addDecorator(inFullHeightDiv);
 
 const label = 'Animation stages';
 
-const animationStages = {
+const transitionStages = {
   entering: 'entering',
   entered: 'entered',
   exiting: 'exiting',
@@ -26,6 +26,6 @@ const groupId = 'GROUP-ID1';
 
 portfolio.add('PortfolioPage', () => (
   <PortfolioPage
-    animationStage={select(label, animationStages, defaultStage, groupId)}
+    transitionStage={select(label, transitionStages, defaultStage, groupId)}
   />
 ));

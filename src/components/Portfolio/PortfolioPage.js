@@ -127,7 +127,7 @@ class PortfolioPage extends Component {
 
   static defaultProps = {
     lang: 'ru',
-    animationStage: 'entered'
+    transitionStage: 'entered'
   };
 
   constructor() {
@@ -171,7 +171,7 @@ class PortfolioPage extends Component {
   render() {
     const items = portfolioIndexPageIn(this.props.lang);
     const animation = {
-      animationStage: this.props.animationStage,
+      transitionStage: this.props.transitionStage,
       transitionDuration: this.props.transitionDuration
     };
 

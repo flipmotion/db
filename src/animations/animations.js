@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function fadeInOut({ animationStage, transitionDuration }) {
+export function fadeInOut({ transitionStage, transitionDuration }) {
   return {
     transitionProperty: 'opacity',
     transitionDuration: `${transitionDuration / 1000}s`,
     transitionTimingFunction: 'ease-in',
     // FIXME: when page is navigated directly, delay is a problem!
     transitionDelay:
-      animationStage === 'entered'
+      transitionStage === 'entered'
         ? `${((transitionDuration / 1000) * 2) / 3}s`
         : '0s',
-    opacity: animationStage === 'entered' ? 1 : 0
+    opacity: transitionStage === 'entered' ? 1 : 0
   };
 }
 
-export function fadeFromLeft({ animationStage, transitionDuration }) {
-  if (animationStage === 'entered') {
+export function fadeFromLeft({ transitionStage, transitionDuration }) {
+  if (transitionStage === 'entered') {
     return {
       opacity: 1,
       transform: 'translateX(0px)',
@@ -32,13 +32,13 @@ export function fadeFromLeft({ animationStage, transitionDuration }) {
 }
 
 export function fadeFromRight({
-  animationStage,
+  transitionStage,
   transitionDuration,
   delayIn = 0,
   delayOut = 0
 }) {
-  const entered = animationStage === 'entered';
-  const exiting = animationStage === 'exiting';
+  const entered = transitionStage === 'entered';
+  const exiting = transitionStage === 'exiting';
 
   return {
     opacity: entered ? 1 : 0,
@@ -51,8 +51,8 @@ export function fadeFromRight({
   };
 }
 
-export function fadeFromBottom({ animationStage, transitionDuration }) {
-  if (animationStage === 'entered') {
+export function fadeFromBottom({ transitionStage, transitionDuration }) {
+  if (transitionStage === 'entered') {
     return {
       opacity: 1,
       transform: 'translateY(0px)',
@@ -67,8 +67,8 @@ export function fadeFromBottom({ animationStage, transitionDuration }) {
   }
 }
 
-export function noTween({ animationStage, transitionDuration }) {
-  return animationStage === 'entered' ? { opacity: 1 } : { opacity: 0 };
+export function noTween({ transitionStage, transitionDuration }) {
+  return transitionStage === 'entered' ? { opacity: 1 } : { opacity: 0 };
 }
 
 // Here comes the HOC
@@ -77,7 +77,7 @@ export function noTween({ animationStage, transitionDuration }) {
 // or some inner component) to make it work
 function animated(Component, animationEffectFn) {
   function AnimatedComponent({
-    animationStage,
+    transitionStage,
     transitionDuration,
     delayIn,
     delayOut,
@@ -86,13 +86,13 @@ function animated(Component, animationEffectFn) {
   }) {
     const mergedStyle = {
       ...style,
-      ...animationEffectFn({ animationStage, transitionDuration, delayIn })
+      ...animationEffectFn({ transitionStage, transitionDuration, delayIn })
     };
     return <Component style={mergedStyle} {...otherProps} />;
   }
 
   AnimatedComponent.propTypes = {
-    animationStage: PropTypes.oneOf([
+    transitionStage: PropTypes.oneOf([
       'entering',
       'entered',
       'exiting',

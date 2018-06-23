@@ -23,7 +23,7 @@ const Splitter = () => <div>---</div>;
 
 const label = 'Animation stages';
 
-const animationStages = {
+const transitionStages = {
   entering: 'entering',
   entered: 'entered',
   exiting: 'exiting',
@@ -63,9 +63,9 @@ homePage.add('Menu', () => (
               }
             >
               <HomePage
-                animationStage={select(
+                transitionStage={select(
                   label,
-                  animationStages,
+                  transitionStages,
                   defaultStage,
                   groupId
                 )}

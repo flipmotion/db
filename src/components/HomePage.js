@@ -27,7 +27,7 @@ const Text = styled.div.attrs({
   style: props => ({
     ...props.style,
     ...fadeFromLeft({
-      animationStage: props.animationStage,
+      transitionStage: props.transitionStage,
       transitionDuration: props.transitionDuration
     })
   }),
@@ -76,7 +76,7 @@ const Composer = styled.div`
   }
 `;
 
-const HomePage = ({ lang, animationStage, transitionDuration, style }) => {
+const HomePage = ({ lang, transitionStage, transitionDuration, style }) => {
   const content = contentIn(lang);
   const header = content.homePage.header;
   const paragraphText = content.homePage.paragraphText;
@@ -92,13 +92,13 @@ const HomePage = ({ lang, animationStage, transitionDuration, style }) => {
         linkText={linkText}
         paragraphText={paragraphText}
         header={header}
-        animationStage={animationStage}
+        transitionStage={transitionStage}
         transitionDuration={transitionDuration}
       />
       <AnimatedImage
         alt={imageAlt}
         src={imageSrc}
-        animationStage={animationStage}
+        transitionStage={transitionStage}
         transitionDuration={transitionDuration}
         delayIn={400}
       />

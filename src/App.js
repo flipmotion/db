@@ -73,9 +73,9 @@ function App() {
                       mountOnEnter={true}
                       unmountOnExit={true}
                     >
-                      {animationStage => (
+                      {transitionStage => (
                         <Enquiry
-                          animationStage={animationStage}
+                          transitionStage={transitionStage}
                           transitionDuration={transitionDuration}
                           lang={lang}
                         />

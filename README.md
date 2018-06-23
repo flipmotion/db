@@ -17,7 +17,7 @@ The project uses `styled-components` and `storybook` heavily. It also relies on 
 - Content is in `src/content`
 
 ## Animation aproach
-The current component contract is: every component recieves an `animationStage` prop, which is an invariant of ['entering', 'entered', 'exiting', 'exited', 'unmounted']
+The current component contract is: every component recieves an `transitionStage` prop, which is an invariant of ['entering', 'entered', 'exiting', 'exited', 'unmounted']
 
 ## Linting
 The project uses prettier (default settings) and ESLint (thanks to Create React App, also no manual  settings).

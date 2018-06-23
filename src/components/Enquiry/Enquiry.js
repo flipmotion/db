@@ -16,21 +16,21 @@ const FixedWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-function bgFill(props) {
-  return props.animationStage === 'entered' ? 0.95 : 0;
+function bgFill({ transitionStage }) {
+  return transitionStage === 'entered' ? 0.95 : 0;
 }
 
 const AnimatedFixedWrapper = styled(
-  ({ animationStage, transitionDuration, ...other }) => (
+  ({ transitionStage, transitionDuration, ...other }) => (
     <FixedWrapper {...other} />
   )
 )`
   background-color: rgba(255, 255, 255, ${bgFill});
-  transition: all ${props => props.transitionDuration / 1000}s;
+  transition: all ${props => props.transitionDuration / 200}s;
   &${FixedWrapper} {
-    opacity: ${props => (props.animationStage === 'entered' ? 1 : 0)};
+    opacity: ${props => (props.transitionStage === 'entered' ? 1 : 0)};
     transform: translateY(
-      ${props => (props.animationStage === 'entered' ? '0' : '100vh')}
+      ${props => (props.transitionStage === 'entered' ? '0' : '100vh')}
     );
     /* when closing the form, fade does not work with transition: background-color
      so I had to resort to transition: all
@@ -41,7 +41,7 @@ const AnimatedFixedWrapper = styled(
 `;
 
 AnimatedFixedWrapper.propTypes = {
-  animationStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+  transitionStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
     .isRequired,
   transitionDuration: PropTypes.number.isRequired
 };
@@ -199,10 +199,10 @@ const Main = styled(({ lang, ...otherProps }) => {
   align-self: center;
 `;
 
-// next: actually use lang and animationStage
-const Enquiry = ({ lang, animationStage, transitionDuration }) => (
+// next: actually use lang and transitionStage
+const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
   <AnimatedFixedWrapper
-    animationStage={animationStage}
+    transitionStage={transitionStage}
     transitionDuration={transitionDuration}
   >
     <BalanceArea />

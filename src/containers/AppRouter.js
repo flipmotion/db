@@ -40,7 +40,7 @@ function AppRouter({ lang }) {
               mountOnEnter={true}
               unmountOnExit={true}
             >
-              {animationStage => (
+              {transitionStage => (
                 <Switch location={location}>
                   <Route
                     exact
@@ -48,7 +48,7 @@ function AppRouter({ lang }) {
                     render={() => (
                       <AbsoluteDiv>
                         <HomePage
-                          animationStage={animationStage}
+                          transitionStage={transitionStage}
                           lang={lang}
                           transitionDuration={transitionDuration}
                         />
@@ -61,7 +61,7 @@ function AppRouter({ lang }) {
                     render={({ location, history }) => (
                       <AbsoluteDiv>
                         <PortfolioPage
-                          animationStage={animationStage}
+                          transitionStage={transitionStage}
                           location={location}
                           history={history}
                           lang={lang}
@@ -79,7 +79,7 @@ function AppRouter({ lang }) {
                           <PortfolioItemContainer
                             index={Number(match.params.index)}
                             lang={lang}
-                            animationStage={animationStage}
+                            transitionStage={transitionStage}
                             history={history}
                             transitionDuration={transitionDuration}
                           />
@@ -101,7 +101,7 @@ function AppRouter({ lang }) {
                           <ServicesContainer
                             current={Number(match.params.index)}
                             lang={lang}
-                            animationStage={animationStage}
+                            transitionStage={transitionStage}
                             transitionDuration={transitionDuration}
                           />
                         </AbsoluteDiv>
@@ -114,7 +114,7 @@ function AppRouter({ lang }) {
                       <AbsoluteDiv>
                         <Calc
                           lang={lang}
-                          animationStage={animationStage}
+                          transitionStage={transitionStage}
                           transitionDuration={transitionDuration}
                         />
                       </AbsoluteDiv>
