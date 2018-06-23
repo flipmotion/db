@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import interfaceIn from './interfaceIn';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import animated, { fadeFromBottom, almostIn } from '../../animations';
+import animated, {
+  fadeFromBottom,
+  almostIn,
+  fadeFromRight
+} from '../../animations';
 
 const FixedWrapper = styled.div`
   position: fixed;
@@ -170,13 +174,14 @@ const Main = styled(({ lang, ...otherProps }) => {
   align-self: center;
 `;
 
-const AnimatedFixedWrapper = animated(FixedWrapper, fadeFromBottom);
+const AnimatedMain = animated(Main, fadeFromBottom);
 
 const Cover = styled(FixedWrapper)`
   background: white;
 `;
 
 const AnimatedCover = animated(Cover, almostIn);
+const AnimatedCloseButton = animated(CloseButton, fadeFromRight);
 
 const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
   <React.Fragment>
@@ -186,15 +191,20 @@ const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
       delayOut={transitionDuration}
     />
 
-    <AnimatedFixedWrapper
-      transitionStage={transitionStage}
-      transitionDuration={transitionDuration}
-      delayIn={transitionDuration * 0.67}
-    >
+    <FixedWrapper>
       <BalanceArea />
-      <Main lang={lang} />
-      <CloseButton />
-    </AnimatedFixedWrapper>
+      <AnimatedMain
+        transitionStage={transitionStage}
+        transitionDuration={transitionDuration}
+        delayIn={transitionDuration * 0.67}
+        lang={lang}
+      />
+      <AnimatedCloseButton
+        transitionStage={transitionStage}
+        transitionDuration={transitionDuration}
+        delayIn={transitionDuration * 0.67}
+      />
+    </FixedWrapper>
   </React.Fragment>
 );
 
