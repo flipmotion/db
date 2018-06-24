@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import animated, { fadeInOut } from '../animations';
 
 const text = {
   'page not found': {
@@ -28,10 +29,10 @@ function interfaceIn(lang) {
   };
 }
 
-function Page404({ lang }) {
+function Page404({ lang, style }) {
   const phrase = interfaceIn(lang);
   return (
-    <div>
+    <div style={style}>
       <h1>{phrase('page not found')}</h1>
       <p>
         {phrase('try from')} <Link to="/">{phrase('the home page')}</Link>
@@ -44,4 +45,6 @@ Page404.propTypes = {
   lang: PropTypes.oneOf(['ru', 'en']).isRequired
 };
 
-export default Page404;
+const AnimatedPage404 = animated(Page404, fadeInOut);
+
+export default AnimatedPage404;
