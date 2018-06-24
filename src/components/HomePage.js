@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import contentIn from '../content/homepage';
@@ -19,28 +19,25 @@ const PortfolioButton = styled(Link)`
   }
 `;
 
-const Text = styled.div.attrs({
-  style: props => ({
-    ...props.style,
-    ...fadeFromLeft({
-      transitionStage: props.transitionStage,
-      transitionDuration: props.transitionDuration
-    })
-  }),
-  children: props => (
-    <Fragment>
-      <h1>{props.header}</h1>
-      <p>{props.paragraphText}</p>
-      <PortfolioButton to={props.linkPath}>{props.linkText}</PortfolioButton>
-    </Fragment>
-  )
-})`
+const TextWrapper = styled.div`
   flex: 4;
   align-self: center;
   padding: 1.5rem;
   transition: transform 1s, opacity 1s;
   z-index: 1;
 `;
+
+function Text(props) {
+  return (
+    <TextWrapper style={props.style}>
+      <h1>{props.header}</h1>
+      <p>{props.paragraphText}</p>
+      <PortfolioButton to={props.linkPath}>{props.linkText}</PortfolioButton>
+    </TextWrapper>
+  );
+}
+
+const AnimatedText = animated(Text, fadeFromLeft);
 
 const Image = styled.img`
   height: 100%;
@@ -52,7 +49,7 @@ const Image = styled.img`
 
 const AnimatedImage = animated(Image, fadeFromRight);
 
-const Composer = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: stretch;
   height: 100%;
@@ -60,7 +57,7 @@ const Composer = styled.div`
 
   @media (orientation: portrait), (max-width: 50rem) {
     position: relative;
-    ${Text} {
+    ${TextWrapper} {
       position: absolute;
       background-color: rgba(222, 222, 222, 0.5);
 
@@ -75,8 +72,8 @@ const Composer = styled.div`
 const HomePage = ({ lang, transitionStage, transitionDuration }) => {
   const phrase = contentIn(lang);
   return (
-    <Composer>
-      <Text
+    <Wrapper>
+      <AnimatedText
         linkPath="/portfolio"
         linkText={phrase('our works')}
         paragraphText={phrase('punch line')}
@@ -91,7 +88,7 @@ const HomePage = ({ lang, transitionStage, transitionDuration }) => {
         transitionDuration={transitionDuration}
         delayIn={400}
       />
-    </Composer>
+    </Wrapper>
   );
 };
 
