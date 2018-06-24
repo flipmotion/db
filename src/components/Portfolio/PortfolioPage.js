@@ -27,6 +27,7 @@ const NavArea = styled.div`
   flex: none;
   width: 22em;
 
+  /* FIXME: not a real solution */
   @media (max-width: 40rem) {
     display: none;
   }
