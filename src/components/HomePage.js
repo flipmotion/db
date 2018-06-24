@@ -1,15 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import contentIn from '../content';
+import contentIn from '../content/homepage';
 import animated, { fadeFromLeft, fadeFromRight } from '../animations';
+import house from '../content/images/house.jpg';
 
-const PortfolioButton = styled(Link).attrs({
-  to: props => ({
-    pathname: props.to,
-    state: { animationType: 'portfolioItem' }
-  })
-})`
+const PortfolioButton = styled(Link)`
   text-decoration: none;
   color: #222;
   padding: 0.5em;
@@ -76,28 +72,21 @@ const Composer = styled.div`
   }
 `;
 
-const HomePage = ({ lang, transitionStage, transitionDuration, style }) => {
-  const content = contentIn(lang);
-  const header = content.homePage.header;
-  const paragraphText = content.homePage.paragraphText;
-  const linkText = content.homePage.link.text;
-  const linkPath = content.homePage.link.path;
-  const imageSrc = content.homePage.media[0].src;
-  const imageAlt = content.homePage.media[0].alt;
-
+const HomePage = ({ lang, transitionStage, transitionDuration }) => {
+  const phrase = contentIn(lang);
   return (
     <Composer>
       <Text
-        linkPath={linkPath}
-        linkText={linkText}
-        paragraphText={paragraphText}
-        header={header}
+        linkPath="/portfolio"
+        linkText={phrase('our works')}
+        paragraphText={phrase('punch line')}
+        header={phrase('real estate services')}
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
       />
       <AnimatedImage
-        alt={imageAlt}
-        src={imageSrc}
+        alt="DB Company"
+        src={house}
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
         delayIn={400}

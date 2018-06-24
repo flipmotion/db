@@ -1,5 +1,4 @@
 import logoSrc from './images/logo.svg';
-import house from './images/house.jpg';
 import React from 'react';
 import MenuItem from '../components/Menu/MenuItem';
 
@@ -84,35 +83,6 @@ const menu = {
   ]
 };
 
-const homePage = {
-  header: {
-    ru: 'Услуги в сфере элитной недвижимости',
-    en: 'Real estate services'
-  },
-  paragraphText: {
-    ru:
-      'Мы разработаем для вас проект любой сложности, получим разрешение на строительство или реконструкцию, проведем строительные работы, создадим дизайн интерьера и предложим техническое обслуживание',
-    en:
-      'We will develop for you the project of any complexity, we will receive permission for construction or reconstruction, we will carry out construction works, we will create interior design and we will offer maintenance'
-  },
-  link: {
-    text: {
-      ru: 'Наши работы',
-      en: 'Our works'
-    },
-    path: '/portfolio'
-  },
-  media: [
-    {
-      alt: {
-        ru: 'DB Company',
-        en: 'DB Company'
-      },
-      src: house
-    }
-  ]
-};
-
 // a helper function to be user in contentIn(lang)
 function translateMediaIn(media, lang) {
   if (!media) throw new Error(`media is ${media}`);
@@ -159,15 +129,6 @@ function contentIn(lang) {
       bottom: menu.bottom.map((item, index) =>
         navLinkify(translateMenuItem(item), index)
       )
-    },
-    homePage: {
-      header: homePage.header[lang],
-      paragraphText: homePage.paragraphText[lang],
-      link: {
-        text: homePage.link.text[lang],
-        path: homePage.link.path
-      },
-      media: homePage.media.map(medium => translateMedia(medium))
     },
     logo: translateMedia(logo)
   };
