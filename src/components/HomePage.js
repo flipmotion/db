@@ -39,15 +39,25 @@ function Text(props) {
 
 const AnimatedText = animated(Text, fadeFromLeft);
 
-const Image = styled.img`
-  height: 100%;
+const FixedImage = styled.img`
+  position: fixed;
+  height: 100vh;
+  width: 60vw;
+  right: 0;
+  top: 0;
   object-fit: cover;
-  width: 100%;
-  min-width: 0;
+  z-index: -1;
+
+  @media (orientation: portrait), (max-width: 50rem) {
+    width: 100vw;
+  }
+`;
+
+const Placeholder = styled.div`
   flex: 6;
 `;
 
-const AnimatedImage = animated(Image, fadeFromRight);
+const AnimatedImage = animated(FixedImage, fadeFromRight);
 
 const Wrapper = styled.div`
   display: flex;
@@ -81,6 +91,7 @@ const HomePage = ({ lang, transitionStage, transitionDuration }) => {
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
       />
+      <Placeholder />
       <AnimatedImage
         alt="DB Company"
         src={house}

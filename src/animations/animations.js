@@ -39,13 +39,15 @@ export function fadeFromLeft({ transitionStage, transitionDuration }) {
     return {
       opacity: 1,
       transform: 'translateX(0px)',
-      transition: `all ${transitionDuration / 1000}s`
+      transitionProperty: 'transform, opacity',
+      transitionDuration: `${transitionDuration / 1000}s`
     };
   } else {
     return {
       opacity: 0,
       transform: 'translateX(-500px)',
-      transition: `all ${transitionDuration / 1000}s`
+      transitionProperty: 'transform, opacity',
+      transitionDuration: `${transitionDuration / 1000}s`
     };
   }
 }
@@ -62,7 +64,7 @@ export function fadeFromRight({
   return {
     opacity: entered ? 1 : 0,
     transform: `translateX(${entered ? 0 : 500}px)`,
-    transitionProperty: 'all',
+    transitionProperty: 'transform, opacity',
     transitionDuration: `${transitionDuration / 1000}s`,
     transitionDelay: `${
       entered ? delayIn / 1000 : exiting ? delayOut / 1000 : 0
