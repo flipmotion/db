@@ -146,7 +146,13 @@ function AppRouter({ lang }) {
                       </AbsoluteDiv>
                     )}
                   />
-                  <Route component={Page404} />
+                  <Route
+                    render={() => (
+                      <AbsoluteDiv>
+                        <Page404 lang={lang} />
+                      </AbsoluteDiv>
+                    )}
+                  />
                 </Switch>
               )}
             </Transition>
