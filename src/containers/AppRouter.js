@@ -11,7 +11,7 @@ import Calc from '../components/Calc';
 import Page404 from '../components/Page404';
 import PortfolioItemContainer from '../containers/PortfolioItemContainer';
 import Contacts from '../components/Contacts';
-import About from '../components/About';
+import Policy from '../components/Policy';
 import Feedback from '../components/Feedback';
 
 const RelativeDiv = styled.div`
@@ -136,10 +136,10 @@ function AppRouter({ lang }) {
                     )}
                   />
                   <Route
-                    path="/about"
+                    path="/policy"
                     render={() => (
                       <AbsoluteDiv>
-                        <About
+                        <Policy
                           lang={lang}
                           transitionStage={transitionStage}
                           transitionDuration={transitionDuration}

@@ -68,10 +68,10 @@ const menu = {
       }
     },
     {
-      to: '/about',
+      to: '/policy',
       text: {
-        ru: 'О компании',
-        en: 'About'
+        ru: 'Политика конфиденциальности',
+        en: 'Privacy policy'
       }
     },
     {
