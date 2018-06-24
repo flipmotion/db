@@ -12,6 +12,7 @@ import Page404 from '../components/Page404';
 import PortfolioItemContainer from '../containers/PortfolioItemContainer';
 import Contacts from '../components/Contacts';
 import About from '../components/About';
+import Feedback from '../components/Feedback';
 
 const RelativeDiv = styled.div`
   position: relative;
@@ -147,9 +148,25 @@ function AppRouter({ lang }) {
                     )}
                   />
                   <Route
+                    path="/feedback"
                     render={() => (
                       <AbsoluteDiv>
-                        <Page404 lang={lang} />
+                        <Feedback
+                          lang={lang}
+                          transitionStage={transitionStage}
+                          transitionDuration={transitionDuration}
+                        />
+                      </AbsoluteDiv>
+                    )}
+                  />
+                  <Route
+                    render={() => (
+                      <AbsoluteDiv>
+                        <Page404
+                          lang={lang}
+                          transitionStage={transitionStage}
+                          transitionDuration={transitionDuration}
+                        />
                       </AbsoluteDiv>
                     )}
                   />
