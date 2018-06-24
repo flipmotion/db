@@ -10,6 +10,8 @@ import ServicesContainer from '../containers/ServicesContainer';
 import Calc from '../components/Calc';
 import Page404 from '../components/Page404';
 import PortfolioItemContainer from '../containers/PortfolioItemContainer';
+import Contacts from '../components/Contacts';
+import About from '../components/About';
 
 const RelativeDiv = styled.div`
   position: relative;
@@ -113,6 +115,30 @@ function AppRouter({ lang }) {
                     render={() => (
                       <AbsoluteDiv>
                         <Calc
+                          lang={lang}
+                          transitionStage={transitionStage}
+                          transitionDuration={transitionDuration}
+                        />
+                      </AbsoluteDiv>
+                    )}
+                  />
+                  <Route
+                    path="/contacts"
+                    render={() => (
+                      <AbsoluteDiv>
+                        <Contacts
+                          lang={lang}
+                          transitionStage={transitionStage}
+                          transitionDuration={transitionDuration}
+                        />
+                      </AbsoluteDiv>
+                    )}
+                  />
+                  <Route
+                    path="/about"
+                    render={() => (
+                      <AbsoluteDiv>
+                        <About
                           lang={lang}
                           transitionStage={transitionStage}
                           transitionDuration={transitionDuration}
