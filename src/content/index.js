@@ -61,10 +61,10 @@ const menu = {
   ],
   bottom: [
     {
-      to: '/contacts',
+      to: '/feedback',
       text: {
-        ru: 'Контакты',
-        en: 'Contacts'
+        ru: 'Отзывы',
+        en: 'Feedback'
       }
     },
     {
@@ -72,6 +72,13 @@ const menu = {
       text: {
         ru: 'О компании',
         en: 'About'
+      }
+    },
+    {
+      to: '/contacts',
+      text: {
+        ru: 'Контакты',
+        en: 'Contacts'
       }
     }
   ]
