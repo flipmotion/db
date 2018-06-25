@@ -24,10 +24,12 @@ const transitionDuration = 850;
 
 function App() {
   return (
+    // IntApp just holds lang state and provides lang change function
     <IntApp
       render={(lang, toggleLang) => {
         const content = contentIn(lang);
         return (
+          // Div100vh makes viewport size stable (bottom menu is always there)
           <Div100vh>
             <Router>
               <React.Fragment>

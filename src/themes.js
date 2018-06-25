@@ -1,3 +1,5 @@
+// didn't use it so far
+
 export default {
   light: {
     primary: 'white',
