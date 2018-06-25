@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import contentIn from '../content/homepage';
-import animated, { fadeFromLeft, fadeFromRight } from '../animations';
-import house from '../content/images/house.jpg';
+import contentIn from '../../content/homepage';
+import animated, { fadeFromLeft, fadeFromRight } from '../../animations';
+import house from '../../content/images/house.jpg';
 
 const PortfolioButton = styled(Link)`
   text-decoration: none;

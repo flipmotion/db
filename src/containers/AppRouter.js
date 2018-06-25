@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
 import styled from 'styled-components';
 
 import HomePage from '../components/HomePage';
 import PortfolioPage from '../components/Portfolio/PortfolioPage';
-import ServicesContainer from '../containers/ServicesContainer';
+import Services from '../components/Services';
 import Calc from '../components/Calc';
 import Page404 from '../components/Page404';
 import PortfolioItemContainer from '../containers/PortfolioItemContainer';
@@ -91,25 +91,14 @@ function AppRouter({ lang }) {
                     }}
                   />
                   <Route
-                    exact
                     path="/services"
-                    render={() => <Redirect to="/services/0" />}
-                  />
-                  <Route
-                    exact
-                    path="/services/:index"
-                    render={({ match }) => {
-                      return (
-                        <AbsoluteDiv>
-                          <ServicesContainer
-                            current={Number(match.params.index)}
-                            lang={lang}
-                            transitionStage={transitionStage}
-                            transitionDuration={transitionDuration}
-                          />
-                        </AbsoluteDiv>
-                      );
-                    }}
+                    render={() => (
+                      <Services
+                        lang={lang}
+                        transitionStage={transitionStage}
+                        transitionDuration={transitionDuration}
+                      />
+                    )}
                   />
                   <Route
                     path="/calc"

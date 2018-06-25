@@ -3,11 +3,11 @@ import { storiesOf } from '@storybook/react';
 import HomePage from './HomePage';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { withKnobs, select } from '@storybook/addon-knobs/react';
-import MenuContainer from '../containers/MenuContainer';
-import contentIn from '../content';
-import IntApp from '../containers/IntApp';
-import { TopBar, BottomBar, MobileBar } from '../components/Menu/MenuBars';
-import LangIcon from '../components/Menu/LangIcon';
+import MenuContainer from '../../containers/MenuContainer';
+import contentIn from '../../content';
+import IntApp from '../../containers/IntApp';
+import { TopBar, BottomBar, MobileBar } from '../../components/Menu/MenuBars';
+import LangIcon from '../../components/Menu/LangIcon';
 import styled from 'styled-components';
 
 const homePage = storiesOf('Home page', module);
