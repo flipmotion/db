@@ -29,7 +29,7 @@ function App() {
       render={(lang, toggleLang) => {
         const content = contentIn(lang);
         return (
-          // Div100vh makes viewport size stable (bottom menu is always there)
+          // Div100vh makes viewport size stable (browser bottom chrome is always there)
           <Div100vh>
             <Router>
               <React.Fragment>
