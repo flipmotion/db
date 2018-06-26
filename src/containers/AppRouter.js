@@ -31,6 +31,17 @@ const transitionDuration = 850;
 
 // To figure out how this monster works, check out
 // https://medium.com/@pshrmn/4b73f634992a
+// Actually, I'm afraid I've complected it even further...
+
+const routingTable = {
+  '/': HomePage,
+  '/portfolio': PortfolioPage,
+  '/calc': Calc,
+  '/contacts': Contacts,
+  '/policy': Policy,
+  '/feedback': Feedback
+};
+
 function AppRouter({ lang }) {
   return (
     <Route
@@ -43,10 +54,6 @@ function AppRouter({ lang }) {
             unmountOnExit={true}
           >
             {transitionStage => {
-              const routingTable = {
-                '/': HomePage,
-                '/portfolio': PortfolioPage
-              };
               return (
                 <Switch location={location}>
                   {Object.keys(routingTable).map(key => {
@@ -68,7 +75,6 @@ function AppRouter({ lang }) {
                       />
                     );
                   })}
-
                   <Route
                     exact
                     path="/portfolio/:index"
@@ -90,54 +96,6 @@ function AppRouter({ lang }) {
                     render={() => (
                       <AbsoluteDiv>
                         <Services
-                          lang={lang}
-                          transitionStage={transitionStage}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
-                  />
-                  <Route
-                    path="/calc"
-                    render={() => (
-                      <AbsoluteDiv>
-                        <Calc
-                          lang={lang}
-                          transitionStage={transitionStage}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
-                  />
-                  <Route
-                    path="/contacts"
-                    render={() => (
-                      <AbsoluteDiv>
-                        <Contacts
-                          lang={lang}
-                          transitionStage={transitionStage}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
-                  />
-                  <Route
-                    path="/policy"
-                    render={() => (
-                      <AbsoluteDiv>
-                        <Policy
-                          lang={lang}
-                          transitionStage={transitionStage}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
-                  />
-                  <Route
-                    path="/feedback"
-                    render={() => (
-                      <AbsoluteDiv>
-                        <Feedback
                           lang={lang}
                           transitionStage={transitionStage}
                           transitionDuration={transitionDuration}

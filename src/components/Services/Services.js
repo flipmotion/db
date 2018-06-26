@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Page404 from '../../components/Page404';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 import Approval from './Approval';
 import Construction from './Construction';
 import Maintenance from './Maintenance';
@@ -16,7 +15,6 @@ const Nav = styled.div`
   flex-direction: column;
   padding: 2rem;
   flex: none;
-  background: white;
   width: 22em;
 `;
 
@@ -29,6 +27,7 @@ const Link = styled(props => (
   color: grey;
   &.${activeClassName} {
     color: black;
+    font-weight: bold;
   }
 `;
 
@@ -79,11 +78,11 @@ function Services({ lang }) {
           {menu.map(service => (
             <Route
               key={service.path}
-              exact
               path={service.path}
               component={service.component}
             />
           ))}
+          <Redirect to="/services/approval" />
         </Switch>
       </Page>
     </Wrapper>
