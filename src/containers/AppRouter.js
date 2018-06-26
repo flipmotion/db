@@ -35,55 +35,50 @@ function AppRouter({ lang }) {
   return (
     <Route
       render={({ location }) => (
-        <RelativeDiv>
-          <TransitionGroup component={null} appear>
-            <Transition
-              key={location.pathname}
-              timeout={{ enter: 0, exit: transitionDuration }}
-              mountOnEnter={true}
-              unmountOnExit={true}
-            >
-              {transitionStage => (
+        <TransitionGroup component={RelativeDiv} appear>
+          <Transition
+            key={location.pathname}
+            timeout={{ enter: 0, exit: transitionDuration }}
+            mountOnEnter={true}
+            unmountOnExit={true}
+          >
+            {transitionStage => {
+              const routingTable = {
+                '/': HomePage,
+                '/portfolio': PortfolioPage
+              };
+              return (
                 <Switch location={location}>
-                  <Route
-                    exact
-                    path="/"
-                    render={() => (
-                      <AbsoluteDiv>
-                        <HomePage
-                          transitionStage={transitionStage}
-                          lang={lang}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
-                  />
-                  <Route
-                    exact
-                    path="/portfolio"
-                    render={({ location, history }) => (
-                      <AbsoluteDiv>
-                        <PortfolioPage
-                          transitionStage={transitionStage}
-                          location={location}
-                          history={history}
-                          lang={lang}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
-                  />
+                  {Object.keys(routingTable).map(key => {
+                    const Component = routingTable[key];
+                    return (
+                      <Route
+                        exact
+                        key={key}
+                        path={key}
+                        render={() => (
+                          <AbsoluteDiv>
+                            <Component
+                              transitionStage={transitionStage}
+                              lang={lang}
+                              transitionDuration={transitionDuration}
+                            />
+                          </AbsoluteDiv>
+                        )}
+                      />
+                    );
+                  })}
+
                   <Route
                     exact
                     path="/portfolio/:index"
-                    render={({ history, match }) => {
+                    render={({ match }) => {
                       return (
                         <AbsoluteDiv>
                           <PortfolioItemContainer
                             index={Number(match.params.index)}
                             lang={lang}
                             transitionStage={transitionStage}
-                            history={history}
                             transitionDuration={transitionDuration}
                           />
                         </AbsoluteDiv>
@@ -93,11 +88,13 @@ function AppRouter({ lang }) {
                   <Route
                     path="/services"
                     render={() => (
-                      <Services
-                        lang={lang}
-                        transitionStage={transitionStage}
-                        transitionDuration={transitionDuration}
-                      />
+                      <AbsoluteDiv>
+                        <Services
+                          lang={lang}
+                          transitionStage={transitionStage}
+                          transitionDuration={transitionDuration}
+                        />
+                      </AbsoluteDiv>
                     )}
                   />
                   <Route
@@ -160,10 +157,10 @@ function AppRouter({ lang }) {
                     )}
                   />
                 </Switch>
-              )}
-            </Transition>
-          </TransitionGroup>
-        </RelativeDiv>
+              );
+            }}
+          </Transition>
+        </TransitionGroup>
       )}
     />
   );
