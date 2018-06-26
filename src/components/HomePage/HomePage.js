@@ -47,8 +47,7 @@ const FixedImage = styled.img`
   top: 0;
   object-fit: cover;
   z-index: -1;
-
-  @media (orientation: portrait), (max-width: 50rem) {
+  ${fadeFromRight} @media (orientation: portrait), (max-width: 50rem) {
     width: 100vw;
   }
 `;
@@ -56,8 +55,6 @@ const FixedImage = styled.img`
 const Placeholder = styled.div`
   flex: 6;
 `;
-
-const AnimatedImage = animated(FixedImage, fadeFromRight);
 
 const Wrapper = styled.div`
   display: flex;
@@ -92,7 +89,7 @@ const HomePage = ({ lang, transitionStage, transitionDuration }) => {
         transitionDuration={transitionDuration}
       />
       <Placeholder />
-      <AnimatedImage
+      <FixedImage
         alt="DB Company"
         src={house}
         transitionStage={transitionStage}

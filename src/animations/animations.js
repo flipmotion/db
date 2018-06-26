@@ -56,17 +56,14 @@ export function fadeFromRight({
   delayOut = 0
 }) {
   const entered = transitionStage === 'entered';
-  const exiting = transitionStage === 'exiting';
 
-  return {
-    opacity: entered ? 1 : 0,
-    transform: `translateX(${entered ? 0 : 500}px)`,
-    transitionProperty: 'transform, opacity',
-    transitionDuration: `${transitionDuration / 1000}s`,
-    transitionDelay: `${
-      entered ? delayIn / 1000 : exiting ? delayOut / 1000 : 0
-    }s`
-  };
+  return css`
+    opacity: ${entered ? 1 : 0};
+    transform: translateX(${entered ? 0 : 500}px);
+    transition-property: transform, opacity;
+    transition-duration: ${transitionDuration / 1000}s;
+    transition-delay: ${entered ? delayIn / 1000 : delayOut / 1000}s;
+  `;
 }
 
 export function fadeFromBottom({

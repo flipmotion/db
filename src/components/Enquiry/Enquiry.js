@@ -21,14 +21,25 @@ const FixedWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const CloseButton = styled(props => (
-  <Link {...props} to="#">
-    X
-  </Link>
-))`
+const CloseButton = styled(
+  ({ transitionDuration, transitionStage, delayIn, delayOut, ...props }) => (
+    <Link {...props} to="#">
+      X
+    </Link>
+  )
+)`
   align-self: flex-start;
   text-decoration: none;
+  ${fadeFromRight};
 `;
+
+CloseButton.propTypes = {
+  transitionDuration: PropTypes.number.isRequired,
+  transitionStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+    .isRequired,
+  delayIn: PropTypes.number,
+  delayOut: PropTypes.number
+};
 
 const SubmitButton = styled.button.attrs({ type: 'submit' })`
   padding: 2em;
@@ -39,8 +50,8 @@ const SubmitButton = styled.button.attrs({ type: 'submit' })`
 `;
 
 // Just for symmetry with CloseButton
-function BalanceArea() {
-  return <CloseButton style={{ visibility: 'hidden' }} />;
+function BalanceArea(props) {
+  return <CloseButton {...props} style={{ visibility: 'hidden' }} />;
 }
 
 function Field({
@@ -184,11 +195,16 @@ const AnimatedMain = animated(Main, fadeFromBottom);
 
 const Cover = styled(FixedWrapper)`
   background: rgb(230, 230, 230);
-  ${({ transitionStage, transitionDuration }) =>
-    almostIn({ transitionDuration, transitionStage })};
+  ${almostIn};
 `;
 
-const AnimatedCloseButton = animated(CloseButton, fadeFromRight);
+Cover.propTypes = {
+  transitionDuration: PropTypes.number.isRequired,
+  transitionStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+    .isRequired,
+  delayIn: PropTypes.number,
+  delayOut: PropTypes.number
+};
 
 const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
   <React.Fragment>
@@ -199,14 +215,20 @@ const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
     />
 
     <FixedWrapper>
-      <BalanceArea />
+      <BalanceArea
+        // just for parity with CloseButton
+        // to avoid warnings
+        transitionStage={transitionStage}
+        transitionDuration={transitionDuration}
+        delayIn={transitionDuration * 0.67}
+      />
       <AnimatedMain
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
         delayIn={transitionDuration * 0.67}
         lang={lang}
       />
-      <AnimatedCloseButton
+      <CloseButton
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
         delayIn={transitionDuration * 0.67}
