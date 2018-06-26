@@ -184,14 +184,15 @@ const AnimatedMain = animated(Main, fadeFromBottom);
 
 const Cover = styled(FixedWrapper)`
   background: rgb(230, 230, 230);
+  ${({ transitionStage, transitionDuration }) =>
+    almostIn({ transitionDuration, transitionStage })};
 `;
 
-const AnimatedCover = animated(Cover, almostIn);
 const AnimatedCloseButton = animated(CloseButton, fadeFromRight);
 
 const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
   <React.Fragment>
-    <AnimatedCover
+    <Cover
       transitionStage={transitionStage}
       transitionDuration={transitionDuration}
       delayOut={transitionDuration}

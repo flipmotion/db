@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'styled-components';
 
 export function fadeInOut({ transitionStage, transitionDuration }) {
   return {
@@ -22,16 +23,12 @@ export function almostIn({
   delayOut = 0
 }) {
   const entered = transitionStage === 'entered';
-  const exiting = transitionStage === 'exiting';
-
-  return {
-    opacity: entered ? 0.95 : 0,
-    transitionProperty: 'opacity',
-    transitionDuration: `${transitionDuration / 1000}s`,
-    transitionDelay: `${
-      entered ? delayIn / 1000 : exiting ? delayOut / 1000 : 0
-    }s`
-  };
+  return css`
+    opacity: ${entered ? 0.95 : 0};
+    transition-property: opacity;
+    transition-duration: ${transitionDuration / 1000}s;
+    transition-delay: ${entered ? delayIn / 1000 : delayOut / 1000}s;
+  `;
 }
 
 export function fadeFromLeft({ transitionStage, transitionDuration }) {
