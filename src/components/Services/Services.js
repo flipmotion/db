@@ -19,7 +19,7 @@ const Nav = styled.div`
 `;
 
 const activeClassName = 'ServicesRouterLink_active';
-const Link = styled(props => (
+const StyledNavLink = styled(props => (
   <NavLink activeClassName={activeClassName} {...props} />
 ))`
   padding-bottom: 2.5rem;
@@ -68,9 +68,9 @@ function Services({ lang }) {
     <Wrapper>
       <Nav>
         {menu.map(service => (
-          <Link key={service.path} to={service.path}>
+          <StyledNavLink key={service.path} to={service.path}>
             {service.name[lang]}
-          </Link>
+          </StyledNavLink>
         ))}
       </Nav>
       <Page>
