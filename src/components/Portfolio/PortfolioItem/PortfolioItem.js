@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Element, Link as ScrollLink } from 'react-scroll';
-import animated, { fadeInOut } from '../../../animations';
+import { fadeInOut } from '../../../animations';
 
 // to change layout for mobile later on
 const Wrapper = styled.div`
@@ -112,11 +112,12 @@ class PortfolioItem extends React.Component {
   }
 
   render() {
+    const { name, stages, ...otherProps } = this.props;
     return (
-      <Wrapper style={this.props.style}>
+      <Wrapper {...otherProps}>
         <MediaArea>
-          <TitleInMediaArea>{this.props.name}</TitleInMediaArea>
-          {this.props.stages.map((stage, stageIndex) => (
+          <TitleInMediaArea>{name}</TitleInMediaArea>
+          {stages.map((stage, stageIndex) => (
             <StageMedia name={stageIndex.toString()} key={stageIndex}>
               <H2>{stage.name}</H2>
               {stage.media.map((medium, index) => (
@@ -126,8 +127,8 @@ class PortfolioItem extends React.Component {
           ))}
         </MediaArea>
         <DetailsArea>
-          <h1>{this.props.name}</h1>
-          {this.props.stages.map((stage, stageIndex) => (
+          <h1>{name}</h1>
+          {stages.map((stage, stageIndex) => (
             <Link
               key={stageIndex}
               to={stageIndex.toString()}
@@ -139,8 +140,8 @@ class PortfolioItem extends React.Component {
             </Link>
           ))}
           <p>
-            {this.props.stages[this.state.currentStageIndex] &&
-              this.props.stages[this.state.currentStageIndex].description}
+            {stages[this.state.currentStageIndex] &&
+              stages[this.state.currentStageIndex].description}
           </p>
         </DetailsArea>
       </Wrapper>
@@ -148,6 +149,16 @@ class PortfolioItem extends React.Component {
   }
 }
 
-const AnimatedPortfolioItem = animated(PortfolioItem, fadeInOut);
+const AnimatedPortfolioItem = styled(PortfolioItem)`
+  ${fadeInOut};
+`;
+
+AnimatedPortfolioItem.propTypes = {
+  transitionDuration: PropTypes.number.isRequired,
+  transitionStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+    .isRequired,
+  delayIn: PropTypes.number,
+  delayOut: PropTypes.number
+};
 
 export default AnimatedPortfolioItem;

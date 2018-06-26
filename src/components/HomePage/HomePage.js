@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import contentIn from '../../content/homepage';
-import animated, { fadeFromLeft, fadeFromRight } from '../../animations';
+import { fadeFromLeft, fadeFromRight } from '../../animations';
 import house from '../../content/images/house.jpg';
 
 const PortfolioButton = styled(Link)`
@@ -27,17 +27,19 @@ const TextWrapper = styled.div`
   z-index: 1;
 `;
 
-function Text(props) {
+function Text({ header, paragraphText, linkPath, linkText, ...props }) {
   return (
-    <TextWrapper style={props.style}>
-      <h1>{props.header}</h1>
-      <p>{props.paragraphText}</p>
-      <PortfolioButton to={props.linkPath}>{props.linkText}</PortfolioButton>
+    <TextWrapper {...props}>
+      <h1>{header}</h1>
+      <p>{paragraphText}</p>
+      <PortfolioButton to={linkPath}>{linkText}</PortfolioButton>
     </TextWrapper>
   );
 }
 
-const AnimatedText = animated(Text, fadeFromLeft);
+const AnimatedText = styled(Text)`
+  ${fadeFromLeft};
+`;
 
 const FixedImage = styled.img`
   position: fixed;

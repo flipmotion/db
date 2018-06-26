@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import interfaceIn from './interfaceIn';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import animated, {
-  fadeFromBottom,
-  almostIn,
-  fadeFromRight
-} from '../../animations';
+import { fadeFromBottom, almostIn, fadeFromRight } from '../../animations';
 
 const FixedWrapper = styled.div`
   position: fixed;
@@ -177,21 +173,37 @@ class Form extends React.Component {
   }
 }
 
-const Main = styled(({ lang, ...otherProps }) => {
-  const phrase = interfaceIn(lang);
-  return (
-    <div {...otherProps}>
-      <h1>{phrase('fill the from')}</h1>
-      <Form lang={lang} />
-    </div>
-  );
-})`
+const Main = styled(
+  ({
+    lang,
+    transitionDuration,
+    transitionStage,
+    delayIn,
+    delayOut,
+    ...otherProps
+  }) => {
+    const phrase = interfaceIn(lang);
+    return (
+      <div {...otherProps}>
+        <h1>{phrase('fill the from')}</h1>
+        <Form lang={lang} />
+      </div>
+    );
+  }
+)`
   align-self: center;
   background: white;
   padding: 3em;
+  ${fadeFromBottom};
 `;
 
-const AnimatedMain = animated(Main, fadeFromBottom);
+Main.propTypes = {
+  transitionDuration: PropTypes.number.isRequired,
+  transitionStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+    .isRequired,
+  delayIn: PropTypes.number,
+  delayOut: PropTypes.number
+};
 
 const Cover = styled(FixedWrapper)`
   background: rgb(230, 230, 230);
@@ -222,7 +234,7 @@ const Enquiry = ({ lang, transitionStage, transitionDuration }) => (
         transitionDuration={transitionDuration}
         delayIn={transitionDuration * 0.67}
       />
-      <AnimatedMain
+      <Main
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
         delayIn={transitionDuration * 0.67}

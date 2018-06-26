@@ -31,25 +31,7 @@ export function almostIn({
   `;
 }
 
-export function fadeFromLeft({ transitionStage, transitionDuration }) {
-  if (transitionStage === 'entered') {
-    return {
-      opacity: 1,
-      transform: 'translateX(0px)',
-      transitionProperty: 'transform, opacity',
-      transitionDuration: `${transitionDuration / 1000}s`
-    };
-  } else {
-    return {
-      opacity: 0,
-      transform: 'translateX(-500px)',
-      transitionProperty: 'transform, opacity',
-      transitionDuration: `${transitionDuration / 1000}s`
-    };
-  }
-}
-
-export function fadeFromRight({
+export function fadeFromLeft({
   transitionStage,
   transitionDuration,
   delayIn = 0,
@@ -59,10 +41,32 @@ export function fadeFromRight({
 
   return css`
     opacity: ${entered ? 1 : 0};
-    transform: translateX(${entered ? 0 : 500}px);
+    transform: translateX(${entered ? 0 : -500}px);
     transition-property: transform, opacity;
     transition-duration: ${transitionDuration / 1000}s;
     transition-delay: ${entered ? delayIn / 1000 : delayOut / 1000}s;
+  `;
+}
+
+export function fadeFromRight({
+  transitionStage,
+  transitionDuration,
+  delayIn = 0,
+  delayOut = 0
+}) {
+  const entered = transitionStage === 'entered';
+  const exiting = transitionStage === 'exiting';
+
+  return css`
+    opacity: ${entered ? 1 : 0};
+    transform: translateX(${entered ? 0 : 500}px);
+    transition-property: transform, opacity;
+    transition-duration: ${transitionDuration / 1000}s;
+    transition-delay: ${entered
+      ? delayIn / 1000
+      : exiting
+        ? delayOut / 1000
+        : 0}s;
   `;
 }
 
@@ -73,57 +77,12 @@ export function fadeFromBottom({
   delayOut = 0
 }) {
   const entered = transitionStage === 'entered';
-  const exiting = transitionStage === 'exiting';
 
-  return {
-    // opacity: entered ? 1 : 0,
-    animationTimingFunction: 'ease-out',
-    transform: `translateY(${entered ? '0px' : '100vh'})`,
-    transitionProperty: 'all',
-    transitionDuration: `${transitionDuration / 1000}s`,
-    transitionDelay: `${
-      entered ? delayIn / 1000 : exiting ? delayOut / 1000 : 0
-    }s`
-  };
+  return css`
+    opacity: ${entered ? 1 : 0};
+    transform: translateY(${entered ? '0px' : '100vh'});
+    transition-property: transform, opacity;
+    transition-duration: ${transitionDuration / 1000}s;
+    transition-delay: ${entered ? delayIn / 1000 : delayOut / 1000}s;
+  `;
 }
-
-export function noTween({ transitionStage, transitionDuration }) {
-  return transitionStage === 'entered' ? { opacity: 1 } : { opacity: 0 };
-}
-
-// Here comes the HOC
-//
-// Component then must use style prop (apply it to root component
-// or some inner component) to make it work
-function animated(Component, animationEffectFn) {
-  function AnimatedComponent({
-    transitionStage,
-    transitionDuration,
-    delayIn,
-    delayOut,
-    style,
-    ...otherProps
-  }) {
-    const mergedStyle = {
-      ...style,
-      ...animationEffectFn({ transitionStage, transitionDuration, delayIn })
-    };
-    return <Component style={mergedStyle} {...otherProps} />;
-  }
-
-  AnimatedComponent.propTypes = {
-    transitionStage: PropTypes.oneOf([
-      'entering',
-      'entered',
-      'exiting',
-      'exited'
-    ]).isRequired,
-    transitionDuration: PropTypes.number.isRequired,
-    delayIn: PropTypes.number,
-    delayOut: PropTypes.number
-  };
-
-  return AnimatedComponent;
-}
-
-export default animated;

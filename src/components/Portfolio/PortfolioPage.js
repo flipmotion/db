@@ -7,17 +7,28 @@ import {
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { pageNameIn, portfolioIndexPageIn } from './content';
-import animated, { fadeInOut } from '../../animations';
+import { fadeInOut } from '../../animations';
 import { Link as RouterLink } from 'react-router-dom';
 
 // later will adjust flex direction on smaller screens
-const Wrapper = styled.div`
+const Wrapper = styled(
+  ({ transitionDuration, transitionStage, delayIn, delayOut, ...other }) => (
+    <div {...other} />
+  )
+)`
   display: flex;
   width: 100%;
   height: 100%;
+  ${fadeInOut};
 `;
 
-const AnimatedWrapper = animated(Wrapper, fadeInOut);
+Wrapper.propTypes = {
+  transitionDuration: PropTypes.number.isRequired,
+  transitionStage: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited'])
+    .isRequired,
+  delayIn: PropTypes.number,
+  delayOut: PropTypes.number
+};
 
 // TODO: scroll forwarding works only in Safari and to be dropped,
 // to programmatically clicking could be a better idea
@@ -177,7 +188,7 @@ class PortfolioPage extends Component {
     };
 
     return (
-      <AnimatedWrapper {...animation}>
+      <Wrapper {...animation}>
         <NavArea>
           <Nav>
             <div style={{ padding: '2rem' }}>
@@ -210,7 +221,7 @@ class PortfolioPage extends Component {
             </Element>
           ))}
         </ContentArea>
-      </AnimatedWrapper>
+      </Wrapper>
     );
   }
 }
