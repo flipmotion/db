@@ -75,13 +75,16 @@ function Services({ lang }) {
       </Nav>
       <Page>
         <Switch>
-          {menu.map(service => (
-            <Route
-              key={service.path}
-              path={service.path}
-              component={service.component}
-            />
-          ))}
+          {menu.map(service => {
+            const Component = service.component;
+            return (
+              <Route
+                key={service.path}
+                path={service.path}
+                render={() => <Component lang={lang} />}
+              />
+            );
+          })}
           <Redirect to="/services/approval" />
         </Switch>
       </Page>
