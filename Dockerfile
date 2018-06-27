@@ -1,7 +1,7 @@
 # Stage 1 - build
 FROM node:9 as build
 WORKDIR /app
-COPY package.json yarn.lock ./
+COPY package*.json ./
 RUN ["yarn", "install"]
 COPY . ./
 ENV CI=true
