@@ -1,5 +1,6 @@
 {
-  "type": "docker",
+  "name": "DB",
+  "type": "npm",
   "static": {
     "trailingSlash": false
   }
