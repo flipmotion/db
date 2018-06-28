@@ -1,5 +1,6 @@
 {
   "static": {
-    "trailingSlash": false
+    "trailingSlash": false,
+    "type": "Dockerfile"
   }
 }
