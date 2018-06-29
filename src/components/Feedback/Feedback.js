@@ -6,9 +6,12 @@ import {
   BrowserRouter as Router,
   Route,
   NavLink,
-  Link
+  Link,
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import uuid from 'uuid';
+import Page404 from '../Page404';
 
 const interfaceText = {
   'clients about us': {
@@ -97,35 +100,49 @@ function Feedback({ lang }) {
             </StyledNavLink>
           ))}
         </NavArea>
-        {cases.map((c, i) => {
-          const last = i === cases.length - 1;
-          const first = i === 0;
-          const nextIndex = last ? 0 : i + 1;
-          const prevIndex = first ? cases.length - 1 : i - 1;
-
-          return (
-            <Route
-              key={c.path}
-              path={'/feedback/' + c.path}
-              render={() => (
-                <React.Fragment>
-                  <MediaArea>
-                    <Image src={c.media[0]} alt={c.title} />
-                  </MediaArea>
-                  <QuotesArea>
-                    <Portrait src={c.reviewerPortrait} />
-                    <Quote>{c.review}</Quote>
-                    <p>{c.reviewerName}</p>
-                    <p>
-                      <NavLeft to={'/feedback/' + cases[prevIndex].path} />
-                      <NavRight to={'/feedback/' + cases[nextIndex].path} />
-                    </p>
-                  </QuotesArea>
-                </React.Fragment>
-              )}
+        <Switch>
+          {/* TODO: redirection DOESN'T work */}
+          {cases[0] && (
+            <Redirect
+              exact
+              from="/feedback"
+              to={'/feedback/' + cases[0].path}
             />
-          );
-        })}
+          )}
+          {cases.map((c, i) => {
+            const last = i === cases.length - 1;
+            const first = i === 0;
+            const nextIndex = last ? 0 : i + 1;
+            const prevIndex = first ? cases.length - 1 : i - 1;
+
+            return (
+              <Route
+                exact
+                key={c.path}
+                path={'/feedback/' + c.path}
+                render={() => (
+                  <React.Fragment>
+                    <MediaArea>
+                      <Image src={c.media[0]} alt={c.title} />
+                    </MediaArea>
+                    <QuotesArea>
+                      <Portrait src={c.reviewerPortrait} />
+                      <Quote>{c.review}</Quote>
+                      <p>{c.reviewerName}</p>
+                      <p>
+                        <NavLeft to={'/feedback/' + cases[prevIndex].path} />
+                        <NavRight to={'/feedback/' + cases[nextIndex].path} />
+                      </p>
+                    </QuotesArea>
+                  </React.Fragment>
+                )}
+              />
+            );
+          })}
+          {/* TODO: 404 should cover nav on the left as well.
+        Currently it COULD work for media + text area. But doesn't work at all */}
+          <Route component={Page404} />
+        </Switch>
       </React.Fragment>
     </Router>
   );
