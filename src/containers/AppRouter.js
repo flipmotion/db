@@ -33,12 +33,16 @@ const transitionDuration = 850;
 // https://medium.com/@pshrmn/4b73f634992a
 // Actually, I'm afraid I've complected it even further...
 
-const routingTable = {
+const exactRoutes = {
   '/': HomePage,
   '/portfolio': PortfolioPage,
   '/calc': Calc,
   '/contacts': Contacts,
-  '/policy': Policy,
+  '/policy': Policy
+};
+
+const notExactRoutes = {
+  '/services': Services,
   '/feedback': Feedback
 };
 
@@ -56,8 +60,8 @@ function AppRouter({ lang }) {
             {transitionStage => {
               return (
                 <Switch location={location}>
-                  {Object.keys(routingTable).map(key => {
-                    const Component = routingTable[key];
+                  {Object.keys(exactRoutes).map(key => {
+                    const Component = exactRoutes[key];
                     return (
                       <Route
                         exact
@@ -75,6 +79,27 @@ function AppRouter({ lang }) {
                       />
                     );
                   })}
+
+                  {Object.keys(notExactRoutes).map(key => {
+                    const Component = notExactRoutes[key];
+                    return (
+                      <Route
+                        // same as above but without 'exact'
+                        key={key}
+                        path={key}
+                        render={() => (
+                          <AbsoluteDiv>
+                            <Component
+                              transitionStage={transitionStage}
+                              lang={lang}
+                              transitionDuration={transitionDuration}
+                            />
+                          </AbsoluteDiv>
+                        )}
+                      />
+                    );
+                  })}
+
                   <Route
                     exact
                     path="/portfolio/:index"
@@ -91,18 +116,7 @@ function AppRouter({ lang }) {
                       );
                     }}
                   />
-                  <Route
-                    path="/services"
-                    render={() => (
-                      <AbsoluteDiv>
-                        <Services
-                          lang={lang}
-                          transitionStage={transitionStage}
-                          transitionDuration={transitionDuration}
-                        />
-                      </AbsoluteDiv>
-                    )}
-                  />
+
                   <Route
                     render={() => (
                       <AbsoluteDiv>
