@@ -47,7 +47,7 @@ function contentIn(lang) {
     path: c.path,
     media: c.media,
     review: c.review[lang],
-    reviewerName: c.reviewerName,
+    reviewerName: c.reviewerName[lang],
     reviewerPortrait: c.reviewerPortrait
   }));
 }
