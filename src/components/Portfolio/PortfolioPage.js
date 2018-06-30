@@ -7,7 +7,12 @@ import {
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { pageNameIn, portfolioIndexPageIn } from './content';
-import { fadeInOut } from '../../animations';
+import {
+  fadeFromLeft,
+  fadeFromRight,
+  fadeFromBottom,
+  fadeInOut
+} from '../../animations';
 import { Link as RouterLink } from 'react-router-dom';
 
 // later will adjust flex direction on smaller screens
@@ -19,6 +24,7 @@ const Wrapper = styled(
   display: flex;
   width: 100%;
   height: 100%;
+  /* to smooth out '/portfolio' -> '/', ideally I'd go without it */
   ${fadeInOut};
 `;
 
@@ -37,6 +43,7 @@ const NavArea = styled.div`
   flex-direction: column;
   flex: none;
   width: 22em;
+  ${fadeFromLeft};
 
   /* FIXME: not a real solution */
   @media (max-width: 40rem) {
@@ -81,8 +88,7 @@ const Description = styled.div`
   flex: none;
   align-self: center;
   width: 22em;
-
-  @media (max-width: 70rem) {
+  ${fadeFromRight} @media (max-width: 70rem) {
     display: none;
   }
 `;
@@ -103,6 +109,7 @@ const ContentArea = styled.div.attrs({ id: 'ContentArea' })`
   overflow: auto;
   flex: auto;
   -webkit-overflow-scrolling: touch;
+  ${fadeFromBottom};
 
   ${Element}:not(:last-child) {
     margin-bottom: 3em;
@@ -146,26 +153,12 @@ class PortfolioPage extends Component {
     super();
     this.state = { active: 0, delayedActive: 0, lastScrollTime: 0 };
     this.setActive = this.setActive.bind(this);
-    this.saveLastScrollTime = this.saveLastScrollTime.bind(this);
   }
 
   // I had to introduce delayedActive instead of regular delayed
   // because there are glitches on iPad
   setActive(to) {
     this.setState({ active: Number(to) });
-    // const currentTimestamp = + new Date();
-    // const lastScrollTime = this.state.lastScrollTime;
-    // const scrollTimeout = 300;
-    // const scrollStopped = currentTimestamp > lastScrollTime + scrollTimeout;
-
-    // if (scrollStopped) {
-    //   this.setState({ delayedActive: Number(to)});
-    //   return;
-    // }
-
-    // // restart itself if scroll didn't come to an end
-    // const reCheckTime = 50;
-    // window.setTimeout(() => this.setActive(to), reCheckTime)
   }
 
   componentDidMount() {
@@ -174,10 +167,6 @@ class PortfolioPage extends Component {
 
   componentWillUnmount() {
     Events.scrollEvent.remove('end');
-  }
-
-  saveLastScrollTime() {
-    this.setState({ lastScrollTime: +new Date() });
   }
 
   render() {
@@ -189,7 +178,7 @@ class PortfolioPage extends Component {
 
     return (
       <Wrapper {...animation}>
-        <NavArea>
+        <NavArea {...animation}>
           <Nav>
             <div style={{ padding: '2rem' }}>
               <h1>{pageNameIn(this.props.lang)}</h1>
@@ -209,13 +198,13 @@ class PortfolioPage extends Component {
             {items[this.state.active].description}
           </DescriptionUnderNav>
         </NavArea>
-        <ContentArea onScroll={this.saveLastScrollTime}>
+        <ContentArea {...animation} delayIn={400} delayOut={400}>
           {items.map((item, index) => (
             <Element name={index.toString()} key={item.name}>
               <ImageLink to={item.url}>
                 <Image src={item.imageSrc} alt={item.name} />
               </ImageLink>
-              <Description>
+              <Description {...animation} delayIn={1000}>
                 <Padding>{item.description}</Padding>
               </Description>
             </Element>
