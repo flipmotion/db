@@ -49,6 +49,7 @@ function Logo() {
 
 const SocialIconsWrapper = styled.div`
   height: 1.33em;
+  white-space: nowrap;
 `;
 
 const SocialIcon = styled.img`

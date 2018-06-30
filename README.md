@@ -1,15 +1,14 @@
 # DB Company web site
 
 ## Current design
-The current design is in the wireframe stage: https://drive.google.com/drive/folders/1TOau5h5wjotXMCtNXPnbZU3bxW8T55py?usp=sharing
+The current design is in the wireframe stage. Current stage is to program as close as possible to https://drive.google.com/drive/folders/1TOau5h5wjotXMCtNXPnbZU3bxW8T55py.
 
 ## What's under the hood
-The project uses `styled-components` and `storybook` heavily. It also relies on `react-transition-group` for animations.
+The project relies on `styled-components` for styling and `react-router` + `react-transition-group` tandem for beetween-route animations.
 
 ## How to start the app
-`npm i` first, then
-- to start storybook, execute `npm run storybook` and navigate to `localhost:9009`
-- to start the app, execute `npm run start`.
+`npm i` to install dependecies, then
+- start the app with `npm run start`.
 
 ## App layout
 - All stateful components reside in `src/containers` folder
@@ -17,7 +16,7 @@ The project uses `styled-components` and `storybook` heavily. It also relies on 
 - Content is in `src/content`
 
 ## Animation aproach
-The current component contract is: every component recieves an `transitionStage` prop, which is an invariant of ['entering', 'entered', 'exiting', 'exited', 'unmounted']
+The current component contract is: every component recieves an `transitionStage` prop, which is an invariant of `['entering', 'entered', 'exiting', 'exited', 'unmounted']`.
 
 ## Linting
 The project uses prettier (default settings) and ESLint (thanks to Create React App, also no manual  settings).
