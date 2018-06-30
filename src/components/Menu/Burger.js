@@ -22,7 +22,7 @@ const Burger = styled.div.attrs({
   height: ${props => props.height || '2.5rem'};
   position: relative;
   cursor: pointer;
-  display: ${props => (props.present ? 'block' : 'none')};
+  display: ${props => (props.displayed ? 'block' : 'none')};
 
   ${Slice}:first-child {
     top: ${props => (props.isOpen ? '50%' : '20%')};
@@ -39,8 +39,8 @@ const Burger = styled.div.attrs({
 `;
 
 Burger.propTypes = {
-  present: PropTypes.bool,
-  isOpen: PropTypes.bool,
+  displayed: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   height: PropTypes.string,
   width: PropTypes.string,
   color: PropTypes.string

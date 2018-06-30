@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
   cursor: pointer;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const LangIcon = props => (
-  <Wrapper onClick={props.onClick} onSelect={e => console.log(e)}>
+  <Wrapper onClick={props.onClick}>
     {props.lang === 'ru' ? (
       <div>
         <b>Ru</b> / En
@@ -24,4 +25,9 @@ const LangIcon = props => (
     )}
   </Wrapper>
 );
+
+LangIcon.propTypes = {
+  onClick: PropTypes.func.isRequired
+};
+
 export default LangIcon;

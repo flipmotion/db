@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import MenuContainer from './MenuContainer';
+import MenuContainer from './Menu';
 import { injectGlobal } from 'styled-components';
-import { TopBar, BottomBar, MobileBar } from '../components/Menu/MenuBars';
+import { TopBar, BottomBar, MobileBar } from './MenuBars';
 
 injectGlobal`
   body {
