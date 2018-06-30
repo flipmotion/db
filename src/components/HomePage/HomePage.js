@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import contentIn from '../../content/homepage';
-import { fadeFromLeft, fadeFromRight } from '../../animations';
-import house from '../../content/images/house.jpg';
+import { fadeFromLeft, fadeFromRight, fadeInOut } from '../../animations';
+import house from './house.jpg';
 
 const PortfolioButton = styled(Link)`
   text-decoration: none;
@@ -41,6 +41,8 @@ const AnimatedText = styled(Text)`
   ${fadeFromLeft};
 `;
 
+// The trick is to extend the image from top to bottom of the page,
+// underneath menu
 const FixedImage = styled.img`
   position: fixed;
   height: 100vh;
@@ -49,8 +51,14 @@ const FixedImage = styled.img`
   top: 0;
   object-fit: cover;
   z-index: -1;
-  ${fadeFromRight} @media (orientation: portrait), (max-width: 50rem) {
+
+  @media (orientation: landscape), (min-width: 50rem) {
+    ${fadeFromRight};
+  }
+
+  @media (orientation: portrait), (max-width: 50rem) {
     width: 100vw;
+    ${fadeInOut};
   }
 `;
 
@@ -89,6 +97,7 @@ const HomePage = ({ lang, transitionStage, transitionDuration }) => {
         header={phrase('real estate services')}
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
+        delayIn={400}
       />
       <Placeholder />
       <FixedImage
@@ -96,7 +105,6 @@ const HomePage = ({ lang, transitionStage, transitionDuration }) => {
         src={house}
         transitionStage={transitionStage}
         transitionDuration={transitionDuration}
-        delayIn={400}
       />
     </Wrapper>
   );
