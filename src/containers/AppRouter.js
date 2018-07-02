@@ -1,9 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Transition, TransitionGroup } from 'react-transition-group';
-
 import styled from 'styled-components';
-
 import HomePage from '../components/HomePage';
 import PortfolioPage from '../components/Portfolio/PortfolioPage';
 import Services from '../components/Services';
@@ -31,7 +29,6 @@ const transitionDuration = 850;
 
 // To figure out how this monster works, check out
 // https://medium.com/@pshrmn/4b73f634992a
-// Actually, I'm afraid I've complected it even further...
 
 const exactRoutes = {
   '/': HomePage,
