@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // A minimal app that provides a lang and a function to change that lang
@@ -6,25 +6,41 @@ import PropTypes from 'prop-types';
 // use it like this:
 // <App  render={(lang, toggleLang) => {...}} />
 // toggleLang takes no args and flips the language between 'ru' and 'en'.
-class IntApp extends Component {
+
+const LANG = {
+  RU: 'ru',
+  EN: 'en'
+};
+
+class IntApp extends PureComponent {
   static propTypes = {
-    render: PropTypes.func.isRequired
+    children: PropTypes.func
   };
 
-  constructor() {
-    super();
-    this.state = { lang: 'ru' };
-    this.toggleLang = this.toggleLang.bind(this);
-  }
+  static defaultProps = {
+    children: () => {}
+  };
 
-  toggleLang() {
-    this.setState(
-      state => (state.lang === 'ru' ? { lang: 'en' } : { lang: 'ru' })
-    );
-  }
+  state = {
+    lang: LANG.RU
+  };
+
+  toggleLang = () => {
+    const { lang } = this.state;
+    const { EN, RU } = LANG;
+
+    const newLang = lang === RU ? EN : RU;
+
+    this.setState({
+      lang: newLang
+    });
+  };
 
   render() {
-    return this.props.render(this.state.lang, this.toggleLang);
+    const { children } = this.props;
+    const { lang } = this.state;
+
+    return children(lang, this.toggleLang);
   }
 }
 

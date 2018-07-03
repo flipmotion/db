@@ -13,6 +13,7 @@ import PortfolioItemContainer from '../containers/PortfolioItemContainer';
 import Contacts from '../components/Contacts';
 import Policy from '../components/Policy';
 import Feedback from '../components/Feedback';
+import ExtendedRoute from '../components/ExtendedRoute';
 
 const RelativeDiv = styled.div`
   position: relative;
@@ -63,19 +64,14 @@ function AppRouter({ lang }) {
                   {Object.keys(exactRoutes).map(key => {
                     const Component = exactRoutes[key];
                     return (
-                      <Route
+                      <ExtendedRoute
                         exact
                         key={key}
                         path={key}
-                        render={() => (
-                          <AbsoluteDiv>
-                            <Component
-                              transitionStage={transitionStage}
-                              lang={lang}
-                              transitionDuration={transitionDuration}
-                            />
-                          </AbsoluteDiv>
-                        )}
+                        lang={lang}
+                        transitionStage={transitionStage}
+                        transitionDuration={transitionDuration}
+                        component={Component}
                       />
                     );
                   })}

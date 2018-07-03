@@ -12,9 +12,9 @@ const Wrapper = styled.div`
   user-select: none;
 `;
 
-const LangIcon = props => (
-  <Wrapper onClick={props.onClick}>
-    {props.lang === 'ru' ? (
+const LangIcon = ({ onClick, lang }) => (
+  <Wrapper onClick={onClick}>
+    {lang === 'ru' ? (
       <div>
         <b>Ru</b> / En
       </div>
