@@ -7,8 +7,8 @@ The current design is in the wireframe stage. Current stage is to program as clo
 The project relies on `styled-components` for styling and `react-router` + `react-transition-group` tandem for beetween-route animations.
 
 ## How to start the app
-`npm i` to install dependecies, then
-- start the app with `npm run start`.
+`yarn` to install dependecies, then
+- start the app with `yarn start`.
 
 ## App layout
 - All stateful components reside in `src/containers` folder
